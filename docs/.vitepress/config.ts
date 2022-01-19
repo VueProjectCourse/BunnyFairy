@@ -39,7 +39,12 @@ function getGuideSidebar() {
       text: "前置内容",
       children: [
         { text: '项目介绍', link: '/documents/introduce' },
-       
+      ]
+    },
+    {
+      text: "首页模块",
+      children: [
+        { text: '顶部通栏', link: '/documents/home_topnav' },
       ]
     }
   ]
