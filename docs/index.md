@@ -3,7 +3,7 @@ home: true
 heroImage: /images/hero.png
 heroAlt: 小兔仙儿
 heroText: bunnyfairy technical documentation
-tagline: Vue3.x + 脚手架 + 路由 + 状态管理
+tagline:  小兔仙儿购物商城
 actionText: Get Started
 actionLink: /documents/introduce
 features:
