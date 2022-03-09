@@ -61,8 +61,8 @@
 }
 .custom-block.warning::before {
   content: var(--c-warn);
-  font-size: 23px;
-  line-height: 26px;
+  /* font-size: 23px;
+  line-height: 26px; */
   background-color:#c4a301;
 }
 
@@ -105,4 +105,13 @@
 .custom-block.warning, 
 .custom-block.danger {
   overflow-x: initial !important;
+}
+
+
+
+#main-title {
+  background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent
 }
