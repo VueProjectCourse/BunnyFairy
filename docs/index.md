@@ -5,7 +5,7 @@ heroAlt: 小兔仙儿
 heroText: Bunnyfairy Documentation
 tagline:  小兔仙儿购物商城
 actionText: Get Started
-actionLink: /documents/introduce
+actionLink: /preparation/introduction
 features:
   - title: 保持分享
     details: 分享知识是一种美德，如果我们每个人都把知识分享给这个社会，那么这个社会将会变得越来越好。
