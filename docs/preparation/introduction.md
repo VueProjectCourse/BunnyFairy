@@ -31,6 +31,7 @@
 * **Kn.3： 项目技术与优势**
 
   该项目使用最流行、最前沿的前端技术开发:
+
   * ⓵ 前端框架: Vue 3.x 以及 组合式API
   * ⓶ Vue 3.x 工具函数库: @vueuse/core
   * ⓷ 路由管理插件: VueRouter 4.x
@@ -38,5 +39,28 @@
   * ⓹ 状态持久化插件: pinia-plugin-persist
   * ⓺ 表单校验插件: vee-validate
   * ⓻ 网络请求库:  axios
+  * ⓼ 初始化样式:normalize.css ()
+  * ⓽ 算法[Power Set](https://github.com/trekhleb/javascript-algorithms/tree/master/src/algorithms/sets/power-set)
 
+  由于前台项目，没有合适的UI组件库，所有组件基本自己封装:
+
+  * ⓵ 轮播图组件
+  * ⓶ 骨架屏组件
+  * ⓷ 复选框组件
+  * ⓸ 对话框组件
+  * ⓹ 分页组件
+  * ⓺ 时间线组件
+  * ⓻ 城市选择组件
+  * ⓼ 查看更多组件
+  * ⓽ 面包屑组件 render+createVnode
+
+  总结：基于vue3.0的技术栈，大量的组件封装。
+
+:::
+
+::: danger 总结
+
+* 【重点】
+* 【难点】
+* 【注意点】
 :::
