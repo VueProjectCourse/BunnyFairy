@@ -77,6 +77,7 @@
 * 【重点】
 * 【难点】
 * 【注意点】
+
   * ⓵ 推荐的 IDE 配置是 [Visual Studio Code](https://code.visualstudio.com/)+ [Volar扩展](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)，选用 WebStorm 也是可以的。
 
 :::
