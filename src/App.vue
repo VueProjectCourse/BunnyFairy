@@ -1,24 +1,20 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-
-</script>
+<script setup></script>
 
 <template>
-  <router-view></router-view>
+  <header>
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="@/assets/logo.svg"
+      width="125"
+      height="125"
+    />
+  </header>
+
+  <RouterView />
 </template>
 
 <style>
-html,body {
+@import "@/assets/base.css";
 
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 </style>

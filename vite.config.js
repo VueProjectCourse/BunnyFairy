@@ -1,21 +1,15 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path';
+import { fileURLToPath, URL } from "url";
+
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src'),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  css: {
-    preprocessorOptions: {
-      less: {
-        charset: false,
-        additionalData: `@import "${resolve('src/assets/style/index.less')}";`,
-      },
-    }
-  },
-})
+});
