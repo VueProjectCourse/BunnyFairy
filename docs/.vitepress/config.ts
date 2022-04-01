@@ -41,7 +41,7 @@ function getGuideSidebar() {
         { text: '项目介绍', link: '/preparation/introduction' },
         { text: '项目创建', link: '/preparation/initialization' },
         { text: '配置路由管理器', link: '/preparation/router-config' },
-        { text: '配置Pinia', link: '/preparation/state-config' },
+        { text: '配置状态管理器', link: '/preparation/state-config' },
         { text: '代码规范配置', link: '/preparation/code-style' },
         { text: '封装网络请求', link: '/preparation/network-request' },
         { text: '项目路由设计', link: '/preparation/router-design' },
