@@ -5,7 +5,7 @@ export default {
   base: "/BunnyFairy",
   // markdown文件设置
   markdown: {
-    lineNumbers: true
+    // lineNumbers: true
   },
   themeConfig: {
     // 设置文档所在的文件夹
