@@ -1,17 +1,18 @@
 # 配置状态管理器
 
-::: tip Object
+::: tip 目标
+
 这一小节，我们的目标是在Vue项目中配置Pinia,并实现状态持久化
 :::
 
-::: warning Path
+::: warning 步骤
 
 1. 安装Pinia
 2. 在项目入口文件中，挂载Pinia
 3. 在src目录创建stores文件夹并创建JavaScript文件
 :::
 
-::: info Experience
+::: info 体验
 
 * **Step.1：安装Pinia**
 
@@ -54,7 +55,7 @@
 
 :::
 
-::: danger Note
+::: danger 总结
 
 * 【重点】
   * ⓵ 安装Pinia
