@@ -133,7 +133,7 @@ ul {
 
 ```js
 import "normalize.css"
-import "./assets/base.css"
+import "./assets/styles/base.css"
 ```
 
 :::
