@@ -255,7 +255,7 @@
       const code = parseInt(response.data && response.data.code);
       // msg为服务端返回的错误信息，字段名自定义，此处以msg为例
       let message = (response.data || {}).msg;
-  
+
       switch (code) {
         case 400:
           break;
@@ -282,7 +282,14 @@
       };
     }
   };
-  
+
   ```
 
+:::
+
+::: danger 总结
+
+* 【重点】
+* 【难点】
+* 【注意点】
 :::
