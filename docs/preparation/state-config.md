@@ -53,6 +53,74 @@
   app.mount("#app");
   ```
 
+* **Step.4：创建用户模块开启缓存**
+
+```js
+import { defineStore } from "pinia";
+
+export const useCounterStore = defineStore({
+  id: "userStore",
+  state: () => ({
+    // 用户信息
+    profile: {
+      // 用户id
+      id: "",
+      // 用户头像
+      avatar: "",
+      // 用户昵称
+      nickname: "",
+      // 用户账号
+      account: "",
+      // 用户手机号
+      mobile: "",
+      // 用户登录凭证
+      token: "",
+    },
+  }),
+  getters: {},
+  actions: {},
+  // 开启数据缓存
+  persist: {
+    enabled: true,
+  },
+});
+
+```
+
+* **Step.5：创建购物车模块开启缓存**
+
+```js
+import { defineStore } from "pinia";
+
+export const useCounterStore = defineStore({
+  id: "cartStore",
+  state: () => ({
+    // 存储分类列表
+    list: [],
+  }),
+   // 开启数据缓存
+  persist: {
+    enabled: true,
+  },
+});
+
+```
+
+* **Step.6：创建分类模块**
+
+```js
+import { defineStore } from "pinia";
+
+export const useCounterStore = defineStore({
+  id: "cartStore",
+  state: () => ({
+    // 存储分类列表
+    list: [],
+  }),
+});
+
+```
+
 :::
 
 ::: danger 总结
