@@ -1,13 +1,19 @@
-html {
-  height: 100%;
-  font-size: 14px;
-}
+:root {
 
-body {
-  height: 100%;
-  color: #333;
-  min-width: 1240px;
-  font: 1em/1.4 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif
+  /* 主题色 */
+  --theme-color: #27BA9B;
+  /* 辅助色 */
+   --help-color: #E26237;
+  /* 成功色 */
+--success-color: #1DC779;
+  /* 警告色 */
+--warning-color: #FFB302;
+  /* 价格 */
+  --price-color: #CF4444;
+  /* 字体 */
+  --font-family: 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
+  
+  font-family: var(--font-family);
 }
 
 ul,
@@ -21,20 +27,20 @@ dd {
   margin: 0;
 }
 
+ul {
+  list-style: none;
+}
+
 a {
   text-decoration: none;
   color: #333;
   outline: none;
 }
 
-i {
-  font-style: normal;
-}
-
 input[type="text"],
 input[type="search"],
-input[type="password"],
-input[type="checkbox"] {
+input[type="password"], 
+input[type="checkbox"]{
   padding: 0;
   outline: none;
   border: none;
@@ -43,19 +49,9 @@ input[type="checkbox"] {
 
 input[type="text"]::placeholder,
 input[type="search"]::placeholder,
-input[type="password"]::placeholder,
-input[type="checkbox"]::placeholder {
+input[type="password"]::placeholder, 
+input[type="checkbox"]::placeholder{
   color: #ccc;
-}
-
-img {
-  max-width: 100%;
-  max-height: 100%;
-  vertical-align: middle;
-}
-
-ul {
-  list-style: none;
 }
 
 #app {
@@ -69,29 +65,7 @@ ul {
   position: relative;
 }
 
-.ellipsis {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.ellipsis-2 {
-  word-break: break-all;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-.fl {
-  float: left;
-}
-
-.fr {
-  float: right;
-}
-
+/* 清除浮动 */
 .clearfix:after {
   content: ".";
   display: block;
@@ -101,6 +75,13 @@ ul {
   clear: both;
 }
 
-* {
-  box-sizing: border-box;
+
+/* 鼠标经过上移阴影动画 */
+.hover-shadow {
+  transition: all .5s;
+}
+
+.hover-shadow:hover {
+  transform: translate3d(0,-3px,0);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }

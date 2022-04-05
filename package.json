@@ -1,7 +1,7 @@
 {
   "name": "bunnyfairy",
   "version": "1.0.0",
-  "description": "小兔仙儿",
+  "description": "小兔鲜儿",
   "main": "index.js",
   "scripts": {
     "docs:dev": "vitepress dev docs",

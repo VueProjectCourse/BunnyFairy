@@ -1,9 +1,9 @@
 ---
 home: true
 heroImage: /images/hero.png
-heroAlt: 小兔仙儿
+heroAlt: 小兔鲜儿
 heroText: Bunnyfairy Documentation
-tagline:  小兔仙儿购物商城
+tagline:  小兔鲜儿购物商城
 actionText: Get Started
 actionLink: /preparation/introduction
 features:

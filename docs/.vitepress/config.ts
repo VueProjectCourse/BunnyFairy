@@ -47,13 +47,15 @@ function getGuideSidebar() {
         { text: '封装网络请求', link: '/preparation/network-request' },
         { text: '项目样式配置', link: '/preparation/style-config' },
         { text: 'DevTools安装', link: '/preparation/devtools-install' },
+        { text: '布局模板页面', link: '/preparation/applayout' },
       ]
     },
     {
       text: "首页模块",
       children: [
-        { text: '顶部通栏布局', link: '/home/devtools-install' },
-        { text: '头部布局', link: '/home/devtools-install' },
+        {text: '基础布局', link: '/home/baselayout'},
+        { text: '顶部通栏布局', link: '/home/apptopnav' },
+        { text: '头部布局', link: '/home/appheader' },
         { text: '底部布局', link: '/home/devtools-install' },
         { text: '抽取导航组件', link: '/home/devtools-install' },
         { text: '导航组件数据填充', link: '/home/devtools-install' },
