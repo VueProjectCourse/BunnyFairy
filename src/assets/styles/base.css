@@ -1,20 +1,4 @@
-:root {
 
-  /* 主题色 */
-  --theme-color: #27BA9B;
-  /* 辅助色 */
-   --help-color: #E26237;
-  /* 成功色 */
---success-color: #1DC779;
-  /* 警告色 */
---warning-color: #FFB302;
-  /* 价格 */
-  --price-color: #CF4444;
-  /* 字体 */
-  --font-family: 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
-  
-  font-family: var(--font-family);
-}
 
 ul,
 h1,

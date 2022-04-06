@@ -3,7 +3,9 @@
     <div class="container">
       <ul>
         <li>
-          <a href="javascript:"> <i class="iconfont icon-user"></i>周杰伦 </a>
+          <a href="javascript:">
+            <i class="iconfont icon-user"></i>周杰伦
+          </a>
         </li>
         <li>
           <a href="javascript:">退出登录</a>
@@ -27,7 +29,9 @@
           <a href="javascript:">关于我们</a>
         </li>
         <li>
-          <a href="javascript:"> <i class="iconfont icon-phone"></i>手机版 </a>
+          <a href="javascript:">
+            <i class="iconfont icon-phone"></i>手机版
+          </a>
         </li>
       </ul>
     </div>
@@ -35,7 +39,7 @@
 </template>
 
 <style scoped>
-@import "@/assets/styles/base.css";
+@import "@/assets/styles/variable.css";
 .app-top-nav {
   background: #333;
 }
