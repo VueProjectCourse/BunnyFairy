@@ -53,13 +53,14 @@ function getGuideSidebar() {
     {
       text: "首页模块",
       children: [
-        {text: '基础布局', link: '/home/baselayout'},
+        { text: '基础布局', link: '/home/baselayout' },
         { text: '顶部通栏布局', link: '/home/apptopnav' },
         { text: '头部布局', link: '/home/appheader' },
         { text: '底部布局', link: '/home/appfooter' },
-        { text: '抽取导航组件', link: '/home/devtools-install' },
-        { text: '导航组件数据填充', link: '/home/devtools-install' },
-        { text: '创建分类页面', link: '/home/devtools-install' },
+        { text: '抽取导航组件', link: '/home/improve-headernav' },
+        { text: '导航组件数据填充', link: '/home/render-headernav' },
+        { text: '创建一级分类页面', link: '/home/top-category' },
+        { text: '创建二级分类页面', link: '/home/sub-category' },
         { text: '控制导航下拉菜单显示隐藏', link: '/home/devtools-install' },
         { text: '实现吸顶导航(传统)', link: '/home/devtools-install' },
         { text: '实现吸顶导航(工具库)', link: '/home/devtools-install' },
