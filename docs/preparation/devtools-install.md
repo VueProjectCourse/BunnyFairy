@@ -10,7 +10,7 @@
 2. 在Microsoft Edge
 :::
 
-::: warning 步骤
+::: info 体验
 
 * **Kn.1： 在Google Chrome安装**
 
