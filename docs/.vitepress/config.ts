@@ -56,7 +56,7 @@ function getGuideSidebar() {
         {text: '基础布局', link: '/home/baselayout'},
         { text: '顶部通栏布局', link: '/home/apptopnav' },
         { text: '头部布局', link: '/home/appheader' },
-        { text: '底部布局', link: '/home/devtools-install' },
+        { text: '底部布局', link: '/home/appfooter' },
         { text: '抽取导航组件', link: '/home/devtools-install' },
         { text: '导航组件数据填充', link: '/home/devtools-install' },
         { text: '创建分类页面', link: '/home/devtools-install' },

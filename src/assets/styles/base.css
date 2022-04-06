@@ -1,4 +1,14 @@
+html {
+  height: 100%;
+  font-size: 14px;
+}
 
+body {
+  height: 100%;
+  color: #333;
+  min-width: 1240px;
+  font-family: 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif
+}
 
 ul,
 h1,
@@ -23,8 +33,8 @@ a {
 
 input[type="text"],
 input[type="search"],
-input[type="password"], 
-input[type="checkbox"]{
+input[type="password"],
+input[type="checkbox"] {
   padding: 0;
   outline: none;
   border: none;
@@ -33,8 +43,8 @@ input[type="checkbox"]{
 
 input[type="text"]::placeholder,
 input[type="search"]::placeholder,
-input[type="password"]::placeholder, 
-input[type="checkbox"]::placeholder{
+input[type="password"]::placeholder,
+input[type="checkbox"]::placeholder {
   color: #ccc;
 }
 
@@ -66,6 +76,6 @@ input[type="checkbox"]::placeholder{
 }
 
 .hover-shadow:hover {
-  transform: translate3d(0,-3px,0);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  transform: translate3d(0, -3px, 0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
