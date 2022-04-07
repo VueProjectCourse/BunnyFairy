@@ -61,7 +61,7 @@
 ```js
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore({
+export const useUserStore = defineStore({
   id: "userStore",
   state: () => ({
     // 用户信息
@@ -95,7 +95,7 @@ export const useCounterStore = defineStore({
 ```js
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore({
+export const useCartStore = defineStore({
   id: "cartStore",
   state: () => ({
     // 存储分类列表
@@ -114,7 +114,7 @@ export const useCounterStore = defineStore({
 ```js
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore({
+export const useCateStore = defineStore({
   id: "cartStore",
   state: () => ({
     // 存储分类列表
