@@ -4,6 +4,6 @@ import Layout from "@/components/Layout/Layout.vue";
 
 <template>
   <Layout>
-    <div>首页</div>
+    <div style="height: 1000px;">首页</div>
   </Layout>
 </template>
