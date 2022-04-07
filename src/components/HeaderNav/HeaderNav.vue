@@ -2,18 +2,24 @@
 import { useCateStore } from "../../stores/cateStore"
 import { storeToRefs } from "pinia"
 const { cateList } = storeToRefs(useCateStore())
+const cateStore = useCateStore();
 </script>
 <template>
   <ul class="app-header-nav">
     <li class="home">
       <RouterLink to="/">首页</RouterLink>
     </li>
-    <li v-for="item in cateList" :key="item.id">
+    <li
+      v-for="item in cateList"
+      :key="item.id"
+      @mouseenter="cateStore.open(item.id)"
+      @mouseleave="cateStore.close(item.id)"
+    >
       <!-- <a href="#">{{item.name}}</a> -->
       <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
-      <div class="layer">
+      <div class="layer" :class="{ open: item.open }">
         <ul>
-          <li v-for="subitem in item.children" :key="subitem.id">
+          <li v-for="subitem in item.children" :key="subitem.id" @click="cateStore.close(item.id)">
             <RouterLink :to="`/category/sub/${subitem.id}`">
               <img :src="subitem.picture" :alt="subitem.name" />
               <p>{{ subitem.name }}</p>
@@ -49,10 +55,10 @@ const { cateList } = storeToRefs(useCateStore())
   color: var(--theme-color);
   border-bottom: 1px solid var(--theme-color);
 }
-.app-header-nav > li:hover > .layer {
+/* .app-header-nav > li:hover > .layer {
   height: 132px;
   opacity: 1;
-}
+} */
 
 .layer {
   width: 1240px;
@@ -66,6 +72,12 @@ const { cateList } = storeToRefs(useCateStore())
   box-shadow: 0 0 5px #ccc;
   transition: all 0.2s 0.1s;
 }
+
+.layer.open {
+  height: 132px;
+  opacity: 1;
+}
+
 .layer ul {
   display: flex;
   flex-wrap: wrap;

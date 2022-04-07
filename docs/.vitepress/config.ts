@@ -61,7 +61,7 @@ function getGuideSidebar() {
         { text: '导航组件数据填充', link: '/home/render-headernav' },
         { text: '创建一级分类页面', link: '/home/top-category' },
         { text: '创建二级分类页面', link: '/home/sub-category' },
-        { text: '控制导航下拉菜单显示隐藏', link: '/home/devtools-install' },
+        { text: '导航二级菜单显示隐藏', link: '/home/submenu-toggle' },
         { text: '实现吸顶导航(传统)', link: '/home/devtools-install' },
         { text: '实现吸顶导航(工具库)', link: '/home/devtools-install' },
         { text: '左侧分类结构渲染', link: '/home/devtools-install' },

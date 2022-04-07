@@ -1,9 +1,9 @@
 <script setup>
-import AppLayout from "@/components/AppLayout/AppLayout.vue";
+import Layout from "@/components/Layout/Layout.vue";
 </script>
 
 <template>
-  <AppLayout>
+  <Layout>
     <div>首页</div>
-  </AppLayout>
+  </Layout>
 </template>

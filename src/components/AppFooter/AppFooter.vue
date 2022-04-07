@@ -83,32 +83,32 @@
   background-color: #f5f5f5;
   padding-top: 20px;
 }
-.app-footer .contact {
+.contact {
   background: #fff;
 }
-.app-footer .contact .container {
+.contact .container {
   padding: 60px 0 40px 25px;
   display: flex;
 }
-.app-footer .contact dl {
+.contact dl {
   height: 190px;
   text-align: center;
   padding: 0 72px;
   border-right: 1px solid #f2f2f2;
   color: #999;
 }
-.app-footer .contact dl:first-child {
+.contact dl:first-child {
   padding-left: 0;
 }
-.app-footer .contact dl:last-child {
+.contact dl:last-child {
   border-right: none;
   padding-right: 0;
 }
-.app-footer .contact dt {
+.contact dt {
   line-height: 1;
   font-size: 18px;
 }
-.app-footer .contact dd {
+.contact dd {
   margin: 36px 12px 0 0;
   float: left;
   width: 92px;
@@ -116,34 +116,34 @@
   padding-top: 10px;
   border: 1px solid #ededed;
 }
-.app-footer .contact dd .iconfont {
+.contact .iconfont {
   font-size: 36px;
   display: block;
   color: #666;
 }
-.app-footer .contact dd:hover .iconfont {
-  color: var( --theme-color);
+.contact dd:hover .iconfont {
+  color: var(--theme-color);
 }
-.app-footer .contact dd:last-child {
+.contact dd:last-child {
   margin-right: 0;
 }
-.app-footer .contact .qrcode {
+.contact .qrcode {
   width: 92px;
   height: 92px;
   padding: 7px;
   border: 1px solid #ededed;
 }
-.app-footer .contact .download {
+.contact .download {
   padding-top: 5px;
   font-size: 14px;
   width: auto;
   height: auto;
   border: none;
 }
-.app-footer .contact .download span {
+.contact .download span {
   display: block;
 }
-.app-footer .contact .download a {
+.contact .download a {
   display: block;
   line-height: 1;
   padding: 10px 25px;
@@ -152,7 +152,7 @@
   border-radius: 2px;
   background-color: var(--theme-color);
 }
-.app-footer .contact .hotline {
+.contact .hotline {
   padding-top: 20px;
   font-size: 22px;
   color: #666;
@@ -160,15 +160,15 @@
   height: auto;
   border: none;
 }
-.app-footer .contact .hotline small {
+.contact .hotline small {
   display: block;
   font-size: 15px;
   color: #999;
 }
-.app-footer .extra {
+.extra {
   background-color: #333;
 }
-.app-footer .slogan {
+.slogan {
   /* height: 178px; */
   line-height: 58px;
   padding: 60px 100px;
@@ -176,40 +176,40 @@
   display: flex;
   justify-content: space-between;
 }
-.app-footer .slogan a {
+.slogan a {
   height: 58px;
   line-height: 58px;
   color: #fff;
   font-size: 28px;
 }
-.app-footer .slogan a i {
+.slogan a i {
   font-size: 50px;
   vertical-align: middle;
   margin-right: 10px;
   font-weight: 100;
 }
-.app-footer .slogan a span {
+.slogan a span {
   vertical-align: middle;
   text-shadow: 0 0 1px #333;
 }
-.app-footer .copyright {
+.copyright {
   height: 170px;
   padding-top: 40px;
   text-align: center;
   color: #999;
   font-size: 15px;
 }
-.app-footer .copyright p {
+.copyright p {
   line-height: 1;
   margin-bottom: 20px;
 }
-.app-footer .copyright a {
+.copyright a {
   color: #999;
   line-height: 1;
   padding: 0 10px;
   border-right: 1px solid #999;
 }
-.app-footer .copyright a:last-child {
+.copyright a:last-child {
   border-right: none;
 }
 </style>
