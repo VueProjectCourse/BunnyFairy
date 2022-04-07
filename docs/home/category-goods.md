@@ -1,18 +1,28 @@
-<script setup>
-import { ref } from "vue"
-import { useMenuList } from "./useMenuList"
-const { menuList } = useMenuList();
-// 用于存储当前用户鼠标移入的左侧一级分类
-const current = ref(null);
+# 实现左侧分类列表商品推荐
 
-</script>
+::: tip 目标
+这一小节，我们的目标是实现左侧分类弹层中的分类商品推荐基础布局及数据渲染,示例如下：
+
+![商品推荐](./images/103.png)
+:::
+
+::: warning 步骤
+
+1. 在 `HomeCategory` 组件中添加弹层布局代码
+2. 在 `HomeCategory` 组件中添加弹层样式代码
+3. 记录用户鼠标移入的分类对象
+4. 渲染当前分类推荐商品至模板
+:::
+
+::: info 体验
+
+* **Step.1：在 `HomeCategory` 组件中添加弹层布局代码**
+
+```html
 <template>
   <div class="home-category">
     <ul class="menu">
-      <li v-for="item in menuList " :key="item.id" @mouseenter="current = item">
-        <RouterLink to="/">{{ item.name }}</RouterLink>
-        <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
-      </li>
+     <!-- 代码略... -->
     </ul>
     <!-- 分类列表商品推荐 -->
     <div class="layer" v-if="current">
@@ -38,32 +48,11 @@ const current = ref(null);
     </div>
   </div>
 </template>
+```
 
-<style scoped>
-@import "@/assets/styles/variable.css";
-.home-category {
-  width: 250px;
-  height: 500px;
-  background: rgba(0, 0, 0, 0.8);
-  position: relative;
-  z-index: 99;
-}
-.menu li {
-  padding-left: 40px;
-  height: 50px;
-  line-height: 50px;
-}
-.menu li:hover {
-  background-color: var(--theme-color);
-}
-.menu li a {
-  margin-right: 4px;
-  color: #fff;
-}
-.menu li a:first-child {
-  font-size: 16px;
-}
+* **Step.2：在 `HomeCategory` 组件中添加弹层样式代码**
 
+```css
 .layer {
   width: 990px;
   height: 500px;
@@ -135,4 +124,55 @@ const current = ref(null);
 .home-category:hover .layer {
   display: block;
 }
-</style>
+```
+
+* **Step.3：记录用户鼠标移入的分类对象**
+
+```js
+const current = ref(null);
+```
+
+```html
+<ul class="menu">
+  <li v-for="item in menuList " :key="item.id" @mouseenter="current = item">
+    <RouterLink to="/">{{ item.name }}</RouterLink>
+    <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
+  </li>
+</ul>
+```
+
+* **Step.4：渲染当前分类推荐商品至模板**
+
+```html
+<!-- 分类列表商品推荐 -->
+<div class="layer" v-if="current">
+  <h4>
+    分类商品推荐
+    <small>根据您的购买或浏览记录推荐</small>
+  </h4>
+  <ul>
+    <li v-for="goods in current.goods" :key="goods.id">
+      <RouterLink to="/">
+        <img :src="goods.picture" :alt="goods.name" />
+        <div class="info">
+          <p class="name ellipsis-2">{{ goods.name }}</p>
+          <p class="desc ellipsis">{{ goods.desc }}</p>
+          <p class="price">
+            <i>¥</i>
+            {{ goods.price }}
+          </p>
+        </div>
+      </RouterLink>
+    </li>
+  </ul>
+</div>
+```
+
+:::
+
+::: danger 总结
+
+* 【重点】
+* 【难点】
+* 【注意点】
+:::
