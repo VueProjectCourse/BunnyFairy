@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, ref } from 'vue';
-export const useScroll = () => {
+export const useBarScroll = () => {
   // 存储滚动距离，用于在模板中作为元素显示隐藏的依据
   const scrollTop = ref(0);
   // 滚动事件的事件处理函数
