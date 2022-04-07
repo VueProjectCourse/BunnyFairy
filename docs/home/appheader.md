@@ -63,16 +63,16 @@
   .app-header {
     background: #fff;
   }
-  
+
   .app-header .container {
     display: flex;
     align-items: center;
   }
-  
+
   .app-header .logo {
     width: 200px;
   }
-  
+
   .app-header .logo a {
     display: block;
     height: 132px;
@@ -80,7 +80,7 @@
     text-indent: -9999px;
     background: url(@/assets/images/logo.png) no-repeat center 18px / contain;
   }
-  
+
   .app-header .app-header-nav {
     width: 820px;
     display: flex;
@@ -89,26 +89,26 @@
     position: relative;
     z-index: 998;
   }
-  
+
   .app-header .app-header-nav > li {
     margin-right: 40px;
     width: 38px;
     text-align: center;
   }
-  
+
   .app-header .app-header-nav > li > a {
     font-size: 16px;
     line-height: 32px;
     height: 32px;
     display: inline-block;
   }
-  
+
   .app-header .app-header-nav > li > a:hover {
     color: var(--theme-color);
     border-bottom: 1px solid var(--theme-color);
   }
-  
-  .app-header .app-header-nav > li > a:hover > .layer {
+
+  .app-header .app-header-nav > li:hover > .layer {
     height: 132px;
     opacity: 1;
   }
@@ -119,7 +119,7 @@
     border-bottom: 1px solid #e7e7e7;
     line-height: 32px;
   }
-  
+
   .app-header .search .icon-search {
     font-size: 18px;
     margin-left: 5px;
@@ -129,11 +129,11 @@
     padding-left: 5px;
     color: #666;
   }
-  
+
   .app-header .cart {
     width: 50px;
   }
-  
+
   .app-header .cart .curr {
     height: 32px;
     line-height: 32px;
@@ -141,11 +141,11 @@
     position: relative;
     display: block;
   }
-  
+
   .app-header .cart .icon-cart {
     font-size: 22px;
   }
-  
+
   .app-header .cart .curr em {
     font-style: normal;
     position: absolute;
