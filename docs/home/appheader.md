@@ -59,7 +59,7 @@
   在 `components` 文件夹中 `AppHeader.vue` 文件并加入如下样式代码
 
   ```css
-  @import "@/assets/styles/base.css";
+  @import "@/assets/styles/variable.css";
   .app-header {
     background: #fff;
   }
