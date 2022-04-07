@@ -8,8 +8,8 @@
 
 ::: warning 步骤
 
-1. 在`AppFooter.vue` 文件加入布局代码
-2. 在`AppFooter.vue` 文件加入样式代码
+1. 在`AppFooter` 文件加入布局代码
+2. 在`AppFooter` 文件加入样式代码
 :::
 
 ::: info 体验

@@ -52,7 +52,7 @@
 * **Step.3：在 `AppTopNav` 组件中编写样式代码**
 
 ```css
-@import "@/assets/styles/base.css";
+@import "@/assets/styles/variable.css";
 .app-top-nav {
   background: #333;
 }
@@ -72,6 +72,8 @@
 }
 
 .app-top-nav ul a:hover {
+  /* color: 属性值是一个变量 */
+  /* 格式: 属性名: var(变量名) */
   color: var(--theme-color);
 }
 
@@ -88,16 +90,35 @@
 * **Step.4：根据当前登录状态切换显示用户名和退出登录**
 
 ```html
-<template v-if="user.profile.token">
-  <li>
-    <a href="javascript:"><i class="iconfont icon-user"></i>{{ user.profile.account }}</a>
-  </li>
-  <li><a href="javascript:">退出登录</a></li>
-</template>
-<template v-else>
-  <li><a href="javascript:">请先登录</a></li>
-  <li><a href="javascript:">免费注册</a></li>
-</template>
+<script setup>
+// 导入 useUserStore
+import { useUserStore } from "../../stores/userStore"
+// 导入 storeToRefs
+import { storeToRefs } from "pinia"
+// 解构出 profile
+const { profile } = storeToRefs(useUserStore()) 
+</script>
+```
+
+```html
+  <template v-if="profile.token">
+    <li>
+      <a href="javascript:">
+        <i class="iconfont icon-user"></i>周杰伦
+      </a>
+    </li>
+    <li>
+      <a href="javascript:">退出登录</a>
+    </li>
+  </template>
+  <template v-else>
+    <li>
+      <a href="javascript:">请先登录</a>
+    </li>
+    <li>
+      <a href="javascript:">免费注册</a>
+    </li>
+  </template>
 ```
 
 :::
