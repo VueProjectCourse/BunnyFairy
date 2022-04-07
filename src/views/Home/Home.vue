@@ -1,9 +1,12 @@
 <script setup>
 import Layout from "@/components/Layout/Layout.vue";
+import HomeCategory from "../../components/HomeCategory/HomeCategory.vue";
 </script>
 
 <template>
   <Layout>
-    <div style="height: 1000px;">首页</div>
+    <div class="container">
+      <HomeCategory />
+    </div>
   </Layout>
 </template>

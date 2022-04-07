@@ -64,7 +64,7 @@ function getGuideSidebar() {
         { text: '导航二级菜单显示隐藏', link: '/home/submenu-toggle' },
         { text: '实现吸顶导航(传统)', link: '/home/sticky-nav-tradition' },
         { text: '实现吸顶导航(工具库)', link: '/home/sticky-nav-plugin' },
-        { text: '左侧分类结构渲染', link: '/home/devtools-install' },
+        { text: '左侧分类结构渲染', link: '/home/left-category-structure' },
         { text: '实现左侧分类列表商品推荐', link: '/home/devtools-install' },
         { text: '实现左侧分类品牌推荐', link: '/home/devtools-install' },
         { text: '实现左侧分类骨架效果', link: '/home/devtools-install' },
