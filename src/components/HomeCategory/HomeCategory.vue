@@ -14,9 +14,9 @@ const aaa = computed(() => {
 
 </script>
 <template>
-  <div class="home-category">
+  <div class="home-category" @mouseleave="current = null">
     <ul class="menu">
-      <li v-for="item in menuList " :key="item.id" @mouseenter="current = item">
+      <li v-for="item in menuList " :key="item.id" @mouseenter="current = item" :class="{ active: current?.id && current.id === item.id }" >
         <RouterLink to="/">{{ item.name }}</RouterLink>
         <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
       </li>
@@ -152,7 +152,7 @@ const aaa = computed(() => {
   height: 95px;
 }
 
-.layer ul li.brand {
+/* .layer ul li.brand {
   height: 180px;
 }
 .layer ul li.brand a {
@@ -167,7 +167,7 @@ const aaa = computed(() => {
 }
 .layer ul li.brand a .info .place {
   color: #999;
-}
+} */
 
 .layer .info {
   padding-left: 10px;
@@ -195,6 +195,11 @@ const aaa = computed(() => {
 
 .home-category:hover .layer {
   display: block;
+}
+
+.menu li:hover,
+.menu li.active {
+  background-color: var(--theme-color);
 }
 
 

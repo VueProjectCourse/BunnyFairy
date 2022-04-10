@@ -7,12 +7,14 @@
 ::: warning 步骤
 
 1. 在 `HomeCategory` 组件中添加品牌推荐的基础布局
-2. 在 `api`文件夹下创建`homeAPI`文件
-3. 在`homeAPI`中创建`readHotBrands`方法用于获取热门品牌数据
-4. 在`useMenuList`文件中,导入`readHotBrands`方法
-5. 在`brand`对象中，添加一个属性`brands`数组用于接收接口数据
-6. 在`useMenuList`方法中调用`readHotBrands`方法获取数据
-7. 在品牌推荐的模板中渲染数据
+2. 在 `api`文件夹下创建`homeAPI`文件及`readHotBrands`方法
+3. 在`useMenuList`文件中,导入`readHotBrands`方法
+4. 在`brand`对象中，添加一个属性`brands`数组用于接收接口数据
+5. 在`useMenuList`方法中调用`readHotBrands`方法获取数据
+6. 在品牌推荐的模板中渲染数据
+7. 实现左侧分类的鼠标移入选中样式
+
+8.
 :::
 
 ::: info 体验
@@ -130,6 +132,25 @@ readHotBrands().then(({ data: res, status: status }) => {
     </li>
   </template>
 </ul>
+```
+
+* **Step.7：实现左侧分类的鼠标移入选中样式**
+
+```css
+.menu li:hover,
+.menu li.active {
+  background-color: var(--theme-color);
+}
+
+```
+
+```html
+<div class="home-category" @mouseleave="current = null">
+  <ul class="menu">
+      <!-- 如果鼠标移入的分类就是当前分类就为当前li添加 active 类名 -->
+    <li :class="{ active: current?.id && current.id === item.id }"></li>
+  <ul>
+</div>
 ```
 
 :::
