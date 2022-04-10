@@ -69,7 +69,7 @@ function getGuideSidebar() {
         { text: '实现左侧分类品牌推荐', link: '/home/brand-recommend' },
         { text: '实现左侧分类骨架效果', link: '/home/menu-skeleton' },
         { text: '首页轮播图布局', link: '/home/home-carousel-layout' },
-        { text: '首页轮播图渲染结构', link: '/home/devtools-install' },
+        { text: '首页轮播图渲染结构', link: '/home/home-carousel-render' },
         { text: '首页轮播图逻辑封装', link: '/home/devtools-install' },
         { text: '封装面板组件', link: '/home/devtools-install' },
         { text: '实现新鲜好物', link: '/home/devtools-install' },

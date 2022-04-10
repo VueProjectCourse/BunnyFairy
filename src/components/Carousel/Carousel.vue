@@ -1,23 +1,37 @@
+<script setup>import { ref } from 'vue';
+defineProps({
+  carousels: {
+    type: Array
+  }
+})
+const currentIndex = ref(0)
+</script>
 <template>
   <div class="xtx-carousel">
     <ul class="carousel-body">
-      <li class="carousel-item fade">
-        <RouterLink to="/">
-          <img
-            src="http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-15/1ba86bcc-ae71-42a3-bc3e-37b662f7f07e.jpg"
-            alt=""
-          />
+      <li
+        class="carousel-item fade"
+        v-for="(item, index) in carousels"
+        :key="item.id"
+        :class="{ fade: index === currentIndex }"
+      >
+        <RouterLink :to="item.hrefUrl">
+          <img :src="item.imgUrl" alt />
         </RouterLink>
       </li>
     </ul>
-    <a href="javascript:" class="carousel-btn prev"
-      ><i class="iconfont icon-angle-left"></i
-    ></a>
-    <a href="javascript:" class="carousel-btn next"
-      ><i class="iconfont icon-angle-right"></i
-    ></a>
+    <a href="javascript:" class="carousel-btn prev">
+      <i class="iconfont icon-angle-left"></i>
+    </a>
+    <a href="javascript:" class="carousel-btn next">
+      <i class="iconfont icon-angle-right"></i>
+    </a>
     <div class="carousel-indicator">
-      <span v-for="i in 5" :key="i"></span>
+      <span
+        v-for="(item, index) in carousels"
+        :key="item.id"
+        :class="{ active: index === currentIndex }"
+      ></span>
     </div>
   </div>
 </template>
@@ -98,6 +112,4 @@
 .xtx-carousel:hover .carousel-btn {
   opacity: 1;
 }
-
-
 </style>

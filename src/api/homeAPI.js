@@ -13,3 +13,17 @@ export const readHotBrands = (limit = 10) => {
     },
   });
 };
+
+
+/**
+ * 获取轮播图数据
+ * @param {number} distributionSite - 广告投放位置 1 首页 2 分类页面
+ * @return {Promise<{result: Array<Banner>}>} 广告图列表
+ */
+export function readBanners(distributionSite = 1) {
+  return request.get("/home/banner", {
+    params: {
+      distributionSite
+    }
+  });
+}
