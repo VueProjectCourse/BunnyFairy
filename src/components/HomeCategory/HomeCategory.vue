@@ -2,6 +2,7 @@
 import { computed } from "@vue/reactivity";
 import { ref } from "vue"
 import { useMenuList } from "./useMenuList"
+import MenuSkeleton from "../MenuSkeleton/MenuSkeleton.vue";
 const { menuList } = useMenuList();
 // 用于存储当前用户鼠标移入的左侧一级分类
 const current = ref(null);
@@ -15,10 +16,30 @@ const aaa = computed(() => {
 </script>
 <template>
   <div class="home-category" @mouseleave="current = null">
-    <ul class="menu">
+    <ul class="menu" v-if="menuList">
       <li v-for="item in menuList " :key="item.id" @mouseenter="current = item" :class="{ active: current?.id && current.id === item.id }" >
         <RouterLink to="/">{{ item.name }}</RouterLink>
-        <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
+
+        <template v-if="item.children">
+           <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
+        </template>
+
+       <template v-else>
+          <MenuSkeleton
+            animated="fade"
+            width="60px"
+            height="18px"
+            bg="rgba(255,255,255,0.2)"
+            style="margin-right: 5px"
+          ></MenuSkeleton>
+          <MenuSkeleton
+            animated="fade"
+            width="60px"
+            height="18px"
+            bg="rgba(255,255,255,0.2)"
+          ></MenuSkeleton>
+        </template>
+       
       </li>
     </ul>
     <!-- 分类列表商品推荐 -->
