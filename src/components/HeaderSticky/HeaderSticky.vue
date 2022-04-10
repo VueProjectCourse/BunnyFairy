@@ -1,14 +1,10 @@
 <script setup>
 
 import HeaderNav from '../HeaderNav/HeaderNav.vue';
-import {useWindowScroll} from "@vueuse/core"
+import { useWindowScroll } from "@vueuse/core"
 // import { useBarScroll } from "./useWindowScroll";
-
 // const { scrollTop } = useBarScroll();
-const {y: scrollTop} = useWindowScroll();
-
-
-
+const { y: scrollTop } = useWindowScroll();
 </script>
 
 
@@ -27,6 +23,7 @@ const {y: scrollTop} = useWindowScroll();
 
 <style scoped>
 @import "@/assets/styles/variable.css";
+
 .header-sticky {
   width: 100%;
   height: 80px;
@@ -45,16 +42,19 @@ const {y: scrollTop} = useWindowScroll();
   opacity: 1;
   transition: all 0.3s linear;
 }
+
 .container {
   display: flex;
   align-items: center;
 }
+
 .logo {
   width: 200px;
   height: 80px;
   background: url(@/assets/images/logo.png) no-repeat right 2px;
   background-size: 160px auto;
 }
+
 .right {
   width: 220px;
   display: flex;
@@ -62,13 +62,16 @@ const {y: scrollTop} = useWindowScroll();
   padding-left: 40px;
   border-left: 2px solid var(--theme-color);
 }
+
 .right a {
   width: 38px;
   margin-right: 40px;
   font-size: 16px;
   line-height: 1;
 }
+
 .right a:hover {
   color: var(--theme-color);
 }
+
 </style>

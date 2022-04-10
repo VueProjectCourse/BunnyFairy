@@ -1,5 +1,5 @@
 <script setup>
-  import HeaderNav from '../HeaderNav/HeaderNav.vue';
+import HeaderNav from '../HeaderNav/HeaderNav.vue';
 </script>
 <template>
   <header class="app-header">
@@ -23,6 +23,7 @@
 </template>
 
 <style scoped>
+
 @import "@/assets/styles/variable.css";
 .app-header {
   background: #fff;
@@ -45,7 +46,6 @@
   background: url(@/assets/images/logo.png) no-repeat center 18px / contain;
 }
 
-
 .app-header .search {
   width: 170px;
   height: 32px;
@@ -58,6 +58,7 @@
   font-size: 18px;
   margin-left: 5px;
 }
+
 .app-header .search input {
   width: 140px;
   padding-left: 5px;

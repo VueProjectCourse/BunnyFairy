@@ -1,7 +1,7 @@
 # 实现吸顶导航(工具库)
 
 ::: tip 目标
-这样小节，我们的目标是使用 `@vueuse/core` 工具库提供的方法实现吸顶导航功能 [文档](https://vueuse.org/)
+这一小节，我们的目标是使用 `@vueuse/core` 工具库提供的方法实现吸顶导航功能 [文档](https://vueuse.org/)
 :::
 
 ::: warning 步骤

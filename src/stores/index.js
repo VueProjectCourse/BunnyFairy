@@ -6,4 +6,5 @@ import piniaPluginPersist from "pinia-plugin-persist";
 const store = createPinia();
 // 在 pinia中 挂载 插件
 store.use(piniaPluginPersist);
+
 export default store;

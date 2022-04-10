@@ -5,10 +5,7 @@ import SubCategory from "../views/SubCategory/SubCategory.vue"
 
 const routes = [
   // 配置路由
-  {
-    path: "/",
-    component: Home,
-  },
+  { path: "/", component: Home},
   { path: "/category/:id", component: TopCategory },
   { path: "/category/sub/:id", component: SubCategory },
 ];

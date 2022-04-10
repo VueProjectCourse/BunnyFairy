@@ -11,20 +11,19 @@ export const useCateStore = defineStore({
     // 初始化分类数据
     async initCategories() {
       const { data: res, status: status } = await readCategories();
-      // console.log(res);
       res.result.forEach((category) => (category.open = false))
       if (status === 200) {
         this.cateList = res.result;
       }
     },
     // 控制导航下拉菜单的显示
-    open(id){
-      const target = this.cateList.find((item)=> item.id === id);
+    open(id) {
+      const target = this.cateList.find((item) => item.id === id);
       target.open = true;
     },
     // 控制导航下拉菜单的隐藏
-    close(id){
-      const target = this.cateList.find((item)=> item.id === id);
+    close(id) {
+      const target = this.cateList.find((item) => item.id === id);
       target.open = false;
     }
   }

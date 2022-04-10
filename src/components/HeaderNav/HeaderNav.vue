@@ -85,10 +85,12 @@ const cateStore = useCateStore();
   align-items: center;
   height: 132px;
 }
+
 .layer ul li {
   width: 110px;
   text-align: center;
 }
+
 .layer ul li img {
   width: 60px;
   height: 60px;

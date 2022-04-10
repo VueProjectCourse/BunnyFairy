@@ -3,11 +3,11 @@
   /* 主题色 */
   --theme-color: #27BA9B;
   /* 辅助色 */
-   --help-color: #E26237;
+  --help-color: #E26237;
   /* 成功色 */
---success-color: #1DC779;
+  --success-color: #1DC779;
   /* 警告色 */
---warning-color: #FFB302;
+  --warning-color: #FFB302;
   /* 价格 */
   --price-color: #CF4444;
 }

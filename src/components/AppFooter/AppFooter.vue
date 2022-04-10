@@ -92,6 +92,7 @@
 }
 .contact dl {
   height: 190px;
+
   text-align: center;
   padding: 0 72px;
   border-right: 1px solid #f2f2f2;
