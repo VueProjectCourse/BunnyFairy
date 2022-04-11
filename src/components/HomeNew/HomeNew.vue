@@ -1,20 +1,23 @@
 <script setup>
 import HomePanel from '../HomePanel/HomePanel.vue';
-import { useNewGoods } from "./useHomeNew"
-const { goods } = useNewGoods();
+// import { useNewGoods } from "./useHomeNew"
+// const { goods } = useNewGoods();
+import { useLazyData } from "./useHomeNew"
+import { readNewGoods } from "../../api/homeAPI"
+const {target, result  } = useLazyData(readNewGoods)
 </script>
 <template>
-  <HomePanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
+  <HomePanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱" ref="target">
     <template v-slot:right>
       <More />
     </template>
     <template v-slot:default>
-      <ul class="goods-list" v-if="goods">
-        <li v-for="item in goods" :key="item.id">
+      <ul class="goods-list" v-if="result">
+        <li v-for="item in result" :key="item.id">
           <RouterLink to="/">
             <img :src="item.picture" alt="" />
-            <p class="name ellipsis">{{item.name}}</p>
-            <p class="price">&yen;{{item.price}}</p>
+            <p class="name ellipsis">{{ item.name }}</p>
+            <p class="price">&yen;{{ item.price }}</p>
           </RouterLink>
         </li>
       </ul>

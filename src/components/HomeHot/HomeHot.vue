@@ -1,14 +1,16 @@
 <script setup>
 import HomePanel from '../HomePanel/HomePanel.vue';
+import { useHotProduct } from "./useHomeHot"
+const { hotList } = useHotProduct()
 </script>
 <template>
   <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
-    <ul class="goods-list">
-      <li>
+    <ul class="goods-list" v-if="hotList">
+      <li v-for="item in hotList" :key="item.id">
         <RouterLink to="/">
-          <img src="https://yjy-oss-files.oss-cn-zhangjiakou.aliyuncs.com/tuxian/popular_1.jpg" alt="" />
-          <p class="name">特惠推荐</p>
-          <p class="desc">它们最实惠</p>
+          <img :src="item.picture" :alt="item.title" />
+          <p class="name">{{ item.title }}</p>
+          <p class="desc">{{ item.alt }}</p>
         </RouterLink>
       </li>
     </ul>
