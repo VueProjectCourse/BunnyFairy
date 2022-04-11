@@ -46,8 +46,7 @@
 
 * **Step.2：在轮播图组件中，编写样式代码**
 
-```html
-<style scoped>
+```css
 .xtx-carousel {
   width: 100%;
   height: 100%;
