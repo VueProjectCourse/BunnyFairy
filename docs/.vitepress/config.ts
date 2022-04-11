@@ -74,7 +74,7 @@ function getGuideSidebar() {
         { text: '轮播图自动轮播', link: '/home/home-carousel-autoplay' },
         { text: '封装面板组件', link: '/home/home-panel' },
         { text: '实现新鲜好物', link: '/home/home-new' },
-        { text: '实现人气推荐', link: '/home/devtools-install' },
+        { text: '实现人气推荐', link: '/home/home-hot' },
         { text: '实现数据懒加载', link: '/home/devtools-install' },
         { text: '实现面板骨架效果', link: '/home/devtools-install' },
         { text: '实现热门品牌', link: '/home/devtools-install' },
