@@ -3,9 +3,7 @@
     <div class="container">
       <ul>
         <li>
-          <a href="javascript:">
-            <i class="iconfont icon-user"></i>周杰伦
-          </a>
+          <a href="javascript:"><i class="iconfont icon-user"></i>周杰伦</a>
         </li>
         <li>
           <a href="javascript:">退出登录</a>
