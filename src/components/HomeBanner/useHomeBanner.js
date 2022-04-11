@@ -4,7 +4,6 @@ export const useBanners = () => {
   const bannerList = ref(null);
 
   readBanners().then(({ data: res, status }) => {
-    console.log(res, status)
     if (status === 200) {
       bannerList.value = res.result;
     }

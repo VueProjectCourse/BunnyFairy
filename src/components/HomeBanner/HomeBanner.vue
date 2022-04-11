@@ -1,11 +1,11 @@
 <script setup>
 import { useBanners } from "./useHomeBanner"
-const { bannerList } = useBanners()
+const { bannerList } = useBanners();
 </script>
 
 <template>
   <div class="home-banner" >
-    <Carousel v-if="bannerList" :carousels="bannerList"  />
+    <Carousel v-if="bannerList" :carousels="bannerList" :auto="true" />
   </div>
 </template>
 
