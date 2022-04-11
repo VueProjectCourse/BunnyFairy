@@ -27,3 +27,25 @@ export function readBanners(distributionSite = 1) {
     }
   });
 }
+
+
+/**
+ * 获取新鲜好物
+ * @param {number} limit 限制获取的数据条数
+ * @return {Promise<{result: Array<newGoods>}>}
+ */
+export function readNewGoods(limit = 4) {
+  return request.get("/home/new", {
+    params: {
+      limit
+    },
+  });
+}
+
+/**
+ * 获取人气推荐
+ * @return {Promise<{result: Array<hotGoods>}>}
+ */
+export function readHotProduct() {
+  return request.get("/home/hot");
+}
