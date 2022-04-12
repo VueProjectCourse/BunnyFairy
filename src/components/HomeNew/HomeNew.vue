@@ -4,8 +4,10 @@ import HomePanel from '../HomePanel/HomePanel.vue';
 // const { goods } = useNewGoods();
 import { useLazyData } from "./useHomeNew"
 import { readNewGoods } from "../../api/homeAPI"
-const {target, result  } = useLazyData(readNewGoods)
+import PanelSkeleton from '../PanelSkeleton/PanelSkeleton.vue';
+const { target, result } = useLazyData(readNewGoods)
 </script>
+
 <template>
   <HomePanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱" ref="target">
     <template v-slot:right>
@@ -21,6 +23,9 @@ const {target, result  } = useLazyData(readNewGoods)
           </RouterLink>
         </li>
       </ul>
+      <Transition name="fade">
+        <PanelSkeleton v-if="!result"></PanelSkeleton>
+      </Transition>
     </template>
   </HomePanel>
 </template>

@@ -1,12 +1,17 @@
 <script setup>
 import HomePanel from '../HomePanel/HomePanel.vue';
-import { useHotProduct } from "./useHomeHot"
-const { hotList } = useHotProduct()
+// import { useHotProduct } from "./useHomeHot"
+// const { hotList } = useHotProduct()
+
+import {useLazyData} from "../HomeNew/useHomeNew"
+import {readHotProduct} from "../../api/homeAPI"
+const {target, result} = useLazyData(readHotProduct)
+
 </script>
 <template>
-  <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
-    <ul class="goods-list" v-if="hotList">
-      <li v-for="item in hotList" :key="item.id">
+  <HomePanel title="人气推荐" sub-title="人气爆款 不容错过" ref="target">
+    <ul class="goods-list" v-if="result">
+      <li v-for="item in result" :key="item.id">
         <RouterLink to="/">
           <img :src="item.picture" :alt="item.title" />
           <p class="name">{{ item.title }}</p>
@@ -14,6 +19,9 @@ const { hotList } = useHotProduct()
         </RouterLink>
       </li>
     </ul>
+     <Transition name="fade">
+        <PanelSkeleton v-if="!result"></PanelSkeleton>
+      </Transition>
   </HomePanel>
 </template>
 
