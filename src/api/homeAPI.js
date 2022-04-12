@@ -20,7 +20,7 @@ export const readHotBrands = (limit = 10) => {
  * @param {number} distributionSite - 广告投放位置 1 首页 2 分类页面
  * @return {Promise<{result: Array<Banner>}>} 广告图列表
  */
-export function readBanners(distributionSite = 1) {
+export const readBanners = (distributionSite = 1) => {
   return request.get("/home/banner", {
     params: {
       distributionSite
@@ -34,7 +34,7 @@ export function readBanners(distributionSite = 1) {
  * @param {number} limit 限制获取的数据条数
  * @return {Promise<{result: Array<newGoods>}>}
  */
-export function readNewGoods(limit = 4) {
+export const readNewGoods = (limit = 4) => {
   return request.get("/home/new", {
     params: {
       limit
@@ -46,6 +46,6 @@ export function readNewGoods(limit = 4) {
  * 获取人气推荐
  * @return {Promise<{result: Array<hotGoods>}>}
  */
-export function readHotProduct() {
+export const readHotProduct = () => {
   return request.get("/home/hot");
 }

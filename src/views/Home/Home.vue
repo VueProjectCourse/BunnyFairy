@@ -4,6 +4,8 @@ import HomeCategory from "../../components/HomeCategory/HomeCategory.vue";
 import HomeBanner from "../../components/HomeBanner/HomeBanner.vue";
 import HomeNew from "../../components/HomeNew/HomeNew.vue";
 import HomeHot from "../../components/HomeHot/HomeHot.vue";
+import HomeBrand from "../../components/HomeBrand/HomeBrand.vue";
+
 </script>
 
 <template>
@@ -15,5 +17,6 @@ import HomeHot from "../../components/HomeHot/HomeHot.vue";
 
     <HomeNew />
     <HomeHot />
+    <HomeBrand/>
   </Layout>
 </template>

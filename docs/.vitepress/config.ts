@@ -77,7 +77,7 @@ function getGuideSidebar() {
         { text: '实现人气推荐', link: '/home/home-hot' },
         { text: '实现数据懒加载', link: '/home/lazy-data' },
         { text: '实现面板骨架效果', link: '/home/pannel-skeleton' },
-        { text: '实现热门品牌', link: '/home/devtools-install' },
+        { text: '实现热门品牌', link: '/home/home-brand' },
         { text: '实现产品区块', link: '/home/devtools-install' },
         { text: '实现图片懒加载', link: '/home/devtools-install' },
         { text: '实现最新专题', link: '/home/devtools-install' },
