@@ -155,8 +155,8 @@ const { hotList } = useHotProduct()
 
 :::
 
-
 ::: danger 总结
+
 * 【重点】
 * 【难点】
 * 【注意点】
