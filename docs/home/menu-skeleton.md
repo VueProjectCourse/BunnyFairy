@@ -135,31 +135,34 @@ app.mount("#app");
 * **Step.6：使用`MenuSkeleton`组件实现左侧二级分类菜单加载等待效果**
 
 ```html
-  <ul class="menu" v-if="menuList">
-    <li v-for="item in menuList " :key="item.id" @mouseenter="current = item" :class="{ active: current?.id && current.id === item.id }" >
-      <RouterLink to="/">{{ item.name }}</RouterLink>
-
-      <template v-if="item.children">
-        <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
-      </template>
-
-      <template v-else>
-        <MenuSkeleton
-          animated="fade"
-          width="60px"
-          height="18px"
-          bg="rgba(255,255,255,0.2)"
-          style="margin-right: 5px"
-          ></MenuSkeleton>
-        <MenuSkeleton animated="fade"
-          width="60px"
-          height="18px"
-          bg="rgba(255,255,255,0.2)"
-          ></MenuSkeleton>
-     </template>
-       
-      </li>
-  </ul>
+<ul class="menu" v-if="menuList">
+  <li v-for="item in menuList " 
+      :key="item.id" 
+      @mouseenter="current = item" 
+      :class="{ active: current?.id && current.id === item.id}" >
+    <RouterLink to="/">{{ item.name }}</RouterLink>
+    <template v-if="item.children">
+      <RouterLink to="/" 
+                  v-for="subitem in item.children" 
+                  :key="subitem.id">{{ subitem.name }}</RouterLink>
+    </template>
+    <template v-else>
+      <MenuSkeleton
+        animated="fade"
+        width="60px"
+        height="18px"
+        bg="rgba(255,255,255,0.2)"
+        style="margin-right: 5px"
+        ></MenuSkeleton>
+      <MenuSkeleton animated="fade"
+        width="60px"
+        height="18px"
+        bg="rgba(255,255,255,0.2)"
+        ></MenuSkeleton>
+   </template>
+     
+  </li>
+</ul>
 ```
 
 :::

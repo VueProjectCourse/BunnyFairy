@@ -36,18 +36,18 @@ const props = defineProps({
 
 ```js
 // 用于存储定时器
-  const timer = ref(null);
+const timer = ref(null);
 // 自动轮播
-  const autoPlay = () => {
-    // 判断调用者是否开启了自动轮播
-    // 判断是否有轮播图数据
-    if (auto && carousels.length > 1) {
-      // 开启
-      timer.value = setInterval(toggle, duration);
-    }
-  };
-   // 组件挂载完成后试图开启自动轮播
-  onMounted(autoPlay);
+const autoPlay = () => {
+  // 判断调用者是否开启了自动轮播
+  // 判断是否有轮播图数据
+  if (auto && carousels.length > 1) {
+    // 开启
+    timer.value = setInterval(toggle, duration);
+  }
+};
+// 组件挂载完成后试图开启自动轮播
+onMounted(autoPlay);
 ```
 
 ```html
@@ -58,12 +58,12 @@ const props = defineProps({
 
 ```js
 // 停止自动轮播
-  const stopPlay = () => {
-    console.log('停止定时器')
-    clearInterval(timer.value);
-  };
-   // 组件卸载之后停止自动轮播
-  onUnmounted(stopPlay);
+const stopPlay = () => {
+  console.log('停止定时器')
+  clearInterval(timer.value);
+};
+// 组件卸载之后停止自动轮播
+onUnmounted(stopPlay);
 ```
 
 ```html
@@ -73,7 +73,7 @@ const props = defineProps({
 * **Step.4：在调用轮播图组件的时候传递是否自动轮播**
 
 ```html
-<XtxCarousel v-if="carousels" :carousels="carousels" :autoPlay="true" />
+<Carousel v-if="carousels" :carousels="carousels" :autoPlay="true" />
 ```
 
 :::

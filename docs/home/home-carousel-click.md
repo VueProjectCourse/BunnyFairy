@@ -17,9 +17,7 @@
 ```js
 import { ref } from "vue";
 
-
 export const useCarouselEffect = (carousels) => {
-
   // 轮播图当前索引
   const currentIndex = ref(0)
   // 轮播图切换
@@ -45,10 +43,10 @@ export const useCarouselEffect = (carousels) => {
 
 ```html
 <a href="javascript:" class="carousel-btn prev" @click="toggle(-1)">
-      <i class="iconfont icon-angle-left"></i>
-    </a>
+  <i class="iconfont icon-angle-left"></i>
+</a>
 <a href="javascript:" class="carousel-btn next" @click="toggle(1)">
-      <i class="iconfont icon-angle-right"></i>
+  <i class="iconfont icon-angle-right"></i>
 </a>
 ```
 
@@ -56,9 +54,9 @@ export const useCarouselEffect = (carousels) => {
 
 ```html
 <span
-    :class="{ active: index === currentIndex }"
-    v-for="(item, index) in carousels"
-    :key="item.id"
+  :class="{ active: index === currentIndex }"
+  v-for="(item, index) in carousels"
+  :key="item.id"
   @click="currentIndex = index"
 ></span>
 ```

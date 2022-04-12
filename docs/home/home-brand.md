@@ -183,16 +183,22 @@ export const  useToggleEffect = () => {
 
 ```html
 <template v-slot:right>
-  <a href="javascript:" @click="toggle(-1)" :class="{ disabled: currentIndex === 0 }"
-    class="iconfont icon-angle-left prev"></a>
-  <a href="javascript:" @click="toggle(1)" :class="{ disabled: currentIndex === 1 }"
-    class="iconfont icon-angle-right next"></a>
+  <a href="javascript:" 
+    @click="toggle(-1)" 
+    :class="{ disabled: currentIndex === 0 }"
+    class="iconfont icon-angle-left prev">
+  </a>
+  <a href="javascript:" 
+    @click="toggle(1)" 
+    :class="{ disabled: currentIndex === 1 }"
+    class="iconfont icon-angle-right next">
+  </a>
 </template>
 ```
 
 ```html
 <ul class="list" 
-    :style="{transform: `translateX(${-currentIndex * 1240}px)`}">
+  :style="{transform: `translateX(${-currentIndex * 1240}px)`}">
 </ul>
 ```
 
