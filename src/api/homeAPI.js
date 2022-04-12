@@ -58,3 +58,18 @@ export const readHotProduct = () => {
 export const readGoodProducts = () => {
   return request.get("/home/goods");
 }
+
+
+
+/**
+ * 获取最新专题
+ * @param {number} limit 限制请求数据的数量
+ * @return {Promise<{result: Array<Special>}>}
+ */
+export  const readSpecial =(limit) => {
+  return request.get("/home/special",  {
+    params: {
+      limit
+    },
+  });
+}

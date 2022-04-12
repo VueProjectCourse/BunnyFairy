@@ -6,6 +6,7 @@ import HomeNew from "../../components/HomeNew/HomeNew.vue";
 import HomeHot from "../../components/HomeHot/HomeHot.vue";
 import HomeBrand from "../../components/HomeBrand/HomeBrand.vue";
 import HomeProduct from "../../components/HomeProduct/HomeProduct.vue";
+import HomeSpecial from "../../components/HomeSpecial/HomeSpecial.vue";
 
 </script>
 
@@ -20,5 +21,6 @@ import HomeProduct from "../../components/HomeProduct/HomeProduct.vue";
     <HomeHot />
     <HomeBrand/>
     <HomeProduct/>
+    <HomeSpecial/>
   </Layout>
 </template>
