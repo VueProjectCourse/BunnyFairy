@@ -49,3 +49,12 @@ export const readNewGoods = (limit = 4) => {
 export const readHotProduct = () => {
   return request.get("/home/hot");
 }
+
+
+/**
+ * 获取产品区块数据
+ * @return {Promise<{result: Array<Product>}>}
+ */
+export const readGoodProducts = () => {
+  return request.get("/home/goods");
+}

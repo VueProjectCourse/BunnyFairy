@@ -5,6 +5,7 @@ import HomeBanner from "../../components/HomeBanner/HomeBanner.vue";
 import HomeNew from "../../components/HomeNew/HomeNew.vue";
 import HomeHot from "../../components/HomeHot/HomeHot.vue";
 import HomeBrand from "../../components/HomeBrand/HomeBrand.vue";
+import HomeProduct from "../../components/HomeProduct/HomeProduct.vue";
 
 </script>
 
@@ -18,5 +19,6 @@ import HomeBrand from "../../components/HomeBrand/HomeBrand.vue";
     <HomeNew />
     <HomeHot />
     <HomeBrand/>
+    <HomeProduct/>
   </Layout>
 </template>

@@ -35,7 +35,8 @@ export const useLazyData = (apiFunction) => {
           }
         });
       }
-    }
+    },
+    { threshold: 0 }
   )
 
 
