@@ -80,7 +80,7 @@ function getGuideSidebar() {
         { text: '实现热门品牌', link: '/home/home-brand' },
         { text: '实现产品区块主体', link: '/home/home-product' },
         { text: '实现产品区块右侧', link: '/home/home-goods' },
-        { text: '实现图片懒加载', link: '/home/devtools-install' },
+        { text: '实现图片懒加载', link: '/home/lazyload-image' },
         { text: '实现最新专题', link: '/home/devtools-install' },
       ]
     },

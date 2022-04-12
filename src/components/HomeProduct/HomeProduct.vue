@@ -21,7 +21,7 @@ const { target, result } = useLazyData(readGoodProducts)
       <template v-slot:default>
         <div class="box">
           <RouterLink class="cover" to="/">
-            <img :src="item.picture" alt="" />
+            <img v-lazy="item.picture" alt="" />
             <strong class="label">
               <span>{{ item.name }}馆</span>
               <span>{{ item.saleInfo }}</span>
