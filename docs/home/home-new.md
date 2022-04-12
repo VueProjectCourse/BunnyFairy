@@ -147,3 +147,10 @@ const { goods } = useNewGoods();
 ```
 
 :::
+
+::: danger 总结
+
+* 【重点】
+* 【难点】
+* 【注意点】
+:::
