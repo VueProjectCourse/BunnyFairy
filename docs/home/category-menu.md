@@ -51,7 +51,7 @@
   line-height: 50px;
 }
 .menu li:hover {
-  background-color: var(--theme-color);
+  background-color: var(--primary-color);
 }
 .menu li a {
   margin-right: 4px;

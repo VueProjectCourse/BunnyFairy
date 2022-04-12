@@ -57,7 +57,7 @@
 }
 
 .app-top-nav ul a:hover {
-  color: var(--theme-color);
+  color: var(--primary-color);
 }
 
 .app-top-nav li ~ li a {

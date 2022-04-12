@@ -104,8 +104,8 @@
   }
 
   .app-header .app-header-nav > li > a:hover {
-    color: var(--theme-color);
-    border-bottom: 1px solid var(--theme-color);
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
   }
 
   .app-header .app-header-nav > li:hover > .layer {

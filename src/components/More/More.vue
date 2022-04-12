@@ -39,6 +39,6 @@ defineProps({
 
 .xtx-more:hover span,
 .xtx-more:hover i {
-  color: var(--theme-color);
+  color: var(--primary-color);
 }
 </style>

@@ -87,7 +87,7 @@ const current = ref(null);
 }
 
 .menu li:hover {
-  background-color: var(--theme-color);
+  background-color: var(--primary-color);
 }
 
 .menu li a {
@@ -205,6 +205,6 @@ const current = ref(null);
 
 .menu li:hover,
 .menu li.active {
-  background-color: var(--theme-color);
+  background-color: var(--primary-color);
 }
 </style>

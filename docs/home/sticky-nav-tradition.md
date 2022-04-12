@@ -70,7 +70,7 @@
   display: flex;
   text-align: center;
   padding-left: 40px;
-  border-left: 2px solid var(--theme-color);
+  border-left: 2px solid var(--primary-color);
 }
 .right a {
   width: 38px;
@@ -79,7 +79,7 @@
   line-height: 1;
 }
 .right a:hover {
-  color: var(--theme-color);
+  color: var(--primary-color);
 }
 </style>
 ```

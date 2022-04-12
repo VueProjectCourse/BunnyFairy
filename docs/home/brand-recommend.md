@@ -137,7 +137,7 @@ readHotBrands().then(({ data: res, status: status }) => {
 ```css
 .menu li:hover,
 .menu li.active {
-  background-color: var(--theme-color);
+  background-color: var(--primary-color);
 }
 
 ```

@@ -123,7 +123,7 @@
   color: #666;
 }
 .contact dd:hover .iconfont {
-  color: var(--theme-color);
+  color: var(--primary-color);
 }
 .contact dd:last-child {
   margin-right: 0;
@@ -151,7 +151,7 @@
   margin-top: 5px;
   color: #fff;
   border-radius: 2px;
-  background-color: var(--theme-color);
+  background-color: var(--primary-color);
 }
 .contact .hotline {
   padding-top: 20px;

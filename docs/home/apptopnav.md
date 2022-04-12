@@ -74,7 +74,7 @@
 .app-top-nav ul a:hover {
   /* color: 属性值是一个变量 */
   /* 格式: 属性名: var(变量名) */
-  color: var(--theme-color);
+  color: var(--primary-color);
 }
 
 .app-top-nav li ~ li a {

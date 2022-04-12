@@ -52,8 +52,8 @@ const cateStore = useCateStore();
   display: inline-block;
 }
 .app-header-nav > li:hover > a {
-  color: var(--theme-color);
-  border-bottom: 1px solid var(--theme-color);
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
 }
 /* .app-header-nav > li:hover > .layer {
   height: 132px;
@@ -99,6 +99,6 @@ const cateStore = useCateStore();
   padding-top: 10px;
 }
 .layer ul li:hover p {
-  color: var(--theme-color);
+  color: var(--primary-color);
 }
 </style>

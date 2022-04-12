@@ -145,7 +145,7 @@
   color: #666;
 }
 .app-footer .contact dd:hover .iconfont {
-  color: var( --theme-color);
+  color: var( --primary-color);
 }
 .app-footer .contact dd:last-child {
   margin-right: 0;
@@ -173,7 +173,7 @@
   margin-top: 5px;
   color: #fff;
   border-radius: 2px;
-  background-color: var(--theme-color);
+  background-color: var(--primary-color);
 }
 .app-footer .contact .hotline {
   padding-top: 20px;
