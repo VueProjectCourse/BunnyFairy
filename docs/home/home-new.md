@@ -101,7 +101,7 @@ export function readNewGoods(limit = 4) {
 // useHomeNew.js
 import { ref } from 'vue'
 import { readNewGoods } from "../../api/homeAPI"
-import { useIntersectionObserver } from '@vueuse/core'
+
 export const useNewGoods = () => {
   const goods = ref(null);
   readNewGoods().then(({ data: res, status: status }) => {
