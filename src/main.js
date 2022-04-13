@@ -6,8 +6,7 @@ import store from "./stores";
 import MenuSkeleton from "./components/MenuSkeleton";
 import Carousel from "./components/Carousel/Carousel";
 import More from "./components/More/More";
-import Bread from "./components/Bread/Bread";
-import BreadItem from "./components/BreadItem/BreadItem";
+import library from "./library"; 
 import lazy from "./directive/lazy";
 import "normalize.css";
 import "@/assets/styles/base.css";
@@ -19,8 +18,7 @@ app.use(router);
 app.use(MenuSkeleton)
 app.use(Carousel)
 app.use(More)
-app.use(Bread)
-app.use(BreadItem)
 app.use(lazy)
+app.use(library)
 
 app.mount("#app");

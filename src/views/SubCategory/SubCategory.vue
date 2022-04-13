@@ -16,3 +16,21 @@ const { topCate,subCate } = useBread();
     </Transition>
   </Layout>
 </template>
+
+
+<style>
+.fade-right-enter-from,
+.fade-right-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+.fade-right-enter-active,
+.fade-right-leave-active {
+  transition: all 0.5s;
+}
+.fade-right-enter-to,
+.fade-right-leave-from {
+  transform: none;
+  opacity: 1;
+}
+</style>

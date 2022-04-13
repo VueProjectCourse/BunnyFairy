@@ -93,7 +93,7 @@ function getGuideSidebar() {
         { text: '一级面包屑导航', link: '/category/bread-top' },
         { text: '二级面包屑导航', link: '/category/bread-sub' },
         { text: '面包屑导航动画', link: '/category/bread-transition' },
-        { text: '批量注册组件', link: '/category/devtools-install' },
+        { text: '批量注册组件', link: '/category/bulk-registration' },
         { text: '一级分类-轮播图展示', link: '/category/devtools-install' },
 
         { text: '一级分类-展示二级分类列表', link: '/category/devtools-install' },
