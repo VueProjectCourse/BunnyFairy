@@ -87,11 +87,15 @@ function getGuideSidebar() {
     {
       text: "分类模块",
       children: [
-        { text: '渲染函数', link: '/category/devtools-install' },
-        { text: '实现面包屑导航组件', link: '/category/devtools-install' },
-        { text: '实现面包屑导航动画', link: '/category/devtools-install' },
+
+        { text: '渲染函数', link: '/category/render-function' },
+        { text: '面包屑导航概述', link: '/category/bread-overview' },
+        { text: '一级面包屑导航', link: '/category/bread-top' },
+        { text: '二级面包屑导航', link: '/category/bread-sub' },
+        { text: '面包屑导航动画', link: '/category/bread-transition' },
         { text: '批量注册组件', link: '/category/devtools-install' },
         { text: '一级分类-轮播图展示', link: '/category/devtools-install' },
+
         { text: '一级分类-展示二级分类列表', link: '/category/devtools-install' },
         { text: '一级分类-实现推荐商品布局', link: '/category/devtools-install' },
         { text: '一级分类-实现推荐商品渲染', link: '/category/devtools-install' },
