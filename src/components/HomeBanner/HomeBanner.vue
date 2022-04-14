@@ -5,7 +5,7 @@ const { bannerList } = useBanners();
 
 <template>
   <div class="home-banner" >
-    <Carousel v-if="bannerList" :carousels="bannerList" :auto="true" />
+    <Carousel v-if="bannerList" :carousel="bannerList" :auto="true" />
   </div>
 </template>
 

@@ -1,7 +1,8 @@
 import { useRoute } from "vue-router"
 import { useCateStore } from "../../stores/cateStore"
 import { storeToRefs } from "pinia"
-import { computed } from "vue";
+import { readBanners } from "../../api/homeAPI"
+import { computed, ref } from "vue";
 
 export const useBread = () => {
   // 获取路由信息对象
@@ -15,4 +16,17 @@ export const useBread = () => {
   })
 
   return { topCate }
+}
+
+export const useTopCateBanner = () => {
+  // 存储轮播图数据
+  const carouselList = ref(null);
+  // 获取轮播图数据
+  readBanners(2).then(({ data: res, status: status }) => {
+    if (status === 200) {
+      carouselList.value = res.result;
+    }
+  });
+
+  return { carouselList }
 }

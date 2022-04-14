@@ -8,7 +8,7 @@ export default defineComponent({
 <script setup>
 import { useCarouselEffect } from "./useCarousel"
 const props = defineProps({
-  carousels: {
+  carousel: {
     type: Array
   },
   auto: {
@@ -21,13 +21,13 @@ const props = defineProps({
   },
 })
 
-const { currentIndex, toggle, autoPlay, stopPlay } = useCarouselEffect(props.auto, props.carousels, props.duration)
+const { currentIndex, toggle, autoPlay, stopPlay } = useCarouselEffect(props.auto, props.carousel, props.duration)
 
 </script>
 <template>
   <div class="xtx-carousel" @mouseenter="stopPlay" @mouseleave="autoPlay">
     <ul class="carousel-body">
-      <li class="carousel-item" v-for="(item, index) in carousels" :key="item.id"
+      <li class="carousel-item" v-for="(item, index) in carousel" :key="item.id"
         :class="{ fade: index === currentIndex }">
         <RouterLink :to="item.hrefUrl">
           <img :src="item.imgUrl" alt />
@@ -41,7 +41,7 @@ const { currentIndex, toggle, autoPlay, stopPlay } = useCarouselEffect(props.aut
       <i class="iconfont icon-angle-right"></i>
     </a>
     <div class="carousel-indicator">
-      <span v-for="(item, index) in carousels" :key="item.id" :class="{ active: index === currentIndex }"
+      <span v-for="(item, index) in carousel" :key="item.id" :class="{ active: index === currentIndex }"
         @click="currentIndex = index"></span>
     </div>
   </div>

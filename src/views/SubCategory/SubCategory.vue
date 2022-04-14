@@ -7,14 +7,18 @@ const { topCate, subCate } = useBread();
 
 <template>
   <Layout>
+    <div class="container">
+      <Bread>
+        <BreadItem path="/">首页</BreadItem>
+        <BreadItem :path="`/category/${topCate?.id}`">{{ topCate?.name }}</BreadItem>
+        <Transition name="fade-right" mode="out-in">
+          <BreadItem :path="`/category/sub/${subCate?.id}`" :key="subCate?.id">{{ subCate?.name }}</BreadItem>
+        </Transition>
+      </Bread>
+    </div>
 
-    <Bread>
-      <BreadItem path="/">首页</BreadItem>
-      <BreadItem :path="`/category/${topCate?.id}`">{{ topCate?.name }}</BreadItem>
-      <Transition name="fade-right" mode="out-in">
-        <BreadItem :path="`/category/sub/${subCate?.id}`" :key="subCate?.id">{{ subCate?.name }}</BreadItem>
-      </Transition>
-    </Bread>
+
+
 
   </Layout>
 </template>

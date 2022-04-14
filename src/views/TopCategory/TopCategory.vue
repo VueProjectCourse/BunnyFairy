@@ -1,19 +1,22 @@
 <script setup>
 import Layout from "../../components/Layout/Layout.vue"
-import { useBread } from "./useTopCategory"
+import { useBread, useTopCateBanner } from "./useTopCategory"
 const { topCate } = useBread();
+const { carouselList } = useTopCateBanner();
 
 </script>
 
 <template>
   <Layout>
+    <div class="container top-category">
+      <Bread>
+        <BreadItem path="/">首页</BreadItem>
+        <Transition name="fade-right" mode="out-in">
+          <BreadItem :key="topCate?.id" :path="`/category/${topCate?.id}`">{{ topCate?.name }}</BreadItem>
+        </Transition>
+      </Bread>
 
-    <Bread>
-      <BreadItem path="/">首页</BreadItem>
-      <Transition name="fade-right" mode="out-in">
-        <BreadItem :key="topCate?.id" :path="`/category/${topCate?.id}`">{{ topCate?.name }}</BreadItem>
-      </Transition>
-    </Bread>
-
+      <Carousel v-if="carouselList"  :auto="true" :carousel="carouselList" :style="{ height: '500px' }"></Carousel>
+    </div>
   </Layout>
 </template>
