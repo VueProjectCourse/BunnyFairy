@@ -1,6 +1,7 @@
 <script setup>
 import Layout from "../../components/Layout/Layout.vue"
 import { useBread } from "./useSubCategory"
+import SubFilter from "../../components/SubFilter/SubFilter.vue";
 const { topCate, subCate } = useBread();
 
 </script>
@@ -15,11 +16,9 @@ const { topCate, subCate } = useBread();
           <BreadItem :path="`/category/sub/${subCate?.id}`" :key="subCate?.id">{{ subCate?.name }}</BreadItem>
         </Transition>
       </Bread>
+
+      <SubFilter/>
     </div>
-
-
-
-
   </Layout>
 </template>
 

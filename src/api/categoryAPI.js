@@ -13,3 +13,17 @@ export const readCategoryById = (id) => {
     },
   });
 };
+
+
+/**
+ * 根据二级分类id获取筛选条件
+ * @param id 二级分类id
+ * @return {Promise}
+ */
+ export function readFilterById(id) {
+  return request.get("/category/sub/filter", {
+    params: {
+      id
+    },
+  });
+}
