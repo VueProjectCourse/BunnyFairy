@@ -96,7 +96,7 @@ function getGuideSidebar() {
         { text: '批量注册组件', link: '/category/bulk-registration' },
         { text: '一级分类-轮播图', link: '/category/top-carousel' },
 
-        { text: '一级分类-展示二级分类列表', link: '/category/devtools-install' },
+        { text: '一级分类-展示二级分类', link: '/category/top-subcategory' },
         { text: '一级分类-实现推荐商品布局', link: '/category/devtools-install' },
         { text: '一级分类-实现推荐商品渲染', link: '/category/devtools-install' },
         { text: '路由切换页面滚动至顶部', link: '/category/devtools-install' },
@@ -104,6 +104,7 @@ function getGuideSidebar() {
         { text: '二级分类-筛选组件-收集筛选条件', link: '/category/devtools-install' },
         { text: '二级分类-筛选组件-数据更新', link: '/category/devtools-install' },
         { text: '二级分类-筛选组件-骨架屏', link: '/category/devtools-install' },
+
         { text: '封装复选框组件', link: '/category/devtools-install' },
         { text: '二级分类-排序组件', link: '/category/devtools-install' },
         { text: '二级分类-商品列表渲染', link: '/category/devtools-install' },

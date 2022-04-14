@@ -1,5 +1,6 @@
 <script setup>
 import Layout from "../../components/Layout/Layout.vue"
+import SubCategoryList from "../../components/SubCategoryList/SubCategoryList.vue"
 import { useBread, useTopCateBanner } from "./useTopCategory"
 const { topCate } = useBread();
 const { carouselList } = useTopCateBanner();
@@ -17,6 +18,8 @@ const { carouselList } = useTopCateBanner();
       </Bread>
 
       <Carousel v-if="carouselList"  :auto="true" :carousel="carouselList" :style="{ height: '500px' }"></Carousel>
+
+      <SubCategoryList :subCategories="topCate.children" v-if="topCate" />
     </div>
   </Layout>
 </template>
