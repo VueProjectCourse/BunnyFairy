@@ -1,5 +1,10 @@
-<script setup>
+<script>
+export default {
+  name: "PanelSkeleton"
+}
+</script>
 
+<script setup>
 defineProps({
   bg: {
     type: String,

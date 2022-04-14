@@ -3,7 +3,7 @@ import HomePanel from "../HomePanel/HomePanel.vue";
 import { readHotBrands } from "../../api/homeAPI"
 import { useLazyData } from "../HomeNew/useHomeNew"
 import { useToggleEffect } from "./useHomeBrand"
-import MenuSkeleton from "../MenuSkeleton/MenuSkeleton.vue";
+// import MenuSkeleton from "../MenuSkeleton/MenuSkeleton.vue";
 const { target, result } = useLazyData(readHotBrands)
 const { currentIndex, toggle } = useToggleEffect();
 </script>

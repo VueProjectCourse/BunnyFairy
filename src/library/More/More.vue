@@ -1,3 +1,8 @@
+<script>
+export default {
+  name: "More"
+}
+</script>
 <script setup>
 defineProps({
   path: {

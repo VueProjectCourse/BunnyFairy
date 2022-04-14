@@ -1,6 +1,5 @@
 <script setup>
 import HomePanel from '../HomePanel/HomePanel.vue';
-import More from '../More/More.vue';
 
 import {readSpecial} from "../../api/homeAPI"
 import {useLazyData} from "../HomeNew/useHomeNew"

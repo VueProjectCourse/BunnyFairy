@@ -1,70 +1,69 @@
 <script setup>
-import { computed } from "@vue/reactivity";
 import { ref } from "vue"
 import { useMenuList } from "./useMenuList"
-import MenuSkeleton from "../MenuSkeleton/MenuSkeleton.vue";
+// import MenuSkeleton from "../MenuSkeleton/MenuSkeleton.vue";
 const { menuList } = useMenuList();
 // 用于存储当前用户鼠标移入的左侧一级分类
 const current = ref(null);
 </script>
 <template>
   <div class="home-category" @mouseleave="current = null">
-      <ul class="menu" v-if="menuList">
-        <li v-for="item in menuList " :key="item.id" @mouseenter="current = item"
-          :class="{ active: current?.id && current.id === item.id }">
-          <RouterLink to="/">{{ item.name }}</RouterLink>
+    <ul class="menu" v-if="menuList">
+      <li v-for="item in menuList " :key="item.id" @mouseenter="current = item"
+        :class="{ active: current?.id && current.id === item.id }">
+        <RouterLink to="/">{{ item.name }}</RouterLink>
 
-          <template v-if="item.children">
-            <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
-          </template>
+        <template v-if="item.children">
+          <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
+        </template>
 
-          <template v-else>
-            <MenuSkeleton animated="fade" width="60px" height="18px" bg="rgba(255,255,255,0.2)"
-              style="margin-right: 5px"></MenuSkeleton>
-            <MenuSkeleton animated="fade" width="60px" height="18px" bg="rgba(255,255,255,0.2)"></MenuSkeleton>
-          </template>
+        <template v-else>
+          <MenuSkeleton animated="fade" width="60px" height="18px" bg="rgba(255,255,255,0.2)" style="margin-right: 5px">
+          </MenuSkeleton>
+          <MenuSkeleton animated="fade" width="60px" height="18px" bg="rgba(255,255,255,0.2)"></MenuSkeleton>
+        </template>
 
+      </li>
+    </ul>
+    <!-- 分类列表商品推荐 -->
+    <div class="layer" v-if="current">
+      <h4>
+        分类{{ current.goods ? '商品' : "品牌" }}推荐
+        <small>根据您的购买或浏览记录推荐</small>
+      </h4>
+      <!--商品推荐 -->
+      <ul>
+        <li v-for="goods in current.goods" :key="goods.id">
+          <RouterLink to="/">
+            <img :src="goods.picture" :alt="goods.name" />
+            <div class="info">
+              <p class="name ellipsis-2">{{ goods.name }}</p>
+              <p class="desc ellipsis">{{ goods.desc }}</p>
+              <p class="price">
+                <i>¥</i>
+                {{ goods.price }}
+              </p>
+            </div>
+          </RouterLink>
         </li>
       </ul>
-      <!-- 分类列表商品推荐 -->
-      <div class="layer" v-if="current">
-        <h4>
-          分类{{ current.goods ? '商品' : "品牌" }}推荐
-          <small>根据您的购买或浏览记录推荐</small>
-        </h4>
-        <!--商品推荐 -->
-        <ul>
-          <li v-for="goods in current.goods" :key="goods.id">
+      <ul v-if="current.brands">
+        <template v-for="item in current.brands" :key="item.id">
+          <li class="brand" v-if="Boolean(Number(item.id))">
             <RouterLink to="/">
-              <img :src="goods.picture" :alt="goods.name" />
+              <img :src="item.picture" alt />
               <div class="info">
-                <p class="name ellipsis-2">{{ goods.name }}</p>
-                <p class="desc ellipsis">{{ goods.desc }}</p>
-                <p class="price">
-                  <i>¥</i>
-                  {{ goods.price }}
+                <p class="place">
+                  <i class="iconfont icon-dingwei"></i>
+                  {{ item.place }}
                 </p>
+                <p class="name ellipsis">DW</p>
+                <p class="desc ellipsis-2">DW品牌闪购</p>
               </div>
             </RouterLink>
           </li>
-        </ul>
-        <ul v-if="current.brands">
-          <template v-for="item in current.brands" :key="item.id">
-            <li class="brand" v-if="Boolean(Number(item.id))">
-              <RouterLink to="/">
-                <img :src="item.picture" alt />
-                <div class="info">
-                  <p class="place">
-                    <i class="iconfont icon-dingwei"></i>
-                    {{ item.place }}
-                  </p>
-                  <p class="name ellipsis">DW</p>
-                  <p class="desc ellipsis-2">DW品牌闪购</p>
-                </div>
-              </RouterLink>
-            </li>
-          </template>
-        </ul>
+        </template>
+      </ul>
     </div>
   </div>
 </template>

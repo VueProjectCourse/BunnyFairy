@@ -4,7 +4,7 @@ import HomePanel from '../HomePanel/HomePanel.vue';
 // const { goods } = useNewGoods();
 import { useLazyData } from "./useHomeNew"
 import { readNewGoods } from "../../api/homeAPI"
-import PanelSkeleton from '../PanelSkeleton/PanelSkeleton.vue';
+// import PanelSkeleton from '../PanelSkeleton/PanelSkeleton.vue';
 const { target, result } = useLazyData(readNewGoods)
 </script>
 

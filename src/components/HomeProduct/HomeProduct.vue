@@ -1,5 +1,4 @@
 <script setup>
-import More from '../More/More.vue';
 import HomePanel from '../HomePanel/HomePanel.vue';
 import HomeGoods from '../HomeGoods/HomeGoods.vue';
 import { readGoodProducts } from "../../api/homeAPI"

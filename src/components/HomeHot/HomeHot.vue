@@ -1,6 +1,6 @@
 <script setup>
 import HomePanel from '../HomePanel/HomePanel.vue';
-import PanelSkeleton from "../PanelSkeleton/PanelSkeleton.vue"
+// import PanelSkeleton from "../PanelSkeleton/PanelSkeleton.vue"
 // import { useHotProduct } from "./useHomeHot"
 // const { hotList } = useHotProduct()
 
