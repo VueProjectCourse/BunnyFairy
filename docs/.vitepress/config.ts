@@ -97,9 +97,8 @@ function getGuideSidebar() {
         { text: '一级分类-轮播图', link: '/category/top-carousel' },
 
         { text: '一级分类-展示二级分类', link: '/category/top-subcategory' },
-        { text: '一级分类-实现推荐商品布局', link: '/category/devtools-install' },
-        { text: '一级分类-实现推荐商品渲染', link: '/category/devtools-install' },
-        { text: '路由切换页面滚动至顶部', link: '/category/devtools-install' },
+        { text: '一级分类-商品推荐', link: '/category/goods-recommend' },
+        { text: '路由切换页面至顶部', link: '/category/router-toggle-scrolltop' },
         { text: '二级分类-筛选组件-数据渲染', link: '/category/devtools-install' },
         { text: '二级分类-筛选组件-收集筛选条件', link: '/category/devtools-install' },
         { text: '二级分类-筛选组件-数据更新', link: '/category/devtools-install' },
