@@ -18,14 +18,14 @@ export const useNewGoods = () => {
  */
 export const useLazyData = (apiFunction) => {
   const target = ref(null)
-  const isVisible = ref(false)
+  // const isVisible = ref(false)
   const result = ref(null);
   const { stop } = useIntersectionObserver(
     target,
     ([{ isIntersecting }]) => {
-      isVisible.value = isIntersecting
+      // isVisible.value = isIntersecting
       // 元素进入可视区
-      if (isVisible.value) {
+      if (isIntersecting) {
         // 停止监听
         stop();
         // 获取数据
