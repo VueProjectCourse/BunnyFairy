@@ -22,7 +22,9 @@
           元素是没有变化的, 加 key 就是为了让元素发生变化, 从而执行动画, 每个分类的 ID 都不一样,
           所以分类 ID 变化, 元素必定重新渲染
       -->
-      <xtx-bread-item :key="category?.id">{{ category?.name }}</xtx-bread-item>
+
+        <BreadItem :key="topCate?.id" :path="`/category/${topCate?.id}`">{{ topCate?.name }}</BreadItem>
+  
         <!-- 
               mode: 指定过渡模式
               默认情况下入场元素的动画和离场元素的动画是同时执行的, 通过过渡模式可以更改这一默认行为
@@ -30,6 +32,17 @@
               out-in: 离场元素的动画先执行, 入场元素的动画后执行
           -->
   </Transition>
+  ```
+
+  ```html
+
+  <Bread>
+    <BreadItem path="/">首页</BreadItem>
+    <BreadItem :path="`/category/${topCate?.id}`">{{ topCate?.name }}</BreadItem>
+    <Transition name="fade-right" mode="out-in">
+      <BreadItem :path="`/category/sub/${subCate?.id}`" :key="subCate?.id">{{ subCate?.name }}</BreadItem>
+    </Transition>
+  </Bread>
   ```
 
 * **Step.2：在 `base.css`中添加过渡样式**
