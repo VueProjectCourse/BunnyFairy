@@ -1,8 +1,8 @@
-import MenuSkeleton from "./MenuSkeleton.vue"
+// import MenuSkeleton from "./MenuSkeleton.vue"
 
 
-export default {
-  install(app) {
-    app.component("MenuSkeleton",MenuSkeleton)
-  }
-}
+// export default {
+//   install(app) {
+//     app.component("MenuSkeleton",MenuSkeleton)
+//   }
+// }
