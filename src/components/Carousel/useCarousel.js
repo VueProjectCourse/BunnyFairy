@@ -25,7 +25,7 @@ export const useCarouselEffect = (auto, carousels, duration) => {
   }
   // 自动轮播
   const autoPlay = () => {
-    console.log("开启定时器")
+    // console.log("开启定时器")
     // 判断调用者是否开启了自动轮播
     // 判断是否有轮播图数据
     if (auto && carousels.length > 1) {
@@ -35,7 +35,7 @@ export const useCarouselEffect = (auto, carousels, duration) => {
   };
   // 停止自动轮播
   const stopPlay = () => {
-    console.log('停止定时器')
+    // console.log('停止定时器')
     clearInterval(timer.value);
   };
   // 组件挂载完成后试图开启自动轮播
