@@ -159,7 +159,6 @@
 * **Step.3：在`HomeProduct`组件中引入需要的组件**
 
 ```js
-import More from '../More/More.vue';
 import HomePanel from '../HomePanel/HomePanel.vue';
 ```
 
