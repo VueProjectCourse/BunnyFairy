@@ -1,9 +1,10 @@
 <script setup>
 
-import HeaderNav from '../HeaderNav/HeaderNav.vue';
-import { useWindowScroll } from "@vueuse/core"
 // import { useBarScroll } from "./useWindowScroll";
 // const { scrollTop } = useBarScroll();
+
+import HeaderNav from '../HeaderNav/HeaderNav.vue';
+import { useWindowScroll } from "@vueuse/core"
 const { y: scrollTop } = useWindowScroll();
 </script>
 
