@@ -25,7 +25,7 @@ const { target, result } = useLazyData(readGoodProducts);
             <img v-lazy="item.picture" alt="" />
             <strong class="label">
               <span>{{ item.name }}馆</span>
-              <span>{{ item.saleInfo }}</span>
+              <span class="ellipsis">{{ item.saleInfo }}</span>
             </strong>
           </RouterLink>
           <ul class="goods-list" v-if="item.goods">

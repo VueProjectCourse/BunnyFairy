@@ -54,16 +54,17 @@ defineProps({
 }
 
 .goods-item p.name {
+  text-align: left;
   height: 44px;
 }
 
 .goods-item p.desc {
   color: #666;
-  height: 22px;
+  height: 26px;
 }
 
 .goods-item p.price {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   font-size: 20px;
   color: var(--price-color);
 }
