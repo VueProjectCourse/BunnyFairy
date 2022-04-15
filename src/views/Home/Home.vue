@@ -1,26 +1,26 @@
 <script setup>
-import Layout from "@/components/Layout/Layout.vue";
-import HomeCategory from "../../components/HomeCategory/HomeCategory.vue";
-import HomeBanner from "../../components/HomeBanner/HomeBanner.vue";
-import HomeNew from "../../components/HomeNew/HomeNew.vue";
-import HomeHot from "../../components/HomeHot/HomeHot.vue";
-import HomeBrand from "../../components/HomeBrand/HomeBrand.vue";
-import HomeProduct from "../../components/HomeProduct/HomeProduct.vue";
-import HomeSpecial from "../../components/HomeSpecial/HomeSpecial.vue";
+import DefaultLayout from "@/views/DefaultLayout/DefaultLayout.vue";
+import Category from "./Category/Category.vue";
+import Banner from "./Banner/Banner.vue";
+import New from "./New/New.vue";
+import Hot from "./Hot/Hot.vue";
+import Brand from "./Brand/Brand.vue";
+import Product from "./Product/Product.vue";
+import Special from "./Special/Special.vue";
 
 </script>
 
 <template>
-  <Layout>
+  <DefaultLayout>
     <div class="container">
-      <HomeCategory />
-      <HomeBanner />
+      <Category />
+      <Banner />
     </div>
 
-    <HomeNew />
-    <HomeHot />
-    <HomeBrand/>
-    <HomeProduct/>
-    <HomeSpecial/>
-  </Layout>
+    <New />
+    <Hot />
+    <Brand/>
+    <Product/>
+    <Special/>
+  </DefaultLayout>
 </template>

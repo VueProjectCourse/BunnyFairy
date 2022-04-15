@@ -1,7 +1,7 @@
 <script setup>
-import Layout from "../../components/Layout/Layout.vue"
+import Layout from "@/views/DefaultLayout/DefaultLayout.vue"
 import { useBread } from "./useSubCategory"
-import SubFilter from "../../components/SubFilter/SubFilter.vue";
+import SubFilter from "./SubFilter/SubFilter.vue";
 const { topCate, subCate } = useBread();
 
 </script>

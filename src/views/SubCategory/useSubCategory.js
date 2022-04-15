@@ -1,5 +1,5 @@
 import { useRoute } from "vue-router"
-import { useCateStore } from "../../stores/cateStore"
+import { useCateStore } from "@/stores/cateStore"
 import { storeToRefs } from "pinia"
 import { ref, watchEffect } from "vue";
 

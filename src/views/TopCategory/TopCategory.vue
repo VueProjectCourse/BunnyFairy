@@ -1,15 +1,15 @@
 <script setup>
-import Layout from "../../components/Layout/Layout.vue"
-import SubCategoryList from "../../components/SubCategoryList/SubCategoryList.vue"
+import DefaultLayout from "@/views/DefaultLayout/DefaultLayout.vue"
+import SubCategoryList from "./SubCategoryList/SubCategoryList.vue"
 import { useBread, useTopCateBanner } from "./useTopCategory"
-import GoodsRecommend from "../../components/GoodsRecommend/GoodsRecommend.vue";
+import GoodsRecommend from "./GoodsRecommend/GoodsRecommend.vue";
 const { topCate } = useBread();
 const { carouselList } = useTopCateBanner();
 
 </script>
 
 <template>
-  <Layout>
+  <DefaultLayout>
     <div class="container top-category">
       <Bread>
         <BreadItem path="/">首页</BreadItem>
@@ -24,5 +24,5 @@ const { carouselList } = useTopCateBanner();
 
       <GoodsRecommend/>
     </div>
-  </Layout>
+  </DefaultLayout>
 </template>
