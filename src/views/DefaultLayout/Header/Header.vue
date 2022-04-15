@@ -24,6 +24,7 @@ import HeaderNav from "../HeaderNav/HeaderNav.vue";
 
 <style scoped>
 @import "@/assets/styles/variable.css";
+
 .app-header {
   background: #fff;
 }
