@@ -1,9 +1,3 @@
-<script>
-export default {
-  name: "MenuSkeleton"
-}
-</script>
-
 <script setup>
 defineProps({
   bg: {

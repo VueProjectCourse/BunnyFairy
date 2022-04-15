@@ -1,8 +1,3 @@
-<script>
-  export default {
-    name:"BreadItem",
-  }
-</script>
 <script setup>
 defineProps({
   path: {

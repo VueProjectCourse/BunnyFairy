@@ -13,8 +13,9 @@ export default {
 	install(app) {
 		app.directive("lazy", lazy)
 		pathList.forEach((path) => {
-			const component = modulesFiles[path].default
-			app.component(component.name, component)
+			const component = modulesFiles[path].default;
+			const componentName= path.split("/")[2].split(".")[0]
+			app.component(componentName, component)
 		})
 	}
 }

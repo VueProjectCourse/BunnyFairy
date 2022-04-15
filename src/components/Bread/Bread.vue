@@ -2,7 +2,6 @@
 // 在 vue 中导入 h 方法, 用于创建元素
 import { defineComponent, h } from 'vue'
 export default defineComponent({
-  name:"Bread",
   render() {
     // 获取组件默认插槽的内容，获取BreadItem组件
     const items = this.$slots.default();

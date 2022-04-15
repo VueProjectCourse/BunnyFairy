@@ -1,10 +1,3 @@
-<script>
-import { defineComponent} from 'vue' 
-
-export default defineComponent({
-  name: "Carousel"
-})
-</script>
 <script setup>
 import { useCarouselEffect } from "./useCarousel"
 const props = defineProps({
