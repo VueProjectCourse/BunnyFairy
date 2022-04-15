@@ -179,9 +179,9 @@ defineProps([""]);
   font-size: 28px;
 }
 .slogan a i {
+  margin-right: 10px;
   font-size: 50px;
   vertical-align: middle;
-  margin-right: 10px;
   font-weight: 100;
 }
 .slogan a span {

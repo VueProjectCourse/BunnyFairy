@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { readCategories } from "../api/cateAPI"
-import { topCategories } from "../api/constantsAPI"
+import { readCategories } from "@/api/cateAPI";
+import { topCategories } from "@/api/constantsAPI";
 export const useCateStore = defineStore({
   id: "cateStore",
   state: () => ({
@@ -11,7 +11,7 @@ export const useCateStore = defineStore({
     // 初始化分类数据
     async initCategories() {
       const { data: res, status: status } = await readCategories();
-      res.result.forEach((category) => (category.open = false))
+      res.result.forEach((category) => (category.open = false));
       if (status === 200) {
         this.cateList = res.result;
       }
@@ -25,6 +25,6 @@ export const useCateStore = defineStore({
     close(id) {
       const target = this.cateList.find((item) => item.id === id);
       target.open = false;
-    }
-  }
+    },
+  },
 });
