@@ -154,7 +154,6 @@
 
 ```js
 import HomePanel from '../HomePanel/HomePanel.vue';
-import More from '../More/More.vue';
 ```
 
 * **Step.4：在`Home`组件中调用`HomeSpecial`组件**
