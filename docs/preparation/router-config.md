@@ -15,50 +15,49 @@
 
 * **Step.1：安装**
 
-```bash
-npm install vue-router@4
-```
+  ```bash
+  npm install vue-router@4
+  ```
 
 * **Step.2：创建route文件**
 
-```js
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home/Home.vue'
+  ```js
+  import { createRouter, createWebHashHistory } from 'vue-router'
+  import Home from '../views/Home/Home.vue'
 
-const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/About/About.vue')
-    }
-  ]
-})
+  const router = createRouter({
+    history: createWebHashHistory(import.meta.env.BASE_URL),
+    routes: [
+      {
+        path: '/',
+        name: 'home',
+        component: Home
+      },
+      {
+        path: '/about',
+        name: 'about',
+        // route level code-splitting
+        // this generates a separate chunk (About.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import('../views/About/About.vue')
+      }
+    ]
+  })
 
+  export default router
 
-export default router
-
-```
+  ```
 
 * **Step.3：挂载router**
 
-```js
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './route'
-
-createApp(App).use(router).mount('#app')
-
-```
+  ```js
+  import { createApp } from 'vue'
+  import App from './App.vue'
+  import router from './route'
+  
+  createApp(App).use(router).mount('#app')
+  
+  ```
 
 :::
 

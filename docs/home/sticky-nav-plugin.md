@@ -14,17 +14,17 @@
 
 * **Step.1：安装`@vueuse/core` 工具库**
 
-```bash
-npm install @vueuse/core
-```
+  ```bash
+  npm install @vueuse/core
+  ```
 
 * **Step.2：使用工具库中的 `useWindowScroll` 获取浏览器滚动高度**
 
-```js
-import HeaderNav from '../HeaderNav/HeaderNav.vue';
-import {useWindowScroll} from "@vueuse/core"
-const {y: scrollTop} = useWindowScroll();
-```
+  ```js
+  import HeaderNav from '../HeaderNav/HeaderNav.vue';
+  import {useWindowScroll} from "@vueuse/core"
+  const {y: scrollTop} = useWindowScroll();
+  ```
 
 :::
 
