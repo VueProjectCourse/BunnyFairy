@@ -1,6 +1,6 @@
-import { ref } from 'vue'
-import { readNewGoods } from "../../api/homeAPI"
-import { useIntersectionObserver } from '@vueuse/core'
+import { ref } from "vue";
+import { readNewGoods } from "../../api/homeAPI";
+
 export const useNewGoods = () => {
   const goods = ref(null);
   readNewGoods().then(({ data: res, status: status }) => {
@@ -9,6 +9,5 @@ export const useNewGoods = () => {
     }
   });
 
-  return { goods }
-}
-
+  return { goods };
+};

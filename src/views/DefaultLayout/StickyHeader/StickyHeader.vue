@@ -1,13 +1,8 @@
 <script setup>
-
-// import { useBarScroll } from "./useWindowScroll";
-// const { scrollTop } = useBarScroll();
-
-import HeaderNav from '../HeaderNav/HeaderNav.vue';
-import { useWindowScroll } from "@vueuse/core"
+import HeaderNav from "../HeaderNav/HeaderNav.vue";
+import { useWindowScroll } from "@vueuse/core";
 const { y: scrollTop } = useWindowScroll();
 </script>
-
 
 <template>
   <div class="header-sticky" :class="{ show: scrollTop > 78 }">
@@ -74,5 +69,4 @@ const { y: scrollTop } = useWindowScroll();
 .right a:hover {
   color: var(--primary-color);
 }
-
 </style>

@@ -1,13 +1,12 @@
 <script setup>
-import Panel from '../Panel/Panel.vue';
+import Panel from "../Panel/Panel.vue";
 // import PanelSkeleton from "../PanelSkeleton/PanelSkeleton.vue"
 // import { useHotProduct } from "./useHomeHot"
 // const { hotList } = useHotProduct()
 
-import {useLazyData} from "@/utils/lazyData"
-import {readHotProduct} from "@/api/homeAPI"
-const {target, result} = useLazyData(readHotProduct)
-
+import { useLazyData } from "@/utils/lazyData";
+import { readHotProduct } from "@/api/homeAPI";
+const { target, result } = useLazyData(readHotProduct);
 </script>
 <template>
   <Panel title="人气推荐" sub-title="人气爆款 不容错过" ref="target">
@@ -20,12 +19,11 @@ const {target, result} = useLazyData(readHotProduct)
         </RouterLink>
       </li>
     </ul>
-     <Transition name="fade">
-        <PanelSkeleton v-if="!result"></PanelSkeleton>
-      </Transition>
+    <Transition name="fade">
+      <PanelSkeleton v-if="!result"></PanelSkeleton>
+    </Transition>
   </Panel>
 </template>
-
 
 <style scoped>
 .goods-list {
@@ -37,7 +35,7 @@ const {target, result} = useLazyData(readHotProduct)
 .goods-list li {
   width: 306px;
   height: 406px;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .goods-list li:hover {

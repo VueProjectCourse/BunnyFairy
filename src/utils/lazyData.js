@@ -27,7 +27,5 @@ import {useIntersectionObserver} from "@vueuse/core"
     { threshold: 0 }
   )
 
-
-
   return { target, result };
 }

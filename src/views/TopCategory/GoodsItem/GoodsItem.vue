@@ -2,16 +2,16 @@
 defineProps({
   goods: {
     type: Object,
-    default: () => ({})
-  }
-})
+    default: () => ({}),
+  },
+});
 </script>
 <template>
   <RouterLink to="/" class="goods-item">
     <img :src="goods.picture" alt="" />
-    <p class="name ellipsis">{{goods.name}}</p>
-    <p class="desc ellipsis">{{goods.desc}}</p>
-    <p class="price">¥{{goods.price}}</p>
+    <p class="name ellipsis">{{ goods.name }}</p>
+    <p class="desc ellipsis">{{ goods.desc }}</p>
+    <p class="price">¥{{ goods.price }}</p>
   </RouterLink>
 </template>
 
@@ -23,14 +23,13 @@ defineProps({
   width: 220px;
   padding: 20px 30px;
   text-align: center;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .goods-item:hover {
   transform: translate3d(0, -3px, 0);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 .goods-item img {
   width: 160px;

@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from "vue"
-import { useMenuList } from "./useMenuList"
+import { ref } from "vue";
+import { useMenuList } from "./useMenuList";
 // import MenuSkeleton from "../MenuSkeleton/MenuSkeleton.vue";
 const { menuList } = useMenuList();
 // 用于存储当前用户鼠标移入的左侧一级分类
@@ -9,26 +9,45 @@ const current = ref(null);
 <template>
   <div class="home-category" @mouseleave="current = null">
     <ul class="menu" v-if="menuList">
-      <li v-for="item in menuList " :key="item.id" @mouseenter="current = item"
-        :class="{ active: current?.id && current.id === item.id }">
+      <li
+        v-for="item in menuList"
+        :key="item.id"
+        @mouseenter="current = item"
+        :class="{ active: current?.id && current.id === item.id }"
+      >
         <RouterLink to="/">{{ item.name }}</RouterLink>
 
         <template v-if="item.children">
-          <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
+          <RouterLink
+            to="/"
+            v-for="subitem in item.children"
+            :key="subitem.id"
+            >{{ subitem.name }}</RouterLink
+          >
         </template>
 
         <template v-else>
-          <MenuSkeleton animated="fade" width="60px" height="18px" bg="rgba(255,255,255,0.2)" style="margin-right: 5px">
+          <MenuSkeleton
+            animated="fade"
+            width="60px"
+            height="18px"
+            bg="rgba(255,255,255,0.2)"
+            style="margin-right: 5px"
+          >
           </MenuSkeleton>
-          <MenuSkeleton animated="fade" width="60px" height="18px" bg="rgba(255,255,255,0.2)"></MenuSkeleton>
+          <MenuSkeleton
+            animated="fade"
+            width="60px"
+            height="18px"
+            bg="rgba(255,255,255,0.2)"
+          ></MenuSkeleton>
         </template>
-
       </li>
     </ul>
     <!-- 分类列表商品推荐 -->
     <div class="layer" v-if="current">
       <h4>
-        分类{{ current.goods ? '商品' : "品牌" }}推荐
+        分类{{ current.goods ? "商品" : "品牌" }}推荐
         <small>根据您的购买或浏览记录推荐</small>
       </h4>
       <!--商品推荐 -->

@@ -8,7 +8,7 @@ defineProps({
     type: String,
     default: "",
   },
-})
+});
 </script>
 <template>
   <div class="home-panel">
@@ -23,7 +23,6 @@ defineProps({
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .home-panel {

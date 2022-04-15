@@ -6,7 +6,7 @@
 @import "@/assets/styles/variable.css";
 
 #app {
-  background: #f5f5f5;
+  background-color: #f5f5f5;
   user-select: none;
   height: 100%;
 }

@@ -1,10 +1,9 @@
 <script setup>
 defineProps({
   path: {
-    type: String
-  }
-})
-
+    type: String,
+  },
+});
 </script>
 
 <template>
@@ -19,7 +18,6 @@ defineProps({
     </span>
   </div>
 </template>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";

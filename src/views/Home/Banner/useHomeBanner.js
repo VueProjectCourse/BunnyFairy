@@ -1,5 +1,5 @@
-import { ref } from "vue"
-import { readBanners } from "../../../api/homeAPI"
+import { ref } from "vue";
+import { readBanners } from "../../../api/homeAPI";
 export const useBanners = () => {
   const bannerList = ref(null);
 
@@ -7,7 +7,7 @@ export const useBanners = () => {
     if (status === 200) {
       bannerList.value = res.result;
     }
-  })
+  });
 
-  return { bannerList }
-}
+  return { bannerList };
+};

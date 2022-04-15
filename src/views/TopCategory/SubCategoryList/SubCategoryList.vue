@@ -1,9 +1,9 @@
 <script setup>
 defineProps({
   subCategories: {
-    type: Array
-  }
-})
+    type: Array,
+  },
+});
 </script>
 <template>
   <div class="sub-list">
@@ -12,13 +12,12 @@ defineProps({
       <li v-for="item in subCategories" :key="item.id">
         <a href="javascript:">
           <img :src="item.picture" alt="item.name" />
-          <p>{{item.name}}</p>
+          <p>{{ item.name }}</p>
         </a>
       </li>
     </ul>
   </div>
 </template>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";

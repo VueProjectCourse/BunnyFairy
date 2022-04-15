@@ -1,25 +1,36 @@
 <script setup>
-import Panel from '../Panel/Panel.vue';
-import { readHotBrands } from "@/api/homeAPI"
-import { useLazyData } from "@/utils/lazyData"
-import { useToggleEffect } from "./useHomeBrand"
-// import MenuSkeleton from "../MenuSkeleton/MenuSkeleton.vue";
-const { target, result } = useLazyData(readHotBrands)
+import Panel from "../Panel/Panel.vue";
+import { readHotBrands } from "@/api/homeAPI";
+import { useLazyData } from "@/utils/lazyData";
+import { useToggleEffect } from "./useHomeBrand";
+const { target, result } = useLazyData(readHotBrands);
 const { currentIndex, toggle } = useToggleEffect();
 </script>
 
 <template>
   <Panel title="热门品牌" subTitle="国际经典 品质保证" ref="target">
     <template #right>
-      <a href="javascript:" @click="toggle(-1)" :class="{ disabled: currentIndex === 0 }"
-        class="iconfont icon-angle-left prev"></a>
-      <a href="javascript:" @click="toggle(1)" :class="{ disabled: currentIndex === 1 }"
-        class="iconfont icon-angle-right next"></a>
+      <a
+        href="javascript:"
+        @click="toggle(-1)"
+        :class="{ disabled: currentIndex === 0 }"
+        class="iconfont icon-angle-left prev"
+      ></a>
+      <a
+        href="javascript:"
+        @click="toggle(1)"
+        :class="{ disabled: currentIndex === 1 }"
+        class="iconfont icon-angle-right next"
+      ></a>
     </template>
     <template #default>
       <div class="box">
         <Transition>
-          <ul v-if="result" class="list" :style="{ transform: `translateX(${-currentIndex * 1240}px)` }">
+          <ul
+            v-if="result"
+            class="list"
+            :style="{ transform: `translateX(${-currentIndex * 1240}px)` }"
+          >
             <li v-for="item in result" :key="item.id">
               <RouterLink to="/">
                 <img :src="item.picture" :alt="item.name" />
@@ -27,14 +38,21 @@ const { currentIndex, toggle } = useToggleEffect();
             </li>
           </ul>
           <div v-else class="skeleton">
-            <MenuSkeleton class="item" v-for="i in 5" :key="i" animated="scroll" bg="#e4e4e4" width="240px" height="305px"></MenuSkeleton>
+            <MenuSkeleton
+              class="item"
+              v-for="i in 5"
+              :key="i"
+              animated="scroll"
+              bg="#e4e4e4"
+              width="240px"
+              height="305px"
+            ></MenuSkeleton>
           </div>
         </Transition>
       </div>
     </template>
   </Panel>
 </template>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";

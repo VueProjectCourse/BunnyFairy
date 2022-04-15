@@ -1,11 +1,11 @@
 <script setup>
-import Panel from '../Panel/Panel.vue';
+import Panel from "../Panel/Panel.vue";
 // import { useNewGoods } from "./useHomeNew"
 // const { goods } = useNewGoods();
-import { useLazyData } from "@/utils/lazyData"
-import { readNewGoods } from "@/api/homeAPI"
+import { useLazyData } from "@/utils/lazyData";
+import { readNewGoods } from "@/api/homeAPI";
 // import PanelSkeleton from '../PanelSkeleton/PanelSkeleton.vue';
-const { target, result } = useLazyData(readNewGoods)
+const { target, result } = useLazyData(readNewGoods);
 </script>
 
 <template>
@@ -43,7 +43,7 @@ const { target, result } = useLazyData(readNewGoods)
   width: 306px;
   height: 406px;
   background: #f0f9f4;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .goods-list li:hover {

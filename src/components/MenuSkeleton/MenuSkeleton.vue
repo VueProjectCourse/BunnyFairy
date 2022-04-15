@@ -16,7 +16,7 @@ defineProps({
     type: String,
     default: "scroll", // 'fade'
   },
-})
+});
 </script>
 
 <template>
@@ -26,7 +26,6 @@ defineProps({
     <!-- 2 闪效果 xtx-skeleton 伪元素 --->
   </div>
 </template>
-
 
 <style scoped>
 .xtx-skeleton {

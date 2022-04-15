@@ -1,8 +1,6 @@
 import { ref } from "vue";
 
-
-import { readCategoryById } from "@/api/categoryAPI"
-
+import { readCategoryById } from "@/api/categoryAPI";
 
 // 存储一级分类具体信息
 const category = ref(null);
@@ -14,8 +12,6 @@ const readCategory = (id) => {
       category.value = res.result;
     }
   });
-}
+};
 
-
-
-export { category,readCategory };
+export { category, readCategory };

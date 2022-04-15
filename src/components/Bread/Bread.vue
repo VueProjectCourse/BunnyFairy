@@ -1,6 +1,5 @@
 <script>
-// 在 vue 中导入 h 方法, 用于创建元素
-import { defineComponent, h } from 'vue'
+import { defineComponent, h } from "vue";
 export default defineComponent({
   render() {
     // 获取组件默认插槽的内容，获取BreadItem组件
@@ -13,16 +12,14 @@ export default defineComponent({
       children.push(item);
       // 如果当前不是最后一项，动态生成icon
       if (index < items.length - 1) {
-        children.push(h("i", {className: "iconfont icon-angle-right"}))
+        children.push(h("i", { className: "iconfont icon-angle-right" }));
       }
-    })
+    });
     // 创建面包屑最外层元素
-    return h('div', {className: "xtx-bread"}, children)
-  }
-})
-
+    return h("div", { className: "xtx-bread" }, children);
+  },
+});
 </script>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";

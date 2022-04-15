@@ -1,9 +1,8 @@
 <script setup>
-import Layout from "@/views/DefaultLayout/DefaultLayout.vue"
-import { useBread } from "./useSubCategory"
+import Layout from "@/views/DefaultLayout/DefaultLayout.vue";
+import { useBread } from "./useSubCategory";
 import SubFilter from "./SubFilter/SubFilter.vue";
 const { topCate, subCate } = useBread();
-
 </script>
 
 <template>
@@ -11,17 +10,22 @@ const { topCate, subCate } = useBread();
     <div class="container">
       <Bread>
         <BreadItem path="/">首页</BreadItem>
-        <BreadItem :path="`/category/${topCate?.id}`">{{ topCate?.name }}</BreadItem>
+        <BreadItem :path="`/category/${topCate?.id}`">{{
+          topCate?.name
+        }}</BreadItem>
         <Transition name="fade-right" mode="out-in">
-          <BreadItem :path="`/category/sub/${subCate?.id}`" :key="subCate?.id">{{ subCate?.name }}</BreadItem>
+          <BreadItem
+            :path="`/category/sub/${subCate?.id}`"
+            :key="subCate?.id"
+            >{{ subCate?.name }}</BreadItem
+          >
         </Transition>
       </Bread>
 
-      <SubFilter/>
+      <SubFilter />
     </div>
   </Layout>
 </template>
-
 
 <style>
 .fade-right-enter-from,

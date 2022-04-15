@@ -3,10 +3,9 @@ import TopNav from "./TopNav/TopNav.vue";
 import Header from "./Header/Header.vue";
 import StickyHeader from "./StickyHeader/StickyHeader.vue";
 import Footer from "./Footer/Footer.vue";
-import { useCateStore } from "@/stores/cateStore"
+import { useCateStore } from "@/stores/cateStore";
 const cateStore = useCateStore();
 cateStore.initCategories();
-
 </script>
 <template>
   <!-- 顶部导航 -->

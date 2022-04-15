@@ -1,7 +1,7 @@
 <script setup>
-import { useCateStore } from "@/stores/cateStore"
-import { storeToRefs } from "pinia"
-const { cateList } = storeToRefs(useCateStore())
+import { useCateStore } from "@/stores/cateStore";
+import { storeToRefs } from "pinia";
+const { cateList } = storeToRefs(useCateStore());
 const cateStore = useCateStore();
 </script>
 <template>
@@ -19,7 +19,11 @@ const cateStore = useCateStore();
       <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
       <div class="layer" :class="{ open: item.open }">
         <ul>
-          <li v-for="subitem in item.children" :key="subitem.id" @click="cateStore.close(item.id)">
+          <li
+            v-for="subitem in item.children"
+            :key="subitem.id"
+            @click="cateStore.close(item.id)"
+          >
             <RouterLink :to="`/category/sub/${subitem.id}`">
               <img :src="subitem.picture" :alt="subitem.name" />
               <p>{{ subitem.name }}</p>

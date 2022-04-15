@@ -1,33 +1,34 @@
 <script setup>
-import GoodsItem from '../GoodsItem/GoodsItem.vue';
-import {onMounted} from "vue"
-import { onBeforeRouteUpdate } from "vue-router"
-import { category,readCategory } from "./useGoodsRecommend"
-import { useRoute } from "vue-router"
+import { onMounted } from "vue";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
+import GoodsItem from "../GoodsItem/GoodsItem.vue";
+import { category, readCategory } from "./useGoodsRecommend";
 // 获取路由信息对象
 const route = useRoute();
-onMounted(()=>{
+onMounted(() => {
   readCategory(route.params.id);
-})
+});
 
 onBeforeRouteUpdate((to) => {
   readCategory(to.params.id);
-})
-
+});
 </script>
 <template>
   <div class="ref-goods" v-for="item in category?.children" :key="item.id">
     <div class="head">
-      <h3>- {{item.name}} -</h3>
-      <p class="tag">{{item.saleProperties}}</p>
+      <h3>- {{ item.name }} -</h3>
+      <p class="tag">{{ item.saleProperties }}</p>
       <More />
     </div>
     <div class="body">
-      <GoodsItem :goods="subitem" v-for="subitem in item.goods" :key="subitem.id" />
+      <GoodsItem
+        :goods="subitem"
+        v-for="subitem in item.goods"
+        :key="subitem.id"
+      />
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .ref-goods {

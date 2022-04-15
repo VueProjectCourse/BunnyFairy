@@ -7,7 +7,6 @@ import Hot from "./Hot/Hot.vue";
 import Brand from "./Brand/Brand.vue";
 import Product from "./Product/Product.vue";
 import Special from "./Special/Special.vue";
-
 </script>
 
 <template>
@@ -19,8 +18,8 @@ import Special from "./Special/Special.vue";
 
     <New />
     <Hot />
-    <Brand/>
-    <Product/>
-    <Special/>
+    <Brand />
+    <Product />
+    <Special />
   </DefaultLayout>
 </template>

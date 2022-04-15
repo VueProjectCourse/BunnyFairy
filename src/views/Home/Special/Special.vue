@@ -1,10 +1,9 @@
 <script setup>
-import Panel from '../Panel/Panel.vue';
+import Panel from "../Panel/Panel.vue";
 
-import {readSpecial} from "@/api/homeAPI"
-import {useLazyData} from "@/utils/lazyData"
-const {target, result} = useLazyData(readSpecial);
-
+import { readSpecial } from "@/api/homeAPI";
+import { useLazyData } from "@/utils/lazyData";
+const { target, result } = useLazyData(readSpecial);
 </script>
 
 <template>
@@ -15,7 +14,7 @@ const {target, result} = useLazyData(readSpecial);
     <template v-slot:default>
       <div class="special-list">
         <div class="special-item" v-for="item in result" :key="item.id">
-           <RouterLink to="/">
+          <RouterLink to="/">
             <img :src="item.cover" alt="" />
             <div class="meta">
               <p class="title">
@@ -50,7 +49,7 @@ const {target, result} = useLazyData(readSpecial);
 .special-list .special-item {
   width: 404px;
   background: #fff;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .special-list .special-item:hover {
@@ -69,7 +68,11 @@ const {target, result} = useLazyData(readSpecial);
   object-fit: cover;
 }
 .special-list .special-item a .meta {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 50%);
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    transparent 50%
+  );
   position: absolute;
   left: 0;
   top: 0;

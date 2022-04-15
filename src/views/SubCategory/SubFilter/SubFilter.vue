@@ -1,5 +1,5 @@
 <script setup>
-import { useFilter } from "./useSubFilter"
+import { useFilter } from "./useSubFilter";
 const { filterList } = useFilter();
 </script>
 
@@ -9,19 +9,28 @@ const { filterList } = useFilter();
     <div class="item">
       <div class="head">品牌：</div>
       <div class="body">
-        <a href="javascript:" v-for="item in filterList?.brands" :key="item.id">{{item.name}}</a>
+        <a
+          href="javascript:"
+          v-for="item in filterList?.brands"
+          :key="item.id"
+          >{{ item.name }}</a
+        >
       </div>
     </div>
 
     <div class="item" v-for="item in filterList?.saleProperties" :key="item.id">
-      <div class="head">{{item.name}}：</div>
+      <div class="head">{{ item.name }}：</div>
       <div class="body">
-        <a href="javascript:" v-for="subitem in item?.properties" :key="subitem.id">{{subitem.name}}</a>
+        <a
+          href="javascript:"
+          v-for="subitem in item?.properties"
+          :key="subitem.id"
+          >{{ subitem.name }}</a
+        >
       </div>
     </div>
   </div>
 </template>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";

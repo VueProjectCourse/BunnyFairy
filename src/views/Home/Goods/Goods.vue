@@ -1,9 +1,9 @@
 <script setup>
 defineProps({
   goods: {
-    type: Object
-  }
-})
+    type: Object,
+  },
+});
 </script>
 <template>
   <div class="goods-item">
@@ -21,7 +21,6 @@ defineProps({
     </div>
   </div>
 </template>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";
@@ -98,7 +97,6 @@ defineProps({
 
 .goods-item:hover {
   border-color: var(--primary-color);
-  ;
 }
 
 .goods-item:hover .extra {
