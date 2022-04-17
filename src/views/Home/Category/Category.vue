@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import { useMenuList } from "./useMenuList";
-// import MenuSkeleton from "../MenuSkeleton/MenuSkeleton.vue";
 const { menuList } = useMenuList();
 // 用于存储当前用户鼠标移入的左侧一级分类
 const current = ref(null);
@@ -27,20 +26,20 @@ const current = ref(null);
         </template>
 
         <template v-else>
-          <MenuSkeleton
+          <Skeleton
             animated="fade"
             width="60px"
             height="18px"
             bg="rgba(255,255,255,0.2)"
             style="margin-right: 5px"
           >
-          </MenuSkeleton>
-          <MenuSkeleton
+          </Skeleton>
+          <Skeleton
             animated="fade"
             width="60px"
             height="18px"
             bg="rgba(255,255,255,0.2)"
-          ></MenuSkeleton>
+          ></Skeleton>
         </template>
       </li>
     </ul>

@@ -100,10 +100,10 @@ function getGuideSidebar() {
         { text: '路由切换页面至顶部', link: '/category/router-toggle-scrolltop' },
 
 
-        // { text: '二级分类-筛选组件-数据渲染', link: '/category/subcate-filter-render' },
-        // { text: '二级分类-筛选组件-收集筛选条件', link: '/category/devtools-install' },
-        // { text: '二级分类-筛选组件-数据更新', link: '/category/devtools-install' },
-        // { text: '二级分类-筛选组件-骨架屏', link: '/category/devtools-install' },
+        { text: '二级分类-筛选组件-数据渲染', link: '/category/subcate-filter-render' },
+        { text: '二级分类-筛选组件-收集筛选数据', link: '/category/subcate-filter-data' },
+        { text: '二级分类-筛选组件-数据更新', link: '/category/subcate-filter-update' },
+        { text: '二级分类-筛选组件-骨架屏', link: '/category/subcate-filter-skeleton' },
 
         { text: '封装复选框组件', link: '/category/packaged-checked' },
         { text: '二级分类-排序组件', link: '/category/devtools-install' },

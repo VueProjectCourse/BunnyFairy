@@ -38,7 +38,7 @@ const { currentIndex, toggle } = useToggleEffect();
             </li>
           </ul>
           <div v-else class="skeleton">
-            <MenuSkeleton
+            <Skeleton
               class="item"
               v-for="i in 5"
               :key="i"
@@ -46,7 +46,7 @@ const { currentIndex, toggle } = useToggleEffect();
               bg="#e4e4e4"
               width="240px"
               height="305px"
-            ></MenuSkeleton>
+            ></Skeleton>
           </div>
         </Transition>
       </div>

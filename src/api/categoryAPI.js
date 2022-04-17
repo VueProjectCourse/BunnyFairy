@@ -20,9 +20,10 @@ export const readCategoryById = (id) => {
  * @return {Promise}
  */
 export function readFilterById(id) {
+  console.log(id);
   return request.get("/category/sub/filter", {
     params: {
-      id,
+      id: id,
     },
   });
 }
