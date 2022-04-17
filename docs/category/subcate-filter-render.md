@@ -111,10 +111,10 @@
 import { useRoute } from "vue-router"
 import { ref } from "vue"
 import { readFilterById } from "../../api/categoryAPI"
-export const useFilter = () => {
+export const readFilter = () => {
   const route = useRoute();
   // 用于存储所有筛选条件数据
-  const filterList = ref(null);
+  const filters = ref(null);
 
   readFilterById(route.params.id).then(({ data: res, status: status }) => {
     if (status === 200) {
@@ -127,11 +127,11 @@ export const useFilter = () => {
         item.properties.unshift({id: null, name: "全部"});
       })
       // 存储筛选条件
-      filterList.value = res.result;
+      filters.value = res.result;
     }
   });
 
-  return { filterList }
+  return { filters }
 }
 ```
 
@@ -140,18 +140,29 @@ export const useFilter = () => {
 ```html
 <template>
   <!-- 筛选区 -->
-  <div class="sub-filter" v-if="filterList">
+   <!-- 筛选区 -->
+  <div class="sub-filter" v-if="filters && !filtersLoading">
     <div class="item">
       <div class="head">品牌：</div>
       <div class="body">
-        <a href="javascript:" v-for="item in filterList?.brands" :key="item.id">{{item.name}}</a>
+        <a
+          href="javascript:"
+          v-for="item in filters?.brands"
+          :key="item.id"
+          >{{ item.name }}</a
+        >
       </div>
     </div>
 
-    <div class="item" v-for="item in filterList?.saleProperties" :key="item.id">
-      <div class="head">{{item.name}}：</div>
+    <div class="item" v-for="item in filters?.saleProperties" :key="item.id">
+      <div class="head">{{ item.name }}：</div>
       <div class="body">
-        <a href="javascript:" v-for="subitem in item?.properties" :key="subitem.id">{{subitem.name}}</a>
+        <a
+          href="javascript:"
+          v-for="subitem in item?.properties"
+          :key="subitem.id"
+          >{{ subitem.name }}</a
+        >
       </div>
     </div>
   </div>
