@@ -18,3 +18,8 @@ export const useFilter = () => {
 
   return { filterList };
 };
+
+/**
+ * 获取筛选条件
+ */
+export const SubCategoryFilter = () => {};

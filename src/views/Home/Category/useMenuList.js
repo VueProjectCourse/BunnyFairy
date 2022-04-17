@@ -1,17 +1,16 @@
 import { computed } from "vue";
-import { readHotBrands } from "@/api/homeAPI"
+import { readHotBrands } from "@/api/homeAPI";
 import { useCateStore } from "@/stores/cateStore";
 
 export const useMenuList = () => {
-
   const cateStore = useCateStore();
 
   const brand = {
     id: "brand",
     name: "品牌",
     children: [{ id: "child-brand", name: "推荐品牌" }],
-    brands: []
-  }
+    brands: [],
+  };
 
   readHotBrands().then(({ data: res, status: status }) => {
     if (status === 200) {
@@ -31,5 +30,4 @@ export const useMenuList = () => {
   });
 
   return { menuList };
-
-}
+};

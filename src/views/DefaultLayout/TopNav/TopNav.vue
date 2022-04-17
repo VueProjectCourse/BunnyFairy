@@ -27,9 +27,7 @@
           <a href="javascript:">关于我们</a>
         </li>
         <li>
-          <a href="javascript:">
-            <i class="iconfont icon-phone"></i>手机版
-          </a>
+          <a href="javascript:"> <i class="iconfont icon-phone"></i>手机版 </a>
         </li>
       </ul>
     </div>

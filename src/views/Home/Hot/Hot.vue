@@ -1,8 +1,5 @@
 <script setup>
 import Panel from "../Panel/Panel.vue";
-// import PanelSkeleton from "../PanelSkeleton/PanelSkeleton.vue"
-// import { useHotProduct } from "./useHomeHot"
-// const { hotList } = useHotProduct()
 
 import { useLazyData } from "@/utils/lazyData";
 import { readHotProduct } from "@/api/homeAPI";

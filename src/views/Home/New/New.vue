@@ -1,10 +1,8 @@
 <script setup>
 import Panel from "../Panel/Panel.vue";
-// import { useNewGoods } from "./useHomeNew"
-// const { goods } = useNewGoods();
 import { useLazyData } from "@/utils/lazyData";
 import { readNewGoods } from "@/api/homeAPI";
-// import PanelSkeleton from '../PanelSkeleton/PanelSkeleton.vue';
+
 const { target, result } = useLazyData(readNewGoods);
 </script>
 

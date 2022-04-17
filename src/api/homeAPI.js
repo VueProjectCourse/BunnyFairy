@@ -1,5 +1,5 @@
 // create(add)增 delete(remove)删 update(edit)改  read(find)查
-import request from "../utils/request"
+import request from "../utils/request";
 
 /**
  * 获取热门品牌
@@ -9,11 +9,10 @@ import request from "../utils/request"
 export const readHotBrands = (limit = 10) => {
   return request.get("/home/brand", {
     params: {
-      limit
+      limit,
     },
   });
 };
-
 
 /**
  * 获取轮播图数据
@@ -23,11 +22,10 @@ export const readHotBrands = (limit = 10) => {
 export const readBanners = (distributionSite = 1) => {
   return request.get("/home/banner", {
     params: {
-      distributionSite
-    }
+      distributionSite,
+    },
   });
-}
-
+};
 
 /**
  * 获取新鲜好物
@@ -37,10 +35,10 @@ export const readBanners = (distributionSite = 1) => {
 export const readNewGoods = (limit = 4) => {
   return request.get("/home/new", {
     params: {
-      limit
+      limit,
     },
   });
-}
+};
 
 /**
  * 获取人气推荐
@@ -48,8 +46,7 @@ export const readNewGoods = (limit = 4) => {
  */
 export const readHotProduct = () => {
   return request.get("/home/hot");
-}
-
+};
 
 /**
  * 获取产品区块数据
@@ -57,19 +54,17 @@ export const readHotProduct = () => {
  */
 export const readGoodProducts = () => {
   return request.get("/home/goods");
-}
-
-
+};
 
 /**
  * 获取最新专题
  * @param {number} limit 限制请求数据的数量
  * @return {Promise<{result: Array<Special>}>}
  */
-export  const readSpecial =(limit) => {
-  return request.get("/home/special",  {
+export const readSpecial = (limit) => {
+  return request.get("/home/special", {
     params: {
-      limit
+      limit,
     },
   });
-}
+};

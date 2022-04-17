@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { readHotProduct } from "../../api/homeAPI";
+import { readHotProduct } from "@/api/homeAPI";
 
 export const useHotProduct = () => {
   const hotList = ref(null);

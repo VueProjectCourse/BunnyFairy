@@ -1,21 +1,20 @@
-import lazy from "../directive/lazy"
+import lazy from "../directive/lazy";
 //获取public目录下所有的文件信息
-const modulesFiles = import.meta.globEager('./**/*.vue')
+const modulesFiles = import.meta.globEager("./**/*.vue");
 
-const pathList = []
+const pathList = [];
 //遍历拿到所有的文件名称
 for (const path in modulesFiles) {
-	pathList.push(path)
+  pathList.push(path);
 }
 //全局批量注册components下所有组件
 export default {
-
-	install(app) {
-		app.directive("lazy", lazy)
-		pathList.forEach((path) => {
-			const component = modulesFiles[path].default;
-			const componentName= path.split("/")[2].split(".")[0]
-			app.component(componentName, component)
-		})
-	}
-}
+  install(app) {
+    app.directive("lazy", lazy);
+    pathList.forEach((path) => {
+      const component = modulesFiles[path].default;
+      const componentName = path.split("/")[2].split(".")[0];
+      app.component(componentName, component);
+    });
+  },
+};
