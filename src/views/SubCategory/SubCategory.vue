@@ -2,6 +2,7 @@
 import Layout from "@/views/DefaultLayout/DefaultLayout.vue";
 import { useBread } from "./useSubCategory";
 import SubFilter from "./SubFilter/SubFilter.vue";
+import SubSort from "./SubSort/SubSort.vue";
 const { topCate, subCate } = useBread();
 </script>
 
@@ -23,6 +24,7 @@ const { topCate, subCate } = useBread();
       </Bread>
 
       <SubFilter />
+      <SubSort />
     </div>
   </Layout>
 </template>

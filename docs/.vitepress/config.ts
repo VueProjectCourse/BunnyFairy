@@ -95,16 +95,17 @@ function getGuideSidebar() {
         { text: '面包屑导航动画', link: '/category/bread-transition' },
         { text: '批量注册组件', link: '/category/bulk-registration' },
         { text: '一级分类-轮播图', link: '/category/top-carousel' },
-
         { text: '一级分类-展示二级分类', link: '/category/top-subcategory' },
         { text: '一级分类-商品推荐', link: '/category/goods-recommend' },
         { text: '路由切换页面至顶部', link: '/category/router-toggle-scrolltop' },
-        { text: '二级分类-筛选组件-数据渲染', link: '/category/subcate-filter-render' },
-        { text: '二级分类-筛选组件-收集筛选条件', link: '/category/devtools-install' },
-        { text: '二级分类-筛选组件-数据更新', link: '/category/devtools-install' },
-        { text: '二级分类-筛选组件-骨架屏', link: '/category/devtools-install' },
 
-        { text: '封装复选框组件', link: '/category/devtools-install' },
+
+        // { text: '二级分类-筛选组件-数据渲染', link: '/category/subcate-filter-render' },
+        // { text: '二级分类-筛选组件-收集筛选条件', link: '/category/devtools-install' },
+        // { text: '二级分类-筛选组件-数据更新', link: '/category/devtools-install' },
+        // { text: '二级分类-筛选组件-骨架屏', link: '/category/devtools-install' },
+
+        { text: '封装复选框组件', link: '/category/packaged-checked' },
         { text: '二级分类-排序组件', link: '/category/devtools-install' },
         { text: '二级分类-商品列表渲染', link: '/category/devtools-install' },
         { text: '二级分类-商品排序与筛选', link: '/category/devtools-install' },
