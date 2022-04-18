@@ -2,6 +2,7 @@ import { useRoute } from "vue-router";
 import { useCateStore } from "@/stores/cateStore";
 import { storeToRefs } from "pinia";
 import { ref, watchEffect } from "vue";
+import { readGoodsReq } from "../../api/categoryAPI";
 
 export const useBread = () => {
   // 获取路由信息对象
@@ -24,4 +25,17 @@ export const useBread = () => {
   });
 
   return { topCate, subCate };
+};
+
+export const useGoods = (id) => {
+  // 用于存储商品数据
+  const result = ref(null);
+  readGoodsReq({ categoryId: id }).then(({ data: res, status: status }) => {
+    if (status === 200) {
+      // console.log(res.result);
+      result.value = res.result;
+    }
+  });
+
+  return { result };
 };

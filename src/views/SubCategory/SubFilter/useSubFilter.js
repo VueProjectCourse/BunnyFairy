@@ -25,7 +25,6 @@ export const readFilter = (paramId) => {
       filters.value = res.result;
     }
   });
-  return { filters };
 };
 
 export const updateFilter = () => {

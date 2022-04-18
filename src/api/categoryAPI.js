@@ -19,11 +19,20 @@ export const readCategoryById = (id) => {
  * @param id 二级分类id
  * @return {Promise}
  */
-export function readFilterById(id) {
+export const readFilterById = (id) => {
   console.log(id);
   return request.get("/category/sub/filter", {
     params: {
       id: id,
     },
   });
+};
+
+/**
+ * 获取商品列表
+ * @param params 分类id、筛选条件、排序条件、分页信息
+ * @return {Promise}
+ */
+export function readGoodsReq(params) {
+  return request.post("/category/goods", params);
 }

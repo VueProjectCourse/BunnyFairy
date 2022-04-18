@@ -1,13 +1,27 @@
 <script setup>
-import Layout from "@/views/DefaultLayout/DefaultLayout.vue";
-import { useBread } from "./useSubCategory";
+import DefaultLayout from "@/views/DefaultLayout/DefaultLayout.vue";
 import SubFilter from "./SubFilter/SubFilter.vue";
 import SubSort from "./SubSort/SubSort.vue";
+import GoodsList from "./GoodsList/GoodsList.vue";
+import { useBread, useGoods } from "./useSubCategory";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
+import { watchEffect } from "vue";
+
+const route = useRoute();
 const { topCate, subCate } = useBread();
+const { result } = useGoods(route.params.id);
+
+onBeforeRouteUpdate((to) => {
+  useGoods(to.params.id);
+});
+
+watchEffect(() => {
+  useGoods(route.params.id);
+});
 </script>
 
 <template>
-  <Layout>
+  <DefaultLayout>
     <div class="container">
       <Bread>
         <BreadItem path="/">首页</BreadItem>
@@ -22,11 +36,14 @@ const { topCate, subCate } = useBread();
           >
         </Transition>
       </Bread>
-
+      <!-- 条件过滤组件 -->
       <SubFilter />
+      <!-- 商品排序组件 -->
       <SubSort />
+      <!-- 商品展示组件 -->
+      <GoodsList :goods="result.items" v-if="result" />
     </div>
-  </Layout>
+  </DefaultLayout>
 </template>
 
 <style>
