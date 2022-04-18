@@ -1,6 +1,6 @@
 <script setup>
 import TopNav from "./TopNav/TopNav.vue";
-import Header from "./Header/Header.vue";
+import NormalHeader from "./NormalHeader/NormalHeader.vue";
 import StickyHeader from "./StickyHeader/StickyHeader.vue";
 import Footer from "./Footer/Footer.vue";
 import { useCateStore } from "@/stores/cateStore";
@@ -11,7 +11,7 @@ cateStore.initCategories();
   <!-- 顶部导航 -->
   <TopNav />
   <!-- 头部 -->
-  <Header />
+  <NormalHeader />
   <!-- 吸顶头部 -->
   <StickyHeader />
   <slot />

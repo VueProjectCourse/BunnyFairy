@@ -7,9 +7,9 @@ export const sortParams = ref({
   onlyDiscount: false,
 });
 
-export const updateSortParams = (emits, target) => {
+export const setSortParams = (emits, target) => {
+  console.log(target);
   // 更新筛选条件
-  console.log(emits, target);
   sortParams.value = { ...sortParams.value, ...target };
   // 将筛选条件传递到父组件
   emits("onSortParamsChanged", sortParams.value);

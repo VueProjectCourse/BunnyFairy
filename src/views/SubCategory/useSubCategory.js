@@ -27,15 +27,22 @@ export const useBread = () => {
   return { topCate, subCate };
 };
 
-export const useGoods = (id) => {
+export const reqParams = ref({
+  categoryId: null,
+});
+
+export const useGoods = (params) => {
   // 用于存储商品数据
   const result = ref(null);
-  readGoodsReq({ categoryId: id }).then(({ data: res, status: status }) => {
+  readGoodsReq(params).then(({ data: res, status: status }) => {
     if (status === 200) {
-      // console.log(res.result);
       result.value = res.result;
     }
   });
 
   return { result };
+};
+
+export const useFilterSortParamsChanged = (target) => {
+  reqParams.value = { ...reqParams.value, ...target };
 };

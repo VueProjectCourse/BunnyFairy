@@ -26,7 +26,7 @@ export const readFilter = (paramId) => {
   });
 };
 
-export const updateFilter = () => {
+export const updateFilter = (emits) => {
   // 汇总用户选择的品牌id
   selectedFilters.value.brandId = filters.value.selectedBrandId;
   selectedFilters.value.attrs = [];
@@ -41,5 +41,5 @@ export const updateFilter = () => {
     }
   });
 
-  console.log(selectedFilters.value);
+  emits("onFilterParamsChanged", selectedFilters.value);
 };

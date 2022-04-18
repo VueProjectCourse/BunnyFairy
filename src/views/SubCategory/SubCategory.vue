@@ -3,20 +3,26 @@ import DefaultLayout from "@/views/DefaultLayout/DefaultLayout.vue";
 import SubFilter from "./SubFilter/SubFilter.vue";
 import SubSort from "./SubSort/SubSort.vue";
 import GoodsList from "./GoodsList/GoodsList.vue";
-import { useBread, useGoods } from "./useSubCategory";
+import {
+  useBread,
+  useGoods,
+  reqParams,
+  useFilterSortParamsChanged,
+} from "./useSubCategory";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
 import { watchEffect } from "vue";
 
 const route = useRoute();
+reqParams.value.categoryId = route.params.id;
 const { topCate, subCate } = useBread();
-const { result } = useGoods(route.params.id);
+const { result } = useGoods(reqParams.value);
 
 onBeforeRouteUpdate((to) => {
-  useGoods(to.params.id);
+  reqParams.value = { categoryId: to.params.id };
 });
 
 watchEffect(() => {
-  useGoods(route.params.id);
+  useGoods(reqParams.value);
 });
 </script>
 
@@ -37,16 +43,18 @@ watchEffect(() => {
         </Transition>
       </Bread>
       <!-- 条件过滤组件 -->
-      <SubFilter />
-      <!-- 商品排序组件 -->
-      <SubSort />
+      <SubFilter @onFilterParamsChanged="useFilterSortParamsChanged" />
+      <div class="goods-list">
+        <!-- 商品排序组件 -->
+        <SubSort @onSortParamsChanged="useFilterSortParamsChanged" />
+      </div>
       <!-- 商品展示组件 -->
       <GoodsList :goods="result.items" v-if="result" />
     </div>
   </DefaultLayout>
 </template>
 
-<style>
+<style scoped>
 .fade-right-enter-from,
 .fade-right-leave-to {
   transform: translateX(20px);
@@ -62,5 +70,11 @@ watchEffect(() => {
 .fade-right-leave-from {
   transform: none;
   opacity: 1;
+}
+
+.goods-list {
+  background: #fff;
+  padding: 0 25px;
+  margin-top: 25px;
 }
 </style>

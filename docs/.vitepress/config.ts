@@ -106,9 +106,9 @@ function getGuideSidebar() {
         { text: '二级分类-筛选组件-骨架屏', link: '/category/subcate-filter-skeleton' },
 
         { text: '封装复选框组件', link: '/category/packaged-checked' },
-        { text: '二级分类-排序组件', link: '/category/devtools-install' },
-        { text: '二级分类-商品列表渲染', link: '/category/devtools-install' },
-        { text: '二级分类-商品排序与筛选', link: '/category/devtools-install' },
+        { text: '二级分类-排序组件', link: '/category/subsort' },
+        { text: '二级分类-商品列表渲染', link: '/category/goods-list' },
+        { text: '二级分类-商品排序与筛选', link: '/category/goods-sort-filter' },
         { text: '二级分类-加载更多数据', link: '/category/devtools-install' },
       ]
     },

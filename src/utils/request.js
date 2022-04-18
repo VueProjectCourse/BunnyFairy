@@ -5,7 +5,7 @@ import axios from "axios";
 const instance = axios.create({
   // baseURL: "http://pcapi-xiaotuxian-front-devtest.itheima.net/",
   baseURL: "https://apipc-xiaotuxian-front.itheima.net/",
-  timeout: 5000,
+  timeout: 10000,
 });
 
 export default instance;

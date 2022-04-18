@@ -8,6 +8,8 @@ import {
   updateFilter,
 } from "./useSubFilter";
 
+const emits = defineEmits(["onFilterParamsChanged"]);
+
 onMounted(() => {
   const route = useRoute();
   readFilter(route.params.id);
@@ -31,7 +33,7 @@ onBeforeRouteUpdate((to) => {
           :class="{ active: filters.selectedBrandId === item.id }"
           @click="
             filters.selectedBrandId = item.id;
-            updateFilter();
+            updateFilter(emits);
           "
           >{{ item.name }}</a
         >
@@ -48,7 +50,7 @@ onBeforeRouteUpdate((to) => {
           :class="{ active: item.selectedFilterName === subitem.name }"
           @click="
             item.selectedFilterName = subitem.name;
-            updateFilter();
+            updateFilter(emits);
           "
           >{{ subitem.name }}</a
         >
