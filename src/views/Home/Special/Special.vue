@@ -1,6 +1,5 @@
 <script setup>
 import Panel from "../Panel/Panel.vue";
-
 import { readSpecial } from "@/api/homeAPI";
 import { useLazyData } from "@/utils/lazyData";
 const { target, result } = useLazyData(readSpecial);

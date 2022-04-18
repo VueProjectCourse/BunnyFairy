@@ -21,7 +21,9 @@ const setChecked = () => {
     <i class="iconfont icon-checked" v-if="isChecked"></i>
     <i class="iconfont icon-unchecked" v-else></i>
     <!-- 如果插槽存在内容 $slots.default 为真 否则为假 -->
-    <span v-if="$slots.default"><slot></slot></span>
+    <span v-if="$slots.default">
+      <slot></slot>
+    </span>
   </div>
 </template>
 

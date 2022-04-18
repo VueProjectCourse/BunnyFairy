@@ -12,7 +12,6 @@ export const readFilter = (paramId) => {
   filtersLoading.value = true;
   readFilterById(paramId).then(({ data: res, status: status }) => {
     if (status === 200) {
-      // console.log(res.result);
       filtersLoading.value = false;
       res.result.brands.unshift({ id: null, name: "全部" });
 
