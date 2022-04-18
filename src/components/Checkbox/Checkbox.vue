@@ -1,6 +1,6 @@
 <script setup>
-// import { useVModel } from "@vueuse/core";
-import { ref, watch } from "vue";
+import { useVModel } from "@vueuse/core";
+
 const props = defineProps({
   modelValue: {
     type: Boolean,
@@ -9,17 +9,12 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:modelValue"]);
 
-const isChecked = ref(false);
+const isChecked = useVModel(props, "modelValue", emit);
+
 const setChecked = () => {
   isChecked.value = !isChecked.value;
   emit("update:modelValue", isChecked.value);
 };
-watch(
-  () => props.modelValue,
-  () => {
-    isChecked.value = props.modelValue;
-  }
-);
 </script>
 <template>
   <div class="xtx-checkbox" @click="setChecked">
