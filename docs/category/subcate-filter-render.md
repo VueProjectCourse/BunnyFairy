@@ -117,36 +117,52 @@
 * **Step.5：在 `SubFilter` 组件中获取筛选条件数据**
 
 ```js
-import { useRoute } from "vue-router"
-import { ref } from "vue"
-import { readFilterById } from "../../api/categoryAPI"
-export const readFilter = () => {
-  const route = useRoute();
-  // 用于存储所有筛选条件数据
-  const filters = ref(null);
+// 导入接口方法
+import { readFilterById } from "@/api/categoryAPI";
+// 导入 声明响应式变量的方法
+import { ref } from "vue";
 
-  readFilterById(route.params.id).then(({ data: res, status: status }) => {
+// 存储筛选条件变量
+export const filters = ref(null);
+
+// 获取筛选条件数据方法
+export const readFilter = (id) => {
+  // 调用接口方法获取数据
+  readFilterById(id).then(({ data: res, status: status }) => {
     if (status === 200) {
-
-      // console.log(res.result);
-      // 在品牌筛选条件的前面加上 `全部` 筛选选项
-      res.result.brands.unshift({ id: null, name: "全部" });
-        // 在其他筛选条件的前面加上 `全部` 筛选选项
-      res.result.saleProperties.forEach((item)=>{
-        item.properties.unshift({id: null, name: "全部"});
-      })
-      // 存储筛选条件
+      // 在品牌中添加一个 全部选项
+      res.result.brands.unshift({ id: "all", name: "全部" });
+      // 在u其他筛选条件中添加 一个 全部 选项
+      res.result.saleProperties.forEach((item) => {
+        // console.log(item);
+        item.properties.unshift({ id: "all", name: "全部" });
+      });
+      // 把处理
       filters.value = res.result;
     }
   });
+};
 
-  return { filters }
-}
 ```
 
 * **Step.6：渲染`SubFilter` 组件模板**
 
 ```html
+<script setup>
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
+// 导入 筛选条件数据 获取筛选条件数据的方法
+import { filters, readFilter } from "./useSubFilter";
+
+// 当dom挂载完,
+onMounted(() => {
+  // 获取路由信息对象
+  const route = useRoute();
+  // 调用获取筛选条件的方法 通过路由信息对象拿到 id值
+  readFilter(route.params.id);
+});
+</script>
+
 <template>
   <!-- 筛选区 -->
    <!-- 筛选区 -->
