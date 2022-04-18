@@ -32,6 +32,15 @@
         <a href="javascript:" v-for="i in 4" :key="i">小米</a>
       </div>
     </div>
+
+     <div class="item" v-for="i in 4" :key="i">
+      <div class="head">颜色：</div>
+      <div class="body">
+        <a href="javascript:">全部</a>
+        <a href="javascript:" >黑色</a>
+         <a href="javascript:" >蓝色</a>
+      </div>
+    </div>
   </div>
 </template>
 ```
