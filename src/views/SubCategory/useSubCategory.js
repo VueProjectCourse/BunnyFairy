@@ -1,8 +1,8 @@
 import { useRoute } from "vue-router";
-import { useCateStore } from "@/stores/cateStore";
 import { storeToRefs } from "pinia";
 import { ref, watchEffect } from "vue";
-import { readGoodsReq } from "../../api/categoryAPI";
+import { useCateStore } from "@/stores/cateStore";
+import { readGoodsReq } from "@/api/categoryAPI";
 
 // 动态生成breadItem
 export const useBread = () => {

@@ -1,6 +1,7 @@
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import { computed, ref } from "vue";
+
 import { useCateStore } from "@/stores/cateStore";
 import { readBanners } from "@/api/homeAPI";
 

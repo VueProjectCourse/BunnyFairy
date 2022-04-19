@@ -1,8 +1,9 @@
 <script setup>
 import DefaultLayout from "@/views/DefaultLayout/DefaultLayout.vue";
 import SubCategoryList from "./SubCategoryList/SubCategoryList.vue";
-import { useBread, useTopCateBanner } from "./useTopCategory";
 import GoodsRecommend from "./GoodsRecommend/GoodsRecommend.vue";
+
+import { useBread, useTopCateBanner } from "./useTopCategory";
 const { topCate } = useBread();
 const { carouselList } = useTopCateBanner();
 </script>

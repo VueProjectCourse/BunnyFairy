@@ -1,5 +1,10 @@
 <script setup>
 import DefaultLayout from "../DefaultLayout/DefaultLayout.vue";
+import SubFilter from "./SubFilter/SubFilter.vue";
+import SubSort from "./SubSort/SubSort.vue";
+import GoodsList from "./GoodsList/GoodsList.vue";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
+import { onMounted, watch } from "vue";
 import {
   useBread,
   reqParams,
@@ -8,11 +13,6 @@ import {
   filterGoodsList,
 } from "./useSubCategory";
 
-import { useRoute, onBeforeRouteUpdate } from "vue-router";
-import SubFilter from "./SubFilter/SubFilter.vue";
-import SubSort from "./SubSort/SubSort.vue";
-import GoodsList from "./GoodsList/GoodsList.vue";
-import { onMounted, watch } from "vue";
 const { topCate, subCate } = useBread();
 
 onMounted(() => {

@@ -1,6 +1,5 @@
 <script setup>
 import Panel from "../Panel/Panel.vue";
-
 import { useLazyData } from "@/utils/lazyData";
 import { readHotProduct } from "@/api/homeAPI";
 const { target, result } = useLazyData(readHotProduct);

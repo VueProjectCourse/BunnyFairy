@@ -1,3 +1,6 @@
+<script setup>
+defineProps([""]);
+</script>
 <template>
   <nav class="app-top-nav">
     <div class="container">

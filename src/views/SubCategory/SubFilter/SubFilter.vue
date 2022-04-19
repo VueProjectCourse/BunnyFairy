@@ -4,7 +4,6 @@ import { useRoute, onBeforeRouteUpdate } from "vue-router";
 // 导入 筛选条件数据 获取筛选条件数据的方法
 import {
   filters,
-  selectedFilters,
   readFilter,
   updateFilter,
   isFilterLoading,
