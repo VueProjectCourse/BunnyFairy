@@ -115,10 +115,10 @@ function getGuideSidebar() {
     {
       text: "商品详情",
       children: [
-        { text: '基础布局', link: '/detail/devtools-install' },
-        { text: '渲染面包屑导航', link: '/detail/devtools-install' },
-        { text: '图片预览组件', link: '/detail/devtools-install' },
-        { text: '实现放大镜效果', link: '/detail/devtools-install' },
+        { text: '基础布局', link: '/detail/baselayout' },
+        { text: '渲染面包屑导航', link: '/detail/breadcrumb' },
+        { text: '图片预览组件', link: '/detail/image-preview' },
+        { text: '放大镜效果', link: '/detail/magnifier-effect' },
         { text: '商品基本信息展示', link: '/detail/devtools-install' },
         { text: '城市选择组件-基础布局', link: '/detail/devtools-install' },
         { text: '城市选择组件-获取数据', link: '/detail/devtools-install' },

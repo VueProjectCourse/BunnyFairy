@@ -8,6 +8,7 @@ const routes = [
   { path: "/", component: Home },
   { path: "/category/:id", component: TopCategory },
   { path: "/category/sub/:id", component: SubCategory },
+  { path: "/goods/:id", component: () => import("@/views/Detail/Detail.vue") },
 ];
 
 const router = createRouter({

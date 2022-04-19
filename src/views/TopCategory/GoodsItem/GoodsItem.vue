@@ -6,7 +6,7 @@ defineProps({
 });
 </script>
 <template>
-  <RouterLink to="/" class="goods-item" v-if="goods">
+  <RouterLink :to="`/goods/${goods.id}`" class="goods-item" v-if="goods">
     <img :src="goods.picture" alt="" />
     <p class="name ellipsis">{{ goods.name }}</p>
     <p class="desc ellipsis">{{ goods.desc }}</p>
