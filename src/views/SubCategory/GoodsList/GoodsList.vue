@@ -1,4 +1,5 @@
 <script setup>
+import GoodsItem from "../../TopCategory/GoodsItem/GoodsItem.vue";
 defineProps({
   goods: {
     type: Array,

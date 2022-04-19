@@ -1,32 +1,34 @@
 <script setup>
-import { sortParams, setSortParams } from "./useSubSort";
+import { subSort } from "./useSubSort";
 const emits = defineEmits(["onSortParamsChanged"]);
+const { sortParams, setSortParams } = subSort();
 </script>
+
 <template>
   <div class="sub-sort">
     <div class="sort">
       <a
         href="javascript:"
-        :class="{ active: sortParams.sortField === '' }"
         @click="setSortParams(emits, { sortField: '', sortMethod: 'desc' })"
+        :class="{ active: sortParams.sortField === '' }"
         >默认排序</a
       >
       <a
         href="javascript:"
-        :class="{ active: sortParams.sortField === 'publishTime' }"
         @click="setSortParams(emits, { sortField: 'publishTime' })"
+        :class="{ active: sortParams.sortField === 'publishTime' }"
         >最新商品</a
       >
       <a
         href="javascript:"
-        :class="{ active: sortParams.sortField === 'orderNum' }"
         @click="setSortParams(emits, { sortField: 'orderNum' })"
+        :class="{ active: sortParams.sortField === 'orderNum' }"
         >最高人气</a
       >
       <a
         href="javascript:"
-        :class="{ active: sortParams.sortField === 'evaluateNum' }"
         @click="setSortParams(emits, { sortField: 'evaluateNum' })"
+        :class="{ active: sortParams.sortField === 'evaluateNum' }"
         >评论最多</a
       >
       <a
@@ -34,6 +36,8 @@ const emits = defineEmits(["onSortParamsChanged"]);
         @click="
           setSortParams(emits, {
             sortField: 'price',
+            // 判断一下是否时desc 如果是，那么值就是asc
+            // 如果值是asc的时候再问是否是desc 那么值就换成 desc
             sortMethod: sortParams.sortMethod === 'desc' ? 'asc' : 'desc',
           })
         "
@@ -52,12 +56,12 @@ const emits = defineEmits(["onSortParamsChanged"]);
     <div class="check">
       <Checkbox
         v-model="sortParams.inventory"
-        @update:modelValue="setSortParams(emits, { inventory: $event })"
+        @update:modelValue="setSortParams(emits)"
         >仅显示有货商品</Checkbox
       >
       <Checkbox
         v-model="sortParams.onlyDiscount"
-        @update:modelValue="setSortParams(emits, { onlyDiscount: $event })"
+        @update:modelValue="setSortParams(emits)"
         >仅显示特惠商品</Checkbox
       >
     </div>
@@ -91,7 +95,7 @@ const emits = defineEmits(["onSortParamsChanged"]);
 }
 
 .sub-sort .sort a.active {
-  background: var(--primary-color);
+  background-color: var(--primary-color);
   border-color: var(--primary-color);
   color: #fff;
 }

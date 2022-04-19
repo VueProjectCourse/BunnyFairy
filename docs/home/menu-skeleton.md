@@ -67,7 +67,7 @@
     top: 0;
     width: 50%;
     height: 100%;
-    background: linear-gradient(
+    background-image: linear-gradient(
       to left,
       rgba(255, 255, 255, 0) 0,
       rgba(255, 255, 255, 0.3) 50%,

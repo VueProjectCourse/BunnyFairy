@@ -1,17 +1,22 @@
 <script setup>
 import { onMounted } from "vue";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
+// 导入 筛选条件数据 获取筛选条件数据的方法
 import {
   filters,
-  filtersLoading,
+  selectedFilters,
   readFilter,
   updateFilter,
+  isFilterLoading,
 } from "./useSubFilter";
 
 const emits = defineEmits(["onFilterParamsChanged"]);
 
+// 当dom挂载完,
 onMounted(() => {
+  // 获取路由信息对象
   const route = useRoute();
+  // 调用获取筛选条件的方法 通过路由信息对象拿到 id值
   readFilter(route.params.id);
 });
 
@@ -22,15 +27,16 @@ onBeforeRouteUpdate((to) => {
 
 <template>
   <!-- 筛选区 -->
-  <div class="sub-filter" v-if="filters && !filtersLoading">
+  <div class="sub-filter" v-if="filters && !isFilterLoading">
     <div class="item">
       <div class="head">品牌：</div>
       <div class="body">
+        <!-- <a href="javascript:">全部</a> -->
         <a
           href="javascript:"
           v-for="item in filters?.brands"
           :key="item.id"
-          :class="{ active: filters.selectedBrandId === item.id }"
+          :class="{ active: filters.selectedBrandId == item.id }"
           @click="
             filters.selectedBrandId = item.id;
             updateFilter(emits);
@@ -43,11 +49,12 @@ onBeforeRouteUpdate((to) => {
     <div class="item" v-for="item in filters?.saleProperties" :key="item.id">
       <div class="head">{{ item.name }}：</div>
       <div class="body">
+        <!-- <a href="javascript:">全部</a> -->
         <a
           href="javascript:"
-          v-for="subitem in item?.properties"
+          v-for="subitem in item.properties"
           :key="subitem.id"
-          :class="{ active: item.selectedFilterName === subitem.name }"
+          :class="{ active: item.selectedFilterName == subitem.name }"
           @click="
             item.selectedFilterName = subitem.name;
             updateFilter(emits);
@@ -71,7 +78,7 @@ onBeforeRouteUpdate((to) => {
 @import "@/assets/styles/variable.css";
 
 .sub-filter {
-  background: #fff;
+  background-color: #fff;
   padding: 25px;
 }
 

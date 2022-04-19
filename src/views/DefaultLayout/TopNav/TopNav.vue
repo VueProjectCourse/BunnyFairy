@@ -37,7 +37,7 @@
 <style scoped>
 @import "@/assets/styles/variable.css";
 .app-top-nav {
-  background: #333;
+  background-color: #333;
 }
 
 .app-top-nav ul {

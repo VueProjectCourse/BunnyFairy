@@ -1,26 +1,30 @@
 <script setup>
-import { useVModel } from "@vueuse/core";
+import { ref, watchEffect } from "vue";
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
-    default: false,
   },
 });
-const emit = defineEmits(["update:modelValue"]);
 
-const isChecked = useVModel(props, "modelValue", emit);
+const emits = defineEmits(["update:modelValue"]);
 
-const setChecked = () => {
+const isChecked = ref(false);
+const setIsChecked = () => {
   isChecked.value = !isChecked.value;
-  emit("update:modelValue", isChecked.value);
+  emits("update:modelValue", isChecked.value);
 };
+
+// 进来之后立即之后
+watchEffect(() => {
+  isChecked.value = props.modelValue;
+});
 </script>
+
 <template>
-  <div class="xtx-checkbox" @click="setChecked">
+  <div class="xtx-checkbox" @click="setIsChecked">
     <i class="iconfont icon-checked" v-if="isChecked"></i>
     <i class="iconfont icon-unchecked" v-else></i>
-    <!-- 如果插槽存在内容 $slots.default 为真 否则为假 -->
     <span v-if="$slots.default">
       <slot></slot>
     </span>

@@ -53,13 +53,12 @@
   @import "@/assets/styles/variable.css";
 
   .home-panel {
-    background: #f5f5f5;
+    background-color: #f5f5f5;
   }
 
   .iconfont {
     width: 20px;
     height: 20px;
-    background: #ccc;
     color: #fff;
     display: inline-block;
     text-align: center;

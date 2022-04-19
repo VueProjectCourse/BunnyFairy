@@ -90,10 +90,10 @@ const current = ref(null);
 @import "@/assets/styles/variable.css";
 
 .home-category {
+  position: relative;
   width: 250px;
   height: 500px;
-  background: rgba(0, 0, 0, 0.8);
-  position: relative;
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 99;
 }
 
@@ -151,7 +151,7 @@ const current = ref(null);
   margin-bottom: 15px;
   border: 1px solid #eee;
   border-radius: 4px;
-  background: #fff;
+  background-color: #fff;
 }
 
 .layer ul li:nth-child(3n) {
@@ -167,7 +167,7 @@ const current = ref(null);
 }
 
 .layer ul li a:hover {
-  background: #e3f9f4;
+  background-color: #e3f9f4;
 }
 
 .layer ul li a img {

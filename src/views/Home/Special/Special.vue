@@ -37,7 +37,7 @@ const { target, result } = useLazyData(readSpecial);
 <style scoped>
 @import "@/assets/styles/variable.css";
 .home-panel {
-  background: #f5f5f5;
+  background-color: #f5f5f5;
 }
 .special-list {
   height: 380px;
@@ -47,7 +47,7 @@ const { target, result } = useLazyData(readSpecial);
 }
 .special-list .special-item {
   width: 404px;
-  background: #fff;
+  background-color: #fff;
   transition: all 0.5s;
 }
 

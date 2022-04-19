@@ -56,7 +56,7 @@
   .layer {
     width: 990px;
     height: 500px;
-    background: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     position: absolute;
     left: 250px;
     top: 0;
@@ -83,7 +83,7 @@
     margin-bottom: 15px;
     border: 1px solid #eee;
     border-radius: 4px;
-    background: #fff;
+    background-color: #fff;
   }
   .layer ul li:nth-child(3n) {
     margin-right: 0;
@@ -96,7 +96,7 @@
     padding: 10px;
   }
   .layer ul li a:hover {
-    background: #e3f9f4;
+    background-color: #e3f9f4;
   }
   .layer ul li a img {
     width: 95px;

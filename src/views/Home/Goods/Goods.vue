@@ -75,7 +75,7 @@ defineProps({
   bottom: 0;
   height: 86px;
   width: 100%;
-  background: var(--primary-color);
+  background-color: var(--primary-color);
   text-align: center;
   transform: translate3d(0, 100%, 0);
   transition: all 0.5s;

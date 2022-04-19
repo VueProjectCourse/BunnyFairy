@@ -61,7 +61,7 @@
   ```css
   @import "@/assets/styles/variable.css";
   .app-header {
-    background: #fff;
+    background-color: #fff;
   }
 
   .app-header .container {
@@ -78,7 +78,7 @@
     height: 132px;
     width: 100%;
     text-indent: -9999px;
-    background: url(@/assets/images/logo.png) no-repeat center 18px / contain;
+    background-image: url(@/assets/images/logo.png) no-repeat center 18px / contain;
   }
 
   .app-header .app-header-nav {
@@ -153,7 +153,7 @@
     top: 0;
     padding: 1px 6px;
     line-height: 1;
-    background: var(--help-color);
+    background-color: var(--help-color);
     color: #fff;
     font-size: 12px;
     border-radius: 10px;

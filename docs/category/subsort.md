@@ -73,7 +73,7 @@
 }
 
 .sub-sort .sort a.active {
-  background: var(--primary-color);
+  background-color: var(--primary-color);
   border-color: var(--primary-color);
   color: #fff;
 }
@@ -124,7 +124,7 @@ export default {
 </script>
 <style scoped lang="less">
 .goods-list {
-  background: #fff;
+  background-color: #fff;
   padding: 0 25px;
   margin-top: 25px;
 }

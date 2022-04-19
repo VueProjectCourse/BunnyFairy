@@ -59,7 +59,7 @@
   ```css
   @import "@/assets/styles/variable.css";
   .home-panel {
-    background: #f5f5f5;
+    background-color: #f5f5f5;
   }
   .special-list {
     height: 380px;
@@ -69,7 +69,7 @@
   }
   .special-list .special-item {
     width: 404px;
-    background: #fff;
+    background-color: #fff;
     transition: all .5s;
   }
 

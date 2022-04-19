@@ -87,7 +87,7 @@
     display: inline-block;
     width: 12px;
     height: 12px;
-    background: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 50%;
     cursor: pointer;
   }
@@ -95,12 +95,12 @@
     margin-left: 12px;
   }
   .xtx-carousel .carousel-indicator span.active {
-    background: #fff;
+    background-color: #fff;
   }
   .xtx-carousel .carousel-btn {
     width: 44px;
     height: 44px;
-    background: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
     border-radius: 50%;
     position: absolute;

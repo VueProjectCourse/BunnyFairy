@@ -9,26 +9,28 @@ const { carouselList } = useTopCateBanner();
 
 <template>
   <DefaultLayout>
-    <div class="container top-category">
-      <Bread>
-        <BreadItem path="/">首页</BreadItem>
-        <Transition name="fade-right" mode="out-in">
-          <BreadItem :key="topCate?.id" :path="`/category/${topCate?.id}`">{{
-            topCate?.name
-          }}</BreadItem>
-        </Transition>
-      </Bread>
+    <div class="top-category" style="background-color: #f5f5f5">
+      <div class="container">
+        <Bread>
+          <BreadItem path="/">首页</BreadItem>
+          <Transition name="fade-right" mode="out-in">
+            <BreadItem :key="topCate?.id" :path="`/category/${topCate?.id}`">{{
+              topCate?.name
+            }}</BreadItem>
+          </Transition>
+        </Bread>
 
-      <Carousel
-        v-if="carouselList"
-        :auto="true"
-        :carousel="carouselList"
-        :style="{ height: '500px' }"
-      ></Carousel>
+        <Carousel
+          v-if="carouselList"
+          :auto="true"
+          :carousel="carouselList"
+          :style="{ height: '500px' }"
+        ></Carousel>
 
-      <SubCategoryList :subCategories="topCate.children" v-if="topCate" />
+        <SubCategoryList :subCategories="topCate.children" v-if="topCate" />
 
-      <GoodsRecommend />
+        <GoodsRecommend />
+      </div>
     </div>
   </DefaultLayout>
 </template>

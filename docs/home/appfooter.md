@@ -107,7 +107,7 @@
     padding-top: 20px;
   }
   .app-footer .contact {
-    background: #fff;
+    background-color: #fff;
   }
   .app-footer .contact .container {
     padding: 60px 0 40px 25px;

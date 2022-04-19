@@ -51,7 +51,7 @@
 @import "@/assets/styles/variable.css";
 
 .sub-filter {
-  background: #fff;
+  background-color: #fff;
   padding: 25px;
 }
 

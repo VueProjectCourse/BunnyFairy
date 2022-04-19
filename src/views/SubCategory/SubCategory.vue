@@ -1,79 +1,67 @@
 <script setup>
-import DefaultLayout from "@/views/DefaultLayout/DefaultLayout.vue";
+import DefaultLayout from "../DefaultLayout/DefaultLayout.vue";
+import {
+  useBread,
+  reqParams,
+  setReqParams,
+  useGoods,
+  filterGoodsList,
+} from "./useSubCategory";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
 import SubFilter from "./SubFilter/SubFilter.vue";
 import SubSort from "./SubSort/SubSort.vue";
 import GoodsList from "./GoodsList/GoodsList.vue";
-import {
-  useBread,
-  useGoods,
-  reqParams,
-  useFilterSortParamsChanged,
-} from "./useSubCategory";
-import { useRoute, onBeforeRouteUpdate } from "vue-router";
-import { watchEffect } from "vue";
-
-const route = useRoute();
-reqParams.value.categoryId = route.params.id;
+import { onMounted, watch } from "vue";
 const { topCate, subCate } = useBread();
-const { result } = useGoods(reqParams.value);
+
+onMounted(() => {
+  const route = useRoute();
+  reqParams.value.categoryId = route.params.id;
+  useGoods();
+});
 
 onBeforeRouteUpdate((to) => {
-  reqParams.value = { categoryId: to.params.id };
+  reqParams.value.categoryId = to.params.id;
+  useGoods();
 });
 
-watchEffect(() => {
-  useGoods(reqParams.value);
-});
+watch(
+  () => reqParams.value,
+  () => {
+    useGoods();
+  }
+);
 </script>
-
 <template>
   <DefaultLayout>
-    <div class="container">
-      <Bread>
-        <BreadItem path="/">首页</BreadItem>
-        <BreadItem :path="`/category/${topCate?.id}`">{{
-          topCate?.name
-        }}</BreadItem>
-        <Transition name="fade-right" mode="out-in">
-          <BreadItem
-            :path="`/category/sub/${subCate?.id}`"
-            :key="subCate?.id"
-            >{{ subCate?.name }}</BreadItem
-          >
-        </Transition>
-      </Bread>
-      <!-- 条件过滤组件 -->
-      <SubFilter @onFilterParamsChanged="useFilterSortParamsChanged" />
-      <div class="goods-list">
-        <!-- 商品排序组件 -->
-        <SubSort @onSortParamsChanged="useFilterSortParamsChanged" />
+    <div class="subcategory" style="background-color: #f5f5f5">
+      <div class="container">
+        <!-- 面包屑导航 -->
+        <Bread>
+          <BreadItem path="/">首页</BreadItem>
+          <BreadItem :path="`/category/${topCate?.id}`">{{
+            topCate?.name
+          }}</BreadItem>
+          <Transition name="fade-right" mode="out-in">
+            <BreadItem :key="subCate?.id">{{ subCate?.name }}</BreadItem>
+          </Transition>
+        </Bread>
+        <!-- 筛选区域 -->
+        <SubFilter @onFilterParamsChanged="setReqParams" />
+        <!-- 排序区域 -->
+        <div class="goods-list">
+          <SubSort @onSortParamsChanged="setReqParams" />
+          <!-- 商品列表 -->
+          <GoodsList :goods="filterGoodsList.items" v-if="filterGoodsList" />
+        </div>
       </div>
-      <!-- 商品展示组件 -->
-      <GoodsList :goods="result.items" v-if="result" />
     </div>
   </DefaultLayout>
 </template>
 
 <style scoped>
-.fade-right-enter-from,
-.fade-right-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-
-.fade-right-enter-active,
-.fade-right-leave-active {
-  transition: all 0.5s;
-}
-
-.fade-right-enter-to,
-.fade-right-leave-from {
-  transform: none;
-  opacity: 1;
-}
-
 .goods-list {
-  background: #fff;
+  background-color: #fff;
   padding: 0 25px;
   margin-top: 25px;
 }

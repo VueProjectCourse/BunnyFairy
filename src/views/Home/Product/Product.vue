@@ -43,7 +43,7 @@ const { target, result } = useLazyData(readGoodProducts);
 @import "@/assets/styles/variable.css";
 
 .home-product {
-  background: #fff;
+  background-color: #fff;
   height: 2900px;
 }
 
@@ -58,7 +58,7 @@ const { target, result } = useLazyData(readGoodProducts);
 }
 
 .home-product .sub a:hover {
-  background: var(--primary-color);
+  background-color: var(--primary-color);
   color: #fff;
 }
 
@@ -103,12 +103,12 @@ const { target, result } = useLazyData(readGoodProducts);
 
 .home-product .box .cover .label span:first-child {
   width: 76px;
-  background: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .home-product .box .cover .label span:last-child {
   flex: 1;
-  background: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .home-product .box .goods-list {
