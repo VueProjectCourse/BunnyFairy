@@ -23,7 +23,7 @@ const target = ref(null);
 useIntersectionObserver(target, ([{ isIntersecting }]) => {
   // 如果元素进入了可视区
   if (isIntersecting) {
-    //如果没有正在加载并且还有数据可以加载
+    console.log(props.loading, props.finished);
     if (!props.loading && !props.finished) {
       emits("infinite");
     }
@@ -32,11 +32,11 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
 </script>
 <template>
   <div class="xtx-infinite-loading" ref="target">
-    <div class="loading">
+    <div class="loading" v-if="loading">
       <span class="img"></span>
       <span class="text">正在加载...</span>
     </div>
-    <div class="none">
+    <div class="none" v-if="finished">
       <span class="img"></span>
       <span class="text">亲，没有更多了</span>
     </div>

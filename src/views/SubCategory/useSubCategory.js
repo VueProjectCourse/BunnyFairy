@@ -3,7 +3,11 @@ import { storeToRefs } from "pinia";
 import { ref, watchEffect } from "vue";
 import { useCateStore } from "@/stores/cateStore";
 import { readGoodsReq } from "@/api/categoryAPI";
+// 用于标识加载状态
+export const loading = ref(false);
 
+//用于标识是否全部数据都已加载完毕
+export const finished = ref(false);
 // 动态生成breadItem
 export const useBread = () => {
   // 获取路由信息的id
@@ -39,18 +43,25 @@ export const useBread = () => {
 export const reqParams = ref({
   // categoryId来自于 route.params.id
   categoryId: null,
+  // 当前页
+  page: 1,
+  // 每次请求获取的数据条数
+  pageSize: 10,
 });
-
-// 用于标识加载状态
-export const loading = ref(false);
-
-//用于标识是否全部数据都已加载完毕
-export const finished = ref(false);
 
 // setReqParams作用是: 把所有的筛选和排序 和 categoryId 整合到一起 发送到服务器
 export const setReqParams = (target) => {
-  reqParams.value = { ...reqParams.value, ...target };
-  console.log(reqParams.value);
+  // 当筛选条件和排序条件发生变化以后, 需要从第一页开始获取数据, 所以页码需要重置.
+  reqParams.value = { ...reqParams.value, ...target, page: 1 };
+};
+
+// 加载更多
+export const loadMore = () => {
+  // 当前页加一
+  reqParams.value = {
+    ...reqParams.value,
+    page: reqParams.value.page + 1,
+  };
 };
 
 // 商品数据
@@ -64,8 +75,23 @@ export const setFilterGoodsList = () => {
   readGoodsReq(reqParams.value).then(({ data: res, status: status }) => {
     if (status === 200) {
       loading.value = false;
-      // 把数据赋值给bannerList
-      filterGoodsList.value = res.result;
+      // 如果当前是第一页，直接赋值
+      if (reqParams.value.page == 1) {
+        filterGoodsList.value = res.result;
+        // 当页码重置为1时, 重置 finished
+        finished.value = false;
+      } else {
+        // 如果当前不是第一页，做商品列表数据的累加
+        filterGoodsList.value = {
+          ...res.result,
+          items: [...filterGoodsList.value.items, ...res.result.items],
+        };
+      }
+
+      // 如果当前页面已经是最后一页了
+      if (reqParams.value.page === res.result.pages || res.result.pages === 0) {
+        finished.value = true;
+      }
     }
   });
 };

@@ -13,6 +13,7 @@ import {
   setFilterGoodsList,
   loading,
   finished,
+  loadMore,
 } from "./useSubCategory";
 
 const { topCate, subCate } = useBread();
@@ -26,6 +27,7 @@ onMounted(() => {
 
 onBeforeRouteUpdate((to) => {
   reqParams.value.categoryId = to.params.id;
+  reqParams.value.page = 1;
   setFilterGoodsList();
 });
 
@@ -57,7 +59,11 @@ watch(
           <SubSort @onSortParamsChanged="setReqParams" />
           <!-- 商品列表 -->
           <GoodsList :goods="filterGoodsList.items" v-if="filterGoodsList" />
-          <InfiniteLoading :loading="loading" :finished="finished" />
+          <InfiniteLoading
+            :loading="loading"
+            :finished="finished"
+            @infinite="loadMore"
+          />
         </div>
       </div>
     </div>
