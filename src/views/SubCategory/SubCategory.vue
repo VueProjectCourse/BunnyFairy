@@ -9,27 +9,30 @@ import {
   useBread,
   reqParams,
   setReqParams,
-  useGoods,
   filterGoodsList,
+  setFilterGoodsList,
+  loading,
+  finished,
 } from "./useSubCategory";
 
 const { topCate, subCate } = useBread();
 
 onMounted(() => {
+  loading.value = true;
   const route = useRoute();
   reqParams.value.categoryId = route.params.id;
-  useGoods();
+  setFilterGoodsList();
 });
 
 onBeforeRouteUpdate((to) => {
   reqParams.value.categoryId = to.params.id;
-  useGoods();
+  setFilterGoodsList();
 });
 
 watch(
   () => reqParams.value,
   () => {
-    useGoods();
+    setFilterGoodsList();
   }
 );
 </script>
@@ -54,6 +57,7 @@ watch(
           <SubSort @onSortParamsChanged="setReqParams" />
           <!-- 商品列表 -->
           <GoodsList :goods="filterGoodsList.items" v-if="filterGoodsList" />
+          <InfiniteLoading :loading="loading" :finished="finished" />
         </div>
       </div>
     </div>

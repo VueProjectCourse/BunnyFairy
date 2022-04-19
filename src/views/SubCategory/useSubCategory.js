@@ -41,6 +41,12 @@ export const reqParams = ref({
   categoryId: null,
 });
 
+// 用于标识加载状态
+export const loading = ref(false);
+
+//用于标识是否全部数据都已加载完毕
+export const finished = ref(false);
+
 // setReqParams作用是: 把所有的筛选和排序 和 categoryId 整合到一起 发送到服务器
 export const setReqParams = (target) => {
   reqParams.value = { ...reqParams.value, ...target };
@@ -51,12 +57,13 @@ export const setReqParams = (target) => {
 export const filterGoodsList = ref(null);
 
 // 调用获取商品数据的方法
-export const useGoods = () => {
+export const setFilterGoodsList = () => {
   // 数据状态
 
   // 修改状态的方法
   readGoodsReq(reqParams.value).then(({ data: res, status: status }) => {
     if (status === 200) {
+      loading.value = false;
       // 把数据赋值给bannerList
       filterGoodsList.value = res.result;
     }
