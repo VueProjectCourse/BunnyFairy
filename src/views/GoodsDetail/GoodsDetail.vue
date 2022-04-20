@@ -1,10 +1,13 @@
 <script setup>
-import { onMounted } from "vue";
 import DefaultLayout from "../DefaultLayout/DefaultLayout.vue";
-import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
-import { goodsDetail, setGoodsDetail } from "./useGoodsDetail";
-import { useRoute, onBeforeRouteUpdate } from "vue-router";
 import GoodsImages from "./GoodsImages/GoodsImages.vue";
+import GoodsSales from "./GoodsSales/GoodsSales.vue";
+import GoodsInfo from "./GoodsInfo/GoodsInfo.vue";
+import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
+import { onMounted } from "vue";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
+import { goodsDetail, setGoodsDetail } from "./useGoodsDetail";
+
 const route = useRoute();
 onMounted(() => {
   setGoodsDetail(route.params.id);
@@ -16,7 +19,7 @@ onBeforeRouteUpdate((to) => {
 </script>
 <template>
   <DefaultLayout>
-    <div class="xtx-goods-page">
+    <div class="xtx-goods-page" style="background-color: #f5f5f5">
       <div class="container">
         <!-- 面包屑 -->
         <Bread>
@@ -37,9 +40,13 @@ onBeforeRouteUpdate((to) => {
               :images="goodsDetail.mainPictures"
               v-if="goodsDetail"
             />
+
+            <GoodsSales />
           </div>
           <!-- 右侧 -->
-          <div class="spec"></div>
+          <div class="spec">
+            <GoodsInfo />
+          </div>
         </div>
         <!-- 商品推荐 -->
         <GoodsRelevant></GoodsRelevant>

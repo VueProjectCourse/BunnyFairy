@@ -98,13 +98,10 @@ function getGuideSidebar() {
         { text: '一级分类-展示二级分类', link: '/category/top-subcategory' },
         { text: '一级分类-商品推荐', link: '/category/goods-recommend' },
         { text: '路由切换页面至顶部', link: '/category/router-toggle-scrolltop' },
-
-
         { text: '二级分类-筛选组件-数据渲染', link: '/category/subcate-filter-render' },
         { text: '二级分类-筛选组件-收集筛选数据', link: '/category/subcate-filter-data' },
         { text: '二级分类-筛选组件-数据更新', link: '/category/subcate-filter-update' },
         { text: '二级分类-筛选组件-骨架屏', link: '/category/subcate-filter-skeleton' },
-
         { text: '封装复选框组件', link: '/category/packaged-checked' },
         { text: '二级分类-排序组件', link: '/category/subsort' },
         { text: '二级分类-商品列表渲染', link: '/category/goods-list' },
@@ -119,7 +116,7 @@ function getGuideSidebar() {
         { text: '渲染面包屑导航', link: '/detail/breadcrumb' },
         { text: '图片预览组件', link: '/detail/image-preview' },
         { text: '放大镜效果', link: '/detail/magnifier-effect' },
-        { text: '商品基本信息展示', link: '/detail/devtools-install' },
+        { text: '商品基本信息展示', link: '/detail/goods-infor-display' },
         { text: '城市选择组件-基础布局', link: '/detail/devtools-install' },
         { text: '城市选择组件-获取数据', link: '/detail/devtools-install' },
         { text: '城市选择组件-交互逻辑', link: '/detail/devtools-install' },
