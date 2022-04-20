@@ -1,10 +1,19 @@
 <script setup>
+import { ref } from "vue";
 defineProps({
   goods: {
     type: Object,
     default: () => ({}),
   },
 });
+
+// 用于存储用户选择的城市信息的名称集合
+const location = ref("");
+// 当用户选择完城市信息以后调用
+const onCityChanged = (data) => {
+  // 拼接用户选择的城市信息
+  location.value = data.location;
+};
 </script>
 <template>
   <p class="g-name">2件装 粉釉花瓣心意点缀 点心盘*2 碟子盘子</p>
@@ -20,7 +29,7 @@ defineProps({
     </dl>
     <dl>
       <dt>配送</dt>
-      <dd>至</dd>
+      <dd>至 <City :location="location" @onCityChanged="onCityChanged" /></dd>
     </dl>
     <dl>
       <dt>服务</dt>

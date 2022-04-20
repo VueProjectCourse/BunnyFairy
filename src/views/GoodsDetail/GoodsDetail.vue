@@ -4,6 +4,7 @@ import GoodsImages from "./GoodsImages/GoodsImages.vue";
 import GoodsSales from "./GoodsSales/GoodsSales.vue";
 import GoodsInfo from "./GoodsInfo/GoodsInfo.vue";
 import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
+import GoodsSku from "./GoodsSku/GoodsSku.vue";
 import { onMounted } from "vue";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
 import { goodsDetail, setGoodsDetail } from "./useGoodsDetail";
@@ -11,6 +12,7 @@ import { goodsDetail, setGoodsDetail } from "./useGoodsDetail";
 const route = useRoute();
 onMounted(() => {
   setGoodsDetail(route.params.id);
+  console.log(goodsDetail);
 });
 
 onBeforeRouteUpdate((to) => {
@@ -46,6 +48,7 @@ onBeforeRouteUpdate((to) => {
           <!-- 右侧 -->
           <div class="spec">
             <GoodsInfo />
+            <GoodsSku :specs="goodsDetail.specs" v-if="goodsDetail" />
           </div>
         </div>
         <!-- 商品推荐 -->
