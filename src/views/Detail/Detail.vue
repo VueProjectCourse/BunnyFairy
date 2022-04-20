@@ -8,7 +8,6 @@ import { onMounted } from "vue";
 const route = useRoute();
 onMounted(() => {
   setGoodsDetail(route.params.id);
-  console.log(goodsDetail);
 });
 
 onBeforeRouteUpdate((to) => {
@@ -20,11 +19,17 @@ onBeforeRouteUpdate((to) => {
     <div class="xtx-goods-page" style="background-color: #f5f5f5">
       <div class="container">
         <!-- 面包屑 -->
-        <Bread>
-          <BreadItem path="/">首页</BreadItem>
-          <BreadItem path="/">手机</BreadItem>
-          <BreadItem path="/">华为</BreadItem>
-          <BreadItem path="/">p30</BreadItem>
+        <Bread v-if="goodsDetail">
+          <BreadItem path="/"> 首页 </BreadItem>
+          <BreadItem :path="`/category/${goodsDetail.categories[1].id}`">
+            {{ goodsDetail.categories[1].name }}
+          </BreadItem>
+          <BreadItem :path="`/category/sub/${goodsDetail.categories[0].id}`">
+            {{ goodsDetail.categories[0].name }}
+          </BreadItem>
+          <BreadItem>
+            {{ goodsDetail.name }}
+          </BreadItem>
         </Bread>
         <!-- 商品信息 -->
         <div class="goods-info">
