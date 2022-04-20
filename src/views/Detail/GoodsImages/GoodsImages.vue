@@ -98,6 +98,19 @@ watch([isOutside, elementX, elementY], () => {
   display: flex;
   z-index: 500;
 }
+
+.goods-image .large {
+  position: absolute;
+  top: 0;
+  left: 412px;
+  width: 400px;
+  height: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-repeat: no-repeat;
+  background-size: 800px 800px;
+  background-color: #f8f8f8;
+}
+
 .goods-image .middle {
   width: 400px;
   height: 400px;
