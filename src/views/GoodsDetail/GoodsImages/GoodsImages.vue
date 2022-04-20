@@ -1,53 +1,57 @@
 <script setup>
-import { useMouseInElement } from "@vueuse/core";
 import { ref, watch } from "vue";
+import { useMouseInElement } from "@vueuse/core";
 defineProps({
   images: {
     type: Array,
     default: () => [],
   },
 });
-// 用于存储当前要显示图片的索引
-const current = ref(0);
-// 用于控制镜片和大图是否显示
-const show = ref(false);
-// 用于存储中图元素
+
+// 当前被选中元素
+const currentIndex = ref(0);
+
+// 控制镜片和大图显示与隐藏的状态
+const isShow = ref(false);
+
+// 声明监听元素
 const middleElement = ref(null);
 
-// 获取鼠标和元素之间的位置关系
+// 获取鼠标是否移入移出的布尔值
 const { isOutside, elementX, elementY } = useMouseInElement(middleElement);
 
-// 用于存储镜片元素位置
-const layerPosition = ref({ left: 0, top: 0 });
+const layerPosition = ref({
+  left: 0,
+  top: 0,
+});
 
-// 用于存储大图背景位置
-const bgPosition = ref({ x: 0, y: 0 });
+const largePosition = ref({
+  x: 0,
+  y: 0,
+});
 
 watch([isOutside, elementX, elementY], () => {
-  // 如果鼠标在元素外部, 隐藏镜片和大图
-  // 如果鼠标在元素内部, 显示静态和大图
-  show.value = !isOutside.value;
+  // 如果鼠标进入(false) 镜片和大图显示 否则(true)隐藏
+  isShow.value = !isOutside.value;
 
-  // 更新镜片元素位置
   layerPosition.value = {
     left: elementX.value - 100,
     top: elementY.value - 100,
   };
-  // 对镜片元素的水平方向位置进行限制
+
   if (layerPosition.value.left < 0) {
     layerPosition.value.left = 0;
   } else if (layerPosition.value.left > 200) {
     layerPosition.value.left = 200;
   }
-  // 对镜片元素的垂直方向位置进行限制
+
   if (layerPosition.value.top < 0) {
     layerPosition.value.top = 0;
   } else if (layerPosition.value.top > 200) {
     layerPosition.value.top = 200;
   }
 
-  // 更新大图背景位置
-  bgPosition.value = {
+  largePosition.value = {
     x: -layerPosition.value.left * 2,
     y: -layerPosition.value.top * 2,
   };
@@ -59,31 +63,31 @@ watch([isOutside, elementX, elementY], () => {
     <div
       class="large"
       :style="{
-        backgroundImage: `url(${images[current]})`,
-        backgroundPositionX: bgPosition.x + 'px',
-        backgroundPositionY: bgPosition.y + 'px',
+        backgroundImage: `url(${images[currentIndex]})`,
+        backgroundPositionX: largePosition.x + 'px',
+        backgroundPositionY: largePosition.y + 'px',
       }"
-      v-show="show"
+      v-show="isShow"
     ></div>
     <div class="middle" ref="middleElement">
       <div
         class="layer"
-        v-show="show"
+        v-show="isShow"
         :style="{
           left: layerPosition.left + 'px',
           top: layerPosition.top + 'px',
         }"
       ></div>
-      <img :src="images[current]" alt="" />
+      <img :src="images[currentIndex]" alt="" />
     </div>
     <ul class="small">
       <li
-        @mouseenter="current = index"
         v-for="(item, index) in images"
-        :key="index"
-        :class="{ active: index === current }"
+        :key="item"
+        @mouseenter="currentIndex = index"
+        :class="{ active: currentIndex === index }"
       >
-        <img :src="item" alt="" />
+        <img :src="item" />
       </li>
     </ul>
   </div>
@@ -118,6 +122,15 @@ watch([isOutside, elementX, elementY], () => {
   position: relative;
   cursor: move;
 }
+
+.goods-image .middle .layer {
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.2);
+  left: 0;
+  top: 0;
+  position: absolute;
+}
 .goods-image .small {
   width: 80px;
 }
@@ -131,14 +144,5 @@ watch([isOutside, elementX, elementY], () => {
 .goods-image .small li:hover,
 .goods-image .small li.active {
   border: 2px solid var(--primary-color);
-}
-
-.goods-image .middle .layer {
-  width: 200px;
-  height: 200px;
-  background: rgba(0, 0, 0, 0.2);
-  left: 0;
-  top: 0;
-  position: absolute;
 }
 </style>

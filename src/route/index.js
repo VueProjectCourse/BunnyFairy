@@ -1,19 +1,37 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "@/views/Home/Home.vue";
-import TopCategory from "../views/TopCategory/TopCategory.vue";
-import SubCategory from "../views/SubCategory/SubCategory.vue";
+// 导入Home组件
+import Home from "../views/Home/Home.vue";
 
 const routes = [
-  // 配置路由
-  { path: "/", component: Home },
-  { path: "/category/:id", component: TopCategory },
-  { path: "/category/sub/:id", component: SubCategory },
-  { path: "/goods/:id", component: () => import("@/views/Detail/Detail.vue") },
+  // 路由规则
+
+  // 首页路由
+  {
+    path: "/",
+    name: "home",
+    component: Home,
+  },
+  {
+    path: "/category/:id",
+    name: "topcategory",
+    component: () => import("@/views/TopCategory/TopCategory.vue"),
+  },
+  {
+    path: "/category/sub/:id",
+    name: "subcategory",
+    component: () => import("@/views/SubCategory/SubCategory.vue"),
+  },
+  {
+    path: "/goods/:id",
+    name: "goodsdetail",
+    component: () => import("@/views/GoodsDetail/GoodsDetail.vue"),
+  },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
+  // 始终让 滚动条到顶部
   scrollBehavior: () => ({ top: 0 }),
 });
 

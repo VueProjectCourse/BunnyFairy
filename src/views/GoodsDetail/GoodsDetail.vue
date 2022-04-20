@@ -1,10 +1,10 @@
 <script setup>
+import { onMounted } from "vue";
 import DefaultLayout from "../DefaultLayout/DefaultLayout.vue";
 import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
-import GoodsImages from "./GoodsImages/GoodsImages.vue";
+import { goodsDetail, setGoodsDetail } from "./useGoodsDetail";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
-import { goodsDetail, setGoodsDetail } from "./useDetail";
-import { onMounted } from "vue";
+import GoodsImages from "./GoodsImages/GoodsImages.vue";
 const route = useRoute();
 onMounted(() => {
   setGoodsDetail(route.params.id);
@@ -16,26 +16,27 @@ onBeforeRouteUpdate((to) => {
 </script>
 <template>
   <DefaultLayout>
-    <div class="xtx-goods-page" style="background-color: #f5f5f5">
+    <div class="xtx-goods-page">
       <div class="container">
         <!-- 面包屑 -->
-        <Bread v-if="goodsDetail">
-          <BreadItem path="/"> 首页 </BreadItem>
-          <BreadItem :path="`/category/${goodsDetail.categories[1].id}`">
-            {{ goodsDetail.categories[1].name }}
-          </BreadItem>
-          <BreadItem :path="`/category/sub/${goodsDetail.categories[0].id}`">
-            {{ goodsDetail.categories[0].name }}
-          </BreadItem>
-          <BreadItem>
-            {{ goodsDetail.name }}
-          </BreadItem>
+        <Bread>
+          <BreadItem path="/">首页</BreadItem>
+          <BreadItem :path="`/category/${goodsDetail?.categories[1].id}`">{{
+            goodsDetail?.categories[1].name
+          }}</BreadItem>
+          <BreadItem :path="`/category/${goodsDetail?.categories[0].id}`">{{
+            goodsDetail?.categories[0].name
+          }}</BreadItem>
+          <BreadItem>{{ goodsDetail?.name }}</BreadItem>
         </Bread>
         <!-- 商品信息 -->
         <div class="goods-info">
           <!-- 左侧 -->
           <div class="media">
-            <GoodsImages :images="goodsDetail?.mainPictures" />
+            <GoodsImages
+              :images="goodsDetail.mainPictures"
+              v-if="goodsDetail"
+            />
           </div>
           <!-- 右侧 -->
           <div class="spec"></div>
