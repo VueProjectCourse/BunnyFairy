@@ -122,7 +122,7 @@ function getGuideSidebar() {
         { text: '城市选择组件-交互逻辑', link: '/detail/city-interact' },
         { text: '规格组件-SPU与SKU', link: '/detail/city-skuspu' },
         { text: '规格组件-基础布局', link: '/detail/goods-sku' },
-        { text: '规格组件-数据渲染与选中', link: '/detail/devtools-install' },
+        { text: '规格组件-数据渲染与选中', link: '/detail/goods-sku-render' },
         { text: '规格组件-禁选效果分析', link: '/detail/devtools-install' },
         { text: '规格组件-禁用效果实现', link: '/detail/devtools-install' },
         { text: '规格组件通讯-默认选中', link: '/detail/devtools-install' },
