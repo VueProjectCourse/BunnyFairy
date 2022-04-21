@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import { useMouseInElement } from "@vueuse/core";
+import { useCurrent, useToggle, useLayer, useLarge } from "./GoodsImages";
 defineProps({
   images: {
     type: Array,
@@ -8,53 +9,23 @@ defineProps({
   },
 });
 
-// 当前被选中元素
-const currentIndex = ref(0);
-
-// 控制镜片和大图显示与隐藏的状态
-const isShow = ref(false);
+const { current, setCurrent } = useCurrent();
+const { isShow, setIsShow } = useToggle();
+const { layerPosition, setLayerPosition } = useLayer();
+const { largePosition, setLargePosition } = useLarge();
 
 // 声明监听元素
 const middleElement = ref(null);
-
 // 获取鼠标是否移入移出的布尔值
 const { isOutside, elementX, elementY } = useMouseInElement(middleElement);
-
-const layerPosition = ref({
-  left: 0,
-  top: 0,
-});
-
-const largePosition = ref({
-  x: 0,
-  y: 0,
-});
-
+// 监听鼠标的移动
 watch([isOutside, elementX, elementY], () => {
   // 如果鼠标进入(false) 镜片和大图显示 否则(true)隐藏
-  isShow.value = !isOutside.value;
+  setIsShow(!isOutside.value);
 
-  layerPosition.value = {
-    left: elementX.value - 100,
-    top: elementY.value - 100,
-  };
+  setLayerPosition(elementX, elementY);
 
-  if (layerPosition.value.left < 0) {
-    layerPosition.value.left = 0;
-  } else if (layerPosition.value.left > 200) {
-    layerPosition.value.left = 200;
-  }
-
-  if (layerPosition.value.top < 0) {
-    layerPosition.value.top = 0;
-  } else if (layerPosition.value.top > 200) {
-    layerPosition.value.top = 200;
-  }
-
-  largePosition.value = {
-    x: -layerPosition.value.left * 2,
-    y: -layerPosition.value.top * 2,
-  };
+  setLargePosition(layerPosition);
 });
 </script>
 
@@ -63,7 +34,7 @@ watch([isOutside, elementX, elementY], () => {
     <div
       class="large"
       :style="{
-        backgroundImage: `url(${images[currentIndex]})`,
+        backgroundImage: `url(${images[current]})`,
         backgroundPositionX: largePosition.x + 'px',
         backgroundPositionY: largePosition.y + 'px',
       }"
@@ -78,14 +49,14 @@ watch([isOutside, elementX, elementY], () => {
           top: layerPosition.top + 'px',
         }"
       ></div>
-      <img :src="images[currentIndex]" alt="" />
+      <img :src="images[current]" alt="" />
     </div>
     <ul class="small">
       <li
         v-for="(item, index) in images"
         :key="item"
-        @mouseenter="currentIndex = index"
-        :class="{ active: currentIndex === index }"
+        @mouseenter="setCurrent(index)"
+        :class="{ active: current === index }"
       >
         <img :src="item" />
       </li>

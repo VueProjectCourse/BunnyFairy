@@ -1,3 +1,6 @@
+<script setup>
+defineProps([""]);
+</script>
 <template>
   <div class="goods-relevant">商品推荐组件</div>
 </template>

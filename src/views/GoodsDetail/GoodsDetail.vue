@@ -43,7 +43,7 @@ onBeforeRouteUpdate((to) => {
               v-if="goodsDetail"
             />
 
-            <GoodsSales />
+            <GoodsSales :sales="goodsDetail" v-if="goodsDetail" />
           </div>
           <!-- 右侧 -->
           <div class="spec">
