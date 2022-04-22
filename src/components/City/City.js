@@ -27,7 +27,6 @@ export const useVisible = (type, selectedArea) => {
 // 地理区域数据
 export const useArea = () => {
   const areaData = ref(null);
-  window.areaData = areaData.value;
 
   const setAreaData = () => {
     if (window.areaData) return window.areaData;
