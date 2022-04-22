@@ -7,12 +7,11 @@ import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
 import GoodsSku from "./GoodsSku/GoodsSku.vue";
 import { onMounted } from "vue";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
-import { goodsDetail, setGoodsDetail } from "./useGoodsDetail";
+import { goodsDetail, setGoodsDetail } from "./GoodsDetail";
 
 const route = useRoute();
 onMounted(() => {
   setGoodsDetail(route.params.id);
-  console.log(goodsDetail);
 });
 
 onBeforeRouteUpdate((to) => {

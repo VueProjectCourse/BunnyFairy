@@ -29,7 +29,7 @@ export const useArea = () => {
   const areaData = ref(null);
 
   const setAreaData = () => {
-    if (window.areaData) return window.areaData;
+    if (window.areaData) return (areaData.value = window.areaData);
 
     axios
       .get(
@@ -83,6 +83,7 @@ export const useOptionsArea = (areaData, selectedArea, emit, setVisible) => {
     let tempList = null;
     if (areaData) {
       tempList = areaData.value;
+      console.log("判断有没有tempList", tempList);
 
       // 如果用户选择了省级数据
       if (selectedArea.provinceCode) {
@@ -107,8 +108,6 @@ export const useOptionsArea = (areaData, selectedArea, emit, setVisible) => {
         tempList = areaData.value;
         // 隐藏弹框
         setVisible("hide", selectedArea);
-        console.log("我是小明");
-        console.log(tempList, selectedArea);
       }
     }
     return tempList;
