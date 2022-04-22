@@ -1,4 +1,5 @@
 <script setup>
+import { useSpecSelected } from "./GoodsSku";
 defineProps({
   specs: {
     type: Array,
@@ -6,38 +7,27 @@ defineProps({
   },
 });
 
-const updateSpecSelected = (spec, value) => {
-  // 如果用户点击的规格已经是选中的
-  if (value.selected) {
-    // 让其取消选中
-    value.selected = false;
-  } else {
-    // 先将该规格中的所有规格取消选中
-    spec.values.forEach((item) => (item.selected = false));
-    // 将当前用户点击的规格设置为选中
-    value.selected = true;
-  }
-};
+const { setSpecSelect } = useSpecSelected();
 </script>
 
 <template>
   <div class="goods-sku">
-    <dl v-for="spec in specs" :key="spec.name">
-      <dt>{{ spec.name }}</dt>
+    <dl v-for="item in specs" :key="item.name">
+      <dt>{{ item.name }}</dt>
       <dd>
-        <template v-for="value in spec.values" :key="value.name">
+        <template v-for="subitem in item.values" :key="subitem.name">
           <img
-            v-if="value.picture"
-            :src="value.picture"
-            :alt="value.name"
-            @click="updateSpecSelected(spec, value)"
-            :class="{ selected: value.selected }"
+            v-if="subitem.picture"
+            :src="subitem.picture"
+            :alt="subitem.name"
+            :class="{ selected: subitem.selected }"
+            @click="setSpecSelect(item, subitem)"
           />
           <span
-            @click="updateSpecSelected(spec, value)"
-            :class="{ selected: value.selected }"
+            @click="setSpecSelect(item, subitem)"
+            :class="{ selected: subitem.selected }"
             v-else
-            >{{ value.name }}</span
+            >{{ subitem.name }}</span
           >
         </template>
       </dd>
@@ -91,7 +81,7 @@ const updateSpecSelected = (spec, value) => {
   margin-bottom: 10px;
 }
 .goods-sku dl dd > span.selected {
-  border-color: hello;
+  border-color: var(--primary-color);
 }
 .goods-sku dl dd > span.disabled {
   opacity: 0.6;
