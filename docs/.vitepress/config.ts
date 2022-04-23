@@ -158,7 +158,7 @@ function getGuideSidebar() {
         { text: '规格组件通讯-默认选中', },
         { text: '规格组件通讯-数据回传', },
 
-        { text: '商品数量选择组件', },
+        { text: '商品数量选择组件', link: '/detail/numberbox' },
         { text: '按钮组件', },
         { text: '同类推荐组件', },
         { text: '标签页组件', },

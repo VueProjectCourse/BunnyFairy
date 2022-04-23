@@ -24,6 +24,7 @@ const onSpecChanged = (data) => {
   result.value.oldPrice = data.oldPrice;
   result.value.inventory = data.inventory;
 };
+const count = ref(1);
 </script>
 <template>
   <DefaultLayout>
@@ -61,6 +62,8 @@ const onSpecChanged = (data) => {
               @on-spec-changed="onSpecChanged"
               v-if="goodsDetail"
             />
+            <NumberBox label="数量" :max="10" v-model="count" />
+            {{ count }}
           </div>
         </div>
         <!-- 商品推荐 -->
