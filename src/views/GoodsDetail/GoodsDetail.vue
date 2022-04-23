@@ -5,7 +5,7 @@ import GoodsSales from "./GoodsSales/GoodsSales.vue";
 import GoodsInfo from "./GoodsInfo/GoodsInfo.vue";
 import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
 import GoodsSku from "./GoodsSku/GoodsSku.vue";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
 import { goodsDetail, setGoodsDetail } from "./GoodsDetail";
 
@@ -17,6 +17,13 @@ onMounted(() => {
 onBeforeRouteUpdate((to) => {
   setGoodsDetail(to.params.id);
 });
+// 监听规格组件传递过来的数据
+const result = ref({});
+const onSpecChanged = (data) => {
+  result.value.price = data.price;
+  result.value.oldPrice = data.oldPrice;
+  result.value.inventory = data.inventory;
+};
 </script>
 <template>
   <DefaultLayout>
@@ -51,6 +58,7 @@ onBeforeRouteUpdate((to) => {
               :specs="goodsDetail.specs"
               :skus="goodsDetail.skus"
               skuId="1369155864430120962"
+              @on-spec-changed="onSpecChanged"
               v-if="goodsDetail"
             />
           </div>

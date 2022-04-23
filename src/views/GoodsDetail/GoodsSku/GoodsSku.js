@@ -137,6 +137,26 @@ export const useUserSelected = () => {
 
     return result;
   };
+  // 将数据回传到父组件;
+  const setSelectedToParent = (specs, skus, emit, pathMap) => {
+    const selected = setUserSelected(specs).filter((item) => item);
+    if (selected.length === specs.length) {
+      // 将规格名称以下划线进行组合, 组合后将它作为 pathMap 对象的属性, 以获取规格组合的 skuId
+      const skuId = pathMap[selected.join("_")];
+      // 通过 skuId 在规格集合中查找具体的规格对象信息
+      const target = skus.find((sku) => sku.id === skuId);
+      // 触发自定义事件将规格信息传递到父组件
+      emit("on-spec-changed", {
+        skuId,
+        price: target.price,
+        oldPrice: target.oldPrice,
+        inventory: target.inventory,
+        specsText: target.specs
+          .map((spec) => `${spec.name}: ${spec.valueName}`)
+          .join(" "),
+      });
+    }
+  };
 
-  return { setUserSelected };
+  return { setUserSelected, setSelectedToParent };
 };

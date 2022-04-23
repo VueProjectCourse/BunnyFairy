@@ -19,9 +19,10 @@ const props = defineProps({
     type: String,
   },
 });
+const emit = defineEmits(["on-spec-changed"]);
 
 // 规格选择
-const { setUserSelected } = useUserSelected();
+const { setUserSelected, setSelectedToParent } = useUserSelected();
 const { pathMap, setPathMap } = useSpecPathMap();
 const { setSpecDisabled } = useSpecDisabled(setUserSelected);
 const { setSpecSelect, setSpecDefaultSelect } = useSpecSelected();
@@ -45,6 +46,7 @@ onMounted(() => {
             @click="
               setSpecSelect(spec, value);
               setSpecDisabled(props.specs, pathMap);
+              setSelectedToParent(props.specs, props.skus, emit, pathMap);
             "
             :class="{ selected: value.selected, disabled: value.disabled }"
             alt=""
@@ -53,6 +55,7 @@ onMounted(() => {
             @click="
               setSpecSelect(spec, value);
               setSpecDisabled(props.specs, pathMap);
+              setSelectedToParent(props.specs, props.skus, emit, pathMap);
             "
             :class="{ selected: value.selected, disabled: value.disabled }"
             v-else
