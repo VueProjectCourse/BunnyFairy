@@ -54,10 +54,10 @@ const onSpecChanged = (data) => {
           <!-- 右侧 -->
           <div class="spec">
             <GoodsInfo />
+            <!--  skuId="1369155864430120962" -->
             <GoodsSku
               :specs="goodsDetail.specs"
               :skus="goodsDetail.skus"
-              skuId="1369155864430120962"
               @on-spec-changed="onSpecChanged"
               v-if="goodsDetail"
             />
