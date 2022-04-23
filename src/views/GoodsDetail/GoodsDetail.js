@@ -9,7 +9,8 @@ export const setGoodsDetail = (id) => {
     if (status === 200) {
       // 把数据赋值给bannerList
       goodsDetail.value = res.result;
-      console.log(goodsDetail.value);
+
+      // console.log(goodsDetail.value);
     }
   });
 };

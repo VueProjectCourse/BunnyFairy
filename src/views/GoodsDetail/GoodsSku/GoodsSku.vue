@@ -1,14 +1,36 @@
 <script setup>
-import { useSpecSelected } from "./GoodsSku";
+import { onMounted } from "vue";
+import {
+  useSpecSelected,
+  useSpecPathMap,
+  useSpecDisabled,
+  useUserSelected,
+} from "./GoodsSku";
 const props = defineProps({
   specs: {
     type: Array,
     default: () => [],
   },
+  skus: {
+    type: Array,
+    default: () => [],
+  },
+  skuId: {
+    type: String,
+  },
 });
 
 // 规格选择
-const { setSpecSelect } = useSpecSelected();
+const { setUserSelected } = useUserSelected();
+const { pathMap, setPathMap } = useSpecPathMap();
+const { setSpecDisabled } = useSpecDisabled(setUserSelected);
+const { setSpecSelect, setSpecDefaultSelect } = useSpecSelected();
+
+onMounted(() => {
+  setPathMap(props.skus);
+  setSpecDisabled(props.specs, pathMap);
+  setSpecDefaultSelect(props.skuId, props.skus, props.specs);
+});
 </script>
 
 <template>
@@ -20,13 +42,19 @@ const { setSpecSelect } = useSpecSelected();
           <img
             v-if="value.picture"
             :src="value.picture"
-            @click="setSpecSelect(spec, value)"
-            :class="{ selected: value.selected }"
+            @click="
+              setSpecSelect(spec, value);
+              setSpecDisabled(props.specs, pathMap);
+            "
+            :class="{ selected: value.selected, disabled: value.disabled }"
             alt=""
           />
           <span
-            @click="setSpecSelect(spec, value)"
-            :class="{ selected: value.selected }"
+            @click="
+              setSpecSelect(spec, value);
+              setSpecDisabled(props.specs, pathMap);
+            "
+            :class="{ selected: value.selected, disabled: value.disabled }"
             v-else
             >{{ value.name }}</span
           >

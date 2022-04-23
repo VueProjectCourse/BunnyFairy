@@ -50,6 +50,7 @@ onBeforeRouteUpdate((to) => {
             <GoodsSku
               :specs="goodsDetail.specs"
               :skus="goodsDetail.skus"
+              skuId="1369155864430120962"
               v-if="goodsDetail"
             />
           </div>
