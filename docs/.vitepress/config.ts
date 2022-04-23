@@ -163,8 +163,8 @@ function getGuideSidebar() {
         { text: '同类推荐组件',link: "/detail/goodsrelevant" },
         { text: '标签页组件', link: "/detail/goodstabs"},
         { text: '热榜组件', link: "/detail/goodshot"},
-        { text: '详情组件', },
-        { text: '注意事项组件', },
+        { text: '详情组件', link: "/detail/gooddetails"},
+        { text: '注意事项组件',link:"/detail/goodswarn" },
 
         { text: '评价组件-头部渲染', },
         { text: '评价组件-列表渲染', },
