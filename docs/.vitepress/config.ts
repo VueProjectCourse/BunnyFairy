@@ -161,8 +161,8 @@ function getGuideSidebar() {
         { text: '商品数量选择组件', link: '/detail/numberbox' },
         { text: '按钮组件', link: '/detail/button'},
         { text: '同类推荐组件',link: "/detail/goodsrelevant" },
-        { text: '标签页组件', link: "/detail/tabs"},
-        { text: '热榜组件', },
+        { text: '标签页组件', link: "/detail/goodstabs"},
+        { text: '热榜组件', link: "/detail/goodshot"},
         { text: '详情组件', },
         { text: '注意事项组件', },
 
