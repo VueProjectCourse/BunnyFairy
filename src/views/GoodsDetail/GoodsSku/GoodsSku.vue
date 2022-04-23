@@ -1,33 +1,34 @@
 <script setup>
 import { useSpecSelected } from "./GoodsSku";
-defineProps({
+const props = defineProps({
   specs: {
     type: Array,
     default: () => [],
   },
 });
 
+// 规格选择
 const { setSpecSelect } = useSpecSelected();
 </script>
 
 <template>
   <div class="goods-sku">
-    <dl v-for="item in specs" :key="item.name">
-      <dt>{{ item.name }}</dt>
+    <dl v-for="spec in specs" :key="spec.name">
+      <dt>{{ spec.name }}</dt>
       <dd>
-        <template v-for="subitem in item.values" :key="subitem.name">
+        <template v-for="value in spec.values" :key="value.name">
           <img
-            v-if="subitem.picture"
-            :src="subitem.picture"
-            :alt="subitem.name"
-            :class="{ selected: subitem.selected }"
-            @click="setSpecSelect(item, subitem)"
+            v-if="value.picture"
+            :src="value.picture"
+            @click="setSpecSelect(spec, value)"
+            :class="{ selected: value.selected }"
+            alt=""
           />
           <span
-            @click="setSpecSelect(item, subitem)"
-            :class="{ selected: subitem.selected }"
+            @click="setSpecSelect(spec, value)"
+            :class="{ selected: value.selected }"
             v-else
-            >{{ subitem.name }}</span
+            >{{ value.name }}</span
           >
         </template>
       </dd>
