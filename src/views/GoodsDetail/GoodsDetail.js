@@ -8,7 +8,10 @@ export const setGoodsDetail = (id) => {
   readGoodsDetailById(id).then(({ data: res, status: status }) => {
     if (status === 200) {
       // 把数据赋值给bannerList
+
       goodsDetail.value = res.result;
+
+      console.log(goodsDetail.value);
     }
   });
 };

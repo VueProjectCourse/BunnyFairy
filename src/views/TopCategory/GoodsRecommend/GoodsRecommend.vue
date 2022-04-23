@@ -1,7 +1,9 @@
 <script setup>
 import { onMounted } from "vue";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
+import GoodsItem from "../GoodsItem/GoodsItem.vue";
 import { category, readCategory } from "./useGoodsRecommend";
+
 // 获取路由信息对象
 const route = useRoute();
 onMounted(() => {

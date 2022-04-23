@@ -83,7 +83,6 @@ export const useOptionsArea = (areaData, selectedArea, emit, setVisible) => {
     let tempList = null;
     if (areaData) {
       tempList = areaData.value;
-      console.log("判断有没有tempList", tempList);
 
       // 如果用户选择了省级数据
       if (selectedArea.provinceCode) {

@@ -47,7 +47,11 @@ onBeforeRouteUpdate((to) => {
           <!-- 右侧 -->
           <div class="spec">
             <GoodsInfo />
-            <GoodsSku :specs="goodsDetail.specs" v-if="goodsDetail" />
+            <GoodsSku
+              :specs="goodsDetail.specs"
+              :skus="goodsDetail.skus"
+              v-if="goodsDetail"
+            />
           </div>
         </div>
         <!-- 商品推荐 -->
