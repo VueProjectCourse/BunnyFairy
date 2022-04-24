@@ -1,7 +1,7 @@
 <script setup>
 import { useCarouselEffect } from "./useCarousel";
-const carouselProps = defineProps({
-  carousels: {
+const props = defineProps({
+  carousel: {
     type: Array,
   },
   auto: {
@@ -15,9 +15,9 @@ const carouselProps = defineProps({
 });
 
 const { currentIndex, toggle, autoPlay, stopPlay } = useCarouselEffect(
-  carouselProps.carousels,
-  carouselProps.auto,
-  carouselProps.duration
+  props.carousel,
+  props.auto,
+  props.duration
 );
 </script>
 <template>
@@ -27,7 +27,7 @@ const { currentIndex, toggle, autoPlay, stopPlay } = useCarouselEffect(
       <li
         class="carousel-item"
         :class="{ fade: index === currentIndex }"
-        v-for="(item, index) in carousels"
+        v-for="(item, index) in carousel"
         :key="item.id"
       >
         <!-- 如果 item 是数组就表示当前遍历的同类商品数据 -->
@@ -56,7 +56,7 @@ const { currentIndex, toggle, autoPlay, stopPlay } = useCarouselEffect(
     ></a>
     <div class="carousel-indicator">
       <span
-        v-for="(item, index) in carousels"
+        v-for="(item, index) in carousel"
         :key="item.id"
         :class="{ active: currentIndex == index }"
         @click="currentIndex = index"

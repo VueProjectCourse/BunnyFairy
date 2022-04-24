@@ -36,3 +36,27 @@ export const readHotGoods = (id, type = 1, limit = 3) => {
     params: { id, limit, type },
   });
 };
+
+/**
+ * 获取商品评价头部数据
+ * @param id 商品id
+ * @return {AxiosPromise}
+ */
+export const readCommentInfo = (id) => {
+  // https://mock.boxuegu.com/mock/1175/goods/${id}/evaluate
+  // return request.get(`/goods/${id}/evaluate`);
+  return request.get(`https://mock.boxuegu.com/mock/1175/goods/${id}/evaluate`);
+};
+
+/**
+ * 获取评论列表数据
+ * @param id 商品ID
+ * @param params 其他的查询参数
+ * @return {AxiosPromise}
+ */
+export const readCommentList = (id, params) => {
+  return request.get(
+    `https://mock.boxuegu.com/mock/1175/goods/${id}/evaluate/page`,
+    params
+  );
+};

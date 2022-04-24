@@ -166,7 +166,7 @@ function getGuideSidebar() {
         { text: '详情组件', link: "/detail/gooddetails"},
         { text: '注意事项组件',link:"/detail/goodswarn" },
 
-        { text: '评价组件-头部渲染', },
+        { text: '评价组件-头部渲染', link:"/detail/goodscomment-header" },
         { text: '评价组件-列表渲染', },
         { text: '评价组件-图片预览', },
         { text: '评价组件-数据排序与筛选', },
