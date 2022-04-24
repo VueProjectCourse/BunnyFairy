@@ -1,7 +1,7 @@
 <script setup>
 import { useCarouselEffect } from "./useCarousel";
-const props = defineProps({
-  carousel: {
+const carouselProps = defineProps({
+  carousels: {
     type: Array,
   },
   auto: {
@@ -15,36 +15,50 @@ const props = defineProps({
 });
 
 const { currentIndex, toggle, autoPlay, stopPlay } = useCarouselEffect(
-  props.auto,
-  props.carousel,
-  props.duration
+  carouselProps.carousels,
+  carouselProps.auto,
+  carouselProps.duration
 );
 </script>
 <template>
   <div class="xtx-carousel" @mouseenter="stopPlay" @mouseleave="autoPlay">
     <ul class="carousel-body">
+      <!-- Carousel.vue -->
       <li
         class="carousel-item"
-        v-for="(item, index) in carousel"
-        :key="item.id"
         :class="{ fade: index === currentIndex }"
+        v-for="(item, index) in carousels"
+        :key="item.id"
       >
-        <RouterLink :to="item.hrefUrl">
-          <img :src="item.imgUrl" alt />
-        </RouterLink>
+        <!-- 如果 item 是数组就表示当前遍历的同类商品数据 -->
+        <div class="slider" v-if="Array.isArray(item)">
+          <router-link
+            v-for="goods in item"
+            :key="goods.id"
+            :to="`/goods/${goods.id}`"
+          >
+            <img :src="goods.picture" alt="" />
+            <p class="name ellipsis">{{ goods.name }}</p>
+            <p class="price">¥{{ goods.price }}</p>
+          </router-link>
+        </div>
+        <!-- 如果 item 是对象就表示当前遍历的是普通轮播图数据 -->
+        <router-link :to="item.hrefUrl" v-else>
+          <img :src="item.imgUrl" alt="" />
+        </router-link>
       </li>
     </ul>
-    <a href="javascript:" class="carousel-btn prev" @click="toggle(-1)">
-      <i class="iconfont icon-angle-left"></i>
-    </a>
-    <a href="javascript:" class="carousel-btn next" @click="toggle(1)">
-      <i class="iconfont icon-angle-right"></i>
-    </a>
+    <a href="javascript:" class="carousel-btn prev" @click="toggle(-1)"
+      ><i class="iconfont icon-angle-left"></i
+    ></a>
+    <a href="javascript:" class="carousel-btn next" @click="toggle(1)"
+      ><i class="iconfont icon-angle-right"></i
+    ></a>
     <div class="carousel-indicator">
       <span
-        v-for="(item, index) in carousel"
+        v-for="(item, index) in carousels"
         :key="item.id"
-        :class="{ active: index === currentIndex }"
+        :class="{ active: currentIndex == index }"
         @click="currentIndex = index"
       ></span>
     </div>
@@ -136,5 +150,30 @@ const { currentIndex, toggle, autoPlay, stopPlay } = useCarouselEffect(
 
 .xtx-carousel:hover .carousel-btn {
   opacity: 1;
+}
+
+.slider {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 40px;
+}
+.slider > a {
+  width: 240px;
+  text-align: center;
+}
+.slider > a img {
+  padding: 20px;
+  width: 230px !important;
+  height: 230px !important;
+}
+.slider > a .name {
+  font-size: 16px;
+  color: #666;
+  padding: 0 40px;
+}
+.slider > a .price {
+  font-size: 16px;
+  color: var(--price-color);
+  margin-top: 15px;
 }
 </style>

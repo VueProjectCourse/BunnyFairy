@@ -1,29 +1,28 @@
 <script setup>
 import DefaultLayout from "../DefaultLayout/DefaultLayout.vue";
+import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
 import GoodsImages from "./GoodsImages/GoodsImages.vue";
 import GoodsSales from "./GoodsSales/GoodsSales.vue";
 import GoodsInfo from "./GoodsInfo/GoodsInfo.vue";
-import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
 import GoodsSku from "./GoodsSku/GoodsSku.vue";
-import { onMounted, ref } from "vue";
+import GoodsTab from "./GoodsTab/GoodsTab.vue";
+import GoodsWarn from "./GoodsWarn/GoodsWarn.vue";
+import GoodsHot from "./GoodsHot/GoodsHot.vue";
+import { onMounted, ref, provide } from "vue";
+import { goodsDetail, setGoodsDetail } from "./useDetail";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
-import { goodsDetail, setGoodsDetail } from "./GoodsDetail";
 
 const route = useRoute();
 onMounted(() => {
   setGoodsDetail(route.params.id);
 });
 
+provide("goodsDetail", goodsDetail);
+
 onBeforeRouteUpdate((to) => {
   setGoodsDetail(to.params.id);
 });
-// 监听规格组件传递过来的数据
-const result = ref({});
-const onSpecChanged = (data) => {
-  result.value.price = data.price;
-  result.value.oldPrice = data.oldPrice;
-  result.value.inventory = data.inventory;
-};
+
 const count = ref(1);
 </script>
 <template>
@@ -45,40 +44,51 @@ const count = ref(1);
         <div class="goods-info">
           <!-- 左侧 -->
           <div class="media">
+            <!-- 商品图片 -->
             <GoodsImages
               :images="goodsDetail.mainPictures"
               v-if="goodsDetail"
             />
-
-            <GoodsSales :sales="goodsDetail" v-if="goodsDetail" />
+            <!-- 商品销售组件 -->
+            <GoodsSales />
           </div>
           <!-- 右侧 -->
           <div class="spec">
-            <GoodsInfo />
-            <!--  skuId="1369155864430120962" -->
-            <GoodsSku
-              :specs="goodsDetail.specs"
-              :skus="goodsDetail.skus"
-              @on-spec-changed="onSpecChanged"
-              v-if="goodsDetail"
+            <GoodsInfo :goods="goodsDetail" v-if="goodsDetail" />
+            <GoodsSku :specs="goodsDetail?.specs" />
+            <!-- :modelValue="" @update:modelValue -->
+            <NumberBox
+              label="数量"
+              :max="goodsDetail?.inventory"
+              v-model="count"
             />
-            <NumberBox label="数量" :max="10" v-model="count" />
-            {{ count }}
+
+            <Button
+              size="middle"
+              type="primary"
+              :style="{ 'margin-top': '20px' }"
+              >加入购物车</Button
+            >
           </div>
         </div>
         <!-- 商品推荐 -->
-        <GoodsRelevant></GoodsRelevant>
+        <GoodsRelevant :goodsId="goodsDetail?.id"></GoodsRelevant>
 
         <!-- 商品详情 -->
         <div class="goods-footer">
           <div class="goods-article">
             <!-- 商品+评价 -->
-            <div class="goods-tabs"></div>
+            <GoodsTab />
             <!-- 注意事项 -->
-            <div class="goods-warn"></div>
+            <!-- 注意事项 -->
+            <GoodsWarn />
           </div>
           <!-- 24热榜 -->
-          <div class="goods-aside"></div>
+          <div class="goods-aside">
+            <GoodsHot :type="1" />
+            <GoodsHot :type="2" />
+            <GoodsHot :type="3" />
+          </div>
         </div>
       </div>
     </div>

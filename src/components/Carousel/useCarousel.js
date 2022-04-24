@@ -1,42 +1,49 @@
-import { ref, onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 
-export const useCarouselEffect = (auto, carousels, duration) => {
-  // 轮播图当前索引
+// 实现轮播图功能的函数
+export const useCarouselEffect = (carousel, auto, duration) => {
+  // 当前索引 作用: 控制轮播图那张图片显示
   const currentIndex = ref(0);
-  // 用于存储定时器
+  // 定义一个定时器名称
   const timer = ref(null);
-  // 轮播图切换
+  // 控制currentIndex的值
   const toggle = (step = 1) => {
-    // 计算索引
-    const nextIndex = currentIndex.value + step;
-    // 如果索引值小于了第一张图片的索引
+    // 当点击按钮的时候 计算当前索引
+    let nextIndex = currentIndex.value + step;
+    // 当currentIndex的值< 0的时候
     if (nextIndex < 0) {
-      // 让索引值为最后一张图片的索引
-      currentIndex.value = carousels.length - 1;
-    } else if (nextIndex > carousels.length - 1) {
-      // 让索引值为第一张图片的索引
+      // console.log("当currentIndex的值< 0的时候 ")
+      // 把currentIndex的值进行复位 复位为 轮播图数据的最大索引
+      currentIndex.value = carousel.length - 1;
+    } else if (nextIndex > carousel.length - 1) {
+      // 当currentIndex的值 大于轮播图数组的最大索引
+      // console.log("currentIndex的值 大于轮播图数组的最大索引", carousel.length - 1)
+      // 把currentIndex的值复位为0
       currentIndex.value = 0;
     } else {
-      // 索引值范围正常
+      // 把currentIndex的值设置 计算后的值
       currentIndex.value = nextIndex;
+      // console.log(currentIndex.value)
     }
   };
   // 自动轮播
   const autoPlay = () => {
-    // 判断调用者是否开启了自动轮播
-    // 判断是否有轮播图数据
-    if (auto && carousels.length > 1) {
-      // 开启
+    if (auto && carousel.length >= 0) {
       timer.value = setInterval(toggle, duration);
     }
   };
-  // 停止自动轮播
+
+  // 停止轮播
   const stopPlay = () => {
     clearInterval(timer.value);
   };
-  // 组件挂载完成后试图开启自动轮播
-  onMounted(autoPlay);
-  // 组件卸载之后停止自动轮播
-  onUnmounted(stopPlay);
+
+  onMounted(() => {
+    autoPlay();
+  });
+  onUnmounted(() => {
+    stopPlay();
+  });
+  // 导出 currentIndex toggle
   return { currentIndex, toggle, autoPlay, stopPlay };
 };

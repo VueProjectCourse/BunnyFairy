@@ -1,20 +1,25 @@
 <script setup>
-import { useLocation } from "./GoodsInfo";
+import { ref } from "vue";
 defineProps({
   goods: {
     type: Object,
-    default: () => ({}),
+    default: () => {},
   },
 });
 
-const { location, setLocation } = useLocation();
+// 用于存储用户选择的城市信息的名称集合
+const location = ref("");
+// 把选中的结果传递到这里 再通过父组件传递子组件
+const setLocationChange = (data) => {
+  location.value = data.location;
+};
 </script>
 <template>
-  <p class="g-name">2件装 粉釉花瓣心意点缀 点心盘*2 碟子盘子</p>
-  <p class="g-desc">花瓣造型干净简约 多功能使用堆叠方便</p>
+  <p class="g-name">{{ goods.name }}</p>
+  <p class="g-desc">{{ goods.desc }}</p>
   <p class="g-price">
-    <span>108.00</span>
-    <span>199.00</span>
+    <span>{{ goods.price }}</span>
+    <span>{{ goods.oldPrice }}</span>
   </p>
   <div class="g-service">
     <dl>
@@ -23,7 +28,9 @@ const { location, setLocation } = useLocation();
     </dl>
     <dl>
       <dt>配送</dt>
-      <dd>至 <City :location="location" @onCityChanged="setLocation" /></dd>
+      <dd>
+        至 <City :location="location" @onCityChanged="setLocationChange" />
+      </dd>
     </dl>
     <dl>
       <dt>服务</dt>

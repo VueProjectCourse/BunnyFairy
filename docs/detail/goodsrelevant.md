@@ -98,9 +98,11 @@ export default {
  * @param id 商品id - 如果传了id参数表示获取相关商品数据, 如果没有传id参数表示获取猜你喜欢数据
  * @return {Promise}
  */
-export function getRelevantGoods(id, limit = 16) {
-  return request("/goods/relevant", "get", { id, limit });
-} 
+export const readRelevantGoods = (id, limit = 16) => {
+  return request.get("/goods/relevant", {
+    params: { id, limit },
+  });
+};
 ```
 
 * **Step.4：在同类商品组件中调用接口函数获取数据, 并将数据结构更新为轮播图组件所需数据结构**
