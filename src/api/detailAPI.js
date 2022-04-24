@@ -57,6 +57,8 @@ export const readCommentInfo = (id) => {
 export const readCommentList = (id, params) => {
   return request.get(
     `https://mock.boxuegu.com/mock/1175/goods/${id}/evaluate/page`,
-    params
+    {
+      params,
+    }
   );
 };

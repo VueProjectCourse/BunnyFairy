@@ -4,16 +4,21 @@ import {
   useCommentHeader,
   useSelectedTag,
   useCommentList,
+  useReqParams,
 } from "./GoodsComment";
 import { useRoute } from "vue-router";
-import { onMounted } from "vue";
+import { onMounted, watchEffect } from "vue";
 const { commentData, setCommentData } = useCommentHeader();
 const { selectedTag, setSelectedTag } = useSelectedTag();
 const { commentList, setCommentList } = useCommentList();
+const { reqParams, setReqParams } = useReqParams();
 const route = useRoute();
 onMounted(() => {
   setCommentData(route.params.id);
-  setCommentList(route.params.id);
+});
+
+watchEffect(() => {
+  setCommentList(route.params.id, reqParams.value);
 });
 </script>
 <template>
@@ -35,7 +40,10 @@ onMounted(() => {
           <a
             href="javascript:"
             :class="{ active: tag.title === selectedTag }"
-            @click="setSelectedTag(tag.title)"
+            @click="
+              setSelectedTag(tag.title);
+              setReqParams({ tag: tag.title });
+            "
             v-for="tag in commentData?.tags"
             :key="tag.title"
             >{{ tag.title }}（{{ tag.tagCount }}）</a
@@ -45,9 +53,24 @@ onMounted(() => {
     </div>
     <div class="sort">
       <span>排序：</span>
-      <a href="javascript:" class="active">默认</a>
-      <a href="javascript:">最新</a>
-      <a href="javascript:">最热</a>
+      <a
+        href="javascript:"
+        @click="setReqParams({ sortField: '' })"
+        :class="{ active: reqParams.sortField === '' }"
+        >默认</a
+      >
+      <a
+        href="javascript:"
+        @click="setReqParams({ sortField: 'createTime' })"
+        :class="{ active: reqParams.sortField === 'createTime' }"
+        >最新</a
+      >
+      <a
+        href="javascript:"
+        @click="setReqParams({ sortField: 'praiseCount' })"
+        :class="{ active: reqParams.sortField === 'praiseCount' }"
+        >最热</a
+      >
     </div>
     <div class="list">
       <div class="item" v-for="item in commentList?.items" :key="item.id">
