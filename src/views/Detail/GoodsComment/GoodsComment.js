@@ -80,7 +80,6 @@ export const useReqParams = () => {
           reqParams.value.tag = params.tag;
         }
       }
-      console.log(reqParams.value);
     } else {
       // 排序选项
       reqParams.value = { ...reqParams.value, ...params };
