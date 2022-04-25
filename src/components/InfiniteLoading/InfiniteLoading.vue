@@ -23,7 +23,6 @@ const target = ref(null);
 useIntersectionObserver(target, ([{ isIntersecting }]) => {
   // 如果元素进入了可视区
   if (isIntersecting) {
-    console.log(props.loading, props.finished);
     if (!props.loading && !props.finished) {
       emits("infinite");
     }

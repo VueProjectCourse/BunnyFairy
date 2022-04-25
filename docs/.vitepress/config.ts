@@ -171,9 +171,9 @@ function getGuideSidebar() {
         { text: '评价组件-图片预览', link:"/detail/goodscomment-preview"},
         { text: '评价组件-数据排序与筛选', link:"/detail/goodscomment-sort"},
 
-        { text: '分页组件-生成页码数据', },
-        { text: '分页组件-渲染分页数据', },
-        { text: '分页组件-关联评论列表', },
+        { text: '分页组件-生成页码数据', link:"/detail/pagination-data" },
+        { text: '分页组件-渲染分页数据', link:"/detail/pagination-render"},
+        { text: '分页组件-关联评论列表', link:"/detail/pagination-concat"},
       ]
     },
     {

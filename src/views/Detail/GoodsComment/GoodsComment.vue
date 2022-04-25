@@ -105,6 +105,12 @@ watchEffect(() => {
         </div>
       </div>
     </div>
+    <Pagination
+      v-if="commentList?.pages > 1"
+      v-model:page="reqParams.page"
+      :pageSize="reqParams.pageSize"
+      :count="commentList?.counts"
+    />
   </div>
 </template>
 
