@@ -26,6 +26,10 @@ const routes = [
     name: "detail",
     component: () => import("@/views/Detail/Detail.vue"),
   },
+  {
+    path: "/login",
+    component: () => import("@/views/Login/Login.vue"),
+  },
 ];
 
 const router = createRouter({
