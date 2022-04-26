@@ -179,12 +179,12 @@ function getGuideSidebar() {
     {
       text: "登录",
       children: [
-        { text: '登录-配置路由规则', },
-        { text: '登录-基础布局', },
-        { text: '登录-表单组件', },
-        { text: '登录-表单验证', },
-        { text: '消息提示组件', },
-        { text: '登录-账号密码登录', },
+        { text: '登录-配置路由规则', link:"/login/login-router" },
+        { text: '登录-基础布局', link:"/login/login-layout"},
+        { text: '登录-表单组件', link: "/login/login-form"},
+        { text: '登录-表单验证', link: "/login/login-validate"},
+        { text: '消息提示组件',  link: "/login/message"},
+        { text: '登录-账号密码登录', link: "/login/account-login"},
         { text: '登录-手机号登录-验证码', },
         { text: '登录-手机号登录-登录', },
         { text: '退出登录', },

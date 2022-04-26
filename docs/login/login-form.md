@@ -1,39 +1,42 @@
-<script setup>
-import { useToggleAccount, useAccountValidate } from "./LoginForm";
-const { accountName, setAccountName } = useToggleAccount();
-const { accountField, accountError, accountHandleSubmit } =
-  useAccountValidate();
+# 登录-表单组件
 
-// 只有表单验证通过以后, 指定的回调函数才会执行, 回调函数的参数是用户在表单中输入的内容
-const onAccountSubmit = accountHandleSubmit((value) => {
-  console.log(value);
-});
-</script>
+::: tip 目标
+这一小节，我们的目标是 实现登录表单基础布局, 实现账号登录和短信登录的切换效果
+
+示例如下:
+![login-form](./images/138.gif)
+:::
+
+::: warning 步骤
+
+1. 创建登录表单组件, 编写布局代码
+2. 在登录表单组件中，编写样式代码
+3. 在登录页面组件中调用登录表单组件
+4. 实现账户登录表单和短信登录表单的切换效果
+:::
+
+::: info 体验
+
+* **Step.1：创建登录表单组件, 编写布局代码**
+
+```html
 <template>
   <div class="account-box">
     <div class="toggle">
-      <button @click="setAccountName('account')">
-        <i class="iconfont icon-user"></i> 使用账号登录
-      </button>
-      <button @click="setAccountName('msg')">
-        <i class="iconfont icon-msg"></i> 使用短信登录
-      </button>
+      <button><i class="iconfont icon-user"></i> 使用账号登录</button>
+      <button><i class="iconfont icon-msg"></i> 使用短信登录</button>
     </div>
     <div class="form">
       <!-- 账户登录 -->
-      <template v-if="accountName === 'account'">
-        <form @submit="onAccountSubmit">
+      <template>
+        <form>
           <div class="form-item">
             <div class="input">
               <i class="iconfont icon-user"></i>
-              <input
-                type="text"
-                placeholder="请输入用户名"
-                v-model="accountField"
-              />
+              <input type="text" placeholder="请输入用户名" />
             </div>
-            <div class="error" v-if="accountError">
-              <i class="iconfont icon-warning"></i>{{ accountError }}
+            <div class="error">
+              <i class="iconfont icon-warning"></i>
             </div>
           </div>
           <div class="form-item">
@@ -61,7 +64,7 @@ const onAccountSubmit = accountHandleSubmit((value) => {
         </form>
       </template>
       <!-- 短信登录 -->
-      <template v-if="accountName === 'msg'">
+      <template>
         <form>
           <div class="form-item">
             <div class="input">
@@ -110,8 +113,11 @@ const onAccountSubmit = accountHandleSubmit((value) => {
     </div>
   </div>
 </template>
+```
 
-<style scoped>
+* **Step.2：在登录表单组件中，编写样式代码**
+
+```css
 @import "@/assets/styles/variable.css";
 .account-box .toggle {
   padding: 15px 40px;
@@ -214,4 +220,45 @@ const onAccountSubmit = accountHandleSubmit((value) => {
   color: #999;
   margin-left: 10px;
 }
-</style>
+```
+
+* **Step.3：在登录页面组件中调用登录表单组件**
+
+```html
+<!-- 表单 -->
+<LoginForm v-if="activeName === 'account'"></LoginForm>
+```
+
+* **Step.4：实现账户登录表单和短信登录表单的切换效果**
+
+```js
+// 是否为短信登录 默认为 false 因为页面中默认显示的是账户登录
+    const isMsgLogin = ref(false)
+```
+
+```html
+<!-- 如果当前是短信登录, 显示账号登录按钮 -->
+<button v-if="isMsgLogin" @click="isMsgLogin = false">
+    <i class="iconfont icon-user"></i> 使用账号登录
+</button>
+<!-- 如果当前不是短信登录, 显示短信登录按钮 -->
+<button v-if="!isMsgLogin" @click="isMsgLogin = true">
+    <i class="iconfont icon-msg"></i> 使用短信登录
+</button>
+```
+
+```html
+<!-- 如果不是短信登录 显示账户登录 -->
+<template v-if="!isMsgLogin"></template>
+<!-- 如果是短信登录 显示短信登录 -->
+<template v-if="isMsgLogin"></template>
+```
+
+:::
+
+::: danger 总结
+
+* 【重点】
+* 【难点】
+* 【注意点】
+:::
