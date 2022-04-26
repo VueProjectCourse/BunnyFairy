@@ -1,11 +1,10 @@
 <script setup>
-import LoginHeader from './LoginHeader/LoginHeader.vue';
-import LoginFooter from './LoginFooter/LoginFooter.vue';
-import { useToggleLogin } from "./Login"
+import LoginHeader from "./LoginHeader/LoginHeader.vue";
+import LoginFooter from "./LoginFooter/LoginFooter.vue";
+import LoginForm from "./LoginForm/LoginForm.vue";
+import { useToggleMethod } from "./Login";
 
-const { activeName, setActiveName } = useToggleLogin();
-
-
+const { activeName, setActiveName } = useToggleMethod();
 </script>
 
 <template>
@@ -14,20 +13,25 @@ const { activeName, setActiveName } = useToggleLogin();
     <section class="login-section">
       <div class="wrapper">
         <nav>
-          <a @click="setActiveName('account')" 
-             :class="{ active: activeName === 'account' }">
-             账户登录
+          <a
+            @click="setActiveName('account')"
+            :class="{ active: activeName === 'account' }"
+          >
+            账户登录
           </a>
-          <a @click="setActiveName('qrcode')" 
-             :class="{ active: activeName === 'qrcode' }">
-             扫码登录
+          <a
+            @click="setActiveName('qrcode')"
+            :class="{ active: activeName === 'qrcode' }"
+          >
+            扫码登录
           </a>
-
         </nav>
         <!-- 即将放置账号登录表单组件, 此处使用div先占个位 -->
-        <div v-if="activeName ==='account'" class="account-box">此处即将放置账号登录表单组件</div>
+        <!-- <div v-if="activeName === 'account'" class="account-box"> -->
+        <LoginForm v-if="activeName === 'account'" />
+        <!-- </div> -->
         <!-- 二维码登录 -->
-        <div v-if="activeName ==='qrcode'" class="qrcode-box">
+        <div v-if="activeName === 'qrcode'" class="qrcode-box">
           <img src="@/assets/images/qrcode.jpg" alt="" />
           <p>打开 <a href="javascript:">小兔鲜App</a> 扫码登录</p>
         </div>
@@ -35,7 +39,6 @@ const { activeName, setActiveName } = useToggleLogin();
     </section>
     <LoginFooter />
   </div>
-
 </template>
 
 <style>

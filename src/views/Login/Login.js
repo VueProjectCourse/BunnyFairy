@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-export const useToggleLogin = () => {
+export const useToggleMethod = () => {
   const activeName = ref("account");
   const setActiveName = (name) => {
     activeName.value = name;
