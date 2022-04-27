@@ -3,6 +3,7 @@ import LoginHeader from "./LoginHeader/LoginHeader.vue";
 import LoginFooter from "./LoginFooter/LoginFooter.vue";
 import LoginForm from "./LoginForm/LoginForm.vue";
 import { useToggleMethod } from "./Login";
+
 const { activeName, setActiveName } = useToggleMethod();
 </script>
 

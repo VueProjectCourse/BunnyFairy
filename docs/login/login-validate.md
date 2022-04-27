@@ -54,21 +54,20 @@ export function isAgree(value) {
 * **Step.3：创建账号登录表单验证对象**
 
 ```js
-import { useField, useForm } from "vee-validate";
-import { account, password, isAgree } from "@/utils/vee-validate-schema";
-
 // 账号登录表单验证
-function useAccountFormValidate() {
-  // 创建表单验证对象
-  const { handleSubmit: accountFormHandleSubmit } = useForm({
-    // 指定表单中包含的验证规则, 只有以下规则都验证通过了表单才可以提交
+// 用于验证账号密码登录表单
+export const useAccountValidate = () => {
+  // 创建账号登录表单验证表单
+  const { handleSubmit: handleAccountSubmit } = useForm({
+    // 指定表单中的验证规则
     validationSchema: {
+      // 用户名的验证规则
       account,
       password,
       isAgree,
     },
   });
-  // 验证用户名
+  // 对用户名进行验证
   const { value: accountField, errorMessage: accountError } =
     useField("account");
   // 验证密码
@@ -77,7 +76,6 @@ function useAccountFormValidate() {
   // 验证是否同意协议
   const { value: accountIsAgreeField, errorMessage: accountIsAgreeError } =
     useField("isAgree");
-
   return {
     accountField,
     accountError,
@@ -85,22 +83,30 @@ function useAccountFormValidate() {
     passwordError,
     accountIsAgreeField,
     accountIsAgreeError,
-    accountFormHandleSubmit,
+    handleAccountSubmit,
   };
-}
+};
 ```
 
 * **Step.4：实现账号表单验证, 处理表单提交**
 
 ```js
-  // accountFormHandleSubmit: 处理账号登录表单提交
-  // accountFormValid: 包含其他验证字段
-  const { accountFormHandleSubmit, ...accountField, accountError } = useAccountFormValidate();
-  // 处理账号登录表单提交, 当表单发生提交行为时, 方法内部会做整体表单验证
-  // 只有表单验证通过以后, 指定的回调函数才会执行, 回调函数的参数是用户在表单中输入的内容
-  const onAccountSubmit = accountHandleSubmit((value) => {
-    console.log(value);
-  });
+ import { useToggleAccount, useAccountValidate } from "./LoginForm";
+const { accountName, setAccountName } = useToggleAccount();
+
+const {
+  handleAccountSubmit,
+  accountField,
+  accountError,
+  passwordField,
+  passwordError,
+  accountIsAgreeField,
+  accountIsAgreeError,
+} = useAccountValidate();
+
+const onAccountSubmit = handleAccountSubmit((value) => {
+  console.log(value);
+});
 ```
 
 ```html

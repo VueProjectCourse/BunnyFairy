@@ -1,12 +1,29 @@
 <script setup>
 import { useToggleAccount, useAccountValidate } from "./LoginForm";
+import { loginByAccountAndPassword } from "../../../api/loginAPI";
+import Message from "../../../components/Message/Message";
 const { accountName, setAccountName } = useToggleAccount();
-const { accountField, accountError, accountHandleSubmit } =
-  useAccountValidate();
 
-// 只有表单验证通过以后, 指定的回调函数才会执行, 回调函数的参数是用户在表单中输入的内容
-const onAccountSubmit = accountHandleSubmit((value) => {
-  console.log(value);
+const {
+  handleAccountSubmit,
+  accountField,
+  accountError,
+  passwordField,
+  passwordError,
+  accountIsAgreeField,
+  accountIsAgreeError,
+} = useAccountValidate();
+
+const onAccountSubmit = handleAccountSubmit(({ account, password }) => {
+  loginByAccountAndPassword({ account, password })
+    // 登录成功
+    .then((res) => {
+      console.log(res);
+    })
+    //  登录失败
+    .catch((error) => {
+      Message({ type: "error", text: error.response.data.message });
+    });
 });
 </script>
 <template>
@@ -39,22 +56,26 @@ const onAccountSubmit = accountHandleSubmit((value) => {
           <div class="form-item">
             <div class="input">
               <i class="iconfont icon-lock"></i>
-              <input type="password" placeholder="请输入密码" />
+              <input
+                type="password"
+                placeholder="请输入密码"
+                v-model="passwordField"
+              />
             </div>
-            <div class="error">
-              <i class="iconfont icon-warning"></i>
+            <div class="error" v-if="passwordError">
+              <i class="iconfont icon-warning"></i>{{ passwordError }}
             </div>
           </div>
           <div class="form-item">
             <div class="agree">
-              <Checkbox />
+              <Checkbox v-model="accountIsAgreeField" />
               <span>我已同意</span>
               <a href="javascript:">《隐私条款》</a>
               <span>和</span>
               <a href="javascript:">《服务条款》</a>
             </div>
-            <div class="error">
-              <i class="iconfont icon-warning"></i>
+            <div class="error" v-if="accountIsAgreeError">
+              <i class="iconfont icon-warning"></i>{{ accountIsAgreeError }}
             </div>
           </div>
           <button type="submit" class="btn">登录</button>
