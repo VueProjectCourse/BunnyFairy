@@ -22,25 +22,17 @@
 import { ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import axios from "axios";
-
-export default {
-  name: "XtxCity",
-  setup() {
-    // 用于存储城市数据
-    const cityData = ref(null);
+// 用于存储城市数据
+const cityData = ref(null);
     // 显示下拉菜单
-    const show = () => {
+const show = () => {
       // 获取城市数据
-      getCityData().then((data) => {
-        // 存储城市数据
-        cityData.value = data;
-      });
+  getCityData().then((data) => { 
+    /* 存储城市数据*/ cityData.value = data;});
       // 显示下拉菜单
       visible.value = true;
     };
-    return { cityData };
-  },
-};
+  }
 
 // 在 window 对象中缓存城市数据
 window.cityData = null;
@@ -96,6 +88,7 @@ async function getCityData() {
 :::
 
 ::: danger 总结
+
 * 【重点】
 * 【难点】
 * 【注意点】

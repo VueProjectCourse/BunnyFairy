@@ -103,44 +103,57 @@ defineProps({
 * **Step.5：在热销组件中获取并渲染热销商品数据**
 
 ```js
-function useHotGoods(type) {
-  // 获取路由信息对象
-  const route = useRoute();
-  // 用于存储热销商品数据
-  const hotGoods = ref(null);
-  // 榜单名称
-  const names = { 1: "24小时热销榜", 2: "周热销榜", 3: "总热销榜" };
-  // 用于获取热销商品数据
-  const getHotGoods = (id) => {
-    // 发送请求获取热销商品数据
-    getHotGoodsApi({ id, type }).then((data) => {
-      // 存储热销商品数据
-      hotGoods.value = data.result;
+import { ref } from "vue";
+import { readHotGoods } from "@/api/detailAPI";
+
+export const useHotGoods = () => {
+  // 声明bannerList数组 用来存储请求来的数据
+  const hotList = ref(null);
+
+  const setHostList = (id, type) => {
+    // 调用接口请求数据
+    readHotGoods(id, type).then(({ data: res, status: status }) => {
+      if (status === 200) {
+        // 把数据赋值给bannerList
+        hotList.value = res.result;
+      }
     });
   };
-  // 初始调用获取热销商品数据
-  getHotGoods(route.params.id);
-  // 当路由参数更新时重新获取热榜数据
-  onBeforeRouteUpdate((to) => getHotGoods(to.params.id));
-  // 返回热销商品数据
-  return { hotGoods, typeName: names[type] };
-}
-```
 
-```js
- const { hotGoods, typeName } = useHotGoods(props.type);
-    return { hotGoods, typeName };
+  return { hotList, setHostList };
+};
 ```
 
 ```html
+<script setup>
+import { onMounted } from "vue";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
+import GoodsItem from "../../TopCategory/GoodsItem/GoodsItem.vue";
+import { useHotGoods } from "./GoodsHot";
+const route = useRoute();
+const props = defineProps({
+  type: {
+    type: Number,
+    default: 1,
+  },
+});
+
+const { hotList, setHostList } = useHotGoods();
+
+onMounted(() => {
+  setHostList(route.params.id, props.type);
+});
+
+onBeforeRouteUpdate((to) => {
+  setHostList(to.params.id, props.type);
+});
+</script>
 <template>
-  <div class="goods-hot" v-if="hotGoods">
-    <h3>{{ typeName }}</h3>
-    <GoodsItem
-      v-for="goods in hotGoods"
-      :key="goods.id"
-      :goods="goods"
-    ></GoodsItem>
+  <div class="goods-hot">
+    <h3 v-if="type == 1">24小时热销榜</h3>
+    <h3 v-else-if="type == 2">周热销榜</h3>
+    <h3 v-else>总热销榜</h3>
+    <GoodsItem v-for="item in hotList" :key="item.id" :goods="item"></GoodsItem>
   </div>
 </template>
 ```

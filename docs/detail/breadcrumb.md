@@ -19,37 +19,55 @@
 * **Step.1：创建用于获取商品详细信息的API方法**
 
 ```js
-import request from "@/utils/request";
-
 /**
  * 根据商品ID获取商品详情信息
  * @param id 商品ID
- * @return {AxiosPromise}
+ * @return {Promise}
  */
-export function readGoodsDetailById(id) {
+export const readGoodsDetailById = (id) => {
   return request.get("/goods", {
     params: {
       id,
     },
   });
-}
+};
 ```
 
 * **Step.2：在商品详情页面组件中调用 `getGoodsDetailById` 方法获取商品详情信息**
 
 ```js
-const getGoodsDetail = (id) => {
-    // 发送请求获取商品详情信息
-    getGoodsDetailById(id).then((data) => {
-      result.value = data.result;
-    });
-  };
-  // 初始获取商品详情信息
-  getGoodsDetail(route.params.id);
-  // 当路由发生更新时, 重新获取商品详情信息
-  onBeforeRouteUpdate((to) => {
-    getGoodsDetail(to.params.id);
+// useDetail.js
+// 商品详情
+import { ref } from "vue";
+import { readGoodsDetailById } from "../../api/detailAPI";
+// 商品详情状态
+export const goodsDetail = ref(null);
+// 声明设置商品详情状态方法
+export const setGoodsDetail = (id) => {
+  readGoodsDetailById(id).then(({ data: res, status: status }) => {
+    if (status === 200) {
+      // 把数据赋值给bannerList
+      goodsDetail.value = res.result;
+    }
   });
+};
+
+```
+
+```js
+// Detail.vue
+import { goodsDetail, setGoodsDetail } from "./useDetail";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
+
+const route = useRoute();
+onMounted(() => {
+  setGoodsDetail(route.params.id);
+});
+
+
+onBeforeRouteUpdate((to) => {
+  setGoodsDetail(to.params.id);
+});
 ```
 
 * **Step.3：根据商品详情信息渲染面包屑组件**

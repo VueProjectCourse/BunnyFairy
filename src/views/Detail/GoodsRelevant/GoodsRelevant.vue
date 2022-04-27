@@ -1,6 +1,6 @@
 <script setup>
 import { useGoodsRelevant } from "./GoodsRelevant";
-import Carousel from "../../../components/Carousel/Carousel.vue";
+
 const props = defineProps({
   goodsId: {
     type: String,

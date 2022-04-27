@@ -81,13 +81,11 @@
 
 ```js
 // GoodsRelevant.vue
-export default {
-  props: {
-    goodsId: {
-      type: String,
-    },
-  }
-};
+const props = defineProps({
+  goodsId: {
+    type: String,
+  },
+});
 ```
 
 * **Step.3：创建用于获取同类商品的API接口函数**
@@ -112,47 +110,63 @@ export const readRelevantGoods = (id, limit = 16) => {
 现在我们将四个商品信息看做一张轮播图信息, 所以数据结构应该是 `[[{},{},{},{}], [{},{},{},{}]]`
 
 ```js
-import { getRelevantGoods } from "@/api/goods";
-import { ref } from 'vue'
+import { ref } from "vue";
+import { readRelevantGoods } from "@/api/detailAPI";
 
-function useRelativeGoods (goodsId) {
-  // 轮播图需要的数据结构 [[{}],[{}],[{}]]
-  const carousels = ref([]);
-  // 发送请求获取数据
-  getRelevantGoods(goodsId).then((data) => {
-    // 每页显示4条数据
-    const size = 4
-    // 一共有多少页数据
-    // 只有计算出了一共有多少页, 才能知道循环多少次才能将数据拆分完成
-    const total = Math.ceil(data.result.length / size)
-    carousels.value = []
-    // 组织数据结构
-    for (let i = 0; i < total; i++) {
-      // 第一页: 0-3 第二页: 4-7 第三页: 8-11
-      // 从哪开始取: i*size
-      // 取到哪 i*size + size, 由于 slice 方法在截取时不包含第二个参数位置的元素, 所以是 + size, 不是 + size - 1
-      carousels.value.push(data.result.slice(i * size, i * size + size));
-    }
-  })
-  return carousels
-}
+export const useGoodsRelevant = (id) => {
+  // 声明bannerList数组 用来存储请求来的数据
+  const relevant = ref([]);
+
+  const setReleVant = () => {
+    // 调用接口请求数据
+    readRelevantGoods(id).then(({ data: res, status: status }) => {
+      if (status === 200) {
+        // relevant.value = res.result;
+        const size = 4;
+        // 总共有多少页
+        const totalPage = Math.ceil(res.result.length / 4);
+
+        for (var i = 0; i < totalPage; i++) {
+          relevant.value.push(res.result.slice(i * size, i * size + size));
+        }
+
+        // console.log(relevant.value);
+      }
+    });
+  };
+
+  return { relevant, setReleVant };
+};
 
 ```
 
 ```js
-export default {
-  setup (props) {
-    // 获取轮播图所需数据数据
-    const carousels = useRelativeGoods(props.goodsId)
-    return { carousels }
-  }
-} 
+import { useGoodsRelevant } from "./GoodsRelevant";
+
+const props = defineProps({
+  goodsId: {
+    type: String,
+  },
+});
+
+const { relevant, setReleVant } = useGoodsRelevant(props.goodsId);
+
+setReleVant();
 ```
 
 * **Step.5：在同类商品组件中调用轮播图组件并传入轮播图所需数据**
 
 ```html
-<XtxCarousel :carousels="carousels" />
+<template>
+  <div class="goods-relevant">
+    <div class="header">
+      <i class="icon"></i>
+      <span class="title">{{ goodsId ? "同类商品" : "猜你喜欢" }}</span>
+    </div>
+    <!-- 此处使用改造后的carousel.vue -->
+    <Carousel v-if="relevant" :carousel="relevant" />
+  </div>
+</template>
 ```
 
 * **Step.6：在轮播图组件中添加同类商品数据所需结构并渲染同类商品数据**
