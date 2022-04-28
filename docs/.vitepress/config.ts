@@ -191,11 +191,11 @@ function getGuideSidebar() {
 
         { text: 'QQ登录-流程分析', link: "/login/process"},
         { text: 'QQ登录-准备工作', link: "/login/prepare"},
-        { text: 'QQ登录-创建登录按钮', },
+        { text: 'QQ登录-创建登录按钮',link: "/login/login-button" },
 
-        { text: 'QQ登录-准备回调路由组件', },
-        { text: 'QQ登录-获取openid', },
-        { text: 'QQ登录-检索已绑定账号', },
+        { text: 'QQ登录-准备回调路由组件', link: "/login/login-callback"},
+        { text: 'QQ登录-获取openid', link: "/login/login-openid"},
+        { text: 'QQ登录-检索已绑定账号', link: "/login/login-bind"},
         { text: 'QQ登录-绑定已有账号', },
         { text: 'QQ登录-绑定新注册账号', },
       ]

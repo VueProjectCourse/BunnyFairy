@@ -177,7 +177,6 @@ export const useMobileLogin = () => {
   };
   // 登陆失败时的回调
   const failFn = (error) => {
-    // console.log(error.response.data.message);
     Message({ type: "error", text: error.response.data.message });
   };
   const setMobileLogin = ({ mobile, code }) => {

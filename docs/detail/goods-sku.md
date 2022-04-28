@@ -103,7 +103,7 @@
   margin-bottom: 10px;
 }
 .goods-sku dl dd > span.selected {
-  border-color: hello;
+  border-color: var(--primary-color);
 }
 .goods-sku dl dd > span.disabled {
   opacity: 0.6;

@@ -168,9 +168,9 @@ watchEffect(() => {
   line-height: 40px;
 }
 .goods-comment .head .tags .dd > a:hover {
-  border-color: hello;
+  border-color: var(--primary-color);
   background: #e6faf6;
-  color: hello;
+  color: var(--primary-color);
 }
 .goods-comment .head .tags .dd > a.active {
   border-color: var(--primary-color);
