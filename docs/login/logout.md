@@ -21,21 +21,21 @@
 * **Step.2：执行退出操作, 清除用户信息, 跳转到登录页**
 
 ```js
-export default {
-  name: 'AppTopNav',
-  setup () {
-    const store = useStore()
-    const router = useRouter()
-    // 退出登录
-    // 1. 清除 store 中的 user/profile (localStorage 中的也会跟着清除)
-    // 2. 跳转到登录页
-    const logout = () => {
-      store.commit('user/setUser', {})
-      router.push('/login')
-    }
-    return { logout }
-  }
-}
+// 导入 useUserStore
+import { useUserStore } from "@/stores/userStore";
+import { useRouter } from "vue-router";
+// 导入 storeToRefs
+import { storeToRefs } from "pinia";
+// 解构出 profile
+const { profile } = storeToRefs(useUserStore());
+const store = useUserStore();
+const router = useRouter();
+const handlerLogout = () => {
+  // 1.重置store中的数据
+  store.$reset();
+  // 2.跳转路由
+  router.push("/login");
+};
 ```
 
 :::
