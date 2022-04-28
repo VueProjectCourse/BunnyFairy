@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore({
+export const useUserStore = defineStore({
+  // store的唯一id
   id: "userStore",
   state: () => ({
     // 用户信息
@@ -19,9 +20,7 @@ export const useCounterStore = defineStore({
       token: "",
     },
   }),
-  getters: {},
-  actions: {},
-  // 开启数据缓存
+  // 开启数据缓存 默认存在sessionStorage
   persist: {
     enabled: true,
   },

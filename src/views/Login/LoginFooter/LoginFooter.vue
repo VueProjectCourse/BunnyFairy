@@ -1,6 +1,3 @@
-<script setup>
-defineProps([""]);
-</script>
 <template>
   <footer class="login-footer">
     <div class="container">
@@ -20,6 +17,10 @@ defineProps([""]);
 
 <style scoped>
 .login-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   height: 152px;
   padding: 30px 0 50px;
   background: #fff;

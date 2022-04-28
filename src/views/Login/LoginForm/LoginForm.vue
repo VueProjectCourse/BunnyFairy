@@ -1,44 +1,66 @@
 <script setup>
-import { useToggleAccount, useAccountValidate } from "./LoginForm";
-import { loginByAccountAndPassword } from "../../../api/loginAPI";
-import Message from "../../../components/Message/Message";
-const { accountName, setAccountName } = useToggleAccount();
+import useCountDown from "@/utils/useCountDown";
+import {
+  useLoginWay,
+  useAccountValidate,
+  useAccountLogin,
+  useMobileValidate,
+  handlerMsgCode,
+} from "./LoginForm";
 
+const { loginWay, setLoginWay } = useLoginWay();
+//#region 账号登陆功能
 const {
-  handleAccountSubmit,
   accountField,
   accountError,
   passwordField,
   passwordError,
   accountIsAgreeField,
   accountIsAgreeError,
+  handleAccountSubmit,
 } = useAccountValidate();
+const { setAccountLogin } = useAccountLogin();
 
-const onAccountSubmit = handleAccountSubmit(({ account, password }) => {
-  loginByAccountAndPassword({ account, password })
-    // 登录成功
-    .then((res) => {
-      console.log(res);
-    })
-    //  登录失败
-    .catch((error) => {
-      Message({ type: "error", text: error.response.data.message });
-    });
+// 只有所有表单规则都验证通过了 在点击提交的时候 才可以触发
+const onAccountSubmit = handleAccountSubmit((values) => {
+  // values 就是登陆所需的参数
+  setAccountLogin(values);
 });
+//#endregion
+
+//#region 手机登陆
+const {
+  mobileField,
+  mobileError,
+  codeField,
+  codeError,
+  mobileIsAgreeField,
+  mobileIsAgreeError,
+  handleMobileSubmit,
+  getMobileIsValidate,
+} = useMobileValidate();
+
+const onMobileSubmit = handleMobileSubmit((values) => {
+  console.log(values);
+});
+const { count, start, isActive } = useCountDown();
+
+//#endregion
 </script>
 <template>
   <div class="account-box">
     <div class="toggle">
-      <button @click="setAccountName('account')">
-        <i class="iconfont icon-user"></i> 使用账号登录
+      <button v-show="loginWay === 'msg'" @click="setLoginWay('account')">
+        <i class="iconfont icon-user"></i>
+        使用账号登录
       </button>
-      <button @click="setAccountName('msg')">
+      <button v-show="loginWay === 'account'" @click="setLoginWay('msg')">
         <i class="iconfont icon-msg"></i> 使用短信登录
       </button>
     </div>
     <div class="form">
       <!-- 账户登录 -->
-      <template v-if="accountName === 'account'">
+      <template v-if="loginWay === 'account'">
         <form @submit="onAccountSubmit">
           <div class="form-item">
             <div class="input">
@@ -82,37 +104,50 @@ const onAccountSubmit = handleAccountSubmit(({ account, password }) => {
         </form>
       </template>
       <!-- 短信登录 -->
-      <template v-if="accountName === 'msg'">
-        <form>
+      <template v-if="loginWay === 'msg'">
+        <form @submit="onMobileSubmit">
           <div class="form-item">
             <div class="input">
               <i class="iconfont icon-user"></i>
-              <input type="text" placeholder="请输入手机号" />
+              <input
+                type="text"
+                placeholder="请输入手机号"
+                v-model="mobileField"
+              />
             </div>
-            <div class="error">
-              <i class="iconfont icon-warning"></i>
+            <div class="error" v-if="mobileError">
+              <i class="iconfont icon-warning"></i>{{ mobileError }}
             </div>
           </div>
           <div class="form-item">
             <div class="input">
               <i class="iconfont icon-code"></i>
-              <input type="password" placeholder="请输入验证码" />
-              <span class="code">发送验证码</span>
+              <input
+                type="password"
+                placeholder="请输入验证码"
+                v-model="codeField"
+              />
+              <span
+                class="code"
+                :class="{ disabled: isActive }"
+                @click="handlerMsgCode(getMobileIsValidate, start, isActive)"
+                >{{ isActive ? `剩余${count}秒` : "发送验证码" }}</span
+              >
             </div>
-            <div class="error">
-              <i class="iconfont icon-warning"></i>
+            <div class="error" v-if="codeError">
+              <i class="iconfont icon-warning"></i>{{ codeError }}
             </div>
           </div>
           <div class="form-item">
             <div class="agree">
-              <Checkbox />
+              <Checkbox v-model="mobileIsAgreeField" />
               <span>我已同意</span>
               <a href="javascript:">《隐私条款》</a>
               <span>和</span>
               <a href="javascript:">《服务条款》</a>
             </div>
-            <div class="error">
-              <i class="iconfont icon-warning"></i>
+            <div class="error" v-if="mobileIsAgreeError">
+              <i class="iconfont icon-warning"></i>{{ mobileIsAgreeError }}
             </div>
           </div>
           <button type="submit" class="btn">登录</button>
@@ -203,7 +238,8 @@ const onAccountSubmit = handleAccountSubmit(({ account, password }) => {
   position: absolute;
   font-size: 12px;
   line-height: 28px;
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
+  color: red;
 }
 .account-box .form-item > .error i {
   font-size: 14px;

@@ -2,11 +2,10 @@
 import LoginHeader from "./LoginHeader/LoginHeader.vue";
 import LoginFooter from "./LoginFooter/LoginFooter.vue";
 import LoginForm from "./LoginForm/LoginForm.vue";
-import { useToggleMethod } from "./Login";
 
-const { activeName, setActiveName } = useToggleMethod();
+import { useTogglePattern } from "./Login";
+const { loginPattern, setLoginPattern } = useTogglePattern();
 </script>
-
 <template>
   <div class="login">
     <LoginHeader>欢迎登录</LoginHeader>
@@ -14,24 +13,22 @@ const { activeName, setActiveName } = useToggleMethod();
       <div class="wrapper">
         <nav>
           <a
-            @click="setActiveName('account')"
-            :class="{ active: activeName === 'account' }"
+            href="javascript:"
+            @click="setLoginPattern('account')"
+            :class="{ active: loginPattern == 'account' }"
+            >账户登录</a
           >
-            账户登录
-          </a>
           <a
-            @click="setActiveName('qrcode')"
-            :class="{ active: activeName === 'qrcode' }"
+            href="javascript:"
+            @click="setLoginPattern('qrcode')"
+            :class="{ active: loginPattern == 'qrcode' }"
+            >扫码登录</a
           >
-            扫码登录
-          </a>
         </nav>
         <!-- 即将放置账号登录表单组件, 此处使用div先占个位 -->
-        <!-- <div v-if="activeName === 'account'" class="account-box"> -->
-        <LoginForm v-if="activeName === 'account'" />
-        <!-- </div> -->
+        <LoginForm v-show="loginPattern === 'account'" />
         <!-- 二维码登录 -->
-        <div v-if="activeName === 'qrcode'" class="qrcode-box">
+        <div class="qrcode-box" v-show="loginPattern === 'qrcode'">
           <img src="@/assets/images/qrcode.jpg" alt="" />
           <p>打开 <a href="javascript:">小兔鲜App</a> 扫码登录</p>
         </div>
@@ -41,21 +38,19 @@ const { activeName, setActiveName } = useToggleMethod();
   </div>
 </template>
 
-<style>
+<style scoped>
 @import "@/assets/styles/variable.css";
 
 .login {
+  position: relative;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding-bottom: 152px;
 }
 
 .login-section {
-  flex: 1;
+  position: relative;
   background: url(@/assets/images/login-bg.png) no-repeat center / cover;
   height: 488px;
-  position: relative;
 }
 
 .login-section .wrapper {

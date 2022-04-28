@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 // 导入Home组件
-import Home from "../views/Home/Home.vue";
+import Home from "@/views/Home/Home.vue";
+import Login from "@/views/Login/Login.vue";
+// 路由规则
 
 const routes = [
-  // 路由规则
-
   // 首页路由
   {
     path: "/",
@@ -28,7 +28,9 @@ const routes = [
   },
   {
     path: "/login",
-    component: () => import("@/views/Login/Login.vue"),
+    name: "login",
+    // component: () => import("@/views/Login/Login.vue"),
+    component: Login,
   },
 ];
 

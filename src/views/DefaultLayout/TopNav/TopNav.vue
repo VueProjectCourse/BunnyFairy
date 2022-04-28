@@ -1,23 +1,40 @@
 <script setup>
-defineProps([""]);
+// 导入 useUserStore
+import { useUserStore } from "@/stores/userStore";
+import { useRouter } from "vue-router";
+// 导入 storeToRefs
+import { storeToRefs } from "pinia";
+// 解构出 profile
+const { profile } = storeToRefs(useUserStore());
+const store = useUserStore();
+const router = useRouter();
+const handlerLogout = () => {
+  // 1.清理store中的数据
+  store.$reset();
+  // 2.跳转路由
+  router.push("/login");
+};
 </script>
 <template>
   <nav class="app-top-nav">
     <div class="container">
       <ul>
-        <li>
-          <a href="javascript:"><i class="iconfont icon-user"></i>周杰伦</a>
-        </li>
-        <li>
-          <a href="javascript:">退出登录</a>
-        </li>
-        <li>
-          <!-- <a href="javascript:">请先登录</a> -->
-          <router-link to="/login">请先登录</router-link>
-        </li>
-        <li>
-          <a href="javascript:">免费注册</a>
-        </li>
+        <template v-if="profile.token">
+          <li>
+            <a href="javascript:"> <i class="iconfont icon-user"></i>周杰伦 </a>
+          </li>
+          <li>
+            <a href="javascript:" @click="handlerLogout">退出登录</a>
+          </li>
+        </template>
+        <template v-else>
+          <li>
+            <RouterLink to="/login">请先登录</RouterLink>
+          </li>
+          <li>
+            <a href="javascript:">免费注册</a>
+          </li>
+        </template>
         <li>
           <a href="javascript:">我的订单</a>
         </li>
@@ -41,7 +58,7 @@ defineProps([""]);
 <style scoped>
 @import "@/assets/styles/variable.css";
 .app-top-nav {
-  background-color: #333;
+  background: #333;
 }
 
 .app-top-nav ul {
@@ -59,6 +76,8 @@ defineProps([""]);
 }
 
 .app-top-nav ul a:hover {
+  /* color: 属性值是一个变量 */
+  /* 格式: 属性名: var(变量名) */
   color: var(--primary-color);
 }
 
