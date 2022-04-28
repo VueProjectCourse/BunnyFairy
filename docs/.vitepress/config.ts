@@ -262,7 +262,7 @@ function getGuideSidebar() {
         { text: '在vue中使用JSX', },
         { text: '封装XtxTabs组件', },
 
-        { text: '订单管理-渲染订单标题', link: '/profile/devtools-install' },
+        { text: '订单管理-渲染订单标题',},
         { text: '订单管理-基础布局', },
         { text: '订单管理-列表渲染', },
         { text: '订单管理-条件查询', },
