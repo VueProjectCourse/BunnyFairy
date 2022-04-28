@@ -2,7 +2,11 @@ import { ref } from "vue";
 import { useUserStore } from "@/stores/userStore";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
-import { loginByAccountAndPassword, readLoginMsgCode } from "@/api/loginAPI";
+import {
+  loginByAccountAndPassword,
+  readLoginMsgCode,
+  loginByMobileMsgCode,
+} from "@/api/loginAPI";
 import Message from "@/components/Message/Message";
 
 // 引入 表单校验规则
@@ -154,4 +158,31 @@ export const handlerMsgCode = async (getMobileIsValidate, start, isActive) => {
       Message({ type: "error", text: error.response.data.message });
     }
   }
+};
+
+export const useMobileLogin = () => {
+  const router = useRouter();
+  // 请求成功时的回调
+  const successFn = ({ data: res, status: status }) => {
+    const { profile } = storeToRefs(useUserStore());
+    if (status === 200) {
+      // 把用户信息存储到Store中
+      profile.value = { ...profile.value, ...res.result };
+      // // 判断登陆成功 跳转到首页
+      router.push("/").then(() => {
+        // 登录成功之后的提示信息
+        Message({ type: "success", text: "登录成功" });
+      });
+    }
+  };
+  // 登陆失败时的回调
+  const failFn = (error) => {
+    // console.log(error.response.data.message);
+    Message({ type: "error", text: error.response.data.message });
+  };
+  const setMobileLogin = ({ mobile, code }) => {
+    loginByMobileMsgCode({ mobile, code }).then(successFn).catch(failFn);
+  };
+
+  return { setMobileLogin };
 };

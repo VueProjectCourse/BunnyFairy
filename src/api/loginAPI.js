@@ -14,11 +14,21 @@ export const loginByAccountAndPassword = ({ account, password }) => {
  * @param mobile
  * @return {Promise}
  */
-
 export const readLoginMsgCode = (mobile) => {
   return request.get("/login/code", {
     params: {
       mobile,
     },
   });
+};
+
+/**
+ * 手机号登录
+ * @param mobile 手机号
+ * @param code 验证码
+ * @return {AxiosPromise}
+ */
+
+export const loginByMobileMsgCode = ({ mobile, code }) => {
+  return request.post("/login/code", { mobile, code });
 };

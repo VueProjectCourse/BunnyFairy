@@ -21,28 +21,42 @@
  * @param code 验证码
  * @return {AxiosPromise}
  */
-export function loginByMobileMsgCode({ mobile, code }) {
-  return request("/login/code", "post", { mobile, code });
-}
+
+export const loginByMobileMsgCode = ({ mobile, code }) => {
+  return request.post("/login/code", { mobile, code });
+};
 ```
 
 * **Step.2：实现验证码登录**
 
 ```js
-import { loginByMobileMsgCode } from "@/api/user";
-export default {
-  setup () {
-    // 处理手机号登录表单提交
-    const onMobileFormSubmit = mobileFormHandleSubmit(({ mobile, code }) => {
-      // 发送请求进行账号密码登录
-      loginByMobileMsgCode({ mobile, code })
-        // 登录成功
-        .then(loginSuccessful)
-        // 登录失败
-        .catch(loginFailed);
-    });
-  }
-}
+export const useMobileLogin = () => {
+  const router = useRouter();
+  // 请求成功时的回调
+  const successFn = ({ data: res, status: status }) => {
+    const { profile } = storeToRefs(useUserStore());
+    if (status === 200) {
+      // 把用户信息存储到Store中
+      profile.value = { ...profile.value, ...res.result };
+      // // 判断登陆成功 跳转到首页
+      router.push("/").then(() => {
+        // 登录成功之后的提示信息
+        Message({ type: "success", text: "登录成功" });
+      });
+    }
+  };
+  // 登陆失败时的回调
+  const failFn = (error) => {
+    // console.log(error.response.data.message);
+    Message({ type: "error", text: error.response.data.message });
+  };
+  const setMobileLogin = ({ mobile, code }) => {
+    loginByMobileMsgCode({ mobile, code }).then(successFn).catch(failFn);
+  };
+
+  return { setMobileLogin };
+};
+
 ```
 
 :::
