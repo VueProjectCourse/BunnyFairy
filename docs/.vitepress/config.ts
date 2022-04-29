@@ -46,7 +46,6 @@ function getGuideSidebar() {
         { text: '代码规范配置', link: '/preparation/code-style' },
         { text: '封装网络请求', link: '/preparation/network-request' },
         { text: '项目样式配置', link: '/preparation/style-config' },
-        { text: 'DevTools安装', link: '/preparation/devtools-install' },
         { text: '批量注册组件', link: '/category/bulk-registration' },
       ]
     },
