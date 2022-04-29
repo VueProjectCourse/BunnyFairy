@@ -8,7 +8,6 @@ import { findAccountByQQOpenid } from "@/api/loginAPI";
 const hasAccount = ref(true);
 // 获取QQ联合中和登录相关的API
 const Login = window.QC.Login;
-console.log(Login);
 // 先假设该用户没有使用 QQ 绑定了账号
 const isBind = ref(false);
 const loading = ref(false);

@@ -39,7 +39,6 @@ function getGuideSidebar() {
       text: "前置内容",
       children: [
         { text: '项目介绍', link: '/preparation/introduction' },
-        { text: '项目路由', link: '/preparation/router-design' },
         { text: '项目创建', link: '/preparation/initialization' },
         { text: '配置路由管理器', link: '/preparation/router-config' },
         { text: '配置状态管理器', link: '/preparation/state-config' },
