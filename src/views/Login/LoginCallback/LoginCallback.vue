@@ -11,18 +11,20 @@ const Login = window.QC.Login;
 // 先假设该用户没有使用 QQ 绑定了账号
 const isBind = ref(false);
 const loading = ref(false);
-
+const unionId = ref(null);
 if (Login.check()) {
   // 1. 获取地址栏中的 access_token 值
   // 2. 向QQ互联服务器发送请求使用 access_token 换取用户的唯一标识 openid
   // https://graph.qq.com/oauth2.0/me?access_token=B204C56879FC0C2818AF844746BD6959
   Login.getMe((openid) => {
-    console.log("--------------------------");
-    console.log(openid);
-
+    unionId.value = openid;
     findAccountByQQOpenid({ unionId: openid })
       // 检测到账号, 走 then 回调函数, 执行登录成功之后的逻辑
       .then((data) => {
+        console.log("着啥啊", data);
+        if (data.result.token) {
+          window.location.href = "/";
+        }
         isBind.value = true;
         loading.value = false;
       })
@@ -62,7 +64,7 @@ if (Login.check()) {
       </a>
     </nav>
     <div class="tab-content" v-if="hasAccount">
-      <LoginCallbackBindPhone />
+      <LoginCallbackBindPhone :unionId="unionId" />
     </div>
     <div class="tab-content" v-if="!hasAccount">
       <LoginCallbackBindPatch />

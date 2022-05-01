@@ -161,12 +161,10 @@ function getGuideSidebar() {
         { text: '热榜组件', link: "/detail/goodshot"},
         { text: '详情组件', link: "/detail/gooddetails"},
         { text: '注意事项组件',link:"/detail/goodswarn" },
-
         { text: '评价组件-头部渲染', link:"/detail/goodscomment-header" },
         { text: '评价组件-列表渲染', link:"/detail/goodscomment-list"},
         { text: '评价组件-图片预览', link:"/detail/goodscomment-preview"},
         { text: '评价组件-数据排序与筛选', link:"/detail/goodscomment-sort"},
-
         { text: '分页组件-生成页码数据', link:"/detail/pagination-data" },
         { text: '分页组件-渲染分页数据', link:"/detail/pagination-render"},
         { text: '分页组件-关联评论列表', link:"/detail/pagination-concat"},
@@ -184,16 +182,14 @@ function getGuideSidebar() {
         { text: '登录-手机号登录-验证码',link: "/login/phone-code" },
         { text: '登录-手机号登录-登录', link: "/login/phone-login"},
         { text: '退出登录',link: "/login/logout" },
-
         { text: 'QQ登录-流程分析', link: "/login/process"},
         { text: 'QQ登录-准备工作', link: "/login/prepare"},
         { text: 'QQ登录-创建登录按钮',link: "/login/login-button" },
-
         { text: 'QQ登录-准备回调路由组件', link: "/login/login-callback"},
         { text: 'QQ登录-获取openid', link: "/login/login-openid"},
         { text: 'QQ登录-检索已绑定账号', link: "/login/login-bind"},
-        { text: 'QQ登录-绑定已有账号', },
-        { text: 'QQ登录-绑定新注册账号', },
+        { text: 'QQ登录-绑定已有账号', link: "/login/bind-account"},
+        { text: 'QQ登录-绑定新注册账号',link: "/login/bind-new-account" },
       ]
     },
     {
@@ -241,7 +237,6 @@ function getGuideSidebar() {
         { text: '结算-收货地址-修改', },
         { text: '结算-收货地址-切换', },
         { text: '结算-提交订单', },
-
         { text: '支付-基础布局', },
         { text: '支付-信息展示', },
         { text: '支付-支付流程', },
@@ -259,7 +254,6 @@ function getGuideSidebar() {
         { text: '个人中心-菜单激活', },
         { text: '在vue中使用JSX', },
         { text: '封装XtxTabs组件', },
-
         { text: '订单管理-渲染订单标题',},
         { text: '订单管理-基础布局', },
         { text: '订单管理-列表渲染', },
@@ -268,7 +262,6 @@ function getGuideSidebar() {
         { text: '订单管理-删除订单', },
         { text: '订单管理-确认收货', },
         { text: '订单管理-查看物流', },
-
         { text: '订单详情-头部展示', },
         { text: '订单详情-封装步骤条组件', },
         { text: '订单详情-物流信息', },
