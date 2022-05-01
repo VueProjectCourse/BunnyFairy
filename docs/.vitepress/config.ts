@@ -111,8 +111,6 @@ function getGuideSidebar() {
         { text: '一级面包屑导航', link: '/category/bread-top' },
         { text: '二级面包屑导航', link: '/category/bread-sub' },
         { text: '面包屑导航动画', link: '/category/bread-transition' },
-
-
         { text: '一级分类-轮播图', link: '/category/top-carousel' },
         { text: '一级分类-展示二级分类', link: '/category/top-subcategory' },
         { text: '一级分类-商品推荐', link: '/category/goods-recommend' },
@@ -213,6 +211,8 @@ function getGuideSidebar() {
         { text: '购物车-全选-未登录', },
         { text: '购物车-删除-未登录', },
         { text: '封装确认框组件', },
+
+        
         { text: '购物车-批量删除-清空无效-未登录', },
         { text: '购物车-更改商品数量-未登录', },
         { text: '购物车-规格数据渲染-未登录', },
