@@ -1,17 +1,17 @@
 import { useRoute } from "vue-router";
+import { useCateStore } from "@/stores/cateStore";
 import { storeToRefs } from "pinia";
 import { computed, ref } from "vue";
-
-import { useCateStore } from "@/stores/cateStore";
 import { readBanners } from "@/api/homeAPI";
-
+// 动态生成breadItem
 export const useBread = () => {
-  // 获取路由信息对象
+  // 获取路由信息的id
   const route = useRoute();
-  // 获取分类数据
-  const { cateList } = storeToRefs(useCateStore());
 
-  // 通过计算属性得到一级分类
+  // 获取分类信息的数组
+  const { cateList } = storeToRefs(useCateStore());
+  // console.log(cateList)
+  // 遍历分类信息的数组 找到对象中的id 和路由信息中的id如果一样 返回该对象
   const topCate = computed(() => {
     return cateList.value.find((item) => item.id === route.params.id);
   });
@@ -19,12 +19,12 @@ export const useBread = () => {
   return { topCate };
 };
 
-export const useTopCateBanner = () => {
-  // 存储轮播图数据
+export const useTopCateCarousel = () => {
   const carouselList = ref(null);
-  // 获取轮播图数据
+
   readBanners(2).then(({ data: res, status: status }) => {
     if (status === 200) {
+      // 把数据赋值给bannerList
       carouselList.value = res.result;
     }
   });

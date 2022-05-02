@@ -4,52 +4,28 @@ import LoginHeader from "../LoginHeader/LoginHeader.vue";
 import LoginFooter from "../LoginFooter/LoginFooter.vue";
 import LoginCallbackBindPhone from "../LoginCallbackBindPhone/LoginCallbackBindPhone.vue";
 import LoginCallbackBindPatch from "../LoginCallbackBindPatch/LoginCallbackBindPatch.vue";
-import { findAccountByQQOpenid } from "@/api/loginAPI";
+import { useDetectAcountBind } from "./LoginCallback";
+
+const { AcountBind, isLoading, setAcountBind } = useDetectAcountBind();
+// tab切换状态
 const hasAccount = ref(true);
-// 获取QQ联合中和登录相关的API
-const Login = window.QC.Login;
-// 先假设该用户没有使用 QQ 绑定了账号
-const isBind = ref(false);
-const loading = ref(false);
-const unionId = ref(null);
-if (Login.check()) {
-  // 1. 获取地址栏中的 access_token 值
-  // 2. 向QQ互联服务器发送请求使用 access_token 换取用户的唯一标识 openid
-  // https://graph.qq.com/oauth2.0/me?access_token=B204C56879FC0C2818AF844746BD6959
-  Login.getMe((openid) => {
-    unionId.value = openid;
-    findAccountByQQOpenid({ unionId: openid })
-      // 检测到账号, 走 then 回调函数, 执行登录成功之后的逻辑
-      .then((data) => {
-        console.log("着啥啊", data);
-        if (data.result.token) {
-          window.location.href = "/";
-        }
-        isBind.value = true;
-        loading.value = false;
-      })
-      // 没有检测到账号, 走 catch 回调函数
-      .catch(() => {
-        // 用户没有使用QQ绑定账号
-        isBind.value = false;
-        loading.value = false;
-      });
-  });
-}
+setAcountBind();
 </script>
+
 <template>
   <LoginHeader>联合登录</LoginHeader>
-  <section class="container" v-if="loading">
+  <!-- 加载提示 -->
+  <section class="container" v-if="isLoading">
     <div class="unbind">
       <div class="loading"></div>
     </div>
   </section>
-  <section class="container" v-if="!loading && !isBind">
+  <section class="container" v-if="!AcountBind && !isLoading">
     <nav class="tab">
       <a
+        :class="{ active: hasAccount }"
         href="javascript:"
         @click="hasAccount = true"
-        :class="{ active: hasAccount }"
       >
         <i class="iconfont icon-bind"></i>
         <span>已有小兔鲜账号，请绑定手机</span>
@@ -64,13 +40,12 @@ if (Login.check()) {
       </a>
     </nav>
     <div class="tab-content" v-if="hasAccount">
-      <LoginCallbackBindPhone :unionId="unionId" />
+      <LoginCallbackBindPhone />
     </div>
     <div class="tab-content" v-if="!hasAccount">
       <LoginCallbackBindPatch />
     </div>
   </section>
-
   <LoginFooter />
 </template>
 
@@ -94,7 +69,6 @@ if (Login.check()) {
   height: 100%;
   background: #fff url(@/assets/images/load.gif) no-repeat center / 100px 100px;
 }
-
 .tab {
   background: #fff;
   height: 80px;

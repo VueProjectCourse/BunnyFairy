@@ -1,6 +1,3 @@
-<script setup>
-defineProps([""]);
-</script>
 <template>
   <form class="xtx-form">
     <div class="xtx-form-item">

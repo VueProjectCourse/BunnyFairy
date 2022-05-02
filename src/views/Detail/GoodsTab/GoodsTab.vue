@@ -28,8 +28,8 @@ const activeComponentName = ref("GoodsDetail");
     <!-- 切换内容的地方 -->
     <!-- <component :is="activeComponentName"></component> -->
 
-    <GoodsDetail v-show="activeComponentName === 'GoodsDetail'" />
-    <GoodsComment v-show="activeComponentName === 'GoodsComment'" />
+    <GoodsDetail v-if="activeComponentName === 'GoodsDetail'" />
+    <GoodsComment v-if="activeComponentName === 'GoodsComment'" />
   </div>
 </template>
 

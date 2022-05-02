@@ -1,15 +1,20 @@
 import { createApp } from "vue";
-
+import store from "./stores";
 import App from "./App.vue";
 import router from "./route";
-import store from "./stores";
+// 引入组件注册文件
 import components from "./components";
-import "normalize.css";
-import "@/assets/styles/base.css";
 
+// 引入重置样式
+import "normalize.css";
+import "./assets/styles/base.css";
+import "./assets/styles/common.css";
 const app = createApp(App);
-// 挂载
+// 挂载store
 app.use(store);
+// 挂载router
 app.use(router);
+// 在全局挂载组件
 app.use(components);
+
 app.mount("#app");

@@ -4,6 +4,7 @@ import { useRoute, onBeforeRouteUpdate } from "vue-router";
 // 导入 筛选条件数据 获取筛选条件数据的方法
 import {
   filters,
+  selectedFilters,
   readFilter,
   updateFilter,
   isFilterLoading,
@@ -65,11 +66,11 @@ onBeforeRouteUpdate((to) => {
   </div>
 
   <div class="sub-filter" v-else>
-    <Skeleton class="item" width="800px" height="40px" />
-    <Skeleton class="item" width="800px" height="40px" />
-    <Skeleton class="item" width="600px" height="40px" />
-    <Skeleton class="item" width="600px" height="40px" />
-    <Skeleton class="item" width="600px" height="40px" />
+    <MenuSkeleton class="item" width="800px" height="40px" />
+    <MenuSkeleton class="item" width="800px" height="40px" />
+    <MenuSkeleton class="item" width="600px" height="40px" />
+    <MenuSkeleton class="item" width="600px" height="40px" />
+    <MenuSkeleton class="item" width="600px" height="40px" />
   </div>
 </template>
 
@@ -77,7 +78,7 @@ onBeforeRouteUpdate((to) => {
 @import "@/assets/styles/variable.css";
 
 .sub-filter {
-  background-color: #fff;
+  background: #fff;
   padding: 25px;
 }
 

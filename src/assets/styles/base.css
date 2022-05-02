@@ -1,6 +1,10 @@
+/* 这个文件是专门用于该项目的样式重置 */
+
 * {
   box-sizing: border-box;
 }
+
+
 html {
   height: 100%;
   font-size: 14px;
@@ -10,7 +14,7 @@ body {
   height: 100%;
   color: #333;
   min-width: 1240px;
-  font-family: 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif
+  font: 1em/1.4 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif
 }
 
 ul,
@@ -24,14 +28,14 @@ dd {
   margin: 0;
 }
 
-ul {
-  list-style: none;
-}
-
 a {
   text-decoration: none;
   color: #333;
   outline: none;
+}
+
+i {
+  font-style: normal;
 }
 
 input[type="text"],
@@ -51,160 +55,14 @@ input[type="checkbox"]::placeholder {
   color: #ccc;
 }
 
+
 img {
   max-width: 100%;
   max-height: 100%;
   vertical-align: middle;
 }
 
-/* 清除浮动 */
-.clearfix:after {
-  content: ".";
-  display: block;
-  visibility: hidden;
-  height: 0;
-  line-height: 0;
-  clear: both;
-}
-
-
-/* 鼠标经过上移阴影动画 */
-.hover-shadow {
-  transition: all .5s;
-}
-
-.hover-shadow:hover {
-  transform: translate3d(0, -3px, 0);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-}
-
-
-.ellipsis {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.ellipsis-2 {
-  word-break: break-all;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-/* 骨架屏和真实内容切换动画 */
-.fade-leave-active {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  transition: opacity 0.5s 0.2s;
-  z-index: 1;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-
-/* 面包屑动画 */
-.fade-right-enter-from,
-.fade-right-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-.fade-right-enter-active,
-.fade-right-leave-active {
-  transition: all 0.5s;
-}
-.fade-right-enter-to,
-.fade-right-leave-from {
-  transform: none;
-  opacity: 1;
-}
-
-
-.xtx-form {
-  padding: 50px 0;
-}
-.xtx-form-item {
-  display: flex;
-  align-items: center;
-  width: 700px;
-  margin: 0 auto;
-  padding-bottom: 25px;
-}
-.xtx-form-item .label {
-  width: 180px;
-  padding-right: 10px;
-  text-align: right;
-  color: #999;
-}
-.xtx-form-item .label ~ .field {
-  margin-left: 0;
-}
-.xtx-form-item .field {
-  width: 320px;
-  height: 50px;
-  position: relative;
-  margin-left: 190px;
-}
-.xtx-form-item .field .icon {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 40px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-  color: #999;
-}
-.xtx-form-item .field .icon ~ .input {
-  padding-left: 40px;
-}
-.xtx-form-item .field .input {
-  border: 1px solid #e4e4e4;
-  width: 320px;
-  height: 50px;
-  line-height: 50px;
-  padding: 0 10px;
-}
-.xtx-form-item .field .input.err {
-  border-color: #CF4444;
-}
-.xtx-form-item .field .input:focus,
-.xtx-form-item .field .input:active {
-  border-color: #27BA9B;
-}
-.xtx-form-item .field .checkbox {
-  width: 20px;
-  height: 20px;
-  border: 1px solid #e4e4e4;
-  margin-top: 15px;
-}
-.xtx-form-item .field .checkbox:checked {
-  border-color: transparent;
-  color: #27BA9B;
-}
-.xtx-form-item .field .checkbox:checked::after {
-  content: "✅";
-}
-.xtx-form-item .error {
-  width: 180px;
-  padding-left: 10px;
-  color: #CF4444;
-}
-.xtx-form .submit {
-  width: 320px;
-  height: 50px;
-  border-radius: 4px;
-  background: #27BA9B;
-  line-height: 50px;
-  text-align: center;
-  font-size: 16px;
-  color: #fff;
-  display: block;
-  margin: 0 auto;
-  border: none;
+ul {
+  list-style: none;
 }
 

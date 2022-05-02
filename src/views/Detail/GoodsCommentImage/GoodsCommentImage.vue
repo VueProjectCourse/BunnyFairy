@@ -1,14 +1,13 @@
 <script setup>
 import { ref } from "vue";
+
 defineProps({
-  pictures: {
+  images: {
     type: Array,
-    default: () => [],
   },
 });
 
-// 大图预览地址
-const preview = ref(null);
+const preImage = ref(null);
 </script>
 
 <template>
@@ -16,16 +15,16 @@ const preview = ref(null);
     <div class="list">
       <a
         href="javascript:"
-        @click="preview = picture"
-        v-for="picture in pictures"
-        :key="picture"
+        v-for="(img, index) in images"
+        :key="index"
+        @click="preImage = img"
       >
-        <img :src="picture" alt="" />
+        <img :src="img" alt="" />
       </a>
     </div>
-    <div class="preview" v-show="preview">
-      <img :src="preview" alt="" />
-      <i class="iconfont icon-close-new" @click="preview = null"></i>
+    <div class="preview" v-show="preImage">
+      <img :src="preImage" alt="" />
+      <i class="iconfont icon-close-new" @click="preImage = null"></i>
     </div>
   </div>
 </template>

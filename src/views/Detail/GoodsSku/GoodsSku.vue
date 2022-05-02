@@ -1,44 +1,58 @@
 <script setup>
-defineProps({
+import { onMounted } from "vue";
+import {
+  useSpecSelect,
+  useSpecPathMap,
+  useSpecDisable,
+  useUserSelect,
+} from "./GoodsSku";
+const props = defineProps({
   specs: {
+    type: Array,
+    default: () => [],
+  },
+  skus: {
     type: Array,
     default: () => [],
   },
 });
 
-const setSpecSelected = (spac, value) => {
-  // 如果用户点击的规格已经是选中的
-  if (value.selected) {
-    // 让其取消选中
-    value.selected = false;
-  } else {
-    // 先将该规格中的所有规格取消选中
-    spac.values.forEach((item) => (item.selected = false));
-    // 将当前用户点击的规格设置为选中
-    value.selected = true;
-  }
-};
+const { setSpecSelect } = useSpecSelect();
+const { specPathMap, setSpecPathMap } = useSpecPathMap();
+const { setUserSelect } = useUserSelect();
+const { setSpecDisable } = useSpecDisable();
+
+onMounted(() => {
+  setSpecPathMap(props.skus);
+  setSpecDisable(props.specs, specPathMap, setUserSelect);
+});
 </script>
 <template>
   <div class="goods-sku">
-    <dl v-for="item in specs" :key="item.name">
-      <dt>{{ item.name }}</dt>
+    <dl v-for="spec in specs" :key="spec.name">
+      <dt>{{ spec.name }}</dt>
       <dd>
-        <template v-for="subitem in item.values" :key="subitem.name">
+        <template v-for="value in spec.values" :key="value.name">
           <img
-            v-if="subitem.picture"
-            :class="{ selected: subitem.selected }"
-            :src="subitem.picture"
-            :title="subitem.name"
-            :alt="subitem.name"
-            @click="setSpecSelected(item, subitem)"
+            v-if="value.picture"
+            :class="{ selected: value.selected, disabled: value.disabled }"
+            :src="value.picture"
+            :title="value.name"
+            :alt="value.name"
+            @click="
+              setSpecSelect(spec, value);
+              setSpecDisable(props.specs, specPathMap, setUserSelect);
+            "
           />
 
           <span
             v-else
-            :class="{ selected: subitem.selected }"
-            @click="setSpecSelected(item, subitem)"
-            >{{ subitem.name }}</span
+            :class="{ selected: value.selected, disabled: value.disabled }"
+            @click="
+              setSpecSelect(spec, value);
+              setSpecDisable(props.specs, specPathMap, setUserSelect);
+            "
+            >{{ value.name }}</span
           >
         </template>
       </dd>

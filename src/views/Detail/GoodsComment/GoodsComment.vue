@@ -1,20 +1,22 @@
 <script setup>
+import { onMounted, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 import GoodsCommentImage from "../GoodsCommentImage/GoodsCommentImage.vue";
 import {
   useCommentHeader,
-  useSelectedTag,
+  useSelectTag,
   useCommentList,
   useReqParams,
 } from "./GoodsComment";
-import { useRoute } from "vue-router";
-import { onMounted, watchEffect } from "vue";
-const { commentData, setCommentData } = useCommentHeader();
-const { selectedTag, setSelectedTag } = useSelectedTag();
+
+const { commentHeader, setCommentHeader } = useCommentHeader();
+const { seletedTag, setSelectedTag } = useSelectTag();
 const { commentList, setCommentList } = useCommentList();
 const { reqParams, setReqParams } = useReqParams();
 const route = useRoute();
+// 当组件挂载完毕 调用方法获取数据
 onMounted(() => {
-  setCommentData(route.params.id);
+  setCommentHeader(route.params.id);
 });
 
 watchEffect(() => {
@@ -23,14 +25,15 @@ watchEffect(() => {
 </script>
 <template>
   <div class="goods-comment">
+    <!-- 评价头部 -->
     <div class="head">
       <div class="data">
         <p>
-          <span>{{ commentData?.salesCount }}</span
+          <span>{{ commentHeader?.salesCount }}</span
           ><span>人购买</span>
         </p>
         <p>
-          <span>{{ commentData?.praisePercent }}</span
+          <span>{{ commentHeader?.praisePercent }}</span
           ><span>好评率</span>
         </p>
       </div>
@@ -39,18 +42,19 @@ watchEffect(() => {
         <div class="dd">
           <a
             href="javascript:"
-            :class="{ active: tag.title === selectedTag }"
+            :class="{ active: seletedTag === tag.title }"
             @click="
               setSelectedTag(tag.title);
               setReqParams({ tag: tag.title });
             "
-            v-for="tag in commentData?.tags"
+            v-for="tag in commentHeader?.tags"
             :key="tag.title"
             >{{ tag.title }}（{{ tag.tagCount }}）</a
           >
         </div>
       </div>
     </div>
+    <!-- 排序与筛选 菜单 -->
     <div class="sort">
       <span>排序：</span>
       <a
@@ -72,6 +76,7 @@ watchEffect(() => {
         >最热</a
       >
     </div>
+    <!-- 评价列表 -->
     <div class="list">
       <div class="item" v-for="item in commentList?.items" :key="item.id">
         <div class="user">
@@ -80,14 +85,19 @@ watchEffect(() => {
         </div>
         <div class="body">
           <div class="score">
-            <i class="iconfont icon-wjx01" v-for="i in item.score" :key="i"></i>
+            <i
+              class="iconfont icon-wjx01"
+              v-for="i in item.score"
+              :key="i + '*'"
+            ></i>
+
             <i
               class="iconfont icon-wjx02"
-              v-for="n in 5 - item.score"
-              :key="n"
+              v-for="i in 5 - item.score"
+              :key="i + 'p'"
             ></i>
             <span class="attr">
-              <template v-for="spec in item.orderInfo.specs" :key="spec.name">
+              <template v-for="spec in item.orderInfo.specs">
                 {{ spec.name }}:{{ spec.nameValue }} {{ " " }}
               </template>
             </span>
@@ -95,7 +105,8 @@ watchEffect(() => {
           <div class="text">
             {{ item.content }}
           </div>
-          <GoodsCommentImage :pictures="item.pictures" />
+
+          <GoodsCommentImage :images="item.pictures" />
           <div class="time">
             <span>{{ item.createTime }}</span>
             <span class="zan"
@@ -108,7 +119,7 @@ watchEffect(() => {
     <Pagination
       v-if="commentList?.pages > 1"
       v-model:page="reqParams.page"
-      :pageSize="reqParams.pageSize"
+      :page-size="commentList?.pageSize"
       :count="commentList?.counts"
     />
   </div>
@@ -116,45 +127,55 @@ watchEffect(() => {
 
 <style scoped>
 @import "@/assets/styles/variable.css";
+
 .goods-comment .head {
   display: flex;
   padding: 30px 0;
 }
+
 .goods-comment .head .data {
   width: 340px;
   display: flex;
   padding: 20px;
 }
+
 .goods-comment .head .data p {
   flex: 1;
   text-align: center;
 }
+
 .goods-comment .head .data p span {
   display: block;
 }
+
 .goods-comment .head .data p span:first-child {
   font-size: 32px;
   color: var(--price-color);
 }
+
 .goods-comment .head .data p span:last-child {
   color: #999;
 }
+
 .goods-comment .head .tags {
   flex: 1;
   display: flex;
   border-left: 1px solid #f5f5f5;
 }
+
 .goods-comment .head .tags .dt {
   font-weight: bold;
   width: 100px;
   text-align: right;
   line-height: 42px;
 }
+
 .goods-comment .head .tags .dd {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
 }
+
 .goods-comment .head .tags .dd > a {
   width: 132px;
   height: 42px;
@@ -167,16 +188,19 @@ watchEffect(() => {
   text-align: center;
   line-height: 40px;
 }
+
 .goods-comment .head .tags .dd > a:hover {
-  border-color: var(--primary-color);
+  border-color: hello;
   background: #e6faf6;
-  color: var(--primary-color);
+  color: hello;
 }
+
 .goods-comment .head .tags .dd > a.active {
   border-color: var(--primary-color);
   background: var(--primary-color);
   color: #fff;
 }
+
 .goods-comment .sort {
   height: 60px;
   line-height: 60px;
@@ -185,12 +209,15 @@ watchEffect(() => {
   margin: 0 20px;
   color: #666;
 }
+
 .goods-comment .sort > span {
   margin-left: 20px;
 }
+
 .goods-comment .sort > a {
   margin-left: 30px;
 }
+
 .goods-comment .sort > a.active,
 .goods-comment .sort > a:hover {
   color: var(--primary-color);
@@ -199,42 +226,52 @@ watchEffect(() => {
 .list {
   padding: 0 20px;
 }
+
 .list .item {
   display: flex;
   padding: 25px 10px;
   border-bottom: 1px solid #f5f5f5;
 }
+
 .list .item .user {
   width: 160px;
 }
+
 .list .item .user img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
 }
+
 .list .item .user span {
   padding-left: 10px;
   color: #666;
 }
+
 .list .item .body {
   flex: 1;
 }
+
 .list .item .body .score {
   line-height: 40px;
 }
+
 .list .item .body .score .iconfont {
   color: #ff9240;
   padding-right: 3px;
 }
+
 .list .item .body .score .attr {
   padding-left: 10px;
   color: #666;
 }
+
 .list .item .text {
   color: #666;
   line-height: 24px;
 }
+
 .list .item .time {
   color: #999;
   display: flex;

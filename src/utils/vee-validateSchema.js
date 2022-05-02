@@ -1,8 +1,12 @@
-export const account = (value) => {
+// 该文件是用来声明 字段验证规则的
+export function account(value) {
+  // value 代表的是我们在输入框内容的值
+  // 如果没有填写 value 那么 请输入用户名会展现在 错误信息的位置
   if (!value) return "请输入用户名";
   if (!/^[a-zA-Z]\w{5,19}$/.test(value)) return "字母开头且6-20个字符";
+  // 如果验证通过 返回true
   return true;
-};
+}
 
 export function password(value) {
   if (!value) return "请输入密码";

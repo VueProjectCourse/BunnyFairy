@@ -1,13 +1,12 @@
 <script setup>
 import useCountDown from "@/utils/useCountDown";
-import { onMounted } from "vue";
 import {
   useLoginWay,
   useAccountValidate,
   useAccountLogin,
   useMobileValidate,
-  handlerMsgCode,
   useMobileLogin,
+  handlerMsgCode,
 } from "./LoginForm";
 
 const { loginWay, setLoginWay } = useLoginWay();
@@ -41,7 +40,9 @@ const {
   handleMobileSubmit,
   getMobileIsValidate,
 } = useMobileValidate();
+
 const { setMobileLogin } = useMobileLogin();
+
 const onMobileSubmit = handleMobileSubmit((values) => {
   // console.log(values);
   setMobileLogin(values);
@@ -49,12 +50,6 @@ const onMobileSubmit = handleMobileSubmit((values) => {
 const { count, start, isActive } = useCountDown();
 
 //#endregion
-
-// onMounted(() => {
-//   window.QC.Login({
-//     btnId: "qqLoginBtn",
-//   });
-// });
 </script>
 <template>
   <div class="account-box">
@@ -164,17 +159,15 @@ const { count, start, isActive } = useCountDown();
       </template>
     </div>
     <div class="action">
-      <!-- <img
-        src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"
-        alt=""
-      /> -->
       <a
-        href="https://graph.qq.com/oauth2.0/authorize?client_id=100556005&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fwww.corho.com%3A8080%2F%23%2Flogin%2Fcallback"
+        href="https://graph.qq.com/oauth2.0/show?which=Login&display=pc&client_id=100556005&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fwww.corho.com%3A8080%2F%23%2Flogin%2Fcallback"
       >
         <img
           src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"
+          alt=""
         />
       </a>
+
       <!-- <span id="qqLoginBtn"></span> -->
       <div class="url">
         <a href="javascript:">忘记密码</a>

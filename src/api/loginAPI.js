@@ -14,6 +14,7 @@ export const loginByAccountAndPassword = ({ account, password }) => {
  * @param mobile
  * @return {Promise}
  */
+
 export const readLoginMsgCode = (mobile) => {
   return request.get("/login/code", {
     params: {
@@ -39,31 +40,6 @@ export const loginByMobileMsgCode = ({ mobile, code }) => {
  * @param source 注册来源
  * @return {AxiosPromise}
  */
-export const findAccountByQQOpenid = ({ unionId, source = 1 }) => {
-  console.log(unionId);
+export const findAccountByQQOpenId = ({ unionId, source = 1 }) => {
   return request.post("/login/social", { unionId, source });
-};
-
-/**
- * 获取手机验证码 (QQ登录, 绑定已有账号手机号)
- * @param mobile
- * @return {Promise}
- */
-export const getBindMobileMsgCode = (mobile) => {
-  return request.get("/login/social/code", {
-    params: {
-      mobile,
-    },
-  });
-};
-
-/**
- * QQ登录, 将手机号和QQ号进行绑定
- * @param unionId 用户的唯一标识(openid)
- * @param mobile 手机号
- * @param code 手机验证码
- * @return {Promise}
- */
-export const bindMobileAndQQ = ({ unionId, mobile, code }) => {
-  return request.post("/login/social/bind", { unionId, mobile, code });
 };

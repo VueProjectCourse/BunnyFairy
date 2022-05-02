@@ -1,5 +1,5 @@
 <script setup>
-import DefaultLayout from "../DefaultLayout/DefaultLayout.vue";
+import DefaultLayout from "../DefaultLayout/Layout.vue";
 import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
 import GoodsImages from "./GoodsImages/GoodsImages.vue";
 import GoodsSales from "./GoodsSales/GoodsSales.vue";
@@ -27,7 +27,7 @@ const count = ref(1);
 </script>
 <template>
   <DefaultLayout>
-    <div class="xtx-goods-page" style="background-color: #f5f5f5">
+    <div class="xtx-goods-page">
       <div class="container">
         <!-- 面包屑 -->
         <Bread>
@@ -55,7 +55,11 @@ const count = ref(1);
           <!-- 右侧 -->
           <div class="spec">
             <GoodsInfo :goods="goodsDetail" v-if="goodsDetail" />
-            <GoodsSku :specs="goodsDetail?.specs" />
+            <GoodsSku
+              v-if="goodsDetail"
+              :specs="goodsDetail.specs"
+              :skus="goodsDetail.skus"
+            />
             <!-- :modelValue="" @update:modelValue -->
             <NumberBox
               label="数量"

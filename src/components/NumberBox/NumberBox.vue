@@ -1,23 +1,26 @@
 <script setup>
 import { useNumberBox } from "./NumberBox";
 const props = defineProps({
-  max: {
-    type: Number,
-  },
   modelValue: {
+    type: Number,
+    default: 0,
+  },
+  max: {
     type: Number,
   },
   label: {
     type: String,
-    default: "数字",
   },
 });
-const { number, setNumber } = useNumberBox(props, emit);
+
 const emit = defineEmits(["update:modelValue"]);
+
+const { number, setNumber } = useNumberBox(props, emit);
 </script>
+
 <template>
   <div class="xtx-number-box">
-    <div class="label">{{ label }}</div>
+    <div class="label">数量</div>
     <div class="number-box">
       <a href="javascript:" @click="setNumber(-1)">-</a>
       <input type="text" readonly :value="number" />
