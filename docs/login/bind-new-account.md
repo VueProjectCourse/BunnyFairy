@@ -31,21 +31,26 @@
  * @return {Promise}
  */
 export function checkUsernameIsUnique(account) {
-  return request("/register/check", "get", { account });
+  return request.get("/register/check", {
+    params: {
+      account,
+    },
+  });
 }
+
 ```
 
 * **Step.2：添加两条验证规则, 验证用户名和两次输入密码是否相同**
 
 ```js
-import { checkUsernameIsUnique } from "@/api/user";
+import { checkUsernameIsUnique } from "@/api/loginAPI";
 
 export async function checkUserAccount(value) {
   if (!value) return "请输入用户名";
   if (!/^[a-zA-Z]\w{5,19}$/.test(value)) return "字母开头且6-20个字符";
   // 服务端校验
-  const { result } = await checkUsernameIsUnique(value);
-  if (result.valid) return "用户名已存在";
+  const { data: res } = await checkUsernameIsUnique(value);
+  if (res.result.valid) return "用户名已存在";
   return true;
 }
 export function rePassword(value, { form }) {
@@ -55,6 +60,7 @@ export function rePassword(value, { form }) {
   if (value !== form.password) return "两次输入的密码不一致";
   return true;
 }
+
 ```
 
 * **Step.3：创建表单验证对象, 实现表单验证**
@@ -62,58 +68,49 @@ export function rePassword(value, { form }) {
 ```js
 // LoginCallbackBindPatch
 import { useField, useForm } from "vee-validate";
-import { checkUserAccount, code, mobile, password, rePassword } from "@/utils/vee-validate-schema";
-
-function useBindNewAccountFormValid() {
-  // 创建表单验证对象
-  const { handleSubmit } = useForm({
-    validationSchema: { checkUserAccount, mobile, code, password, rePassword },
+import { mobile, code } from "@/utils/vee-validateSchema";
+// 表单验证
+export const useBindPhoneValidate = () => {
+  const { handleSubmit: handleBindPhoneSubmit } = useForm({
+    validationSchema: { mobile, code },
   });
-  // 创建用于验证用户名的表单项验证对象
-  const { value: accountField, errorMessage: accountError } =
-    useField("checkUserAccount");
-  // 创建用户验证手机号的表单项验证对象
-  const { value: mobileField, errorMessage: mobileError } = useField("mobile");
-  // 创建用于验证手机验证码格式的表单项验证对象
+  const {
+    value: mobileField,
+    errorMessage: mobileError,
+    validate,
+  } = useField("mobile");
+
   const { value: codeField, errorMessage: codeError } = useField("code");
-  // 创建用于验证密码的表单项验证对象
-  const { value: passwordField, errorMessage: passwordError } =
-    useField("password");
-  // 创建用于验证两次密码是否输入一直的表单验证项对象
-  const { value: rePasswordField, errorMessage: rePasswordError } =
-    useField("rePassword");
+
+ 
   return {
-    handleSubmit,
-    accountField,
-    accountError,
     mobileField,
     mobileError,
     codeField,
     codeError,
-    passwordField,
-    passwordError,
-    rePasswordField,
-    rePasswordError,
+    handleBindPhoneSubmit,
+    getMobileIsValidate,
   };
-}
+};
+
 ```
 
 * **Step.4：在组件的 setup 方法中获取表单验证相关信息并返回给模板使用**
 
 ```js
-export default {
-  name: "LoginCallbackBindPatch",
-  setup() {
-    // 单独获取处理表单提交的方法, 将其他属性放入单独的对象中
-    const { handleSubmit, ...rest } = useBindNewAccountFormValid();
-        // 表单提交处理
-    const onSubmitHandler = handleSubmit((value) => {
-      console.log(value);
-    });
-    return { ...rest, onSubmitHandler };
-  },
-};
+const {
+  mobileField,
+  mobileError,
+  codeField,
+  codeError,
+  handleBindPhoneSubmit,
+  getMobileIsValidate,
+} = useBindPhoneValidate();
 
+
+const onBindPhoneSubmit = handleBindPhoneSubmit((value) => {
+ 
+});
 ```
 
 * **Step.5：在模板中绑定表单表单验证信息**
@@ -144,24 +141,24 @@ export default {
  * @return {AxiosPromise}
  */
 export function getRegisterMsgCode(mobile) {
-  return request("/register/code", "get", { mobile });
+  return request.get("/register/code", {
+    params: {
+      mobile,
+    },
+  });
 }
+
 ```
 
 创建用于单独验证手机号的验证方法
 
 ```js
 // LoginCallbackBindPatch.vue
-function useBindNewAccountFormValid() {
-  // 单独验证手机号
-  const getMobileIsValidate = async () => {
-    // 验证用户输入的手机号格式是否正确
-    let { valid } = await validate();
-    // 将验证结果和手机号返回出去
+
+ const getMobileIsValidate = async () => {
+    const { valid } = await validate();
     return { isValid: valid, mobile: mobileField.value };
   };
-  return { getMobileIsValidate }
-}
 ```
 
 实现验证码发送功能
@@ -171,40 +168,33 @@ function useBindNewAccountFormValid() {
 ```
 
 ```js
-import { getRegisterMsgCode } from "@/api/user";
+import { getRegisterMsgCode} from "@/api/loginAPI";
 import Message from "@/components/library/Message";
 import useCountDown from "@/hooks/useCountDown";
-export default {
-  setup () {
-    // 表单验证
-    const { getMobileIsValidate } = useBindNewAccountFormValid()
-    // 获取倒计时值及开始方法
-    const { count, start, isActive } = useCountDown()
-    // 获取手机验证码
-    const getMsgCode = () => {
-      // 如果倒计时正在执行, 阻止程序向下执行
-      if (isActive.value) return;
-      // 验证手机号
-      getMobileIsValidate()
-        .then(({ isValid, mobile }) => {
-          // 如果手机号验证通过
-          if (isValid) return getRegisterMsgCode(mobile);
-        })
-        .then(() => {
-          Message({ type: "success", text: "验证码发送成功" });
-          // 开启倒计时
-          start(60);
-        })
-        .catch((error) =>
-          Message({
-            type: "error",
-            text: `验证码发送失败 ${error.response.data.message}`,
-          })
-        );
-    };
-    return { getMsgCode, count }
-  }
-}
+
+// 获取手机验证码
+const getMsgCode = () => {
+  // 如果倒计时正在执行, 阻止程序向下执行
+  if (isActive.value) return;
+  // 验证手机号
+  getMobileIsValidate()
+    .then(({ isValid, mobile }) => {
+      // 如果手机号验证通过
+      if (isValid) return getRegisterMsgCode(mobile);
+    })
+    .then(() => {
+      Message({ type: "success", text: "验证码发送成功" });
+      // 开启倒计时
+      start(60);
+    })
+    .catch((error) =>
+      Message({
+        type: "error",
+        text: `验证码发送失败 ${error.response.data.message}`,
+      })
+    );
+};
+
 ```
 
 * **Step.7：完善信息(创建新账号)、绑定QQ号**
@@ -228,7 +218,7 @@ export function createNewAccountBindQQ({
   code,
   password,
 }) {
-  return request(`/login/social/${unionId}/complement`, "POST", {
+  return request.post(`/login/social/${unionId}/complement`, {
     account,
     mobile,
     code,
@@ -240,30 +230,38 @@ export function createNewAccountBindQQ({
 创建新账号、绑定QQ号、成功后跳转到首页(登录成功)
 
 ```js
-import useLoginAfter from "@/hooks/useLoginAfter";
-import { createNewAccountBindQQ } from "@/api/user";
+import { getRegisterMsgCode, createNewAccountBindQQ } from "@/api/loginAPI";
 
-export default {
-    setup() {
-        // 获取登录成功回调函数、获取登录失败回调函数
-    const { loginSuccessful, loginFailed } = useLoginAfter();
-    // 处理表单提交
-    const onSubmitHandler = handleSubmit((value) => {
-      // 实现注册新账户并绑定QQ号, 完成后就是登录状态
-      createNewAccountBindQQ({
-        unionId: props.unionId,
-        account: value.checkUserAccount,
-        mobile: value.mobile,
-        code: value.code,
-        password: value.password,
-      })
-        // 成功
-        .then(loginSuccessful)
-        // 失败
-        .catch(loginFailed);
-    });
+const onSubmitHandler = handleSubmit((value) => {
+  // 请求成功时的回调
+  const successFn = ({ data: res, status: status }) => {
+    const { profile } = storeToRefs(useUserStore());
+    if (status === 200) {
+      // 把用户信息存储到Store中
+      profile.value = { ...profile.value, ...res.result };
+      // // 判断登陆成功 跳转到首页
+      router.push("/").then(() => {
+        // 登录成功之后的提示信息
+        Message({ type: "success", text: "登录成功" });
+      });
     }
-}
+  };
+  // 登陆失败时的回调
+  const failFn = (error) => {
+    // console.log(error.response.data.message);
+    Message({ type: "error", text: error.response.data.message });
+  };
+  createNewAccountBindQQ({
+    unionId: props.unionId,
+    account: value.checkUserAccount,
+    mobile: value.mobile,
+    code: value.code,
+    password: value.password,
+  }) // 成功
+    .then(successFn)
+    // 失败
+    .catch(failFn);
+});
 
 ```
 
