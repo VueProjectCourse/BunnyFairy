@@ -76,35 +76,26 @@ const onBindPhoneSubmit = handleBindPhoneSubmit((value) => {
 <template>
   <form class="xtx-form" @submit="onBindPhoneSubmit">
     <div class="user-info">
-      <img :src="avatar" alt="" />
-      <p>Hi，{{ nickname }} 欢迎来小兔鲜，完成绑定后可以QQ账号一键登录哦~</p>
+      <img
+        src="http://qzapp.qlogo.cn/qzapp/101941968/57C7969540F9D3532451374AA127EE5B/50"
+        alt=""
+      />
+      <p>Hi，Tom 欢迎来小兔鲜，完成绑定后可以QQ账号一键登录哦~</p>
     </div>
     <div class="xtx-form-item">
       <div class="field">
         <i class="icon iconfont icon-phone"></i>
-        <input
-          class="input"
-          type="text"
-          placeholder="绑定的手机号"
-          v-model="mobileField"
-        />
+        <input class="input" type="text" placeholder="绑定的手机号" />
       </div>
-      <div class="error" v-if="mobileError">{{ mobileError }}</div>
+      <div class="error"></div>
     </div>
     <div class="xtx-form-item">
       <div class="field">
         <i class="icon iconfont icon-code"></i>
-        <input
-          class="input"
-          type="text"
-          placeholder="短信验证码"
-          v-model="codeField"
-        />
-        <span class="code" @click="getMsgCode">{{
-          isActive ? `剩余${count}秒` : "发送验证码"
-        }}</span>
+        <input class="input" type="text" placeholder="短信验证码" />
+        <span class="code">发送验证码</span>
       </div>
-      <div class="error" v-if="codeError">{{ codeError }}</div>
+      <div class="error"></div>
     </div>
     <input type="submit" class="submit" value="立即绑定" />
   </form>

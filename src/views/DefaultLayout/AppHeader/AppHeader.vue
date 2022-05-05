@@ -1,7 +1,6 @@
 <script setup>
-import HeaderNav from '../HeaderNav/HeaderNav.vue';
+import HeaderNav from "../HeaderNav/HeaderNav.vue";
 </script>
-
 
 <template>
   <header class="app-header">
@@ -26,7 +25,6 @@ import HeaderNav from '../HeaderNav/HeaderNav.vue';
     </div>
   </header>
 </template>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";

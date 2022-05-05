@@ -1,11 +1,11 @@
 <script setup>
 const props = defineProps({
   subCategories: {
-    type: Array
-  }
-})
+    type: Array,
+  },
+});
 
-console.log(props.cate)
+console.log(props.cate);
 </script>
 
 <template>
@@ -14,17 +14,13 @@ console.log(props.cate)
     <ul>
       <li v-for="item in subCategories" :key="item.id">
         <a href="javascript:">
-          <img
-            :src="item.picture"
-            :alt="item.name"
-          />
-          <p>{{item.name}}</p>
+          <img :src="item.picture" :alt="item.name" />
+          <p>{{ item.name }}</p>
         </a>
       </li>
     </ul>
   </div>
 </template>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";

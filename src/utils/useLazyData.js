@@ -1,15 +1,15 @@
-import { ref } from "vue"
-import { useIntersectionObserver } from "@vueuse/core"
+import { ref } from "vue";
+import { useIntersectionObserver } from "@vueuse/core";
 // 声明 数据懒加载的方法
 
 /**
- * 
+ *
  * @param {*} apiFn 接口方法
- * @returns 
+ * @returns
  */
 export const lazyData = (apiFn) => {
   // 监听是否进入可视区的目标元素
-  const target = ref(null)
+  const target = ref(null);
   // 声明接口数据
   const result = ref(null);
   // stop 停止监听的方法
@@ -26,9 +26,9 @@ export const lazyData = (apiFn) => {
           // 把数据赋值给bannerList
           result.value = res.result;
         }
-      })
+      });
     }
-  })
+  });
 
-  return { target, result }
-}
+  return { target, result };
+};

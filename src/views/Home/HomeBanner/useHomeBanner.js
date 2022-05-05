@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { readBanners } from "@/api/homeAPI"
+import { readBanners } from "@/api/homeAPI";
 
 export const useBanner = () => {
   // 声明bannerList数组 用来存储请求来的数据
@@ -10,7 +10,7 @@ export const useBanner = () => {
       // 把数据赋值给bannerList
       bannerList.value = res.result;
     }
-  })
+  });
   // 导出请求数据
   return { bannerList };
-}
+};

@@ -16,6 +16,7 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+<<<<<<< HEAD
   skuId: {
     type: String,
   },
@@ -28,11 +29,22 @@ const { specPathMap, setSpecPathMap } = useSpecPathMap();
 const { setUserSelect } = useUserSelect();
 const { setSpecDisable } = useSpecDisable();
 const { setDataToParent } = useDataToParent(setUserSelect);
+=======
+});
+
+const { setSpecSelect } = useSpecSelect();
+const { specPathMap, setSpecPathMap } = useSpecPathMap();
+const { setUserSelect } = useUserSelect();
+const { setSpecDisable } = useSpecDisable();
+>>>>>>> 934b00301669902b2620a64f31d28100f8140ac6
 
 onMounted(() => {
   setSpecPathMap(props.skus);
   setSpecDisable(props.specs, specPathMap, setUserSelect);
+<<<<<<< HEAD
   setSpecDefaultSelect(props.skuId, props.skus, props.specs);
+=======
+>>>>>>> 934b00301669902b2620a64f31d28100f8140ac6
 });
 </script>
 <template>
@@ -50,7 +62,10 @@ onMounted(() => {
             @click="
               setSpecSelect(spec, value);
               setSpecDisable(props.specs, specPathMap, setUserSelect);
+<<<<<<< HEAD
               setDataToParent(props.specs, props.skus, emit, specPathMap);
+=======
+>>>>>>> 934b00301669902b2620a64f31d28100f8140ac6
             "
           />
 
@@ -60,7 +75,10 @@ onMounted(() => {
             @click="
               setSpecSelect(spec, value);
               setSpecDisable(props.specs, specPathMap, setUserSelect);
+<<<<<<< HEAD
               setDataToParent(props.specs, props.skus, emit, specPathMap);
+=======
+>>>>>>> 934b00301669902b2620a64f31d28100f8140ac6
             "
             >{{ value.name }}</span
           >

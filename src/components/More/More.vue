@@ -4,7 +4,7 @@ defineProps({
     type: String,
     default: "/",
   },
-})
+});
 </script>
 
 <template>
@@ -13,7 +13,6 @@ defineProps({
     <i class="iconfont icon-angle-right"></i>
   </RouterLink>
 </template>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";
@@ -41,4 +40,4 @@ defineProps({
 .xtx-more:hover i {
   color: var(--primary-color);
 }
-</style>
+=======

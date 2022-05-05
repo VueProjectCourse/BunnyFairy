@@ -18,17 +18,16 @@ defineProps({
     type: String,
     default: "scroll", // 'fade'
   },
-})
-
+});
 </script>
 
 <template>
   <div class="xtx-skeleton" :style="{ width, height }" :class="animated">
     <!-- 1 盒子-->
     <div class="block" :style="{ backgroundColor: bg }"></div>
-    <!-- 2 闪效果 xtx-skeleton 伪元素 --->  </div>
+    <!-- 2 闪效果 xtx-skeleton 伪元素 --->
+  </div>
 </template>
-
 
 <style scoped>
 .xtx-skeleton {
@@ -71,10 +70,12 @@ defineProps({
   top: 0;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to left,
-      rgba(255, 255, 255, 0) 0,
-      rgba(255, 255, 255, 0.3) 50%,
-      rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
   transform: skewX(-45deg);
 }
 

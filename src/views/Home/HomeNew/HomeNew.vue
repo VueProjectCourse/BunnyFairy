@@ -1,15 +1,12 @@
 <script setup>
-import HomePanel from '../HomePanel/HomePanel.vue';
+import HomePanel from "../HomePanel/HomePanel.vue";
 // import PanelSkeleton from '../PanelSkeleton/PanelSkeleton.vue';
 
 // const { goodsList } = useNewGoods();
 // import { useNewGoods } from "./useHomeNew"
-import {readNewGoods} from "@/api/homeAPI"
-import { lazyData } from "@/utils/useLazyData"
-const {target, result:goodsList } = lazyData(readNewGoods);
-
-
-
+import { readNewGoods } from "@/api/homeAPI";
+import { lazyData } from "@/utils/useLazyData";
+const { target, result: goodsList } = lazyData(readNewGoods);
 </script>
 <template>
   <HomePanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱" ref="target">
@@ -29,7 +26,6 @@ const {target, result:goodsList } = lazyData(readNewGoods);
       <Transition name="fade">
         <PanelSkeleton v-if="!goodsList"></PanelSkeleton>
       </Transition>
-      
     </template>
   </HomePanel>
 </template>
@@ -47,7 +43,7 @@ const {target, result:goodsList } = lazyData(readNewGoods);
   width: 306px;
   height: 406px;
   background: #f0f9f4;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .goods-list li:hover {

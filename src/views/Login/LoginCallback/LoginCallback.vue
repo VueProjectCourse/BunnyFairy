@@ -48,7 +48,7 @@ window.QC.Login.getMe((openId) => {
       </a>
     </nav>
     <div class="tab-content" v-if="hasAccount">
-      <LoginCallbackBindPhone :unionId="unionId" />
+      <LoginCallbackBindPhone />
     </div>
     <div class="tab-content" v-if="!hasAccount">
       <LoginCallbackBindPatch :unionId="unionId" />

@@ -1,8 +1,8 @@
 <script setup>
-import HomePanel from '../HomePanel/HomePanel.vue';
-import { readGoodProducts } from "@/api/homeAPI"
-import { lazyData } from "@/utils/useLazyData"
-import HomeGoods from "../HomeGoods/HomeGoods.vue"
+import HomePanel from "../HomePanel/HomePanel.vue";
+import { readGoodProducts } from "@/api/homeAPI";
+import { lazyData } from "@/utils/useLazyData";
+import HomeGoods from "../HomeGoods/HomeGoods.vue";
 const { target, result: productList } = lazyData(readGoodProducts);
 </script>
 
@@ -11,9 +11,13 @@ const { target, result: productList } = lazyData(readGoodProducts);
     <HomePanel :title="item.name" v-for="item in productList" :key="item.id">
       <template v-slot:right>
         <div class="sub" v-if="item.children">
-          <RouterLink v-for="subitem in item.children" :key="subitem.id" :to="`/category/sub/${subitem.id}`">
-            {{ subitem.name }}</RouterLink>
-
+          <RouterLink
+            v-for="subitem in item.children"
+            :key="subitem.id"
+            :to="`/category/sub/${subitem.id}`"
+          >
+            {{ subitem.name }}</RouterLink
+          >
         </div>
         <More />
       </template>
@@ -37,7 +41,6 @@ const { target, result: productList } = lazyData(readGoodProducts);
     </HomePanel>
   </div>
 </template>
-
 
 <style scoped>
 @import "@/assets/styles/variable.css";
@@ -124,7 +127,7 @@ const { target, result: productList } = lazyData(readGoodProducts);
   margin-bottom: 10px;
 }
 
-.home-product .box .goods-list li:nth-last-child(-n+4) {
+.home-product .box .goods-list li:nth-last-child(-n + 4) {
   margin-bottom: 0;
 }
 

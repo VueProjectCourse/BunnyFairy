@@ -1,6 +1,6 @@
 <script setup>
 // 接收path属性
-defineProps(["path"])
+defineProps(["path"]);
 </script>
 
 <template>
@@ -16,7 +16,6 @@ defineProps(["path"])
   </div>
 </template>
 
-
 <style scoped>
 @import "@/assets/styles/variable.css";
 
@@ -29,4 +28,3 @@ defineProps(["path"])
   color: var(--primary-color);
 }
 </style>
-
