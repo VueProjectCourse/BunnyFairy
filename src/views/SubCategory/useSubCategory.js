@@ -1,12 +1,12 @@
 import { useRoute } from "vue-router";
+import { useCateStore } from "@/stores/cateStore";
 import { storeToRefs } from "pinia";
 import { ref, watchEffect } from "vue";
-import { useCateStore } from "@/stores/cateStore";
 import { readGoodsReq } from "@/api/categoryAPI";
-// 用于标识加载状态
-export const loading = ref(false);
 
-//用于标识是否全部数据都已加载完毕
+// 声明 正在加载UI状态
+export const loading = ref(false);
+// 声明 无更多数据UI状态
 export const finished = ref(false);
 // 动态生成breadItem
 export const useBread = () => {
@@ -43,55 +43,53 @@ export const useBread = () => {
 export const reqParams = ref({
   // categoryId来自于 route.params.id
   categoryId: null,
-  // 当前页
   page: 1,
-  // 每次请求获取的数据条数
-  pageSize: 10,
 });
 
-// setReqParams作用是: 把所有的筛选和排序 和 categoryId 整合到一起 发送到服务器
-export const setReqParams = (target) => {
-  // 当筛选条件和排序条件发生变化以后, 需要从第一页开始获取数据, 所以页码需要重置.
-  reqParams.value = { ...reqParams.value, ...target, page: 1 };
-};
-
-// 加载更多
 export const loadMore = () => {
-  // 当前页加一
+  // 当我们刚进入页面的时候，我们就有一个参数 page
+  // 当监听的元素到可视区的时候，让参数page+1
+  // console.log(11111);
   reqParams.value = {
     ...reqParams.value,
     page: reqParams.value.page + 1,
   };
 };
 
+// setReqParams作用是: 把所有的筛选和排序 和 categoryId 整合到一起 发送到服务器
+export const setReqParams = (target) => {
+  reqParams.value = { ...reqParams.value, ...target };
+};
+
 // 商品数据
 export const filterGoodsList = ref(null);
 
 // 调用获取商品数据的方法
-export const setFilterGoodsList = () => {
-  // 数据状态
+export const useGoods = () => {
+  // 当调用useGoods的时候 要发请求
+  loading.value = true;
 
   // 修改状态的方法
   readGoodsReq(reqParams.value).then(({ data: res, status: status }) => {
     if (status === 200) {
+      // 当数据获取到之后， 要让loading隐藏
       loading.value = false;
-      // 如果当前是第一页，直接赋值
+
+      // 当page是第一页的时候, 直接把结果进行赋值
       if (reqParams.value.page == 1) {
         filterGoodsList.value = res.result;
-        // 当页码重置为1时, 重置 finished
-        finished.value = false;
       } else {
-        // 如果当前不是第一页，做商品列表数据的累加
+        // 如果不是第一页，那么把旧数据和新数据进行整合
         filterGoodsList.value = {
           ...res.result,
           items: [...filterGoodsList.value.items, ...res.result.items],
         };
       }
+    }
 
-      // 如果当前页面已经是最后一页了
-      if (reqParams.value.page === res.result.pages || res.result.pages === 0) {
-        finished.value = true;
-      }
+    // 如果当前页码如果和总页数一样，说明是最后一页 让finished为true 这一页啥数据都没有 让finished为true
+    if (res.result.page == res.result.pages || res.result.pages == 0) {
+      finished.value = true;
     }
   });
 };

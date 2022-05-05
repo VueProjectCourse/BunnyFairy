@@ -1,5 +1,5 @@
 <script setup>
-import DefaultLayout from "../DefaultLayout/DefaultLayout.vue";
+import DefaultLayout from "../DefaultLayout/Layout.vue";
 import GoodsRelevant from "./GoodsRelevant/GoodsRelevant.vue";
 import GoodsImages from "./GoodsImages/GoodsImages.vue";
 import GoodsSales from "./GoodsSales/GoodsSales.vue";
@@ -23,11 +23,18 @@ onBeforeRouteUpdate((to) => {
   setGoodsDetail(to.params.id);
 });
 
+let result = goodsDetail;
+const onSpecChanged = (data) => {
+  // 数据回传，
+  // console.log(data);
+  result.value = { ...result.value, ...data };
+};
+
 const count = ref(1);
 </script>
 <template>
   <DefaultLayout>
-    <div class="xtx-goods-page" style="background-color: #f5f5f5">
+    <div class="xtx-goods-page">
       <div class="container">
         <!-- 面包屑 -->
         <Bread>
@@ -55,7 +62,13 @@ const count = ref(1);
           <!-- 右侧 -->
           <div class="spec">
             <GoodsInfo :goods="goodsDetail" v-if="goodsDetail" />
-            <GoodsSku :specs="goodsDetail?.specs" />
+            <GoodsSku
+              v-if="goodsDetail"
+              :specs="goodsDetail.specs"
+              :skus="goodsDetail.skus"
+              skuId="1369155864430120962"
+              @on-spec-changed="onSpecChanged"
+            />
             <!-- :modelValue="" @update:modelValue -->
             <NumberBox
               label="数量"

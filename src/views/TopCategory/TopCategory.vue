@@ -1,37 +1,27 @@
 <script setup>
-import DefaultLayout from "@/views/DefaultLayout/DefaultLayout.vue";
-import SubCategoryList from "./SubCategoryList/SubCategoryList.vue";
-import GoodsRecommend from "./GoodsRecommend/GoodsRecommend.vue";
-
-import { useBread, useTopCateBanner } from "./useTopCategory";
-const { topCate } = useBread();
-const { carouselList } = useTopCateBanner();
+import Layout from '../DefaultLayout/Layout.vue';
+import { useBread, useTopCateCarousel } from "./useTopCategory";
+import SubCateList from "./SubCateList/SubCateList.vue";
+import RecommendGoods from './RecommendGoods/RecommendGoods.vue';
+const { topCate } = useBread()
+const { carouselList } = useTopCateCarousel();
 </script>
-
 <template>
-  <DefaultLayout>
-    <div class="top-category" style="background-color: #f5f5f5">
-      <div class="container">
-        <Bread>
-          <BreadItem path="/">首页</BreadItem>
-          <Transition name="fade-right" mode="out-in">
-            <BreadItem :key="topCate?.id" :path="`/category/${topCate?.id}`">{{
-              topCate?.name
-            }}</BreadItem>
-          </Transition>
-        </Bread>
-
-        <Carousel
-          v-if="carouselList"
-          :auto="true"
-          :carousel="carouselList"
-          :style="{ height: '500px' }"
-        ></Carousel>
-
-        <SubCategoryList :subCategories="topCate.children" v-if="topCate" />
-
-        <GoodsRecommend />
-      </div>
+  <Layout>
+    <div class="container">
+      <!-- 面包屑导航 -->
+      <Bread>
+        <BreadItem path="/">首页</BreadItem>
+        <Transition name="fade-right" mode="out-in">
+          <BreadItem :key="topCate?.id">{{ topCate?.name }}</BreadItem>
+        </Transition>
+      </Bread>
+      <!-- 轮播图 -->
+      <Carousel v-if="carouselList" :carousels="carouselList" :auto="true" :style="{ height: '500px' }"></Carousel>
+      <!-- 全部分类 -->
+      <SubCateList v-if="topCate" :subCategories="topCate?.children"></SubCateList>
+      <!-- 推荐商品 -->
+      <RecommendGoods/>
     </div>
-  </DefaultLayout>
+  </Layout>
 </template>

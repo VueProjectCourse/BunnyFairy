@@ -1,9 +1,21 @@
-// create(add)增 delete(remove)删 update(edit)改  read(find)查
-import request from "../utils/request";
+// 分类模块
+// 增(create)删(delete)改(update)查(read)
+
+// 导入封装好的axios工具函数
+import request from "@/utils/request";
+
+/**
+ * 首页-全部分类（包含推荐商品）
+ * @returns {Promise<{result: Array<Category>}>}
+ */
+export function readCategories() {
+  // 根据工具函数 导出一个方法
+  return request.get("/home/category/head");
+}
 
 /**
  * 获取热门品牌
- * @param {number} limit - 请求多少条数据
+ * @param { Number } limit - 请求多少条数据
  * @return {Promise<{result: Array<Brand>}>}
  */
 export const readHotBrands = (limit = 10) => {
@@ -15,9 +27,9 @@ export const readHotBrands = (limit = 10) => {
 };
 
 /**
- * 获取轮播图数据
- * @param {number} distributionSite - 广告投放位置 1 首页 2 分类页面
- * @return {Promise<{result: Array<Banner>}>} 广告图列表
+ * 获取轮播图
+ * @param {*} distributionSite 轮播图页面位置
+ * @returns {Promise<{result: Array<Banners>}>}
  */
 export const readBanners = (distributionSite = 1) => {
   return request.get("/home/banner", {
@@ -32,21 +44,21 @@ export const readBanners = (distributionSite = 1) => {
  * @param {number} limit 限制获取的数据条数
  * @return {Promise<{result: Array<newGoods>}>}
  */
-export const readNewGoods = (limit = 4) => {
+export function readNewGoods(limit = 4) {
   return request.get("/home/new", {
     params: {
       limit,
     },
   });
-};
+}
 
 /**
  * 获取人气推荐
  * @return {Promise<{result: Array<hotGoods>}>}
  */
-export const readHotProduct = () => {
+export function readHotProduct() {
   return request.get("/home/hot");
-};
+}
 
 /**
  * 获取产品区块数据

@@ -1,13 +1,22 @@
 <script setup>
 import LoginHeader from "./LoginHeader/LoginHeader.vue";
 import LoginFooter from "./LoginFooter/LoginFooter.vue";
-import LoginForm from "./LoginForm/LoginForm.vue";
-
 import { useTogglePattern } from "./Login";
+import LoginForm from "./LoginForm/LoginForm.vue";
+// import Message from "../../components/Message/Message";
 const { loginPattern, setLoginPattern } = useTogglePattern();
+
+// const showMessage = () => {
+//   Message({ type: "success", text: "封装Message组件" });
+// };
 </script>
+
 <template>
   <div class="login">
+    <!-- 通过 标签调用了 组件 -->
+    <!-- 能不能通过js来调用组件 -->
+    <!-- <Message type="success" text="登录成功" /> -->
+    <!-- <button @click="showMessage">点击按钮</button> -->
     <LoginHeader>欢迎登录</LoginHeader>
     <section class="login-section">
       <div class="wrapper">

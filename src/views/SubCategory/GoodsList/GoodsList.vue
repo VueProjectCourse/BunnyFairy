@@ -1,5 +1,5 @@
 <script setup>
-import GoodsItem from "@/views/TopCategory/GoodsItem/GoodsItem.vue";
+import GoodsItem from "../../TopCategory/GoodsItem/GoodsItem.vue";
 defineProps({
   goods: {
     type: Array,

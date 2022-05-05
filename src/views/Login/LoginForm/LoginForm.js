@@ -160,8 +160,16 @@ export const handlerMsgCode = async (getMobileIsValidate, start, isActive) => {
   }
 };
 
+// 手机短信登陆
 export const useMobileLogin = () => {
+  // vue-router 用的是provide inject
+  // 注意 useRouter方法 必须在setup内执行 或者是 函数式组件
   const router = useRouter();
+  // route 和 router
+  // route 获取 路由里面的信息的
+  // router 是路由对象 专门用来改变路由的 里面有 改变路由的方法 route里面全部是属性
+  // console.log(router);
+
   // 请求成功时的回调
   const successFn = ({ data: res, status: status }) => {
     const { profile } = storeToRefs(useUserStore());
@@ -177,10 +185,13 @@ export const useMobileLogin = () => {
   };
   // 登陆失败时的回调
   const failFn = (error) => {
+    // console.log(error.response.data.message);
     Message({ type: "error", text: error.response.data.message });
   };
-  const setMobileLogin = ({ mobile, code }) => {
-    loginByMobileMsgCode({ mobile, code }).then(successFn).catch(failFn);
+
+  // 登陆方法
+  const setMobileLogin = (loginParams) => {
+    loginByMobileMsgCode(loginParams).then(successFn).catch(failFn);
   };
 
   return { setMobileLogin };

@@ -1,12 +1,18 @@
+/* color palette from <https://github.com/vuejs/theme> */
+/*  */
 :root {
+  /* css支持的格式: --变量名: 值 */
   /* 主题色 */
   --primary-color: #27BA9B;
   /* 辅助色 */
-  --auxiliary-color: #E26237;
+  --help-color: #E26237;
   /* 成功色 */
   --success-color: #1DC779;
   /* 警告色 */
   --warning-color: #FFB302;
   /* 价格 */
   --price-color: #CF4444;
+  /* 背景颜色 */
+  --white-color: #f5f5f5;
+
 }

@@ -1,13 +1,11 @@
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore({
+export const useCartStore = defineStore({
   id: "cartStore",
   state: () => ({
-    // 存储购物车列表
+    // 存储商品列表
     list: [],
   }),
-  getters: {},
-  actions: {},
   // 开启数据缓存
   persist: {
     enabled: true,

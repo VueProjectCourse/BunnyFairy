@@ -1,34 +1,36 @@
 <script setup>
 import { useIntersectionObserver } from "@vueuse/core";
 import { ref } from "vue";
-
 const props = defineProps({
-  // 是否正在加载
+  // 控制正在加载效果的显示
   loading: {
     type: Boolean,
     default: false,
   },
-  //是否已经加载全部数据
+  // 控制没有更多效果的显示
   finished: {
     type: Boolean,
     default: false,
   },
 });
 
-const emits = defineEmits(["infinite"]);
+const emit = defineEmits(["infinite"]);
 
-// 被监听元素
+// 监听 某一个元素是否进入可视区的方法
+// target 监听哪个元素
+// isIntersecting 是否进入可视区
 const target = ref(null);
-//执行监听元素的操作
 useIntersectionObserver(target, ([{ isIntersecting }]) => {
-  // 如果元素进入了可视区
   if (isIntersecting) {
+    // 如果元素进入了可视区 是要让父组件去请求数据的 但是如果已经在请求数据了 没有数据了就没必要请求
+
     if (!props.loading && !props.finished) {
-      emits("infinite");
+      emit("infinite");
     }
   }
 });
 </script>
+
 <template>
   <div class="xtx-infinite-loading" ref="target">
     <div class="loading" v-if="loading">

@@ -1,5 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
+
+// 接收外面调用的时候 什么情况下的消息 成功 失败 警告  提示信息的样式不一样  根据内容不一样 消息具体内容也不一样
 defineProps({
   // 消息提示类型 warn、error、success
   type: {
@@ -36,15 +38,17 @@ const style = {
   },
 };
 
-// 默认不渲染元素
-const show = ref(false);
-// 组件挂载完成后渲染元素
-onMounted(() => (show.value = true));
-</script>
+// 给 Message组件添加动画，是没有效果的 只有发生组件的更新 才会有效果
 
+const isShow = ref(false);
+
+onMounted(() => {
+  isShow.value = true;
+});
+</script>
 <template>
   <Transition name="down">
-    <div class="xtx-message" :style="style[type]" v-if="show">
+    <div class="xtx-message" :style="style[type]" v-if="isShow">
       <i class="iconfont" :class="style[type].icon"></i>
       <span class="text">{{ text }}</span>
     </div>

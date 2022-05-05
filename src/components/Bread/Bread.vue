@@ -1,25 +1,28 @@
 <script>
-import { defineComponent, h } from "vue";
+import { defineComponent, h } from "vue"
+
 export default defineComponent({
+  props: ["path"],
   render() {
-    // 获取组件默认插槽的内容，获取BreadItem组件
-    const items = this.$slots.default();
-    // 存储子组件内容，因为icon需要动态生成
-    const children = [];
-    // 遍历插槽内容
-    items.forEach((item, index) => {
-      // 将当前便利插槽内容存储起来
-      children.push(item);
-      // 如果当前不是最后一项，动态生成icon
-      if (index < items.length - 1) {
-        children.push(h("i", { className: "iconfont icon-angle-right" }));
+    // 获取组件的属性this.$props.属性名
+    // 获取插槽内容 this.$slots.default()
+    // console.log(this.$slots.default())
+    const items = this.$slots.default(); // BreadItem数组
+    const children = []; // 用来存储 渲染到h函数的第三个参数的
+    items.forEach((ele, index) => {
+      children.push(ele)
+      // 如果是首页 > 电器 > 空调 不加
+      if (index  < items.length -1) {
+        children.push(h('i', {className: "iconfont icon-angle-right"}))
       }
     });
-    // 创建面包屑最外层元素
-    return h("div", { className: "xtx-bread" }, children);
-  },
-});
+    // console.log(children)
+     return h('div', {className: "xtx-bread"}, children)
+  }
+})
+
 </script>
+
 
 <style scoped>
 @import "@/assets/styles/variable.css";

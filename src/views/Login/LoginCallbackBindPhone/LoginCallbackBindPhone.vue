@@ -1,62 +1,80 @@
 <script setup>
-import Message from "@/components/Message/Message";
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
+import { storeToRefs } from "pinia";
+import { useQQUserInfo, useBindPhoneValidate } from "./LoginCallbackBindPhone";
+import { getBindMobileMsgCode, bindMobileAndQQ } from "@/api/loginAPI";
 import useCountDown from "@/utils/useCountDown";
-import { getBindMobileMsgCode } from "../../../api/loginAPI";
-import {
-  useQQUserInfo,
-  useBindPhoneValid,
-  useThirdPartyLogin,
-} from "./LoginCallbackBindPhone";
+import Message from "@/components/Message/Message";
+const router = useRouter();
+const { nickname, avatar, setNickAndAvatar } = useQQUserInfo();
+const {
+  handleBindPhoneSubmit,
+  mobileField,
+  mobileError,
+  codeField,
+  codeError,
+  getMobileIsValidate,
+} = useBindPhoneValidate();
+const { count, start, isActive } = useCountDown();
 const props = defineProps({
   unionId: {
     type: String,
     default: "",
   },
 });
-const { count, isActive, start } = useCountDown();
-const { nickname, avatar, setNickAndAvatar } = useQQUserInfo();
-const { setThirdPartyLogin } = useThirdPartyLogin();
-setNickAndAvatar();
-// 获取和表单验证相关的内容
-const {
-  codeField,
-  codeError,
-  mobileField,
-  mobileError,
-  handleSubmit,
-  getMobileIsValidate,
-} = useBindPhoneValid();
-// 表单提交
-const onSubmitHandler = handleSubmit((value) => {
-  console.log(value);
-  setThirdPartyLogin({ ...value, unionId: props.unionId });
+onMounted(() => {
+  setNickAndAvatar();
 });
+// 获取验证码
 const getMsgCode = () => {
   getMobileIsValidate().then(({ isValid, mobile }) => {
     // 如果手机号验证通过
-    if (isValid) {
-      // 如果手机号验证通过
-      if (isValid && !isActive.value) {
-        console.log(1111);
-        return getBindMobileMsgCode(mobile)
-          .then(() => {
-            Message({ type: "success", text: "验证码发送成功" });
-            // 开启倒计时
-            start(60);
-          })
-          .catch((error) => {
-            Message({
-              type: "error",
-              text: `验证码发送失败 ${error.response.data.message}`,
-            });
-          });
-      }
+    // if (isValid && !isActive.value) return getBindMobileMsgCode(mobile);
+    console.log(isValid, mobile, !isActive.value);
+    if (isValid && !isActive.value) {
+      start(60);
+      getBindMobileMsgCode(mobile)
+        .then(() => {
+          // 验证码发送成功提示
+          Message({ type: "success", text: "验证码发送成功" });
+        })
+        .catch((error) => {
+          Message({ type: "error", text: error.response.data.message });
+        });
     }
   });
 };
+// 点击提交的方法
+const onBindPhoneSubmit = handleBindPhoneSubmit((value) => {
+  // 请求成功时的回调
+  const successFn = ({ data: res, status: status }) => {
+    const { profile } = storeToRefs(useUserStore());
+    if (status === 200) {
+      // 把用户信息存储到Store中
+      profile.value = { ...profile.value, ...res.result };
+      // // 判断登陆成功 跳转到首页
+      router.push("/").then(() => {
+        // 登录成功之后的提示信息
+        Message({ type: "success", text: "登录成功" });
+      });
+    }
+  };
+  // 登陆失败时的回调
+  const failFn = (error) => {
+    // console.log(error.response.data.message);
+    Message({ type: "error", text: error.response.data.message });
+  };
+  // 将手机号和QQ号进行绑定
+  // 绑定成功即登录成功
+  bindMobileAndQQ({ ...value, unionId: props.unionId })
+    .then(successFn)
+    .catch(failFn);
+});
 </script>
 <template>
-  <form class="xtx-form" @submit="onSubmitHandler">
+  <form class="xtx-form" @submit="onBindPhoneSubmit">
     <div class="user-info">
       <img :src="avatar" alt="" />
       <p>Hi，{{ nickname }} 欢迎来小兔鲜，完成绑定后可以QQ账号一键登录哦~</p>
@@ -102,17 +120,14 @@ const getMsgCode = () => {
   padding: 0 10px;
   margin: 0 auto 20px;
 }
-
 .user-info img {
   background: #f2f2f2;
   width: 50px;
   height: 50px;
 }
-
 .user-info p {
   padding-left: 10px;
 }
-
 .code {
   position: absolute;
   right: 0;
@@ -121,7 +136,6 @@ const getMsgCode = () => {
   width: 80px;
   color: #999;
 }
-
 .code:hover {
   cursor: pointer;
 }

@@ -1,23 +1,21 @@
 <script setup>
-defineProps({
-  path: {
-    type: String,
-  },
-});
+// 接收path属性
+defineProps(["path"])
 </script>
 
 <template>
   <div class="xtx-bread-item">
-    <!-- 如果传递了path属性，那么就渲染 超链接 -->
+    <!-- 判断使用该组件的时候 是否传递path 如果传递了path那么 就用超链接展示 -->
     <RouterLink v-if="path" :to="path">
       <slot></slot>
     </RouterLink>
-    <!-- 如果没有传递path属性，那么就渲染为文本 -->
+    <!-- 如果没有传递path属性 那么就展示成普通文本 -->
     <span v-else>
       <slot></slot>
     </span>
   </div>
 </template>
+
 
 <style scoped>
 @import "@/assets/styles/variable.css";
@@ -31,3 +29,4 @@ defineProps({
   color: var(--primary-color);
 }
 </style>
+

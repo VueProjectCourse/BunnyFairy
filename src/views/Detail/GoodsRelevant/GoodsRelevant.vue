@@ -1,6 +1,6 @@
 <script setup>
 import { useGoodsRelevant } from "./GoodsRelevant";
-
+import Carousel from "../../../components/Carousel/Carousel.vue";
 const props = defineProps({
   goodsId: {
     type: String,
@@ -18,7 +18,7 @@ setReleVant();
       <span class="title">{{ goodsId ? "同类商品" : "猜你喜欢" }}</span>
     </div>
     <!-- 此处使用改造后的carousel.vue -->
-    <Carousel v-if="relevant" :carousel="relevant" />
+    <Carousel v-if="relevant" :carousels="relevant" />
   </div>
 </template>
 

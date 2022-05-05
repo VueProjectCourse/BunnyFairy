@@ -29,6 +29,8 @@ const handlerLogout = () => {
         </template>
         <template v-else>
           <li>
+            <!-- <a href="javascript:">请先登录</a> -->
+
             <RouterLink to="/login">请先登录</RouterLink>
           </li>
           <li>

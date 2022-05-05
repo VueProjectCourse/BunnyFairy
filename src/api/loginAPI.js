@@ -14,6 +14,7 @@ export const loginByAccountAndPassword = ({ account, password }) => {
  * @param mobile
  * @return {Promise}
  */
+
 export const readLoginMsgCode = (mobile) => {
   return request.get("/login/code", {
     params: {
@@ -39,8 +40,7 @@ export const loginByMobileMsgCode = ({ mobile, code }) => {
  * @param source 注册来源
  * @return {AxiosPromise}
  */
-export const findAccountByQQOpenid = ({ unionId, source = 1 }) => {
-  console.log(unionId);
+export const findAccountByQQOpenId = ({ unionId, source = 1 }) => {
   return request.post("/login/social", { unionId, source });
 };
 
@@ -66,4 +66,54 @@ export const getBindMobileMsgCode = (mobile) => {
  */
 export const bindMobileAndQQ = ({ unionId, mobile, code }) => {
   return request.post("/login/social/bind", { unionId, mobile, code });
+};
+
+/**
+ * 检测用户名是否唯一
+ * @param account 用户名
+ * @return {Promise}
+ */
+export const checkUsernameIsUnique = (account) => {
+  return request.get("/register/check", {
+    params: {
+      account,
+    },
+  });
+};
+
+/**
+ * 获取手机验证码 (注册)
+ * @param mobile 手机号
+ * @return {AxiosPromise}
+ */
+export const getRegisterMsgCode = (mobile) => {
+  return request.get("/register/code", {
+    params: {
+      mobile,
+    },
+  });
+};
+
+/**
+ * 创建新账户并绑定QQ
+ * @param unionId QQ用户唯一标识
+ * @param account 用户名
+ * @param mobile 手机号
+ * @param code 验证码
+ * @param password 密码
+ * @return {AxiosPromise}
+ */
+export const createNewAccountBindQQ = ({
+  unionId,
+  account,
+  mobile,
+  code,
+  password,
+}) => {
+  return request.post(`/login/social/${unionId}/complement`, {
+    account,
+    mobile,
+    code,
+    password,
+  });
 };

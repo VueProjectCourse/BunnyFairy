@@ -95,7 +95,7 @@ const { sortParams, setSortParams } = subSort();
 }
 
 .sub-sort .sort a.active {
-  background-color: var(--primary-color);
+  background: var(--primary-color);
   border-color: var(--primary-color);
   color: #fff;
 }

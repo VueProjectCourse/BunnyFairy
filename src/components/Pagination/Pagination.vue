@@ -1,88 +1,91 @@
 <script setup>
-import { useVModel } from "@vueuse/core";
-import { computed } from "vue";
+import { useVModel } from '@vueuse/core';
+import { computed } from 'vue';
 
 const props = defineProps({
-  // 当前页
   page: {
     type: Number,
-    default: 1,
+    default: 10
   },
-  // 总数据条数
-  count: {
-    type: Number,
-    default: 1,
-  },
-  // 每页显示数据条数
   pageSize: {
     type: Number,
-    default: 10,
+    default: 10
   },
-});
-const emit = defineEmits(["update:page"]);
-// 当前页
+  count: {
+    type: Number,
+    default: 100
+  }
+})
+const emit = defineEmits(["update:page"])
+// 分析: 
+// 1. 声明 当前页 (父组件设置当前页 点击当前页把值传递给父组件)
 const currentPage = useVModel(props, "page", emit);
-// 总数据条数
-const totalCount = computed(() => props.count);
-// 每页显示数据条数
-const pageSize = computed(() => props.pageSize);
+// 2. 声明 每页显示多少条数据
+// 当代码写在setup内的时候 setup是一个入口函数，只执行一次，因此我们使用
+// computed监听
+const pageSize = computed(()=>props.pageSize);
+// 3. 数据总条数
+const total =  computed(()=>props.count);
 
-// 显示页码按钮的个数
-const pageButtonNum = 5;
+// 4. 页码按钮的个数(异常情况除外)
+const buttonNumber = 5;
+// 5. 偏移量(当前页左边的数字是几 右边的数字是几)
+const offset = Math.floor(buttonNumber/2); // 2
+// 6. 分页所需数据
+const pageInfo = computed(()=> {
 
-// 页码偏移量计算
-const pageOffset = Math.floor(pageButtonNum / 2); // 2
+  // 6.1 计算 页码按钮的开始数字 3
+  // 4 5 6 7 8
+  // 10 - 2 
+  let start = currentPage.value - offset;
 
-const pageInfo = computed(() => {
-  let start = currentPage.value - pageOffset; // 3
+  // 6.2 计算 页码按钮的结束数字 7
+  // 4 + 5 -1 8
+  // 8 9 10 11 12
+  let end = start + buttonNumber - 1;
 
-  let end = start + pageButtonNum - 1;
-  let totalPage = Math.ceil(totalCount.value / pageSize.value);
+  // 6.3 计算 数据的总页数
+  let totalPage = Math.ceil(total.value / pageSize.value); // 10
+  // 6.4 处理开始数字边界异常
   if (start < 1) {
     start = 1;
-    let tmp = start + pageButtonNum - 1;
 
-    end = tmp > totalPage ? totalPage : tmp;
+    let tmp = start + buttonNumber - 1;
+
+     end = tmp > totalPage ? totalPage : tmp;
   }
 
-  if (end > totalPage) {
+  // 6.5 处理结束数字的边界异常
+  // 10 > 10
+  if (end >= totalPage) {
     end = totalPage;
 
-    let tmp = end - pageButtonNum + 1;
+    let tmp = end - buttonNumber + 1;
+    
     start = tmp < 1 ? 1 : tmp;
   }
 
-  let pageButtons = [];
+  // 6.6 声明 存储 页码按钮数字的 数组
+  let pages = [];
 
-  for (var i = start; i <= end; i++) {
-    pageButtons.push(i);
+  // 6.7 通过for循环 把开始到结束的数字添加到 上面的数组中
+  for (var i = start; i<=end;i++) {
+    pages.push(i);
   }
+  // 6.8 返回一个对象{start, end, 数据的总页数, 存储 页码按钮数字的 数组}
+  return {start, end , totalPage, pages}
+})
 
-  return { start, end, totalPage, pageButtons };
-});
 </script>
 
 <template>
+{{pageInfo}}
   <div class="xtx-pagination">
-    <a href="javascript:" @click="currentPage--" v-if="currentPage > 1"
-      >上一页</a
-    >
-    <span v-if="pageInfo.start > 1">...</span>
-    <a
-      href="javascript:"
-      @click="currentPage = page"
-      :class="{ active: page === currentPage }"
-      v-for="page in pageInfo.pageButtons"
-      :key="page"
-      >{{ page }}</a
-    >
-    <span v-if="pageInfo.start < pageInfo.totalPage">...</span>
-    <a
-      href="javascript:"
-      @click="currentPage++"
-      v-if="currentPage < pageInfo.totalPage"
-      >下一页</a
-    >
+    <a href="javascript:" v-if="currentPage > 1" @click="currentPage--">上一页</a>
+    <span v-if="currentPage > 1">... </span>
+    <a href="javascript:" v-for="page in pageInfo.pages" :class="{active: page === currentPage}" @click="currentPage= page">{{page}}</a>
+    <span v-if="currentPage < pageInfo.totalPage">...</span>
+    <a href="javascript:" v-if="currentPage < pageInfo.totalPage" @click="currentPage++">下一页</a>
   </div>
 </template>
 

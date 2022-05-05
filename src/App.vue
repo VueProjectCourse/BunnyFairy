@@ -1,3 +1,5 @@
+<script setup></script>
+
 <template>
   <RouterView />
 </template>
@@ -6,15 +8,16 @@
 @import "@/assets/styles/variable.css";
 
 #app {
-  background-color: #f5f5f5;
+  
+  background-color: var(--white-color);
   user-select: none;
-  -webkit-user-select: none;
-  height: 100%;
 }
 
+/* 布局容器 做版心的  */
 .container {
   position: relative;
   width: 1240px;
   margin: 0 auto;
+
 }
 </style>

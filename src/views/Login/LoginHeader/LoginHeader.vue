@@ -1,6 +1,3 @@
-<script setup>
-defineProps([""]);
-</script>
 <template>
   <header class="login-header">
     <div class="container">

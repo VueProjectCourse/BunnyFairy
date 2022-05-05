@@ -31,10 +31,9 @@ onBeforeRouteUpdate((to) => {
 </template>
 
 <style scoped>
-@import "@/assets/styles/variable.css";
 .goods-hot h3 {
   height: 70px;
-  background: var(--auxiliary-color);
+  background: var(--help-color);
   color: #fff;
   font-size: 18px;
   line-height: 70px;

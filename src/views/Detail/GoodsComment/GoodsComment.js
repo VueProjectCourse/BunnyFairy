@@ -1,11 +1,15 @@
 import { ref } from "vue";
-import { readCommentInfo, readCommentList } from "@/api/detailAPI";
-
+import { readCommentInfo, readCommentList } from "../../../api/detailAPI";
+// 获取头部信息数据
 export const useCommentHeader = () => {
-  const commentData = ref(null);
-  const setCommentData = (id) => {
+  // 头部数据
+  const commentHeader = ref(null);
+  // 获取头部数据的方法(设置头部状态数据的方法)
+  const setCommentHeader = (id) => {
     readCommentInfo(id).then(({ data: res, status: status }) => {
       if (status === 200) {
+        // 把数据赋值给bannerList
+
         res.result.tags.unshift(
           {
             title: "全部评价",
@@ -17,31 +21,31 @@ export const useCommentHeader = () => {
           }
         );
 
-        commentData.value = res.result;
+        commentHeader.value = res.result;
       }
     });
   };
-
-  return { commentData, setCommentData };
+  return { commentHeader, setCommentHeader };
 };
 
-// 评价头部标记的选中效果
-export const useSelectedTag = () => {
-  const selectedTag = ref("全部评价");
-
-  const setSelectedTag = (tagName) => {
-    selectedTag.value = tagName;
+// 设置头部标记的选中效果
+export const useSelectTag = () => {
+  const seletedTag = ref("全部评价");
+  const setSelectedTag = (tagTitle) => {
+    seletedTag.value = tagTitle;
   };
-
-  return { selectedTag, setSelectedTag };
+  return { seletedTag, setSelectedTag };
 };
 
-// 评论列表
+// 获取评论列表
 export const useCommentList = () => {
+  // 评论列表
   const commentList = ref(null);
+  // 改变评论列表数据的方法
   const setCommentList = (id, params) => {
     readCommentList(id, params).then(({ data: res, status: status }) => {
       if (status === 200) {
+        // 把获取到的数据赋值给commentList
         commentList.value = res.result;
       }
     });
@@ -50,8 +54,8 @@ export const useCommentList = () => {
   return { commentList, setCommentList };
 };
 
-// 筛选参数
 export const useReqParams = () => {
+  // 查询参数状态数据
   const reqParams = ref({
     page: 1,
     hasPicture: null,
@@ -60,32 +64,25 @@ export const useReqParams = () => {
     // createTime 最新
     sortField: "",
   });
-
+  // 改变查询参数状态数据的方法
   const setReqParams = (params) => {
-    // 如果用户选择的是评价标签,单独处理
     if (params.tag) {
-      // 如果用户选择的是有图
+      // 判断是否选择了头部标记
       if (params.tag === "有图") {
-        // 将 hasPicture 设置为true
         reqParams.value.hasPicture = true;
       } else {
-        // 用户选择的不是有图， 将hasPicture设置为false
         reqParams.value.hasPicture = false;
-        // 如果用户选择的是全部
-        if (reqParams.value.tag === "全部评价") {
-          // 将tag设置为空字符串
+        // 如果没有选择有图
+        if (params.tag === "全部评价") {
           reqParams.value.tag = "";
         } else {
-          // 其他标签，用户选什么设置什么
           reqParams.value.tag = params.tag;
         }
       }
     } else {
-      // 排序选项
+      // 如果没有选择头部标记，那么选择的是排序
       reqParams.value = { ...reqParams.value, ...params };
     }
-
-    // 当筛选条件发生变化后重置页码
     reqParams.value.page = 1;
   };
 
