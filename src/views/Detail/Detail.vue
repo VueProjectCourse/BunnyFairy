@@ -8,11 +8,14 @@ import GoodsSku from "./GoodsSku/GoodsSku.vue";
 import GoodsTab from "./GoodsTab/GoodsTab.vue";
 import GoodsWarn from "./GoodsWarn/GoodsWarn.vue";
 import GoodsHot from "./GoodsHot/GoodsHot.vue";
-import { onMounted, ref, provide } from "vue";
+import { onMounted, provide, ref } from "vue";
 import { goodsDetail, setGoodsDetail } from "./useDetail";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
+import { useCartStore } from "../../stores/cartStore";
+import Message from "@/components/Message/Message";
 
 const route = useRoute();
+const cartStore = useCartStore();
 onMounted(() => {
   setGoodsDetail(route.params.id);
 });
@@ -24,13 +27,51 @@ onBeforeRouteUpdate((to) => {
 });
 
 let result = goodsDetail;
+let count = ref(1);
 const onSpecChanged = (data) => {
   // 数据回传，
   // console.log(data);
-  result.value = { ...result.value, ...data };
+  // result.value = { ...result.value, ...data };
+  result.value.price = data.price;
+  result.value.oldPrice = data.oldPrice;
+  result.value.inventory = data.inventory;
+  result.value.currentSelectedSkuId = data.skuId;
+  result.value.currentSelectedSkuText = data.specsText;
 };
+const addCart = () => {
+  // 判断用户是否选择了规格
+  if (!result.value.currentSelectedSkuId)
+    return Message({ type: "error", text: "请选择商品规格" });
 
-const count = ref(1);
+  const goods = {
+    // 商品id
+    id: result.value.id,
+    // 商品 skuId
+    skuId: result.value.currentSelectedSkuId,
+    // 商品名称
+    name: result.value.name,
+    // 商品规格属性文字
+    attrsText: result.value.currentSelectedSkuText,
+    // 商品图片
+    picture: result.value.mainPictures[0],
+    // 商品原价
+    price: result.value.oldPrice,
+    // 商品现价
+    nowPrice: result.value.price,
+    // 是否选中
+    selected: true,
+    // 商品库存
+    stock: result.value.inventory,
+    // 用户选择的商品数量
+    count: count.value,
+    // 如果用户选择了规格, 该商品就一定是有效商品, 因为能够选择的规格都是有库存的
+    isEffective: true,
+  };
+
+  // console.log(goods);
+
+  cartStore.addGoodsToCart(goods);
+};
 </script>
 <template>
   <DefaultLayout>
@@ -80,6 +121,7 @@ const count = ref(1);
               size="middle"
               type="primary"
               :style="{ 'margin-top': '20px' }"
+              @click="addCart"
               >加入购物车</Button
             >
           </div>

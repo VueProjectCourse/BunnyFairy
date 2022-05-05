@@ -195,10 +195,10 @@ function getGuideSidebar() {
     {
       text: "购物车",
       children: [
-        { text: '购物车功能分析', },
-        { text: '加入购物车-未登录', },
-        { text: '头部购物车-商品列表渲染-未登录', },
-        { text: '头部购物车-删除-未登录', },
+        { text: '购物车功能分析', link: "/cart/cart-analyze"},
+        { text: '加入购物车-未登录', link: "/cart/cart-add-unlogin" },
+        { text: '头部购物车-商品列表渲染-未登录', link: "/cart/cart-header-unlogin"},
+        { text: '头部购物车-删除-未登录', link: "/cart/cart-delete-unlogin"},
         { text: '头部购物车-细节处理', },
         { text: '购物车-基础布局', },
         { text: '购物车-数据渲染-未登录', },

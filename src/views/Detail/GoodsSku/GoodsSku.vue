@@ -33,6 +33,7 @@ onMounted(() => {
   setSpecPathMap(props.skus);
   setSpecDisable(props.specs, specPathMap, setUserSelect);
   setSpecDefaultSelect(props.skuId, props.skus, props.specs);
+  setDataToParent(props.specs, props.skus, emit, specPathMap);
 });
 </script>
 <template>
