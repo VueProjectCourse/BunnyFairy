@@ -1,36 +1,25 @@
 <script setup>
 import HomePanel from "../HomePanel/HomePanel.vue";
-import { useToggleEffect } from "./useHomeBrand";
-import { readHotBrands } from "@/api/homeAPI";
-import { lazyData } from "@/utils/useLazyData";
-const { target, result: brandsList } = lazyData(readHotBrands);
+import { useToggleEffect } from "./useHomeBrand"
+import { readHotBrands } from "@/api/homeAPI"
+import { lazyData } from "@/utils/useLazyData"
+const { target, result: brandsList } = lazyData(readHotBrands)
 const { currentIndex, toggle } = useToggleEffect();
+
 </script>
 
 <template>
   <HomePanel title="热门品牌" subTitle="国际经典 品质保证" ref="target">
     <template #right>
-      <a
-        href="javascript:"
-        @click="toggle(-1)"
-        class="iconfont icon-angle-left prev"
-        :class="{ disabled: currentIndex === 0 }"
-      ></a>
-      <a
-        href="javascript:"
-        @click="toggle(1)"
-        class="iconfont icon-angle-right next"
-        :class="{ disabled: currentIndex === 1 }"
-      ></a>
+      <a href="javascript:" @click="toggle(-1)" class="iconfont icon-angle-left prev "
+        :class="{ disabled: currentIndex === 0 }"></a>
+      <a href="javascript:" @click="toggle(1)" class="iconfont icon-angle-right next"
+        :class="{ disabled: currentIndex === 1 }"></a>
     </template>
     <template #default>
       <div class="box">
         <Transition name="fade">
-          <ul
-            class="list"
-            v-if="brandsList"
-            :style="{ transform: `translateX(${-currentIndex * 1240}px)` }"
-          >
+          <ul class="list" v-if="brandsList" :style="{ transform: `translateX(${-currentIndex * 1240}px)` }">
             <li v-for="item in brandsList" :key="item.id">
               <RouterLink to="/">
                 <img :src="item.picture" alt="" />
@@ -38,21 +27,15 @@ const { currentIndex, toggle } = useToggleEffect();
             </li>
           </ul>
           <div v-else class="skeleton">
-            <MenuSkeleton
-              class="item"
-              v-for="i in 5"
-              :key="i"
-              animated="scroll"
-              bg="#e4e4e4"
-              width="240px"
-              height="305px"
-            ></MenuSkeleton>
+            <MenuSkeleton class="item" v-for="i in 5" :key="i" animated="scroll" bg="#e4e4e4" width="240px"
+              height="305px"></MenuSkeleton>
           </div>
-        </Transition>
+          </Transition>
       </div>
     </template>
   </HomePanel>
 </template>
+
 
 <style scoped>
 @import "@/assets/styles/variable.css";
@@ -110,6 +93,7 @@ const { currentIndex, toggle } = useToggleEffect();
   width: 240px;
   height: 305px;
 }
+
 
 .skeleton {
   width: 100%;

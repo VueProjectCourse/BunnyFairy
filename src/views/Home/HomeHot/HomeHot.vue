@@ -1,13 +1,14 @@
 <script setup>
-import HomePanel from "../HomePanel/HomePanel.vue";
+import HomePanel from '../HomePanel/HomePanel.vue';
 // import PanelSkeleton from '../PanelSkeleton/PanelSkeleton.vue';
 // import { useHotProduct } from "./useHomeHot"
 // const { hotList } = useHotProduct();
 // 引入接口函数
-import { readHotProduct } from "@/api/homeAPI";
-import { lazyData } from "@/utils/useLazyData";
+import { readHotProduct } from "@/api/homeAPI"
+import { lazyData } from "@/utils/useLazyData"
 
-const { result: hotList, target } = lazyData(readHotProduct);
+const { result: hotList, target } = lazyData(readHotProduct)
+
 </script>
 
 <template>
@@ -37,7 +38,7 @@ const { result: hotList, target } = lazyData(readHotProduct);
 .goods-list li {
   width: 306px;
   height: 406px;
-  transition: all 0.5s;
+  transition: all .5s;
 }
 
 .goods-list li:hover {

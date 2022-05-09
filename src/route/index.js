@@ -37,6 +37,11 @@ const routes = [
     name: "callback",
     component: () => import("@/views/Login/LoginCallback/LoginCallback.vue"),
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: () => import("@/views/Cart/Cart.vue"),
+  },
 ];
 
 const router = createRouter({

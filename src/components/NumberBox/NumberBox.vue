@@ -20,7 +20,7 @@ const { number, setNumber } = useNumberBox(props, emit);
 
 <template>
   <div class="xtx-number-box">
-    <div class="label">数量</div>
+    <div class="label" v-if="label">{{ label }}</div>
     <div class="number-box">
       <a href="javascript:" @click="setNumber(-1)">-</a>
       <input type="text" readonly :value="number" />

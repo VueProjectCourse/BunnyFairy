@@ -1,52 +1,33 @@
 <script setup>
 import { ref } from "vue";
-import { useReadCategory } from "./useCategory";
+import { useReadCategory } from "./useCategory"
 const { menuList } = useReadCategory();
 
 const current = ref(null);
+
 </script>
 <template>
   <div class="home-category">
     <ul class="menu" v-if="menuList">
-      <!-- 即使 mouseenter里面写的js代码 但是该js代码在模板里面 也遵循 响应式变量 ref 在模板中可以自动解构 不需要写value -->
-      <li
-        v-for="item in menuList"
-        :key="item.id"
-        @mouseenter="current = item"
-        :class="{ active: current?.id && current.id === item.id }"
-      >
+    <!-- 即使 mouseenter里面写的js代码 但是该js代码在模板里面 也遵循 响应式变量 ref 在模板中可以自动解构 不需要写value -->
+      <li v-for="item in menuList" :key="item.id" @mouseenter="current = item;"
+        :class="{ active: current?.id && current.id === item.id }">
         <RouterLink to="/">{{ item.name }}</RouterLink>
         <template v-if="item.children">
-          <RouterLink
-            to="/"
-            v-for="subitem in item.children"
-            :key="subitem.id"
-            >{{ subitem.name }}</RouterLink
-          >
+          <RouterLink to="/" v-for="subitem in item.children" :key="subitem.id">{{ subitem.name }}</RouterLink>
         </template>
 
         <template v-else>
-          <MenuSkeleton
-            animated="fade"
-            width="60px"
-            height="18px"
-            bg="rgba(255,255,255,0.2)"
-            style="margin-right: 5px"
-          >
+          <MenuSkeleton animated="fade" width="60px" height="18px" bg="rgba(255,255,255,0.2)" style="margin-right: 5px">
           </MenuSkeleton>
-          <MenuSkeleton
-            animated="fade"
-            width="60px"
-            height="18px"
-            bg="rgba(255,255,255,0.2)"
-          ></MenuSkeleton>
+          <MenuSkeleton animated="fade" width="60px" height="18px" bg="rgba(255,255,255,0.2)"></MenuSkeleton>
         </template>
       </li>
     </ul>
     <!-- 分类列表商品推荐 -->
     <div class="layer" v-if="current">
       <h4>
-        分类{{ current.goods ? "商品" : "品牌" }}推荐
+        分类{{ current.goods ? '商品' : "品牌" }}推荐
         <small>根据您的购买或浏览记录推荐</small>
       </h4>
       <ul v-if="current.goods">
@@ -67,13 +48,11 @@ const current = ref(null);
       <!-- 品牌推荐 -->
       <!-- 判断当前是否为品牌推荐 如果不是品牌推荐 补显示 -->
       <ul v-if="current.brands">
-        <li class="brand" v-for="item in current.brands" :key="item.id">
+        <li class="brand" v-for="item in current.brands " :key="item.id">
           <RouterLink to="/">
-            <img :src="item.picture" alt="" />
+            <img :src="item.picture" alt="">
             <div class="info">
-              <p class="place">
-                <i class="iconfont icon-dingwei"></i>{{ item.place }}
-              </p>
+              <p class="place"><i class="iconfont icon-dingwei"></i>{{ item.place }}</p>
               <p class="name ellipsis">{{ item.nameEn }}</p>
               <p class="desc ellipsis-2">{{ item.name }}</p>
             </div>
@@ -83,6 +62,7 @@ const current = ref(null);
     </div>
   </div>
 </template>
+
 
 <style scoped>
 @import "@/assets/styles/variable.css";
@@ -118,6 +98,7 @@ const current = ref(null);
 .menu li.active {
   background-color: var(--primary-color);
 }
+
 
 .layer {
   width: 990px;

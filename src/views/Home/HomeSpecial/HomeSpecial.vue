@@ -1,11 +1,12 @@
 <script setup>
-import HomePanel from "../HomePanel/HomePanel.vue";
-import { readSpecial } from "@/api/homeAPI";
-import { lazyData } from "@/utils/useLazyData";
+import HomePanel from '../HomePanel/HomePanel.vue';
+import { readSpecial } from "@/api/homeAPI"
+import { lazyData } from "@/utils/useLazyData"
 const { target, result: specialList } = lazyData(readSpecial);
 </script>
 
 <template>
+
   <HomePanel title="最新专题" ref="target">
     <template v-slot:right>
       <More />
@@ -17,28 +18,23 @@ const { target, result: specialList } = lazyData(readSpecial);
             <img :src="item.cover" :alt="item.title" />
             <div class="meta">
               <p class="title">
-                <span class="top ellipsis">{{ item.title }}</span>
-                <span class="sub ellipsis">{{ item.summary }}</span>
+                <span class="top ellipsis">{{item.title}}</span>
+                <span class="sub ellipsis">{{item.summary}}</span>
               </p>
-              <span class="price">¥{{ item.lowestPrice }}起</span>
+              <span class="price">¥{{item.lowestPrice}}起</span>
             </div>
           </RouterLink>
           <div class="foot">
-            <span class="like"
-              ><i class="iconfont icon-hart1"></i>{{ item.collectNum }}</span
-            >
-            <span class="view"
-              ><i class="iconfont icon-see"></i>{{ item.viewNum }}</span
-            >
-            <span class="reply"
-              ><i class="iconfont icon-message"></i>{{ item.replyNum }}</span
-            >
+            <span class="like"><i class="iconfont icon-hart1"></i>{{item.collectNum}}</span>
+            <span class="view"><i class="iconfont icon-see"></i>{{item.viewNum}}</span>
+            <span class="reply"><i class="iconfont icon-message"></i>{{item.replyNum}}</span>
           </div>
         </div>
       </div>
     </template>
   </HomePanel>
 </template>
+
 
 <style scoped>
 @import "@/assets/styles/variable.css";
@@ -57,7 +53,7 @@ const { target, result: specialList } = lazyData(readSpecial);
 .special-list .special-item {
   width: 404px;
   background: #fff;
-  transition: all 0.5s;
+  transition: all .5s;
 }
 
 .special-list .special-item:hover {
@@ -79,11 +75,7 @@ const { target, result: specialList } = lazyData(readSpecial);
 }
 
 .special-list .special-item a .meta {
-  background-image: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.8),
-    transparent 50%
-  );
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 50%);
   position: absolute;
   left: 0;
   top: 0;

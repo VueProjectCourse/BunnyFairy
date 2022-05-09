@@ -23,6 +23,7 @@ import AppHeaderCart from "./AppHeaderCart/AppHeaderCart.vue";
           <em>2</em>
         </a>
       </div> -->
+
       <AppHeaderCart />
     </div>
   </header>
@@ -69,7 +70,7 @@ import AppHeaderCart from "./AppHeaderCart/AppHeaderCart.vue";
   color: #666;
 }
 
-.app-header .cart {
+/* .app-header .cart {
   width: 50px;
 }
 
@@ -97,5 +98,5 @@ import AppHeaderCart from "./AppHeaderCart/AppHeaderCart.vue";
   font-size: 12px;
   border-radius: 10px;
   font-family: Arail, serif;
-}
+} */
 </style>

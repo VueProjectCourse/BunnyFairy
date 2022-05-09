@@ -1,33 +1,49 @@
 <script setup>
-// 获取 store 对象
-import { storeToRefs } from "pinia";
 import { useCartStore } from "@/stores/cartStore";
+import { storeToRefs } from "pinia";
+import {ref} from "vue"
+import {useRoute, onBeforeRouteUpdate} from "vue-router"
 const cartStore = useCartStore();
-const { effectiveGoodsCount, effectiveGoodsPrice, effectiveGoodsList } =
+const { effectiveGoodsList, effectiveGoodsCount, effectiveGoodsPrice } =
   storeToRefs(useCartStore());
+const route = useRoute();
+
+// 当我们刚进入页面的时候
+const isCartPage = ref(route.path ==="/cart");
+// 当路由发生更新了
+onBeforeRouteUpdate((to)=>{
+  isCartPage.value = (to.path ==="/cart");
+})
+
 </script>
+
 <template>
   <div class="cart">
-    <a class="curr" href="#">
+    <!-- <a class="curr" href="#">
+      
+    </a> -->
+
+    <RouterLink class="curr" to="/cart">
       <i class="iconfont icon-cart"></i><em>{{ effectiveGoodsCount }}</em>
-    </a>
-    <div class="layer">
+    </RouterLink>
+
+    <div class="layer" v-if="effectiveGoodsCount > 0 && !isCartPage">
       <div class="list">
-        <div class="item" v-for="goods in effectiveGoodsList" :key="goods.id">
-          <RouterLink to="">
-            <img :src="goods.picture" alt="" />
+        <div class="item" v-for="item in effectiveGoodsList" :key="item.id">
+          <RouterLink :to="`/goods/${item.id}`">
+            <img :src="item.picture" alt="" />
             <div class="center">
-              <p class="name ellipsis-2">{{ goods.name }}</p>
-              <p class="attr ellipsis">{{ goods.attrsText }}</p>
+              <p class="name ellipsis-2">{{ item.name }}</p>
+              <p class="attr ellipsis">{{ item.attrsText }}</p>
             </div>
             <div class="right">
-              <p class="price">¥{{ goods.nowPrice }}</p>
-              <p class="count">x{{ goods.count }}</p>
+              <p class="price">¥{{ item.price }}</p>
+              <p class="count">x{{ item.count }}</p>
             </div>
           </RouterLink>
           <i
             class="iconfont icon-close-new"
-            @click="cartStore.deleteGoodsOfCartBySkuId(goods.skuId)"
+            @click="cartStore.deleteGoodsOfCartBySkuId(item.skuId)"
           ></i>
         </div>
       </div>
@@ -36,7 +52,7 @@ const { effectiveGoodsCount, effectiveGoodsPrice, effectiveGoodsList } =
           <p>共 {{ effectiveGoodsCount }} 件商品</p>
           <p>¥{{ effectiveGoodsPrice }}</p>
         </div>
-        <Button type="plain">去购物车结算</Button>
+        <Button type="plain"><RouterLink to="/cart">去购物车结算</RouterLink></Button>
       </div>
     </div>
   </div>

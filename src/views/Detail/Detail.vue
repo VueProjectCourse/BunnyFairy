@@ -8,14 +8,14 @@ import GoodsSku from "./GoodsSku/GoodsSku.vue";
 import GoodsTab from "./GoodsTab/GoodsTab.vue";
 import GoodsWarn from "./GoodsWarn/GoodsWarn.vue";
 import GoodsHot from "./GoodsHot/GoodsHot.vue";
-import { onMounted, provide, ref } from "vue";
+import { onMounted, ref, provide } from "vue";
 import { goodsDetail, setGoodsDetail } from "./useDetail";
 import { useRoute, onBeforeRouteUpdate } from "vue-router";
 import { useCartStore } from "../../stores/cartStore";
-import Message from "@/components/Message/Message";
+import Message from "../../components/Message/Message";
+const cartStore = useCartStore();
 
 const route = useRoute();
-const cartStore = useCartStore();
 onMounted(() => {
   setGoodsDetail(route.params.id);
 });
@@ -27,11 +27,9 @@ onBeforeRouteUpdate((to) => {
 });
 
 let result = goodsDetail;
-let count = ref(1);
 const onSpecChanged = (data) => {
   // 数据回传，
   // console.log(data);
-  // result.value = { ...result.value, ...data };
   result.value.price = data.price;
   result.value.oldPrice = data.oldPrice;
   result.value.inventory = data.inventory;
@@ -39,10 +37,6 @@ const onSpecChanged = (data) => {
   result.value.currentSelectedSkuText = data.specsText;
 };
 const addCart = () => {
-  // 判断用户是否选择了规格
-  if (!result.value.currentSelectedSkuId)
-    return Message({ type: "error", text: "请选择商品规格" });
-
   const goods = {
     // 商品id
     id: result.value.id,
@@ -67,11 +61,13 @@ const addCart = () => {
     // 如果用户选择了规格, 该商品就一定是有效商品, 因为能够选择的规格都是有库存的
     isEffective: true,
   };
-
   // console.log(goods);
-
+  if (!goods.skuId)
+    return Message({ type: "error", text: "您还没有选中商品规格" });
   cartStore.addGoodsToCart(goods);
 };
+
+const count = ref(1);
 </script>
 <template>
   <DefaultLayout>
@@ -103,11 +99,11 @@ const addCart = () => {
           <!-- 右侧 -->
           <div class="spec">
             <GoodsInfo :goods="goodsDetail" v-if="goodsDetail" />
+            <!--     skuId="1369155864430120962" -->
             <GoodsSku
               v-if="goodsDetail"
               :specs="goodsDetail.specs"
               :skus="goodsDetail.skus"
-              skuId="1369155864430120962"
               @on-spec-changed="onSpecChanged"
             />
             <!-- :modelValue="" @update:modelValue -->
