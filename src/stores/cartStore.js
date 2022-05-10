@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { updateLocalCart } from "../api/cartAPI";
 import { useUserStore } from "./userStore";
 export const useCartStore = defineStore({
   id: "cartStore",
@@ -91,6 +92,35 @@ export const useCartStore = defineStore({
         const index = this.list.findIndex((item) => item.skuId === skuId);
 
         this.list.splice(index, 1);
+      }
+    },
+    // 更新购物车商品
+    updateCartList() {
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+      } else {
+        // 如果没有登陆怎么办
+        // 遍历购物车中的商品，发送请求获取该商品的最新信息
+        const arrayPromise = this.list.map(({ skuId }) =>
+          // 将方法调用后返回的 promise 对象存储在一个数组中
+          updateLocalCart(skuId)
+        );
+
+        // 批量获取多个请求的响应数据，所有响应书就被存储在一个数组中
+        Promise.all(arrayPromise).then((data) => {
+          data.forEach((item, index) => {
+            item.data.result.skuId = this.list[index].skuId;
+
+            this.list[index] = {
+              ...this.list[index],
+              ...item.data.result,
+            };
+          });
+
+          console.log(this.list);
+        });
       }
     },
   },

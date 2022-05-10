@@ -3,6 +3,7 @@ import Layout from "../DefaultLayout/Layout.vue";
 import GoodsRelevant from "../Detail/GoodsRelevant/GoodsRelevant.vue";
 import { useCartStore } from "../../stores/cartStore";
 import { storeToRefs } from "pinia";
+import { onMounted } from "vue";
 
 const {
   effectiveGoodsList,
@@ -11,6 +12,12 @@ const {
   userSelectedGoodsCount,
   userSelectedGoodsPrice,
 } = storeToRefs(useCartStore());
+
+const cartStore = useCartStore();
+
+onMounted(() => {
+  cartStore.updateCartList();
+});
 </script>
 <template>
   <Layout>
