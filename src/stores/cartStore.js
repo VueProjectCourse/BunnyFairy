@@ -95,7 +95,7 @@ export const useCartStore = defineStore({
       }
     },
     // 更新购物车商品
-    updateCartList() {
+    async updateCartList() {
       const userStore = useUserStore();
       // 判断用户是否登陆
       if (userStore.profile.token) {
@@ -118,9 +118,25 @@ export const useCartStore = defineStore({
               ...item.data.result,
             };
           });
-
-          console.log(this.list);
         });
+      }
+    },
+    updateGoodsOfCartBySkuId(partOfGoods) {
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+      } else {
+        // 如果没有登陆怎么办
+        // 根据 skuId在购物车列表中查找哦想要更新的商品
+        const index = this.list.findIndex(
+          (item) => item.skuId === partOfGoods.skuId
+        );
+        // 更新商品
+        this.list[index] = {
+          ...this.list[index],
+          ...partOfGoods,
+        };
       }
     },
   },

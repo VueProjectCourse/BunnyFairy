@@ -1,9 +1,10 @@
 <script setup>
 import Layout from "../DefaultLayout/Layout.vue";
 import GoodsRelevant from "../Detail/GoodsRelevant/GoodsRelevant.vue";
-import { useCartStore } from "../../stores/cartStore";
+import { useCartStore } from "@/stores/cartStore";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
+import Message from "../../components/Message/Message";
 
 const {
   effectiveGoodsList,
@@ -16,7 +17,9 @@ const {
 const cartStore = useCartStore();
 
 onMounted(() => {
-  cartStore.updateCartList();
+  cartStore.updateCartList().then(() => {
+    Message({ type: "success", text: "本地购物车中的商品信息更新成功" });
+  });
 });
 </script>
 <template>
@@ -42,7 +45,17 @@ onMounted(() => {
             <!-- 有效商品 -->
             <tbody>
               <tr v-for="goods in effectiveGoodsList" :key="goods.id">
-                <td><Checkbox /></td>
+                <td>
+                  <Checkbox
+                    :modelValue="goods.selected"
+                    @update:modelValue="
+                      cartStore.updateGoodsOfCartBySkuId({
+                        skuId: goods.skuId,
+                        selected: $event,
+                      })
+                    "
+                  />
+                </td>
                 <td>
                   <div class="goods">
                     <RouterLink :to="`/goods/${goods.id}`"
@@ -83,7 +96,7 @@ onMounted(() => {
               </tr>
             </tbody>
             <!-- 无效商品 -->
-            <tbody>
+            <tbody v-if="invalidGoodsList.length > 0">
               <tr>
                 <td colspan="6"><h3 class="tit">失效商品</h3></td>
               </tr>

@@ -70,7 +70,9 @@ export const updateLocalCart = (skuId) => {
 const cartStore = useCartStore();
 
 onMounted(() => {
-  cartStore.updateCartList();
+  cartStore.updateCartList().then(() => {
+    Message({ type: "success", text: "本地购物车中的商品信息更新成功" });
+  });
 });
 ```
 
