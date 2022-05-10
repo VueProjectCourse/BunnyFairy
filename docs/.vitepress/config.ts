@@ -201,7 +201,7 @@ function getGuideSidebar() {
         { text: '头部购物车-删除-未登录', link: "/cart/cart-delete-unlogin"},
         { text: '头部购物车-细节处理', link: "/cart/cart-header-details"},
         { text: '购物车-基础布局', link: "/cart/cart-page"},
-        { text: '购物车-数据渲染-未登录', },
+        { text: '购物车-数据渲染-未登录', link:"/cart/cart-page-render"},
         { text: '购物车-更新商品列表-未登录', },
         { text: '购物车-单选-未登录', },
         { text: '购物车-全选-未登录', },
