@@ -6,8 +6,8 @@ import { storeToRefs } from "pinia";
 
 const {
   effectiveGoodsList,
+  effectiveGoodsCount,
   invalidGoodsList,
-  userSelectedGoodsList,
   userSelectedGoodsCount,
   userSelectedGoodsPrice,
 } = storeToRefs(useCartStore());
@@ -119,7 +119,8 @@ const {
             <a href="javascript:">清空失效商品</a>
           </div>
           <div class="total">
-            共 7 件商品，已选择 {{ userSelectedGoodsCount }} 件，商品合计：
+            共 {{ effectiveGoodsCount }} 件商品，已选择
+            {{ userSelectedGoodsCount }} 件，商品合计：
             <span class="red">¥{{ userSelectedGoodsPrice }}</span>
             <Button type="primary">下单结算</Button>
           </div>
