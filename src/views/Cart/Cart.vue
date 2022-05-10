@@ -12,6 +12,7 @@ const {
   invalidGoodsList,
   userSelectedGoodsCount,
   userSelectedGoodsPrice,
+  selectAllButtonStatus,
 } = storeToRefs(useCartStore());
 
 const cartStore = useCartStore();
@@ -34,7 +35,13 @@ onMounted(() => {
           <table>
             <thead>
               <tr>
-                <th><Checkbox>全选</Checkbox></th>
+                <th>
+                  <Checkbox
+                    :modelValue="selectAllButtonStatus"
+                    @update:modelValue="cartStore.selectIsAll($event)"
+                    >全选</Checkbox
+                  >
+                </th>
                 <th>商品信息</th>
                 <th>单价</th>
                 <th>数量</th>
@@ -90,7 +97,14 @@ onMounted(() => {
                 </td>
                 <td class="tc">
                   <p><a href="javascript:">移入收藏夹</a></p>
-                  <p><a class="green" href="javascript:">删除</a></p>
+                  <p>
+                    <a
+                      class="green"
+                      href="javascript:"
+                      @click="cartStore.deleteGoodsOfCartBySkuId(goods.skuId)"
+                      >删除</a
+                    >
+                  </p>
                   <p><a href="javascript:">找相似</a></p>
                 </td>
               </tr>

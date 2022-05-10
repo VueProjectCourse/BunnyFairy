@@ -1,53 +1,75 @@
-# 头部购物车-删除-未登录
+# 购物车-删除-未登录
 
 ::: tip 目标
-这一小节，我们的目标是实现删除本地购物车中的商品
+这一小节，我们的目标是实现购物车中商品的删除功能
 :::
 
 ::: warning 步骤
 
-1. 在 Store 中定义用于删除购物车中商品的 action 方法
-2. 在组件中实现删除购物车商品功能
+1. 为删除按钮添加点击事件，执行删除操作
+2. 如果购物车中没有有效商品, 显示用户提示
+3. 判断购物车中是否没有商品，如果没有显示以上组件
 :::
 
 ::: info 体验
 
-* **Step.1：在 Store 中定义用于删除购物车中商品的 action 方法**
-
-```js
- // 根据skuId 删除商品
-    deleteGoodsOfCartBySkuId(skuId) {
-      const userStore = useUserStore();
-      console.log(skuId);
-      // 获取要被删除商品的索引
-      //  判断用户是否登录
-      // 判断用户是否登录
-      if (userStore.profile.token) {
-        // 登录了
-        console.log("登录了");
-      } else {
-        // 获取要被删除的商品的索引
-        const index = this.list.findIndex((item) => item.skuId === skuId);
-
-        this.list = [
-          ...this.list.slice(0, index),
-          ...this.list.slice(index + 1),
-        ];
-      }
-    },
-```
-
-* **Step.2：在组件中实现删除购物车商品功能**
-
-```js
-const cartStore = useCartStore();
-```
+* **Step.1：为删除按钮添加点击事件，执行删除操作**
 
 ```html
-<i
-  class="iconfont icon-close-new"
-  @click="cartStore.deleteGoodsOfCartBySkuId(goods.skuId)"
-></i>
+<td class="tc">
+  <p><a href="javascript:">移入收藏夹</a></p>
+  <p>
+    <a
+      class="green"
+      href="javascript:"
+      @click="cartStore.deleteGoodsOfCartBySkuId(goods.skuId)"
+      >删除</a
+    >
+  </p>
+  <p><a href="javascript:">找相似</a></p>
+</td>
+```
+
+* **Step.2：如果购物车中没有有效商品, 显示用户提示**
+
+```html
+<!-- EmptyCart.vue` -->
+<template>
+  <div class="cart-none">
+    <img src="@/assets/images/none.png" alt="" />
+    <p>购物车内暂时没有商品</p>
+    <div class="btn">
+      <XtxButton type="primary" @click="$router.push('/')">继续逛逛</XtxButton>
+    </div>
+  </div>
+</template>
+
+```
+
+```css
+.cart-none {
+  text-align: center;
+  padding: 150px 0;
+  background: #fff;
+}
+.cart-none  p {
+    color: #999999;
+    padding: 20px 0;
+}
+.cart-none  img {
+    width: 180px;
+}
+```
+
+* **Step.3：判断购物车中是否没有商品，如果没有显示以上组件**
+
+```html
+<tr v-if="effectiveGoodsCount === 0">
+  <td colspan="6">
+    <EmptyCart />
+  </td>
+</tr>
+<tr v-else v-for="goods in effectiveGoodsList" :key="goods.id"></tr>
 ```
 
 :::

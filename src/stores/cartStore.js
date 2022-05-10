@@ -51,6 +51,15 @@ export const useCartStore = defineStore({
         0
       );
     },
+    // 全选、全不选按钮的状态
+    selectAllButtonStatus() {
+      // 有效商品的数量和选中商品的数量相等意味着所有有效商品已选中
+      // 并且有效商品数量必须大于 0
+      return (
+        this.effectiveGoodsList.length > 0 &&
+        this.userSelectedGoodsList.length === this.effectiveGoodsList.length
+      );
+    },
   },
   actions: {
     // 把商品添加到购物车
@@ -62,9 +71,7 @@ export const useCartStore = defineStore({
         // 如果登陆
       } else {
         // 如果没有登陆怎么办
-
         // 找购物车中有没有该商品
-
         const index = this.list.findIndex((item) => item.skuId === goods.skuId);
 
         if (index > -1) {
@@ -137,6 +144,26 @@ export const useCartStore = defineStore({
           ...this.list[index],
           ...partOfGoods,
         };
+      }
+    },
+    selectIsAll(isSelected) {
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+      } else {
+        // 如果没有登陆怎么办
+        // console.log(isSelected);
+        this.list.forEach((item) => {
+          const index = this.list.findIndex(
+            (subitem) => subitem.skuId === item.skuId
+          );
+          // 更新商品
+          this.list[index] = {
+            ...this.list[index],
+            selected: isSelected,
+          };
+        });
       }
     },
   },
