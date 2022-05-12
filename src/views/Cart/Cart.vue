@@ -4,7 +4,8 @@ import GoodsRelevant from "../Detail/GoodsRelevant/GoodsRelevant.vue";
 import { useCartStore } from "@/stores/cartStore";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
-import Message from "../../components/Message/Message";
+import Message from "@/components/Message/Message";
+import Confirm from "@/components/Confirm/Confirm.js";
 
 const {
   effectiveGoodsList,
@@ -22,6 +23,20 @@ onMounted(() => {
     Message({ type: "success", text: "本地购物车中的商品信息更新成功" });
   });
 });
+
+const cartRemove = (skuId) => {
+  // cartStore.deleteGoodsOfCartBySkuId(skuId);
+  console.log(skuId);
+  Confirm({
+    content: "您确定要删除该商品吗?",
+  })
+    .then(() => {
+      console.log("点击确定");
+    })
+    .catch(() => {
+      console.log("点击取消");
+    });
+};
 </script>
 <template>
   <Layout>
@@ -101,7 +116,7 @@ onMounted(() => {
                     <a
                       class="green"
                       href="javascript:"
-                      @click="cartStore.deleteGoodsOfCartBySkuId(goods.skuId)"
+                      @click="cartRemove(goods.skuId)"
                       >删除</a
                     >
                   </p>
