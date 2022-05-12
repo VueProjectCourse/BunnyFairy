@@ -37,6 +37,40 @@ const cartRemove = (skuId) => {
       console.log("点击取消");
     });
 };
+
+// 删除用户选择的商品 userSelectedGoodsList、清空无效商品 invalidGoodsList
+const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
+  // 弹框提示文字
+  let content = "";
+  // 如果当前操作是删除用户选择的商品
+  if (flag === "userSelectedGoodsList") {
+    // 判断用户是否选择了商品
+    if (userSelectedGoodsCount.value === 0) {
+      Message({ type: "error", text: "请选择要删除的商品" });
+      return;
+    }
+    // 设置弹框提示文字
+    content = "确定要删除选中的商品吗?";
+  }
+  // 如果当前操作是清空无效商品
+  if (flag === "invalidGoodsList") {
+    // 判断当前是否有无效商品
+    if (invalidGoodsList.value.length === 0) {
+      // 提示
+      Message({ type: "error", text: "没有无效商品" });
+      return;
+    }
+    // 设置弹框提示文字
+    content = "确定要删除无效商品吗?";
+  }
+  // 和用户进行确认
+  Confirm({ content })
+    .then(() => {
+      // 执行操作
+      cartStore.deleteGoodsOfCartByUserSelectedOrInvalid(flag);
+    })
+    .catch(() => {});
+};
 </script>
 <template>
   <Layout>
@@ -163,9 +197,23 @@ const cartRemove = (skuId) => {
         <div class="action">
           <div class="batch">
             <Checkbox>全选</Checkbox>
-            <a href="javascript:">删除商品</a>
+            <a
+              href="javascript:"
+              @click="
+                deleteGoodsOfCartByUserSelectedOrInvalid(
+                  'userSelectedGoodsList'
+                )
+              "
+              >删除商品</a
+            >
             <a href="javascript:">移入收藏夹</a>
-            <a href="javascript:">清空失效商品</a>
+            <a
+              href="javascript:"
+              @click="
+                deleteGoodsOfCartByUserSelectedOrInvalid('invalidGoodsList')
+              "
+              >清空失效商品</a
+            >
           </div>
           <div class="total">
             共 {{ effectiveGoodsCount }} 件商品，已选择

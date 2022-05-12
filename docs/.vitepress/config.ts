@@ -207,7 +207,7 @@ function getGuideSidebar() {
         { text: '购物车-全选-未登录', link:"/cart/cart-all-unlogin"},
         { text: '购物车-删除-未登录', link:"/cart/cart-delete-unlogin"},
         { text: '封装确认框组件', link:"/cart/confirm"},
-        { text: '购物车-批量删除-清空无效-未登录', },
+        { text: '购物车-批量删除-清空无效-未登录',link: "/cart/batch-delete" },
         { text: '购物车-更改商品数量-未登录', },
         { text: '购物车-规格数据渲染-未登录', },
         { text: '购物车-规格数据修改-未登录', },

@@ -101,6 +101,19 @@ export const useCartStore = defineStore({
         this.list.splice(index, 1);
       }
     },
+    // 删除用户选择的商品、清空无效商品
+    deleteGoodsOfCartByUserSelectedOrInvalid(flag) {
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+      } else {
+        // 如果没有登陆怎么办
+        this[flag].forEach((item) => {
+          this.deleteGoodsOfCartBySkuId(item.skuId);
+        });
+      }
+    },
     // 更新购物车商品
     async updateCartList() {
       const userStore = useUserStore();
