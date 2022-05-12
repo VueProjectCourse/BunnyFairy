@@ -179,6 +179,9 @@ export const useCartStore = defineStore({
         });
       }
     },
+    changeGoodsCountOfCartBySkuId(skuId, count) {
+      this.updateGoodsOfCartBySkuId({ skuId, count });
+    },
   },
   // 开启数据缓存
   persist: {

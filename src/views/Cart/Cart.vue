@@ -137,7 +137,16 @@ const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
                   </p>
                 </td>
                 <td class="tc">
-                  <NumberBox v-model="goods.count"></NumberBox>
+                  <NumberBox
+                    :max="goods.stock"
+                    :modelValue="goods.count"
+                    @update:modelValue="
+                      cartStore.changeGoodsCountOfCartBySkuId(
+                        goods.skuId,
+                        $event
+                      )
+                    "
+                  ></NumberBox>
                 </td>
                 <td class="tc">
                   <p class="f16 red">
