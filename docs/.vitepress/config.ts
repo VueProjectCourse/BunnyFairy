@@ -209,8 +209,8 @@ function getGuideSidebar() {
         { text: '封装确认框组件', link:"/cart/confirm"},
         { text: '购物车-批量删除-清空无效-未登录',link: "/cart/batch-delete" },
         { text: '购物车-更改商品数量-未登录',link: "/cart/update-goods-count" },
-        { text: '购物车-规格数据渲染-未登录', },
-        { text: '购物车-规格数据修改-未登录', },
+        { text: '购物车-规格数据渲染-未登录',link: "/cart/render-spec-data" },
+        { text: '购物车-规格数据修改-未登录', link: "/cart/update-spec-data"},
 
 
         { text: '购物车-合并购物车-已登录', },

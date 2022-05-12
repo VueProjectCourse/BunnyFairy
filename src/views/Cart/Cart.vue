@@ -1,6 +1,7 @@
 <script setup>
 import Layout from "../DefaultLayout/Layout.vue";
 import GoodsRelevant from "../Detail/GoodsRelevant/GoodsRelevant.vue";
+import CartSku from "./CartSku/CartSku.vue";
 import { useCartStore } from "@/stores/cartStore";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
@@ -122,6 +123,10 @@ const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
                         {{ goods.name }}
                       </p>
                       <!-- 选择规格组件 -->
+                      <CartSku
+                        :attrsText="goods.attrsText"
+                        :skuId="goods.skuId"
+                      />
                     </div>
                   </div>
                 </td>

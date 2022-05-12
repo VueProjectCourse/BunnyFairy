@@ -182,6 +182,30 @@ export const useCartStore = defineStore({
     changeGoodsCountOfCartBySkuId(skuId, count) {
       this.updateGoodsOfCartBySkuId({ skuId, count });
     },
+    // 商品规格信息发生变化, 更新商品信息
+    updateGoodsOfCartBySkuChanged({ oldSkuId, userSelectedNewSku }) {
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+      } else {
+        // 如果没有登陆怎么办
+        // 先根据旧的 skuId 查找商品, 根据旧商品生成新商品, 删除旧商品, 插入新商品
+        const oldGoods = this.list.find((item) => item.skuId === oldSkuId);
+
+        const newGoods = {
+          ...oldGoods,
+          skuId: userSelectedNewSku.skuId,
+          stock: userSelectedNewSku.inventory,
+          oldPrice: userSelectedNewSku.oldPrice,
+          nowPrice: userSelectedNewSku.price,
+          attrsText: userSelectedNewSku.attrsText,
+        };
+
+        this.deleteGoodsOfCartBySkuId(oldGoods);
+        this.addGoodsToCart(newGoods);
+      }
+    },
   },
   // 开启数据缓存
   persist: {
