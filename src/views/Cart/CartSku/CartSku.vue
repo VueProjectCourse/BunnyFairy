@@ -61,6 +61,7 @@ onClickOutside(target, () => {
 
 // 监听规格信息变化
 const onSpecChanged = (sku) => {
+  console.log(sku);
   userSelectedNewSku = sku;
 };
 

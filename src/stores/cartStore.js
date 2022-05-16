@@ -65,7 +65,6 @@ export const useCartStore = defineStore({
     // 把商品添加到购物车
     addGoodsToCart(goods) {
       const userStore = useUserStore();
-      console.log(userStore.profile.token);
       // 判断用户是否登陆
       if (userStore.profile.token) {
         // 如果登陆
@@ -199,8 +198,10 @@ export const useCartStore = defineStore({
           stock: userSelectedNewSku.inventory,
           oldPrice: userSelectedNewSku.oldPrice,
           nowPrice: userSelectedNewSku.price,
-          attrsText: userSelectedNewSku.attrsText,
+          attrsText: userSelectedNewSku.specsText,
         };
+
+        console.log(newGoods);
 
         this.deleteGoodsOfCartBySkuId(oldGoods);
         this.addGoodsToCart(newGoods);
