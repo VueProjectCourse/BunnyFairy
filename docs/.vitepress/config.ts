@@ -213,7 +213,7 @@ function getGuideSidebar() {
         { text: '购物车-规格数据修改-未登录', link: "/cart/update-spec-data"},
 
 
-        { text: '购物车-合并购物车-已登录', },
+        { text: '购物车-合并购物车-已登录',link: "/cart/combine-cart-login" },
         { text: '购物车-购物车列表-已登录', },
         { text: '购物车-加入购物车-已登录', },
         { text: '购物车-删除商品-已登录', },

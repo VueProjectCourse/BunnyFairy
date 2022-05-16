@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { updateLocalCart } from "../api/cartAPI";
+import { updateLocalCart, setMergeCart } from "../api/cartAPI";
 import { useUserStore } from "./userStore";
 export const useCartStore = defineStore({
   id: "cartStore",
@@ -205,6 +205,28 @@ export const useCartStore = defineStore({
 
         this.deleteGoodsOfCartBySkuId(oldGoods);
         this.addGoodsToCart(newGoods);
+      }
+    },
+    // 合并购物车
+    async mergeCart() {
+      console.log(11111);
+      // 如果本地购物车中没有数据，不用进行合并
+      if (this.list.length === 0) return;
+      // 准备合并购物车接口所需数据
+      const carts = this.list.map((item) => ({
+        skuId: item.skuId,
+        selected: item.selected,
+        count: item.count,
+      }));
+
+      try {
+        // 合并购物车
+        await setMergeCart(carts);
+        // 清空本地购物车
+        this.list = [];
+      } catch (error) {
+        // 购物车合并失败, 抛出异常
+        throw new Error(error);
       }
     },
   },

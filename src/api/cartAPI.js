@@ -18,3 +18,12 @@ export const updateLocalCart = (skuId) => {
 export const getSkuInfoBySkuId = (skuId) => {
   return request.get(`/goods/sku/${skuId}`);
 };
+
+/**
+ * 将本地购物车和服务器端购物车进行合并
+ * @param {Array<{skuId: string, selected: boolean, count: number}>} cart
+ * @return {Promise}
+ */
+export const setMergeCart = (cart) => {
+  return request.post("/member/cart/merge", cart);
+};
