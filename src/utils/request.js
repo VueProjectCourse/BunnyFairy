@@ -1,5 +1,7 @@
 // 导入 Axios
 import axios from "axios";
+import { useUserStore } from "../stores/userStore";
+import { storeToRefs } from "pinia";
 
 // 使用Axios创建新的axios实例 并导出
 const instance = axios.create({
@@ -16,11 +18,15 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
+    const { profile } = storeToRefs(useUserStore());
+    if (profile.value.token) {
+      // 将token 放置在请求头对象中
+      config.headers.Authorization = `Bearer ${profile.value.token}`;
+    }
     return config;
   },
   function (error) {
     // 对请求错误做些什么
-
     return Promise.reject(error);
   }
 );

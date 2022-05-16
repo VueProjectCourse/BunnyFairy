@@ -27,3 +27,11 @@ export const getSkuInfoBySkuId = (skuId) => {
 export const setMergeCart = (cart) => {
   return request.post("/member/cart/merge", cart);
 };
+
+/**
+ * 获取服务器端购物车列表数据
+ * @return {AxiosPromise}
+ */
+export const getCartList = () => {
+  return request.get("/member/cart");
+};

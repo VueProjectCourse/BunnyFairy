@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { updateLocalCart, setMergeCart } from "../api/cartAPI";
+import { updateLocalCart, setMergeCart, getCartList } from "../api/cartAPI";
 import { useUserStore } from "./userStore";
 export const useCartStore = defineStore({
   id: "cartStore",
@@ -119,6 +119,8 @@ export const useCartStore = defineStore({
       // 判断用户是否登陆
       if (userStore.profile.token) {
         // 如果登陆
+        const data = await getCartList();
+        console.log(data);
       } else {
         // 如果没有登陆怎么办
         // 遍历购物车中的商品，发送请求获取该商品的最新信息
@@ -211,7 +213,7 @@ export const useCartStore = defineStore({
     async mergeCart() {
       console.log(11111);
       // 如果本地购物车中没有数据，不用进行合并
-      if (this.list.length === 0) return;
+      // if (this.list.length === 0) return;
       // 准备合并购物车接口所需数据
       const carts = this.list.map((item) => ({
         skuId: item.skuId,

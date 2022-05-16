@@ -80,6 +80,7 @@ export const useAccountLogin = () => {
     if (status === 200) {
       // 把用户信息存储到Store中
       profile.value = { ...profile.value, ...res.result };
+      console.log(profile);
       await cartStore.mergeCart();
       await cartStore.updateCartList();
       // // 判断登陆成功 跳转到首页
