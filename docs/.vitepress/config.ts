@@ -217,7 +217,7 @@ function getGuideSidebar() {
         { text: '购物车-购物车列表-已登录', link: "/cart/cart-list-login" },
         { text: '购物车-加入购物车-已登录', link: "/cart/cart-add-login" },
         { text: '购物车-删除商品-已登录', link: "/cart/cart-delete-login" },
-        { text: '购物车-批量删除商品-已登录', },
+        { text: '购物车-批量删除商品-已登录', link: "/cart/cart-patch-delete-login"},
         { text: '购物车-选中状态和数量-已登录', },
         { text: '购物车-全选与取消全选-已登录', },
         { text: '购物车-修改商品规格-已登录', },
