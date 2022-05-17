@@ -23,5 +23,10 @@ export const useUserStore = defineStore({
   // 开启数据缓存 默认存在sessionStorage
   persist: {
     enabled: true,
+    strategies: [
+      {
+        storage: localStorage,
+      },
+    ],
   },
 });

@@ -70,19 +70,34 @@ export const useAccountLogin = () => {
   // 注意 useRouter方法 必须在setup内执行 或者是 函数式组件
   const router = useRouter();
   const cartStore = useCartStore();
-  // route 和 router
-  // route 获取 路由里面的信息的
-  // router 是路由对象 专门用来改变路由的 里面有 改变路由的方法 route里面全部是属性
-  // console.log(router);
+  const userStore = useUserStore();
 
   // 请求成功时的回调
   const successFn = async ({ data: res, status: status }) => {
-    const { profile } = storeToRefs(useUserStore());
+    // const { profile } = storeToRefs(useUserStore());
+
     if (status === 200) {
       // 把用户信息存储到Store中
-      profile.value = { ...profile.value, ...res.result };
+      // profile.value = { ...profile.value, ...res.result };
+
+      userStore.profile = {
+        // 用户id
+        id: res.result.id,
+        // 用户头像
+        avatar: res.result.avatar,
+        // 用户昵称
+        nickname: res.result.nickname,
+        // 用户账号
+        account: res.result.account,
+        // 用户手机号
+        mobile: res.result.mobile,
+        // 用户登录凭证
+        token: res.result.token,
+      };
+
       await cartStore.mergeCart();
       await cartStore.updateCartList();
+
       // // 判断登陆成功 跳转到首页
       router.push("/").then(() => {
         // 登录成功之后的提示信息
@@ -170,10 +185,6 @@ export const useMobileLogin = () => {
   // vue-router 用的是provide inject
   // 注意 useRouter方法 必须在setup内执行 或者是 函数式组件
   const router = useRouter();
-  // route 和 router
-  // route 获取 路由里面的信息的
-  // router 是路由对象 专门用来改变路由的 里面有 改变路由的方法 route里面全部是属性
-  // console.log(router);
 
   // 请求成功时的回调
   const successFn = ({ data: res, status: status }) => {
@@ -181,6 +192,7 @@ export const useMobileLogin = () => {
     if (status === 200) {
       // 把用户信息存储到Store中
       profile.value = { ...profile.value, ...res.result };
+
       // // 判断登陆成功 跳转到首页
       router.push("/").then(() => {
         // 登录成功之后的提示信息

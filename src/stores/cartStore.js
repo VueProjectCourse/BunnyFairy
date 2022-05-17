@@ -109,7 +109,6 @@ export const useCartStore = defineStore({
         // 获取服务器端购物车列表数据
         let data = await getCartList();
         // 将服务器端购物车列表数据存储到 vuex 中
-        console.log(data.result);
         this.list = data.data.result;
       } else {
         // 如果没有登陆怎么办
@@ -209,7 +208,7 @@ export const useCartStore = defineStore({
     // 合并购物车数据
     async mergeCart() {
       // 判断一下 购物车中有没有数据 如果没有数据 就不需要合并
-      console.log(1111);
+
       // 准备合并购物车所需数据
       const carts = this.list.map((item) => ({
         skuId: item.skuId,
