@@ -20,31 +20,33 @@
  * @param ids {Array<string>} 商品 skuId 数组
  * @return {AxiosPromise}
  */
-export function deleteGoodsOfCartBySkuIds(ids) {
-  return request("/member/cart", "delete", { ids });
-}
+export const deleteGoodsOfCartBySkuIds = (ids) => {
+  console.log(ids);
+  return request.delete("/member/cart", { data: { ids } });
+};
+
 ```
 
 * **Step.2：在store中调用接口实现删除商品功能**
 
 ```js
-import { deleteGoodsOfCartBySkuIds } from "@/api/cart";
-
-export default {
-  actions: {
-    // 根据 skuId 删除商品
-    async deleteGoodsOfCartBySkuId({ rootState, commit, dispatch }, skuId) {
-      if (rootState.user.profile.token) {
-        // 已登录
+   // 把商品从购物车中删除
+    async deleteGoodsOfCartBySkuId(skuId) {
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+        // console.log(skuId);
         await deleteGoodsOfCartBySkuIds([skuId]);
-        // 更新商品列表
-        dispatch("updateCartList");
+        // 更新购物车商品列表
+        this.updateCartList();
       } else {
-        // 未登录
+        // 如果没有登陆怎么办
+        const index = this.list.findIndex((item) => item.skuId === skuId);
+
+        this.list.splice(index, 1);
       }
     },
-  }
-}
 ```
 
 :::
