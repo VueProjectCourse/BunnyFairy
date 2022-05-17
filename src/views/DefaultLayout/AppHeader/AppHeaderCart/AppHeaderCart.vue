@@ -1,20 +1,19 @@
 <script setup>
 import { useCartStore } from "@/stores/cartStore";
 import { storeToRefs } from "pinia";
-import {ref} from "vue"
-import {useRoute, onBeforeRouteUpdate} from "vue-router"
+import { ref } from "vue";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
 const cartStore = useCartStore();
 const { effectiveGoodsList, effectiveGoodsCount, effectiveGoodsPrice } =
   storeToRefs(useCartStore());
 const route = useRoute();
 
 // 当我们刚进入页面的时候
-const isCartPage = ref(route.path ==="/cart");
+const isCartPage = ref(route.path === "/cart");
 // 当路由发生更新了
-onBeforeRouteUpdate((to)=>{
-  isCartPage.value = (to.path ==="/cart");
-})
-
+onBeforeRouteUpdate((to) => {
+  isCartPage.value = to.path === "/cart";
+});
 </script>
 
 <template>
@@ -52,7 +51,9 @@ onBeforeRouteUpdate((to)=>{
           <p>共 {{ effectiveGoodsCount }} 件商品</p>
           <p>¥{{ effectiveGoodsPrice }}</p>
         </div>
-        <Button type="plain"><RouterLink to="/cart">去购物车结算</RouterLink></Button>
+        <Button type="plain"
+          ><RouterLink to="/cart">去购物车结算</RouterLink></Button
+        >
       </div>
     </div>
   </div>

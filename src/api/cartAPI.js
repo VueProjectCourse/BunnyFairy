@@ -1,5 +1,4 @@
-import request from "@/utils/request";
-
+import request from "../utils/request";
 /**
  * 更新购物车中的商品信息 (库存, 是否有效, 现价)
  * @param skuId

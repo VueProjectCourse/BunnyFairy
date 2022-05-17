@@ -1,12 +1,13 @@
 <script setup>
 import Layout from "../DefaultLayout/Layout.vue";
 import GoodsRelevant from "../Detail/GoodsRelevant/GoodsRelevant.vue";
-import CartSku from "./CartSku/CartSku.vue";
-import { useCartStore } from "@/stores/cartStore";
+import Message from "../../components/Message/Message";
+import EmptyCart from "./EmptyCart/EmptyCart.vue";
+import { useCartStore } from "../../stores/cartStore";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
-import Message from "@/components/Message/Message";
-import Confirm from "@/components/Confirm/Confirm.js";
+import Confirm from "../../components/Confirm/Confirm.js";
+import CartSku from "./CartSku/CartSku.vue";
 
 const {
   effectiveGoodsList,
@@ -24,18 +25,19 @@ onMounted(() => {
     Message({ type: "success", text: "本地购物车中的商品信息更新成功" });
   });
 });
-
-const cartRemove = (skuId) => {
-  // cartStore.deleteGoodsOfCartBySkuId(skuId);
-  console.log(skuId);
+const deleteGoodsOfCartBySkuId = (skuId) => {
   Confirm({
-    content: "您确定要删除该商品吗?",
+    title: "温馨提示",
+    content: "您是否要真的删除该商品?",
   })
     .then(() => {
-      console.log("点击确定");
+      // 确定
+      console.log("确定");
+      cartStore.deleteGoodsOfCartBySkuId(skuId);
     })
     .catch(() => {
-      console.log("点击取消");
+      // 取消
+      console.log("取消");
     });
 };
 
@@ -88,7 +90,9 @@ const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
                 <th>
                   <Checkbox
                     :modelValue="selectAllButtonStatus"
-                    @update:modelValue="cartStore.selectIsAll($event)"
+                    @update:modelValue="
+                      cartStore.selectIsAll({ selected: $event })
+                    "
                     >全选</Checkbox
                   >
                 </th>
@@ -100,8 +104,14 @@ const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
               </tr>
             </thead>
             <!-- 有效商品 -->
+
             <tbody>
-              <tr v-for="goods in effectiveGoodsList" :key="goods.id">
+              <tr v-if="effectiveGoodsCount === 0">
+                <td colspan="6">
+                  <EmptyCart />
+                </td>
+              </tr>
+              <tr v-else v-for="goods in effectiveGoodsList" :key="goods.id">
                 <td>
                   <Checkbox
                     :modelValue="goods.selected"
@@ -164,7 +174,7 @@ const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
                     <a
                       class="green"
                       href="javascript:"
-                      @click="cartRemove(goods.skuId)"
+                      @click="deleteGoodsOfCartBySkuId(goods.skuId)"
                       >删除</a
                     >
                   </p>
@@ -173,7 +183,7 @@ const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
               </tr>
             </tbody>
             <!-- 无效商品 -->
-            <tbody v-if="invalidGoodsList.length > 0">
+            <tbody>
               <tr>
                 <td colspan="6"><h3 class="tit">失效商品</h3></td>
               </tr>
@@ -210,7 +220,11 @@ const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
         <!-- 操作栏 -->
         <div class="action">
           <div class="batch">
-            <Checkbox>全选</Checkbox>
+            <Checkbox
+              :modelValue="selectAllButtonStatus"
+              @update:modelValue="cartStore.selectIsAll({ selected: $event })"
+              >全选</Checkbox
+            >
             <a
               href="javascript:"
               @click="

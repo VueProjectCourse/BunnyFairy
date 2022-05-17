@@ -1,11 +1,10 @@
 <script setup>
-import GoodsSku from "../../Detail/GoodsSku/GoodsSku.vue";
-import { onClickOutside } from "@vueuse/core";
-import { useCartStore } from "@/stores/cartStore";
-import { getSkuInfoBySkuId } from "../../../api/cartAPI";
 import { ref } from "vue";
+import { onClickOutside } from "@vueuse/core";
+import { getSkuInfoBySkuId } from "../../../api/cartAPI";
+import { useCartStore } from "../../../stores/cartStore";
+import GoodsSku from "../../Detail/GoodsSku/GoodsSku.vue";
 import Message from "../../../components/Message/Message";
-
 const props = defineProps({
   attrsText: {
     type: String,
@@ -16,72 +15,71 @@ const props = defineProps({
     default: "",
   },
 });
-const specsAndSkus = ref(null);
-
-const loadingSku = ref(false);
-
-// 存储用户选择的新的商品规格
-let userSelectedNewSku = null;
+const cartStore = useCartStore();
 // 控制规格弹层的显示和隐藏
 const visible = ref(false);
-
 // 获取弹层容器
 const target = ref(null);
-
-// 显示
+// 供用户选择的规格选项数据 所有可组合的规格组合
+const specsAndSkus = ref(null);
+// sku 数据的加载状态
+const loadingSku = ref(false);
+// 显示方法
 const show = async () => {
   visible.value = true;
 
+  // 显示弹层
+  visible.value = true;
+  // 更新加载状态
   loadingSku.value = true;
+  // 获取 sku 数据
+  // await 等待
+  let data = await getSkuInfoBySkuId(props.skuId);
 
-  let { data: res } = await getSkuInfoBySkuId(props.skuId);
-
-  console.log(res);
-
-  specsAndSkus.value = res.result;
-
+  specsAndSkus.value = data.data.result;
+  // 更新加载状态
   loadingSku.value = false;
 };
-
-// 隐藏
+// 隐藏方法
 const hide = () => {
   visible.value = false;
 };
-
-// 切换
+// 显示与隐藏切换方法
 const toggle = () => {
   visible.value ? hide() : show();
 };
 
 // 在规格外部点击时
 onClickOutside(target, () => {
-  // 如果规格弹框是显示的，就让他隐藏
+  // 如果规格弹框是显示的, 就让他隐藏
   visible.value && hide();
 });
-
-// 监听规格信息变化
-const onSpecChanged = (sku) => {
-  console.log(sku);
-  userSelectedNewSku = sku;
+let userSelectedNewSku = ref(null);
+const onSpecChanged = (data) => {
+  // 数据回传，
+  // console.log(data);
+  userSelectedNewSku.value = data;
 };
 
-// 提交规格
-const cartStore = useCartStore();
+// 把选择到的SKU传给store中的action方法来改变规格
 const submitSku = () => {
+  // 1. 让规格选择框隐藏
   hide();
-  // 如果用户没有重新选择规格, 或者用户选择了规格, 但是选择的规格和之前是一样的
+  // 2. 如果用户没有重新选择规格, 或者用户选择了规格, 但是选择的规格和之前是一样的
   if (
-    !userSelectedNewSku ||
-    (userSelectedNewSku && userSelectedNewSku.skuId === props.skuId)
+    !userSelectedNewSku.value ||
+    (userSelectedNewSku && userSelectedNewSku.value.skuId === props.skuId)
   ) {
     // 用户提示
     Message({ type: "warn", text: "商品规格信息没有发生变化" });
     return;
+  } else {
+    // 3. 把用户选择的规格提交到store中
+    cartStore.updateGoodsOfCartBySkuChanged({
+      oldSkuId: props.skuId,
+      userSelectedNewSku,
+    });
   }
-  cartStore.updateGoodsOfCartBySkuChanged({
-    oldSkuId: props.skuId,
-    userSelectedNewSku,
-  });
 };
 </script>
 

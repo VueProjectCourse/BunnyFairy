@@ -1,9 +1,9 @@
 <script setup>
-import Layout from "../DefaultLayout/Layout.vue";
+import Layout from '../DefaultLayout/Layout.vue';
 import { useBread, useTopCateCarousel } from "./useTopCategory";
 import SubCateList from "./SubCateList/SubCateList.vue";
-import RecommendGoods from "./RecommendGoods/RecommendGoods.vue";
-const { topCate } = useBread();
+import RecommendGoods from './RecommendGoods/RecommendGoods.vue';
+const { topCate } = useBread()
 const { carouselList } = useTopCateCarousel();
 </script>
 <template>
@@ -17,19 +17,11 @@ const { carouselList } = useTopCateCarousel();
         </Transition>
       </Bread>
       <!-- 轮播图 -->
-      <Carousel
-        v-if="carouselList"
-        :carousels="carouselList"
-        :auto="true"
-        :style="{ height: '500px' }"
-      ></Carousel>
+      <Carousel v-if="carouselList" :carousels="carouselList" :auto="true" :style="{ height: '500px' }"></Carousel>
       <!-- 全部分类 -->
-      <SubCateList
-        v-if="topCate"
-        :subCategories="topCate?.children"
-      ></SubCateList>
+      <SubCateList v-if="topCate" :subCategories="topCate?.children"></SubCateList>
       <!-- 推荐商品 -->
-      <RecommendGoods />
+      <RecommendGoods/>
     </div>
   </Layout>
 </template>

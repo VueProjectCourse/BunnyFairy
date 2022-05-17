@@ -1,6 +1,6 @@
 <script setup>
 import Button from "../Button/Button.vue";
-const props = defineProps({
+defineProps({
   title: {
     type: String,
     default: "温馨提示",
@@ -19,7 +19,6 @@ const props = defineProps({
   },
 });
 </script>
-
 <template>
   <div class="xtx-confirm">
     <div class="wrapper">
@@ -56,7 +55,6 @@ const props = defineProps({
   width: 100%;
   height: 100%;
   z-index: 8888;
-  /* background: rgba(0, 0, 0, 0.5); */
   background: rgba(0, 0, 0, 0);
   transition: all 0.4s;
 }
@@ -70,10 +68,9 @@ const props = defineProps({
   position: absolute;
   top: 50%;
   left: 50%;
-  /* transform: translate(-50%, -50%); */
-  transition: all 0.4s;
   transform: translate(-50%, -60%);
   opacity: 0;
+  transition: all 0.4s;
 }
 .xtx-confirm .wrapper.fade {
   transform: translate(-50%, -50%);

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { updateLocalCart, setMergeCart, getCartList } from "../api/cartAPI";
 import { useUserStore } from "./userStore";
+import { updateLocalCart, setMergeCart, getCartList } from "../api/cartAPI";
 export const useCartStore = defineStore({
   id: "cartStore",
   state: () => ({
@@ -53,8 +53,6 @@ export const useCartStore = defineStore({
     },
     // 全选、全不选按钮的状态
     selectAllButtonStatus() {
-      // 有效商品的数量和选中商品的数量相等意味着所有有效商品已选中
-      // 并且有效商品数量必须大于 0
       return (
         this.effectiveGoodsList.length > 0 &&
         this.userSelectedGoodsList.length === this.effectiveGoodsList.length
@@ -70,7 +68,9 @@ export const useCartStore = defineStore({
         // 如果登陆
       } else {
         // 如果没有登陆怎么办
+
         // 找购物车中有没有该商品
+
         const index = this.list.findIndex((item) => item.skuId === goods.skuId);
 
         if (index > -1) {
@@ -100,8 +100,73 @@ export const useCartStore = defineStore({
         this.list.splice(index, 1);
       }
     },
-    // 删除用户选择的商品、清空无效商品
+    // 更新商品列表
+    async updateCartList() {
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+        // 获取服务器端购物车列表数据
+        let data = await getCartList();
+        // 将服务器端购物车列表数据存储到 vuex 中
+        console.log(data.result);
+        this.list = data.data.result;
+      } else {
+        // 如果没有登陆怎么办
+
+        // 声明一个数组 用来装 异步请求
+
+        // 把每个请求都遍历发起
+        const arrayPromise = this.list.map((goods) =>
+          updateLocalCart(goods.skuId)
+        );
+
+        // 使用promise.all
+        Promise.all(arrayPromise).then((data) => {
+          // console.log(data)
+          data.forEach((item, index) => {
+            // console.log(item);
+            item.data.result.skuId = this.list[index].skuId;
+
+            this.list[index] = {
+              ...this.list[index],
+              ...item.data.result,
+            };
+          });
+        });
+      }
+    },
+    // 更改商品信息(是否选择)
+    updateGoodsOfCartBySkuId(partOfGoods) {
+      // console.log(partOfGoods)
+      // 1. 通过skuId查找到该商品在list中的索引
+      const index = this.list.findIndex(
+        (item) => item.skuId === partOfGoods.skuId
+      );
+      // console.log(index);
+      // 2， 更改list中的那个商品的selected的值
+      // 在vue中这样的写法更好
+      // this.list[index].selected = partOfGoods.selected;
+
+      // 更新商品
+      // 在react中 只能用下面的方法
+      // 编程范式-->数据不可变范式
+      //
+      this.list[index] = {
+        ...this.list[index],
+        ...partOfGoods,
+      };
+    },
+    selectIsAll(partOfGoods) {
+      // console.log(partOfGoods)
+      this.list.forEach((item) => {
+        // console.log(item.selected)
+        item.selected = partOfGoods.selected;
+      });
+    },
+    //
     deleteGoodsOfCartByUserSelectedOrInvalid(flag) {
+      // userSelectedGoodsList
       const userStore = useUserStore();
       // 判断用户是否登陆
       if (userStore.profile.token) {
@@ -113,108 +178,39 @@ export const useCartStore = defineStore({
         });
       }
     },
-    // 更新购物车商品
-    async updateCartList() {
-      const userStore = useUserStore();
-      // 判断用户是否登陆
-      if (userStore.profile.token) {
-        // 如果登陆
-        const data = await getCartList();
-        console.log(data);
-      } else {
-        // 如果没有登陆怎么办
-        // 遍历购物车中的商品，发送请求获取该商品的最新信息
-        const arrayPromise = this.list.map(({ skuId }) =>
-          // 将方法调用后返回的 promise 对象存储在一个数组中
-          updateLocalCart(skuId)
-        );
-
-        // 批量获取多个请求的响应数据，所有响应书就被存储在一个数组中
-        Promise.all(arrayPromise).then((data) => {
-          data.forEach((item, index) => {
-            item.data.result.skuId = this.list[index].skuId;
-
-            this.list[index] = {
-              ...this.list[index],
-              ...item.data.result,
-            };
-          });
-        });
-      }
-    },
-    updateGoodsOfCartBySkuId(partOfGoods) {
-      const userStore = useUserStore();
-      // 判断用户是否登陆
-      if (userStore.profile.token) {
-        // 如果登陆
-      } else {
-        // 如果没有登陆怎么办
-        // 根据 skuId在购物车列表中查找哦想要更新的商品
-        const index = this.list.findIndex(
-          (item) => item.skuId === partOfGoods.skuId
-        );
-        // 更新商品
-        this.list[index] = {
-          ...this.list[index],
-          ...partOfGoods,
-        };
-      }
-    },
-    selectIsAll(isSelected) {
-      const userStore = useUserStore();
-      // 判断用户是否登陆
-      if (userStore.profile.token) {
-        // 如果登陆
-      } else {
-        // 如果没有登陆怎么办
-        // console.log(isSelected);
-        this.list.forEach((item) => {
-          const index = this.list.findIndex(
-            (subitem) => subitem.skuId === item.skuId
-          );
-          // 更新商品
-          this.list[index] = {
-            ...this.list[index],
-            selected: isSelected,
-          };
-        });
-      }
-    },
     changeGoodsCountOfCartBySkuId(skuId, count) {
       this.updateGoodsOfCartBySkuId({ skuId, count });
     },
-    // 商品规格信息发生变化, 更新商品信息
-    updateGoodsOfCartBySkuChanged({ oldSkuId, userSelectedNewSku }) {
+    updateGoodsOfCartBySkuChanged(partOfGoods) {
       const userStore = useUserStore();
       // 判断用户是否登陆
       if (userStore.profile.token) {
         // 如果登陆
       } else {
         // 如果没有登陆怎么办
-        // 先根据旧的 skuId 查找商品, 根据旧商品生成新商品, 删除旧商品, 插入新商品
-        const oldGoods = this.list.find((item) => item.skuId === oldSkuId);
+        console.log(partOfGoods);
+        const oldGoods = this.list.find(
+          (item) => item.skuId === partOfGoods.oldSkuId
+        );
 
         const newGoods = {
           ...oldGoods,
-          skuId: userSelectedNewSku.skuId,
-          stock: userSelectedNewSku.inventory,
-          oldPrice: userSelectedNewSku.oldPrice,
-          nowPrice: userSelectedNewSku.price,
-          attrsText: userSelectedNewSku.specsText,
+          skuId: partOfGoods.userSelectedNewSku.value.skuId,
+          stock: partOfGoods.userSelectedNewSku.value.inventory,
+          oldPrice: partOfGoods.userSelectedNewSku.value.oldPrice,
+          nowPrice: partOfGoods.userSelectedNewSku.value.price,
+          attrsText: partOfGoods.userSelectedNewSku.value.specsText,
         };
 
-        console.log(newGoods);
-
-        this.deleteGoodsOfCartBySkuId(oldGoods);
+        this.deleteGoodsOfCartBySkuId(partOfGoods.oldSkuId);
         this.addGoodsToCart(newGoods);
       }
     },
-    // 合并购物车
+    // 合并购物车数据
     async mergeCart() {
-      console.log(11111);
-      // 如果本地购物车中没有数据，不用进行合并
-      // if (this.list.length === 0) return;
-      // 准备合并购物车接口所需数据
+      // 判断一下 购物车中有没有数据 如果没有数据 就不需要合并
+      console.log(1111);
+      // 准备合并购物车所需数据
       const carts = this.list.map((item) => ({
         skuId: item.skuId,
         selected: item.selected,
@@ -222,12 +218,10 @@ export const useCartStore = defineStore({
       }));
 
       try {
-        // 合并购物车
         await setMergeCart(carts);
-        // 清空本地购物车
+
         this.list = [];
       } catch (error) {
-        // 购物车合并失败, 抛出异常
         throw new Error(error);
       }
     },

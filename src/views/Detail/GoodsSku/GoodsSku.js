@@ -159,7 +159,6 @@ export const useDataToParent = (setUserSelect) => {
       const skuId = specPathMap[selected.join("_")];
       // 该sku
       const target = skus.find((sku) => sku.id === skuId);
-      console.log(target);
       // 发送数据
       emit("on-spec-changed", {
         skuId,

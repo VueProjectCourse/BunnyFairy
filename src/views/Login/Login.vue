@@ -3,8 +3,12 @@ import LoginHeader from "./LoginHeader/LoginHeader.vue";
 import LoginFooter from "./LoginFooter/LoginFooter.vue";
 import { useTogglePattern } from "./Login";
 import LoginForm from "./LoginForm/LoginForm.vue";
-
+// import Message from "../../components/Message/Message";
 const { loginPattern, setLoginPattern } = useTogglePattern();
+
+// const showMessage = () => {
+//   Message({ type: "success", text: "封装Message组件" });
+// };
 </script>
 
 <template>
