@@ -16,27 +16,24 @@
 * **Step.2：发送请求实现商品的批量删除**
 
 ```js
-export default {
-  actions: {
-    // 删除用户选择的商品、清空无效商品
-    async deleteGoodsOfCartByUserSelectedOrInvalid(
-      { getters, rootState, commit, dispatch },
-      flag
-    ) {
-      if (rootState.user.profile.token) {
-        // 登录
+// 批量删除或情况无效商品
+    async deleteGoodsOfCartByUserSelectedOrInvalid(flag) {
+      // userSelectedGoodsList
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
         // 获取要批量删除商品的 skuId 数组
-        const skuIds = getters[flag].map((item) => item.skuId);
-        // 发送请求 批量删除商品
+        const skuIds = this[flag].map((item) => item.skuId);
         await deleteGoodsOfCartBySkuIds(skuIds);
-        // 更新商品列表
-        dispatch("updateCartList");
+        this.updateCartList();
       } else {
-        // 未登录
+        // 如果没有登陆怎么办
+        this[flag].forEach((item) => {
+          this.deleteGoodsOfCartBySkuId(item.skuId);
+        });
       }
     },
-  }
-} 
 ```
 
 :::
