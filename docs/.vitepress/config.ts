@@ -222,7 +222,7 @@ function getGuideSidebar() {
         { text: '购物车-全选与取消全选-已登录', link: "/cart/cart-checkedall-login"},
         { text: '购物车-修改商品规格-已登录', link: "/cart/cart-specs-login"},
         { text: '清空本地购物车-退出登录', link: "/cart/cart-clear-login"},
-        { text: '购物车-下单结算按钮', },
+        { text: '购物车-下单结算按钮', link: "/cart/cart-settle-login"},
       ]
     },
     {
