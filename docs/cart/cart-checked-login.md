@@ -21,32 +21,39 @@
  * @param ids skuId 数组
  * @return {AxiosPromise}
  */
-export function selectOrUnselectCartGoods({ selected, ids }) {
-  return request("/member/cart/selected", "put", { selected, ids });
-}
+export const selectOrUnselectCartGoods = ({ selected, ids }) => {
+  return request.put("/member/cart/selected", { selected, ids });
+};
+
 ```
 
 * **Step.2：在 store 中的 action 方法中调用接口实现修改服务器端购物车商品信息**
 
 ```js
-export default {
-  actions: {
-    // 全选、全不选
-    async selectIsAll({ rootState, getters, commit, dispatch }, isAll) {
-      if (rootState.user.profile.token) {
-        // 登录
-        // 获取商品 skuId 数组
-        const ids = getters.effectiveGoodsList.map((item) => item.skuId);
-        // 发送请求执行, 全选、全不选操作
-        await selectOrUnselectCartGoods({ ids, selected: isAll });
-        // 更新购物车商品列表
-        dispatch("updateCartList");
+ async selectIsAll(partOfGoods) {
+      // console.log(partOfGoods)
+
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+        const ids = this.effectiveGoodsList.map((item) => item.skuId);
+        console.log(ids);
+
+        await selectOrUnselectCartGoods({
+          ids,
+          selected: partOfGoods.selected,
+        });
+
+        this.updateCartList();
       } else {
-        // 未登录
+        // 如果没有登陆怎么办
+        this.list.forEach((item) => {
+          // console.log(item.selected)
+          item.selected = partOfGoods.selected;
+        });
       }
     },
-  }
-}
 ```
 
 :::
