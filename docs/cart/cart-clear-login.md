@@ -12,14 +12,31 @@
 ::: info 体验
 
 ```js
-const logout = () => {
-  store.commit("cart/setCart", []);
-} 
+<script setup>
+// 导入 useUserStore
+import { useUserStore } from "@/stores/userStore";
+import { useCartStore } from "../../../stores/cartStore";
+import { useRouter } from "vue-router";
+// 导入 storeToRefs
+import { storeToRefs } from "pinia";
+// 解构出 profile
+const { profile } = storeToRefs(useUserStore());
+const userStore = useUserStore();
+const cartStore = useCartStore();
+const router = useRouter();
+const handlerLogout = () => {
+  // 1.清理store中的数据
+  userStore.$reset();
+  cartStore.$reset();
+  // 2.跳转路由
+  router.push("/login");
+};
 ```
 
 :::
 
 ::: danger 总结
+
 * 【重点】
 * 【难点】
 * 【注意点】
