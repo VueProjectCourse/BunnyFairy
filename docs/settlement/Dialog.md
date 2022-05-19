@@ -37,6 +37,7 @@
 * **Step.2：在对话框组件中，编写样式代码**
 
 ```css
+@import "@/assets/styles/variable.css";
 .xtx-dialog {
   position: fixed;
   left: 0;
@@ -103,8 +104,6 @@
 .xtx-dialog .wrapper .header a:hover {
   color: #666;
 }
-
-
 ```
 
 * **Step.3：实现对话框组件内容动态化**
@@ -120,73 +119,100 @@
 </Dialog>
 ```
 
+```js
+const props = defineProps({
+  title: {
+    type: String,
+    default: "",
+  },
+});
+```
+
 ```html
 <template>
-  <div class="header">
-    <h3>{{ title }}</h3>
-  </div>
-  <div class="body">
-    <slot name="default"></slot>
-  </div>
-  <div class="footer">
-    <slot name="footer"></slot>
+  <div class="xtx-dialog">
+    <div class="wrapper">
+      <div class="header">
+        <h3>{{ title }}</h3>
+        <a href="JavaScript:" class="iconfont icon-close-new"></a>
+      </div>
+      <div class="body">对话框内容</div>
+      <div class="footer">
+        <Button type="gray" :size="small" style="margin-right: 20px"
+          >取消</Button
+        >
+        <Button type="primary" :size="small">确认</Button>
+      </div>
+    </div>
   </div>
 </template>
-<script>
-export default {
-  props: {
-    title: {
-      type: String,
-      default: ""
-    }
-  }
-}
-</script>
 ```
 
 * **Step.4：实现对话框组件的渲染与销毁**
 
-```html
-<template>
-  <div class="xtx-dialog fade" v-if="isRendering" v-fade>
-    <a @click="destroy" class="iconfont icon-close-new"></a>
-  </div>
-</template>
-<script>
+```js
 import { useVModel } from "@vueuse/core";
 
-export default {
-  name: "XtxDialog",
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
+<script setup>
+import { useVModel } from "@vueuse/core";
+import Button from "../Button/Button.vue";
+const props = defineProps({
+  title: {
+    type: String,
+    default: "",
   },
-  setup(props, { emit }) {
-    // 控制弹框是否渲染
-    const isRendering = useVModel(props, "visible", emit);
-    // 渲染弹框
-    const render = () => {
-      isRendering.value = true;
-    };
-    // 销毁弹框
-    const destroy = () => {
-      isRendering.value = false;
-    };
-    return { isRendering, render, destroy };
+  visible: {
+    type: Boolean,
+    default: false,
   },
-  directives: {
-    fade: {
-      mounted(el) {
-        requestAnimationFrame(() => {
-          el.classList.add("fade");
-        });
-      },
-    },
+});
+
+// 控制弹框是否渲染
+const isRendering = useVModel(props, "visible", emit);
+
+// 渲染弹框
+const render = () => {
+  isRendering.value = true;
+};
+
+// 销毁弹框
+const destroy = () => {
+  isRendering.value = false;
+};
+
+// 注册一个局部的自定义指令，需要以小写v开头
+const vFocus = {
+  mounted(el) {
+    // 获取input，并调用其focus()方法
+    requestAnimationFrame(() => {
+      el.classList.add("fade");
+    });
   },
 };
-</script>
+```
+
+```html
+<template>
+  <div class="xtx-dialog" v-if="isRendering" v-fade>
+    <div class="wrapper">
+      <div class="header">
+        <h3>{{ title }}</h3>
+        <a href="JavaScript:" class="iconfont icon-close-new"></a>
+      </div>
+      <div class="body">对话框内容</div>
+      <div class="footer">
+        <Button
+          type="gray"
+          :size="small"
+          style="margin-right: 20px"
+          @click="destroy"
+          >取消</Button
+        >
+        <Button type="primary" :size="small">确认</Button>
+      </div>
+    </div>
+  </div>
+</template>
 ```
 
 ```html
