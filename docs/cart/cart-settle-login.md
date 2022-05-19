@@ -40,26 +40,29 @@ const jumpToCheckout = () => {
 * **Step.2：添加路由前置守卫, 进行路由拦截, 判断用户是否登录**
 
 ```js
-import store from "@/store";
-
-export default function authGuard(to, from, next) {
-  // 指明需要登录的路由地址
+import { useUserStore } from "../stores/userStore";
+import { storeToRefs } from "pinia";
+export default (to, from, next) => {
+  // 指明需要登陆的路由地址
   const requiredLogin = ["checkout", "member"];
+  // 在发送请求之前做些什么
+  const { profile } = storeToRefs(useUserStore());
   // 将用户访问的路由地址的开始字符串匹配出来
-  // 如果用户访问的页面是需要登录的
+  // 如果用户访问的页面时需要登陆的
   if (requiredLogin.includes(to.path.split("/")[1])) {
-    // 如果用户没有登录
-    if (!store.state.user.profile.token) {
+    // 如果用户没有登陆
+    if (!profile.value.token) {
       next({ path: "/login", query: { redirectURL: to.fullPath } });
     } else {
-      // 如果用户登录了
+      // 如果登陆了
       next();
     }
   } else {
-    // 用户访问的页面是不需要登录的
+    // 用户访问的是不需要登陆的
     next();
   }
-}
+};
+
 ```
 
 ```js
