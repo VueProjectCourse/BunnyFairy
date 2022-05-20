@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 import Layout from "../../DefaultLayout/Layout.vue";
 import { useOrderInfo } from "./Order";
+import CheckoutAddress from "../CheckoutAddress/CheckoutAddress.vue";
 
 const { orderInfo, setOrderList } = useOrderInfo();
 
@@ -22,25 +23,7 @@ onMounted(() => {
           <!-- 收货地址 -->
           <h3 class="box-title">收货地址</h3>
           <div class="box-body">
-            <div class="address">
-              <div class="text">
-                <!-- <div class="none">您需要先添加收货地址才可提交订单。</div> -->
-                <ul>
-                  <li>
-                    <span>收<i />货<i />人：</span>朱超
-                  </li>
-                  <li><span>联系方式：</span>132****2222</li>
-                  <li>
-                    <span>收货地址：</span>海南省三亚市解放路108号物质大厦1003室
-                  </li>
-                </ul>
-                <a href="javascript:">修改地址</a>
-              </div>
-              <div class="action">
-                <Button class="btn">切换地址</Button>
-                <Button class="btn">添加地址</Button>
-              </div>
-            </div>
+            <CheckoutAddress />
           </div>
           <!-- 商品信息 -->
           <h3 class="box-title">商品信息</h3>
@@ -94,23 +77,23 @@ onMounted(() => {
           </div>
           <!-- 金额明细 -->
           <h3 class="box-title">金额明细</h3>
-          <div class="box-body">
+          <div class="box-body" v-if="orderInfo">
             <div class="total">
               <dl>
                 <dt>商品件数：</dt>
-                <dd>5件</dd>
+                <dd>{{ orderInfo.summary.goodsCount }}件</dd>
               </dl>
               <dl>
                 <dt>商品总价：</dt>
-                <dd>¥5697.00</dd>
+                <dd>¥{{ orderInfo.summary.totalPrice }}</dd>
               </dl>
               <dl>
                 <dt>运<i></i>费：</dt>
-                <dd>¥0.00</dd>
+                <dd>¥{{ orderInfo.summary.postFee }}</dd>
               </dl>
               <dl>
                 <dt>应付总额：</dt>
-                <dd class="price">¥5697.00</dd>
+                <dd class="price">¥{{ orderInfo.summary.totalPayPrice }}</dd>
               </dl>
             </div>
           </div>
