@@ -1,6 +1,13 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { useAddresses } from "./CheckoutAddress";
 import AddressEdit from "../AddressEdit/AddressEdit.vue";
+
+const { addressList, setAddress } = useAddresses();
+
+onMounted(() => {
+  setAddress();
+});
 
 // 用于存储编辑收货地址组件实例对象
 const addressEditInstance = ref(null);
