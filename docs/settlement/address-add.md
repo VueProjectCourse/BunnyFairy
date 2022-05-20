@@ -2,6 +2,9 @@
 
 ::: tip Object
 这一小节，我们的目标是 实现添加收货地址功能
+
+示例如下:
+![69](./images/69.png)
 :::
 
 ::: warning Path
