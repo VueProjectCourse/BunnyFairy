@@ -1,17 +1,56 @@
 <script setup>
-import Button from "../Button/Button.vue";
+import { useVModel } from "@vueuse/core";
+
+const props = defineProps({
+  title: {
+    type: String,
+    default: "",
+  },
+  visible: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const emit = defineEmits(["update:visible"]);
+
+// 控制弹框是否渲染
+const isRendering = useVModel(props, "visible", emit);
+
+// 渲染弹框
+const render = () => {
+  isRendering.value = true;
+};
+
+// 销毁弹框
+const destroy = () => {
+  isRendering.value = false;
+};
+
+// 注册一个局部的自定义指令，需要以小写v开头
+const vFade = {
+  mounted(el) {
+    // 获取input，并调用其focus()方法
+    requestAnimationFrame(() => {
+      el.classList.add("fade");
+    });
+  },
+};
 </script>
 <template>
-  <div class="xtx-dialog">
-    <div class="wrapper">
+  <div class="xtx-dialog" v-if="isRendering" v-fade>
+    <div class="wrapper" v-fade>
       <div class="header">
-        <h3>切换收货地址</h3>
-        <a href="JavaScript:" class="iconfont icon-close-new"></a>
+        <h3>{{ title }}</h3>
+        <a
+          href="JavaScript:"
+          class="iconfont icon-close-new"
+          @click="destroy"
+        ></a>
       </div>
-      <div class="body">对话框内容</div>
+      <div class="body"><slot name="default"></slot></div>
       <div class="footer">
-        <Button type="gray" style="margin-right: 20px">取消</Button>
-        <Button type="primary">确认</Button>
+        <slot name="footer"></slot>
       </div>
     </div>
   </div>

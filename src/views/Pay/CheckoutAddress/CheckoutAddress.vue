@@ -1,4 +1,28 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import AddressEdit from "../AddressEdit/AddressEdit.vue";
+
+// 用于存储编辑收货地址组件实例对象
+const addressEditInstance = ref(null);
+const addAddress = () => {
+  addressEditInstance.value.visible = true;
+
+  // 收货地址参数的初始状态
+  addressEditInstance.value.address = {
+    receiver: "",
+    contact: "",
+    provinceCode: "",
+    cityCode: "",
+    countryCode: "",
+    address: "",
+    postalCode: "",
+    addressTags: "",
+    isDefault: false,
+  };
+  // 清空城市信息
+  addressEditInstance.value.location = "";
+};
+</script>
 
 <template>
   <div class="address">
@@ -15,7 +39,9 @@
     </div>
     <div class="action">
       <Button class="btn">切换地址</Button>
-      <Button class="btn">添加地址</Button>
+      <Button class="btn" @click="addAddress">添加地址</Button>
+
+      <AddressEdit ref="addressEditInstance" />
     </div>
   </div>
 </template>
