@@ -8,9 +8,9 @@ const instance = axios.create({
   // 开发环境
   // 测试环境
   // 线上环境
-  baseURL: "https://apipc-xiaotuxian-front.itheima.net/",
-  // baseURL: "http://pcapi-xiaotuxian-front-devtest.itheima.net/",
-  timeout: 5000,
+  // baseURL: "https://apipc-xiaotuxian-front.itheima.net/",
+  baseURL: "http://pcapi-xiaotuxian-front-devtest.itheima.net/",
+  // timeout: 5000,
 });
 
 // 添加请求拦截器

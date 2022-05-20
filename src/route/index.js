@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import authGuard from "./authGuard";
 // 导入Home组件
 import Home from "@/views/Home/Home.vue";
 import Login from "@/views/Login/Login.vue";
@@ -42,6 +43,11 @@ const routes = [
     name: "cart",
     component: () => import("@/views/Cart/Cart.vue"),
   },
+  {
+    path: "/checkout/order",
+    name: "order",
+    component: () => import("@/views/Pay/Order/Order.vue"),
+  },
 ];
 
 const router = createRouter({
@@ -50,5 +56,7 @@ const router = createRouter({
   // 始终让 滚动条到顶部
   scrollBehavior: () => ({ top: 0 }),
 });
+
+router.beforeEach(authGuard);
 
 export default router;

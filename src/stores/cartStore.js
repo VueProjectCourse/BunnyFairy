@@ -1,6 +1,14 @@
 import { defineStore } from "pinia";
 import { useUserStore } from "./userStore";
-import { updateLocalCart, setMergeCart, getCartList } from "../api/cartAPI";
+import {
+  updateLocalCart,
+  setMergeCart,
+  getCartList,
+  addGoods,
+  deleteGoodsOfCartBySkuIds,
+  selectOrUnselectCartGoods,
+  updateGoodsOfCartBySkuIds,
+} from "../api/cartAPI";
 export const useCartStore = defineStore({
   id: "cartStore",
   state: () => ({
@@ -61,11 +69,16 @@ export const useCartStore = defineStore({
   },
   actions: {
     // 把商品添加到购物车
-    addGoodsToCart(goods) {
+    async addGoodsToCart(goods) {
       const userStore = useUserStore();
       // 判断用户是否登陆
       if (userStore.profile.token) {
         // 如果登陆
+        await addGoods({
+          skuId: goods.skuId,
+          count: goods.count,
+        });
+        this.updateCartList();
       } else {
         // 如果没有登陆怎么办
 
@@ -88,11 +101,15 @@ export const useCartStore = defineStore({
       }
     },
     // 把商品从购物车中删除
-    deleteGoodsOfCartBySkuId(skuId) {
+    async deleteGoodsOfCartBySkuId(skuId) {
       const userStore = useUserStore();
       // 判断用户是否登陆
       if (userStore.profile.token) {
         // 如果登陆
+        // console.log(skuId);
+        await deleteGoodsOfCartBySkuIds([skuId]);
+        // 更新购物车商品列表
+        this.updateCartList();
       } else {
         // 如果没有登陆怎么办
         const index = this.list.findIndex((item) => item.skuId === skuId);
@@ -136,40 +153,73 @@ export const useCartStore = defineStore({
       }
     },
     // 更改商品信息(是否选择)
-    updateGoodsOfCartBySkuId(partOfGoods) {
-      // console.log(partOfGoods)
-      // 1. 通过skuId查找到该商品在list中的索引
-      const index = this.list.findIndex(
-        (item) => item.skuId === partOfGoods.skuId
-      );
-      // console.log(index);
-      // 2， 更改list中的那个商品的selected的值
-      // 在vue中这样的写法更好
-      // this.list[index].selected = partOfGoods.selected;
+    async updateGoodsOfCartBySkuId(partOfGoods) {
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+        // 更新商品信息
+        // console.log(partOfGoods);
+        await updateGoodsOfCartBySkuIds(partOfGoods);
+        // 更新购物车商品列表
+        this.updateCartList();
+      } else {
+        // 如果没有登陆怎么办
+        // console.log(partOfGoods)
+        // 1. 通过skuId查找到该商品在list中的索引
+        const index = this.list.findIndex(
+          (item) => item.skuId === partOfGoods.skuId
+        );
+        // console.log(index);
+        // 2， 更改list中的那个商品的selected的值
+        // 在vue中这样的写法更好
+        // this.list[index].selected = partOfGoods.selected;
 
-      // 更新商品
-      // 在react中 只能用下面的方法
-      // 编程范式-->数据不可变范式
-      //
-      this.list[index] = {
-        ...this.list[index],
-        ...partOfGoods,
-      };
+        // 更新商品
+        // 在react中 只能用下面的方法
+        // 编程范式-->数据不可变范式
+        //
+        this.list[index] = {
+          ...this.list[index],
+          ...partOfGoods,
+        };
+      }
     },
-    selectIsAll(partOfGoods) {
+    async selectIsAll(partOfGoods) {
       // console.log(partOfGoods)
-      this.list.forEach((item) => {
-        // console.log(item.selected)
-        item.selected = partOfGoods.selected;
-      });
+
+      const userStore = useUserStore();
+      // 判断用户是否登陆
+      if (userStore.profile.token) {
+        // 如果登陆
+        const ids = this.effectiveGoodsList.map((item) => item.skuId);
+        console.log(ids);
+
+        await selectOrUnselectCartGoods({
+          ids,
+          selected: partOfGoods.selected,
+        });
+
+        this.updateCartList();
+      } else {
+        // 如果没有登陆怎么办
+        this.list.forEach((item) => {
+          // console.log(item.selected)
+          item.selected = partOfGoods.selected;
+        });
+      }
     },
-    //
-    deleteGoodsOfCartByUserSelectedOrInvalid(flag) {
+    // 批量删除或情况无效商品
+    async deleteGoodsOfCartByUserSelectedOrInvalid(flag) {
       // userSelectedGoodsList
       const userStore = useUserStore();
       // 判断用户是否登陆
       if (userStore.profile.token) {
         // 如果登陆
+        // 获取要批量删除商品的 skuId 数组
+        const skuIds = this[flag].map((item) => item.skuId);
+        await deleteGoodsOfCartBySkuIds(skuIds);
+        this.updateCartList();
       } else {
         // 如果没有登陆怎么办
         this[flag].forEach((item) => {
@@ -180,14 +230,32 @@ export const useCartStore = defineStore({
     changeGoodsCountOfCartBySkuId(skuId, count) {
       this.updateGoodsOfCartBySkuId({ skuId, count });
     },
-    updateGoodsOfCartBySkuChanged(partOfGoods) {
+    async updateGoodsOfCartBySkuChanged(partOfGoods) {
       const userStore = useUserStore();
       // 判断用户是否登陆
       if (userStore.profile.token) {
         // 如果登陆
+        // 找到旧的商品
+        const oldGoods = this.list.find(
+          (item) => item.skuId === partOfGoods.oldSkuId
+        );
+        // 把旧的商品删除
+        // await deleteGoodsOfCartBySkuIds([oldSkuId]);
+        // 获取新的商品
+        const newGoods = {
+          ...oldGoods,
+          skuId: partOfGoods.userSelectedNewSku.value.skuId,
+          stock: partOfGoods.userSelectedNewSku.value.inventory,
+          oldPrice: partOfGoods.userSelectedNewSku.value.oldPrice,
+          nowPrice: partOfGoods.userSelectedNewSku.value.price,
+          attrsText: partOfGoods.userSelectedNewSku.value.specsText,
+        };
+        // 添加新商品
+
+        this.deleteGoodsOfCartBySkuId(partOfGoods.oldSkuId);
+        this.addGoodsToCart(newGoods);
       } else {
         // 如果没有登陆怎么办
-        console.log(partOfGoods);
         const oldGoods = this.list.find(
           (item) => item.skuId === partOfGoods.oldSkuId
         );
@@ -208,7 +276,7 @@ export const useCartStore = defineStore({
     // 合并购物车数据
     async mergeCart() {
       // 判断一下 购物车中有没有数据 如果没有数据 就不需要合并
-
+      // console.log(1111);
       // 准备合并购物车所需数据
       const carts = this.list.map((item) => ({
         skuId: item.skuId,
@@ -226,12 +294,19 @@ export const useCartStore = defineStore({
     },
   },
   // 开启数据缓存
+  // persist: {
+  //   enabled: true,
+  //   strategies: [
+  //     {
+  //       storage: localStorage,
+  //     },
+  //   ],
+  // },
+
   persist: {
-    enabled: true,
-    strategies: [
-      {
-        storage: localStorage,
-      },
-    ],
+    // 存储的key
+    key: "cartStore",
+    // 存储在什么地方
+    storage: window.localStorage,
   },
 });

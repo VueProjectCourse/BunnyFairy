@@ -21,12 +21,14 @@ export const useUserStore = defineStore({
     },
   }),
   // 开启数据缓存 默认存在sessionStorage
+  // persist: {
+  //   enabled: true,
+  // },
+
   persist: {
-    enabled: true,
-    strategies: [
-      {
-        storage: localStorage,
-      },
-    ],
+    // 存储的key
+    key: "userStore",
+    // 存储在什么地方
+    storage: window.localStorage,
   },
 });

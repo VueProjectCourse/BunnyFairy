@@ -6,6 +6,7 @@ import EmptyCart from "./EmptyCart/EmptyCart.vue";
 import { useCartStore } from "../../stores/cartStore";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
+import {useRouter} from "vue-router"
 import Confirm from "../../components/Confirm/Confirm.js";
 import CartSku from "./CartSku/CartSku.vue";
 
@@ -19,6 +20,7 @@ const {
 } = storeToRefs(useCartStore());
 
 const cartStore = useCartStore();
+const router = useRouter();
 
 onMounted(() => {
   cartStore.updateCartList().then(() => {
@@ -74,6 +76,15 @@ const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
     })
     .catch(() => {});
 };
+
+const jumpToCheckout = ()=>{
+  // 判断用户是否选择了商品 如果没有选择 提示用户
+  if (userSelectedGoodsCount.value === 0) {
+      return Message({ type: "error", text: "请至少选择一件商品" });
+  }
+  // 跳转到结算页面
+  router.push("/checkout/order")
+}
 </script>
 <template>
   <Layout>
@@ -247,7 +258,7 @@ const deleteGoodsOfCartByUserSelectedOrInvalid = (flag) => {
             共 {{ effectiveGoodsCount }} 件商品，已选择
             {{ userSelectedGoodsCount }} 件，商品合计：
             <span class="red">¥{{ userSelectedGoodsPrice }}</span>
-            <Button type="primary">下单结算</Button>
+            <Button type="primary" @click="jumpToCheckout">下单结算</Button>
           </div>
         </div>
         <!-- 猜你喜欢 -->
