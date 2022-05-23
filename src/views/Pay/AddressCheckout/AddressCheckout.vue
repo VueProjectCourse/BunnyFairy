@@ -2,7 +2,8 @@
 import { onMounted, ref } from "vue";
 import { useAddresses } from "./AddressCheckout";
 import AddressEdit from "../AddressEdit/AddressEdit.vue";
-const { setAddressList, finalAddress } = useAddresses();
+const { setAddressList, finalAddress, userSelectedAddress, addressList } =
+  useAddresses();
 // 添加地址
 // 用于存储编辑收货地址组件实例对象
 const addressEditInstance = ref(null);
@@ -30,8 +31,14 @@ onMounted(() => {
   setAddressList();
 });
 
-const updateUserSelectedAddress = (res) => {
-  console.log(res);
+// 用于更新用户添加的收货地址或者切换的收货地址
+const updateUserSelectedAddress = (id) => {
+  setAddressList(() => {
+    userSelectedAddress.value = addressList.value.find(
+      (item) => item.id === id
+    );
+    console.log(userSelectedAddress);
+  });
 };
 </script>
 <template>

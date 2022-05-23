@@ -35,14 +35,16 @@ const HandlerOnSure = async () => {
   };
 
   try {
-    let data = await addAddress(target);
-    emit("onAddressChanged", data.result.id);
+    let { data: res } = await addAddress(target);
+    console.log(res.result.id);
+    emit("onAddressChanged", res.result.id);
     // 关闭对话框
     visible.value = false;
     // 用户提示
     Message({ type: "success", text: "收货地址添加成功" });
   } catch (error) {
     // 收货地址添加失败
+    console.log(error);
     Message({
       type: "error",
       text: `收货地址添加失败 ${error.response.data.message}`,

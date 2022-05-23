@@ -2,17 +2,19 @@ import { computed, ref } from "vue";
 import { getAddressList } from "../../../api/OrderAPI";
 export const useAddresses = () => {
   const addressList = ref(null);
-  const setAddressList = () => {
+  const setAddressList = (cb) => {
     // 调用接口请求数据
     getAddressList().then(({ data: res, status: status }) => {
       if (status === 200) {
         // 把数据赋值给bannerList
         addressList.value = res.result;
-        console.log(addressList);
+        cb && cb();
       }
     });
   };
+
   const userSelectedAddress = ref(null);
+
   const finalAddress = computed(() => {
     // 存储计算结果
     let result = null;
@@ -39,5 +41,10 @@ export const useAddresses = () => {
     return result;
   });
 
-  return { finalAddress, userSelectedAddress, setAddressList };
+  return {
+    finalAddress,
+    userSelectedAddress,
+    setAddressList,
+    addressList,
+  };
 };

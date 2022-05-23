@@ -117,25 +117,28 @@ const onSureClickHandler = async () => {
 ```
 
 ```js
-export default {
-  setup() {
-    const { updateUserSelectedAddress } = getAddresses();
-    return { updateUserSelectedAddress };
-  },
+// 用于更新用户添加的收货地址或者切换的收货地址
+const updateUserSelectedAddress = (id) => {
+  setAddressList(() => {
+    userSelectedAddress.value = addressList.value.find(
+      (item) => item.id === id
+    );
+    console.log(userSelectedAddress);
+  });
 };
+```
 
-// 获取收货地址列表
-function getAddresses() {
-  // 用于更新用户添加的收货地址或者切换的收货地址
-  const updateUserSelectedAddress = (id) => {
-     getData(() => {
-      userSelectedAddress.value = addresses.value.find(
-        (item) => item.id === id
-      );
+```js
+ const setAddressList = (cb) => {
+    // 调用接口请求数据
+    getAddressList().then(({ data: res, status: status }) => {
+      if (status === 200) {
+        // 把数据赋值给bannerList
+        addressList.value = res.result;
+        cb && cb();
+      }
     });
   };
-  return { updateUserSelectedAddress };
-}
 ```
 
 :::
