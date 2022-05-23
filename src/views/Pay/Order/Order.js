@@ -8,7 +8,6 @@ export const useOrderInfo = () => {
     createOrder().then(({ data: res, status: status }) => {
       if (status === 200) {
         // 把数据赋值给bannerList
-        console.log(res);
         // orderList.value = res.result;
         orderInfo.value = res.result;
       }

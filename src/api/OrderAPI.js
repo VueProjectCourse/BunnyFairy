@@ -16,3 +16,11 @@ export const createOrder = () => {
 export const addAddress = (address) => {
   return request.post("/member/address", address);
 };
+
+/**
+ * 获取收货地址列表
+ * @return {AxiosPromise}
+ */
+export const getAddressList = () => {
+  return request("/member/address");
+};
