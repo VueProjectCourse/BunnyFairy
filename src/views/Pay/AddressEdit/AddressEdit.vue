@@ -2,8 +2,6 @@
 import { ref } from "vue";
 import { addAddress } from "../../../api/OrderAPI";
 import Message from "../../../components/Message/Message";
-
-// 用于控制弹框是否显示
 const visible = ref(false);
 defineExpose({
   visible,
@@ -12,39 +10,32 @@ defineExpose({
 const location = ref();
 // 用于存储用户最终填写的收货地址
 const address = ref({
-  receiver: "",
-  contact: "",
   provinceCode: "",
   cityCode: "",
   countyCode: "",
+  receiver: "",
+  contact: "",
   address: "",
   postalCode: "",
   addressTags: "",
   isDefault: false,
 });
-
-// 城市信息发生改变时
-const onCityChanged = (city) => {
-  // 存储城市文字信息
-  location.value = city.location;
-  // 存储城市代码
-  address.value.provinceCode = city.provinceCode;
-  address.value.cityCode = city.cityCode;
-  address.value.countyCode = city.countryCode;
-  console.log(city);
-  console.log(address.value);
+const onCityChanged = (area) => {
+  address.value.provinceCode = area.provinceCode;
+  address.value.cityCode = area.cityCode;
+  address.value.countyCode = area.countryCode;
+  location.value = area.location;
 };
-
-// 用于执行用户点击确定按钮之后的逻辑代码
-const onSureClickHandler = async () => {
-  // 将会被作为添加收货地址的请求参数
+// 点击确定按钮
+const HandlerOnSure = async () => {
   const target = {
     ...address.value,
     isDefault: address.value.isDefault ? 0 : 1,
   };
+
   try {
-    // 发送请求, 实现添加收货地址
     await addAddress(target);
+
     // 关闭对话框
     visible.value = false;
     // 用户提示
@@ -58,7 +49,6 @@ const onSureClickHandler = async () => {
   }
 };
 </script>
-
 <template>
   <Dialog v-model:visible="visible" title="添加收货地址">
     <template v-slot:default>
@@ -69,8 +59,8 @@ const onSureClickHandler = async () => {
             <div class="field">
               <input
                 class="input"
-                v-model="address.receiver"
                 placeholder="请输入收货人"
+                v-model="address.receiver"
               />
             </div>
           </div>
@@ -79,8 +69,8 @@ const onSureClickHandler = async () => {
             <div class="field">
               <input
                 class="input"
-                v-model="address.contact"
                 placeholder="请输入手机号"
+                v-model="address.contact"
               />
             </div>
           </div>
@@ -99,8 +89,8 @@ const onSureClickHandler = async () => {
             <div class="field">
               <input
                 class="input"
-                v-model="address.address"
                 placeholder="请输入详细地址"
+                v-model="address.address"
               />
             </div>
           </div>
@@ -109,8 +99,8 @@ const onSureClickHandler = async () => {
             <div class="field">
               <input
                 class="input"
-                v-model="address.postalCode"
                 placeholder="请输入邮政编码"
+                v-model="address.postalCode"
               />
             </div>
           </div>
@@ -119,8 +109,8 @@ const onSureClickHandler = async () => {
             <div class="field">
               <input
                 class="input"
-                v-model="address.addressTags"
                 placeholder="请输入地址标签，逗号分隔"
+                v-model="address.addressTags"
               />
             </div>
           </div>
@@ -129,8 +119,8 @@ const onSureClickHandler = async () => {
             <div class="field">
               <input
                 type="checkbox"
-                v-model="address.isDefault"
                 class="checkbox"
+                v-model="address.isDefault"
               />
             </div>
           </div>
@@ -141,12 +131,12 @@ const onSureClickHandler = async () => {
       <Button @click="visible = false" type="gray" style="margin-right: 20px">
         取消
       </Button>
-      <Button @click="onSureClickHandler" type="primary">确认</Button>
+      <Button @click="HandlerOnSure" type="primary">确认</Button>
     </template>
   </Dialog>
 </template>
 
-<style scoped lang="less">
+<style scoped>
 .xtx-dialog :deep(.wrapper) {
   width: 780px;
 }

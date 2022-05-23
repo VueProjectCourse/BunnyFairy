@@ -1,9 +1,8 @@
 <script setup>
-import { onMounted } from "vue";
 import Layout from "../../DefaultLayout/Layout.vue";
+import AddressCheckout from "../AddressCheckout/AddressCheckout.vue";
+import { onMounted } from "vue";
 import { useOrderInfo } from "./Order";
-import CheckoutAddress from "../CheckoutAddress/CheckoutAddress.vue";
-
 const { orderInfo, setOrderList } = useOrderInfo();
 
 onMounted(() => {
@@ -23,7 +22,7 @@ onMounted(() => {
           <!-- 收货地址 -->
           <h3 class="box-title">收货地址</h3>
           <div class="box-body">
-            <CheckoutAddress />
+            <AddressCheckout />
           </div>
           <!-- 商品信息 -->
           <h3 class="box-title">商品信息</h3>
@@ -77,23 +76,23 @@ onMounted(() => {
           </div>
           <!-- 金额明细 -->
           <h3 class="box-title">金额明细</h3>
-          <div class="box-body" v-if="orderInfo">
+          <div class="box-body" v-if="orderInfo?.summary">
             <div class="total">
               <dl>
                 <dt>商品件数：</dt>
-                <dd>{{ orderInfo.summary.goodsCount }}件</dd>
+                <dd>{{ orderInfo?.summary.goodsCount }}件</dd>
               </dl>
               <dl>
                 <dt>商品总价：</dt>
-                <dd>¥{{ orderInfo.summary.totalPrice }}</dd>
+                <dd>¥{{ orderInfo?.summary.totalPrice }}</dd>
               </dl>
               <dl>
                 <dt>运<i></i>费：</dt>
-                <dd>¥{{ orderInfo.summary.postFee }}</dd>
+                <dd>¥{{ orderInfo?.summary.postFee }}</dd>
               </dl>
               <dl>
                 <dt>应付总额：</dt>
-                <dd class="price">¥{{ orderInfo.summary.totalPayPrice }}</dd>
+                <dd class="price">¥{{ orderInfo?.summary.totalPayPrice }}</dd>
               </dl>
             </div>
           </div>

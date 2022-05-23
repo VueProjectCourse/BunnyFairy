@@ -1,36 +1,30 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import { useAddresses } from "./CheckoutAddress";
+import { ref } from "vue";
 import AddressEdit from "../AddressEdit/AddressEdit.vue";
-
-const { addressList, setAddress } = useAddresses();
-
-onMounted(() => {
-  setAddress();
-});
-
+// 添加地址
 // 用于存储编辑收货地址组件实例对象
 const addressEditInstance = ref(null);
-const addAddress = () => {
+const handlerAddressInsert = () => {
+  // 让Dialog对话框显示出来
   addressEditInstance.value.visible = true;
 
+  // 再次点击添加收货地址的对话框，目前为止 没有出现遗留数据，因此代码可以不写
   // 收货地址参数的初始状态
-  addressEditInstance.value.address = {
-    receiver: "",
-    contact: "",
-    provinceCode: "",
-    cityCode: "",
-    countryCode: "",
-    address: "",
-    postalCode: "",
-    addressTags: "",
-    isDefault: false,
-  };
-  // 清空城市信息
-  addressEditInstance.value.location = "";
+  // addressEditInstance.value.address = {
+  //   receiver: "",
+  //   contact: "",
+  //   provinceCode: "",
+  //   cityCode: "",
+  //   countryCode: "",
+  //   address: "",
+  //   postalCode: "",
+  //   addressTags: "",
+  //   isDefault: false,
+  // };
+  // // 清空城市信息
+  // addressEditInstance.value.location = "";
 };
 </script>
-
 <template>
   <div class="address">
     <div class="text">
@@ -46,7 +40,7 @@ const addAddress = () => {
     </div>
     <div class="action">
       <Button class="btn">切换地址</Button>
-      <Button class="btn" @click="addAddress">添加地址</Button>
+      <Button class="btn" @click="handlerAddressInsert">添加地址</Button>
 
       <AddressEdit ref="addressEditInstance" />
     </div>

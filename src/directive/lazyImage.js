@@ -1,4 +1,4 @@
-import defaultImg from "../assets/images/200.png"
+import defaultImg from "../assets/images/200.png";
 
 export default {
   // 在绑定元素的父组件
@@ -15,13 +15,13 @@ export default {
 
         // el 是一个图片
         // 如果图片载入发生错误, 那么就用默认图片去代替
-        el.onerror = ()=>{
+        el.onerror = () => {
           el.src = defaultImg;
-        }
+        };
       }
-    
+
       // el.src = binding.value
     });
     observer.observe(el);
   },
-}
+};

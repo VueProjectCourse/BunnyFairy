@@ -11,23 +11,27 @@ const props = defineProps({
     default: false,
   },
 });
-
 const emit = defineEmits(["update:visible"]);
-
-// 控制弹框是否渲染
+// 双向数据绑定的写法
 const isRendering = useVModel(props, "visible", emit);
 
+// 让对话框显示的方法
 // 渲染弹框
-const render = () => {
-  isRendering.value = true;
-};
-
-// 销毁弹框
+// const render = () => {
+//   isRendering.value = true;
+// };
+// 让对话框隐藏的方法
 const destroy = () => {
   isRendering.value = false;
 };
 
+defineExpose({
+  destroy,
+});
+
 // 注册一个局部的自定义指令，需要以小写v开头
+// v-fade
+// directive("fade")
 const vFade = {
   mounted(el) {
     // 获取input，并调用其focus()方法
@@ -37,6 +41,7 @@ const vFade = {
   },
 };
 </script>
+
 <template>
   <div class="xtx-dialog" v-if="isRendering" v-fade>
     <div class="wrapper" v-fade>
@@ -48,7 +53,9 @@ const vFade = {
           @click="destroy"
         ></a>
       </div>
-      <div class="body"><slot name="default"></slot></div>
+      <div class="body">
+        <slot name="default"></slot>
+      </div>
       <div class="footer">
         <slot name="footer"></slot>
       </div>
