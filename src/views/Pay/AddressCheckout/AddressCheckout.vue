@@ -29,6 +29,10 @@ const handlerAddressInsert = () => {
 onMounted(() => {
   setAddressList();
 });
+
+const updateUserSelectedAddress = (res) => {
+  console.log(res);
+};
 </script>
 <template>
   <div class="address">
@@ -54,7 +58,10 @@ onMounted(() => {
       <Button class="btn">切换地址</Button>
       <Button class="btn" @click="handlerAddressInsert">添加地址</Button>
 
-      <AddressEdit ref="addressEditInstance" />
+      <AddressEdit
+        ref="addressEditInstance"
+        @onAddressChanged="updateUserSelectedAddress($event)"
+      />
     </div>
   </div>
 </template>

@@ -6,6 +6,7 @@ const visible = ref(false);
 defineExpose({
   visible,
 });
+const emit = defineEmits(["onAddressChanged"]);
 // 用于存储用户选择的城市文字信息
 const location = ref();
 // 用于存储用户最终填写的收货地址
@@ -34,8 +35,8 @@ const HandlerOnSure = async () => {
   };
 
   try {
-    await addAddress(target);
-
+    let data = await addAddress(target);
+    emit("onAddressChanged", data.result.id);
     // 关闭对话框
     visible.value = false;
     // 用户提示
