@@ -230,7 +230,7 @@ function getGuideSidebar() {
       children: [
         { text: '结算-基础布局', link: "/settlement/layout-base"},
         { text: '结算-渲染页面', link: "/settlement/layout-render"},
-        { text: '结算-对话框组件封装', link: "/settlement/Dialog"},
+        { text: '结算-对话框组件封装', link: "/settlement/dialog"},
         { text: '结算-收货地址-基础布局', link: "/settlement/address-layout"},
         { text: '结算-收货地址-添加',link: "/settlement/address-add" },
         { text: '结算-收货地址-渲染', link: "/settlement/address-render"},
