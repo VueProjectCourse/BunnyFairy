@@ -242,7 +242,7 @@ function getGuideSidebar() {
 
         { text: '支付-支付流程', link: "/settlement/pay-process"},
         { text: '支付-跳转支付', link: "/settlement/pay-jump"},
-        { text: '支付-支付结果展示', },
+        { text: '支付-支付结果展示', link: "/settlement/pay-result"},
       ]
     },
     {
