@@ -61,11 +61,18 @@
       font-size: 14px;
     }
     a {
-      color: @xtxColor;
+      color: var(--primary-color);
     }
   }
 
-</style>
+  </style>
   ```
 
+:::
+
+::: danger Note
+
+* 【重点】
+* 【难点】
+* 【注意点】
 :::
