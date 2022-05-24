@@ -240,8 +240,8 @@ function getGuideSidebar() {
         { text: '支付-基础布局', link: "/settlement/pay-layout"},
         { text: '支付-信息展示', link: "/settlement/pay-infor"},
 
-        { text: '支付-支付流程', },
-        { text: '支付-跳转支付', },
+        { text: '支付-支付流程', link: "/settlement/pay-process"},
+        { text: '支付-跳转支付', link: "/settlement/pay-jump"},
         { text: '支付-支付结果展示', },
       ]
     },
