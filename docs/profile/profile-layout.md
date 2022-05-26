@@ -1,4 +1,4 @@
-# 个人中心-布局容
+# 个人中心-布局容器
 
 ::: tip Object
 这一小节，我们的目标是 完成个人中心页面基础布局结构，配置路由。
@@ -9,22 +9,85 @@
 
 ::: warning Path
 
-1. 创建个人中心左侧菜单组件, 编写布局代码
-2. 在个人中心左侧菜单组件中，编写样式代码
-3. 创建个人中心布局组件, 编写布局代码
-4. 在个人中心布局组建中，编写样式代码
-5. 创建个人中心首页组件
-6. 配置个人中心布局组件路由规则
-7. 配置个人中心首页页面路由规则
-8. 在顶部通栏组件中添加跳转到个人中心的链接地址
+1. 创建个人中心布局组件, 编写布局代码
+2. 在个人中心布局组建中，编写样式代码
+3. 创建个人中心首页组件
+4. 配置个人中心首页页面路由规则
+5. 在顶部通栏组件中添加跳转到个人中心的链接地址
+6. 创建个人中心左侧菜单组件, 编写布局代码
+7. 在个人中心左侧菜单组件中，编写样式代码
 :::
 
 ::: info Experience
 
-* **Step.1：创建个人中心左侧菜单组件, 编写布局代码**
+* **Step.1：创建个人中心布局组件, 编写布局代码**
 
 ```html
-<!-- AppMemberSidebar -->
+<!-- MemberLayout -->
+<template>
+  <Layout>
+    <div class="container">
+      <MemberSidebar />
+      <article class="article">
+        <slot />
+      </article>
+    </div>
+  </Layout>
+</template>
+```
+
+* **Step.2：在个人中心布局组建中，编写样式代码**
+
+```css
+.container {
+  display: flex;
+  padding-top: 20px;
+}
+.container .article {
+  width: 1000px;
+  position: relative;
+}
+```
+
+* **Step.3：创建个人中心首页组件**
+
+```html
+<!-- Member -->
+<template>
+  <MemberLayout>
+    个人中心
+  </MemberLayout>
+</template>
+```
+
+* **Step.4：配置个人中心首页页面路由规则**
+
+```js
+// router
+const Member = () => import("@/views/Member/Member.vue");
+
+const routes = [
+  {
+    path: "/member/home",
+    component: Member,
+  },
+];
+```
+
+* **Step.5：在顶部通栏组件中添加跳转到个人中心的链接地址**
+
+```html
+<RouterLink to="/member/home">
+ <i class="iconfont icon-user"></i>
+ {{ user.profile.account }}
+</RouterLink> 
+```
+
+* **Step.6：创建个人中心左侧菜单组件, 编写布局代码**
+
+```html
+<!-- MemberSidebar -->
+<script setup></script>
 <template>
   <div class="xtx-member-aside">
     <div class="user-manage">
@@ -64,7 +127,7 @@
 </template>
 ```
 
-* **Step.2：在个人中心左侧菜单组件中，编写样式代码**
+* **Step.7：在个人中心左侧菜单组件中，编写样式代码**
 
 ```css
 .xtx-member-aside {
@@ -93,16 +156,16 @@
   position: relative;
 }
 .xtx-member-aside .user-manage a:hover {
-  color: #27BA9B;
+  color: #27ba9b;
 }
 .xtx-member-aside .user-manage a.exact-active {
-  color: #27BA9B;
+  color: #27ba9b;
 }
 .xtx-member-aside .user-manage a.exact-active:before {
   display: block;
 }
 .xtx-member-aside .user-manage a.fuzzy-active {
-  color: #27BA9B;
+  color: #27ba9b;
 }
 .xtx-member-aside .user-manage a.fuzzy-active:before {
   display: block;
@@ -116,72 +179,8 @@
   position: absolute;
   top: 19px;
   left: -16px;
-  background-color: #27BA9B;
+  background-color: #27ba9b;
 }
-```
-
-* **Step.3：创建个人中心布局组件, 编写布局代码**
-
-```html
-<!-- AppMemberLayout.vue -->
-<template>
-  <AppLayout>
-    <div class="container">
-      <AppMemberSidebar />
-      <article class="article">
-        <slot />
-      </article>
-    </div>
-  </AppLayout>
-</template>
-```
-
-* **Step.4：在个人中心布局组建中，编写样式代码**
-
-```css
-.container {
-  display: flex;
-  padding-top: 20px;
-}
-.container .article {
-  width: 1000px;
-  position: relative;
-}
-```
-
-* **Step.5：创建个人中心首页组件**
-
-```html
-<!-- MemberHomePage -->
-<template>
-  <AppMemberLayout> 个人中心首页 </AppMemberLayout>
-</template>
-<script>
-import AppMemberLayout from "@/components/AppMemberLayout";
-</script>
-```
-
-* **Step.6：配置个人中心布局组件路由规则**
-* **Step.7：配置个人中心首页页面路由规则**
-
-```js
-const MemberHomePage = () => import("@/views/member/MemberHomePage");
-
-const routes = [
-  {
-    path: "/member/home",
-    component: MemberHomePage,
-  },
-];
-```
-
-* **Step.8：在顶部通栏组件中添加跳转到个人中心的链接地址**
-
-```html
-<RouterLink to="/member/home">
-    <i class="iconfont icon-user"></i>
-    {{ user.profile.account }}
-</RouterLink>
 ```
 
 :::
