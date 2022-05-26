@@ -248,8 +248,8 @@ function getGuideSidebar() {
     {
       text: "个人中心",
       children: [
-        { text: '个人中心-布局容器', },
-        { text: '个人中心-基础布局', },
+        { text: '个人中心-布局容器', link: "/profile/profile-layout"},
+        { text: '个人中心-基础布局', link: "/profile/profile-base"},
         { text: '模拟接口数据', },
         { text: '个人中心-我的收藏', },
         { text: '个人中心-菜单激活', },
