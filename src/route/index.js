@@ -56,6 +56,10 @@ const routes = [
     path: "/pay/callback",
     component: () => import("@/views/Pay/PayResult/PayResult.vue"),
   },
+  {
+    path: "/member/home",
+    component: () => import("@/views/Member/MemberHome.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -24,7 +24,12 @@ const handlerLogout = () => {
       <ul>
         <template v-if="profile.token">
           <li>
-            <a href="javascript:"> <i class="iconfont icon-user"></i>周杰伦 </a>
+            <!-- <a href="javascript:"> <i class="iconfont icon-user"></i>周杰伦 </a> -->
+
+            <RouterLink to="/member/home">
+              <i class="iconfont icon-user"></i>
+              {{ profile.account }}
+            </RouterLink>
           </li>
           <li>
             <a href="javascript:" @click="handlerLogout">退出登录</a>

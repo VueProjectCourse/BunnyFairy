@@ -15,6 +15,12 @@ export default defineConfig({
   // build: {
   //   assetsInlineLimit: 1024,
   // },
+  define: {
+    "process.env": {
+      BASE_URL: "http://pcapi-xiaotuxian-front-devtest.itheima.net/",
+      NODE_ENV: "development",
+    },
+  },
   server: {
     port: 8080,
   },
