@@ -48,6 +48,14 @@ const routes = [
     name: "order",
     component: () => import("@/views/Pay/Order/Order.vue"),
   },
+  {
+    path: "/checkout/pay",
+    component: () => import("@/views/Pay/Pay.vue"),
+  },
+  {
+    path: "/pay/callback",
+    component: () => import("@/views/Pay/PayResult/PayResult.vue"),
+  },
 ];
 
 const router = createRouter({

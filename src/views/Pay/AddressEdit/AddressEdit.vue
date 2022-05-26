@@ -1,14 +1,9 @@
 <script setup>
 import { ref } from "vue";
-import { addAddress } from "../../../api/OrderAPI";
+import { addAddress, updateAddressById } from "../../../api/orderAPI";
 import Message from "../../../components/Message/Message";
 const visible = ref(false);
-defineExpose({
-  visible,
-});
-const emit = defineEmits(["onAddressChanged"]);
-// 用于存储用户选择的城市文字信息
-const location = ref();
+const dialogInstance = ref(null);
 // 用于存储用户最终填写的收货地址
 const address = ref({
   provinceCode: "",
@@ -21,6 +16,15 @@ const address = ref({
   addressTags: "",
   isDefault: false,
 });
+// 用于存储用户选择的城市文字信息
+const location = ref(null);
+defineExpose({
+  visible,
+  address,
+  location,
+});
+const emit = defineEmits(["onAddressChanged"]);
+
 const onCityChanged = (area) => {
   address.value.provinceCode = area.provinceCode;
   address.value.cityCode = area.cityCode;
@@ -34,26 +38,49 @@ const HandlerOnSure = async () => {
     isDefault: address.value.isDefault ? 0 : 1,
   };
 
-  try {
-    let { data: res } = await addAddress(target);
-    console.log(res.result.id);
-    emit("onAddressChanged", res.result.id);
-    // 关闭对话框
-    visible.value = false;
-    // 用户提示
-    Message({ type: "success", text: "收货地址添加成功" });
-  } catch (error) {
-    // 收货地址添加失败
-    console.log(error);
-    Message({
-      type: "error",
-      text: `收货地址添加失败 ${error.response.data.message}`,
-    });
+  // 判断 有没有 address.id 如果有 意味着修改
+  if (target.id) {
+    try {
+      await updateAddressById(target.id, target);
+
+      dialogInstance.value.destroy();
+      // 通知父组件, 渲染当前修改的收货地址
+      emit("onAddressChanged", target.id);
+    } catch (error) {
+      // 收货地址添加失败
+      Message({
+        type: "error",
+        text: `收货地址修改失败 ${error.response.data.message}`,
+      });
+    }
+  } else {
+    // 如果没有 那就是添加
+    try {
+      let { data: res } = await addAddress(target);
+
+      console.log(res.result.id);
+      emit("onAddressChanged", res.result.id);
+
+      // 关闭对话框
+      visible.value = false;
+      // 用户提示
+      Message({ type: "success", text: "收货地址添加成功" });
+    } catch (error) {
+      // 收货地址添加失败
+      Message({
+        type: "error",
+        text: `收货地址添加失败 ${error.response.data.message}`,
+      });
+    }
   }
 };
 </script>
 <template>
-  <Dialog v-model:visible="visible" title="添加收货地址">
+  <Dialog
+    v-model:visible="visible"
+    :title="`${address?.id ? '修改' : '添加'}收货地址`"
+    ref="dialogInstance"
+  >
     <template v-slot:default>
       <div class="address-edit">
         <div class="xtx-form">
@@ -134,7 +161,9 @@ const HandlerOnSure = async () => {
       <Button @click="visible = false" type="gray" style="margin-right: 20px">
         取消
       </Button>
-      <Button @click="HandlerOnSure" type="primary">确认</Button>
+      <Button @click="HandlerOnSure" type="primary">{{
+        address?.id ? "修改" : "添加"
+      }}</Button>
     </template>
   </Dialog>
 </template>

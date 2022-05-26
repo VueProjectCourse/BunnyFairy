@@ -22,5 +22,33 @@ export const addAddress = (address) => {
  * @return {AxiosPromise}
  */
 export const getAddressList = () => {
-  return request("/member/address");
+  return request.get("/member/address");
+};
+
+/**
+ * 修改收货地址
+ * @param id 收货地址id
+ * @param address 新的收货地址
+ * @return {AxiosPromise}
+ */
+export const updateAddressById = (id, address) => {
+  return request.put(`/member/address/${id}`, address);
+};
+
+/**
+ * 提交订单
+ * @param order 订单对象
+ * @return {Promise}
+ */
+export function submitOrder(order) {
+  return request.post("/member/order", order);
+}
+
+/**
+ * 根据订单id获取订单详情
+ * @param id 订单ID
+ * @return {Promise}
+ */
+export const getOrderInfoById = (id) => {
+  return request.get(`/member/order/${id}`);
 };

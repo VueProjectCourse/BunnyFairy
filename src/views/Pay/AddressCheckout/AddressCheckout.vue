@@ -1,12 +1,13 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { useAddresses } from "./AddressCheckout";
 import AddressEdit from "../AddressEdit/AddressEdit.vue";
-const { setAddressList, finalAddress, userSelectedAddress, addressList } =
-  useAddresses();
+import { useAddress } from "./AddressCheckout";
+import AddressSwitch from "../AddressSwitch/AddressSwitch.vue";
 // 添加地址
 // 用于存储编辑收货地址组件实例对象
 const addressEditInstance = ref(null);
+// 用于存储切换收货地址组件实例对象
+const addressSwitchInstance = ref(null);
 const handlerAddressInsert = () => {
   // 让Dialog对话框显示出来
   addressEditInstance.value.visible = true;
@@ -27,42 +28,65 @@ const handlerAddressInsert = () => {
   // // 清空城市信息
   // addressEditInstance.value.location = "";
 };
+const { addressList, setAddressList, userSelectedAddress, finalAddress } =
+  useAddress();
+defineExpose({
+  finalAddress,
+});
 onMounted(() => {
   setAddressList();
 });
 
-// 用于更新用户添加的收货地址或者切换的收货地址
 const updateUserSelectedAddress = (id) => {
+  // console.log("我接受到了id", id);
   setAddressList(() => {
     userSelectedAddress.value = addressList.value.find(
       (item) => item.id === id
     );
-    console.log(userSelectedAddress);
   });
+};
+const modifyAddress = () => {
+  const { fullLocation, isDefault, ...rest } = finalAddress.value;
+  addressEditInstance.value.location = fullLocation;
+  addressEditInstance.value.address = { ...rest };
+
+  addressEditInstance.value.address.isDefault = isDefault === 0;
+  // 让Dialog对话框显示出来
+  addressEditInstance.value.visible = true;
+};
+// 切换地址
+const handlerSwitchAddress = () => {
+  addressSwitchInstance.value.visible = true;
 };
 </script>
 <template>
   <div class="address">
     <div class="text">
-      <div v-if="!finalAddress" class="none">
+      <div class="none" v-if="!finalAddress">
         您需要先添加收货地址才可提交订单。
       </div>
-      <ul v-if="finalAddress">
+      <ul else>
         <li>
-          <span>收<i />货<i />人：</span>{{ finalAddress.receiver }}
+          <span>收<i />货<i />人：</span>{{ finalAddress?.receiver }}
         </li>
+        <!-- 预习文档中有 finalAddress.contact.replace(/(\d{3})\d{4}(\d{4})/g, `$1****$3`)  -->
+        <li><span>联系方式：</span>132****2222</li>
         <li>
-          <span>联系方式：</span
-          >{{
-            finalAddress.contact.replace(/(\d{3})\d{4}(\d{4})/g, `$1****$3`)
-          }}
+          <span>收货地址：</span>{{ finalAddress?.provinceCode }}
+          {{ finalAddress?.cityCode }} {{ finalAddress?.countyCode
+          }}{{ finalAddress?.address }}
         </li>
-        <li><span>收货地址：</span>{{ finalAddress.address }}</li>
       </ul>
-      <a href="javascript:">修改地址</a>
+      <a href="javascript:" @click="modifyAddress()">修改地址</a>
     </div>
     <div class="action">
-      <Button class="btn">切换地址</Button>
+      <Button class="btn" @click="handlerSwitchAddress">切换地址</Button>
+      <AddressSwitch
+        ref="addressSwitchInstance"
+        :list="addressList"
+        :activeAddressId="finalAddress?.id"
+        @onAddressChanged="updateUserSelectedAddress($event)"
+      />
       <Button class="btn" @click="handlerAddressInsert">添加地址</Button>
 
       <AddressEdit

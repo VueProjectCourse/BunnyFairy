@@ -3,10 +3,11 @@ import Layout from "../../DefaultLayout/Layout.vue";
 import AddressCheckout from "../AddressCheckout/AddressCheckout.vue";
 import { onMounted } from "vue";
 import { useOrderInfo } from "./Order";
-const { orderInfo, setOrderList } = useOrderInfo();
+const { orderInfo, setOrderInfo, referOrder, checkoutAddressInstance } =
+  useOrderInfo();
 
 onMounted(() => {
-  setOrderList();
+  setOrderInfo();
 });
 </script>
 <template>
@@ -22,7 +23,7 @@ onMounted(() => {
           <!-- 收货地址 -->
           <h3 class="box-title">收货地址</h3>
           <div class="box-body">
-            <AddressCheckout />
+            <AddressCheckout ref="checkoutAddressInstance" />
           </div>
           <!-- 商品信息 -->
           <h3 class="box-title">商品信息</h3>
@@ -98,7 +99,7 @@ onMounted(() => {
           </div>
           <!-- 提交订单 -->
           <div class="submit">
-            <Button type="primary">提交订单</Button>
+            <Button type="primary" @click="referOrder">提交订单</Button>
           </div>
         </div>
       </div>
