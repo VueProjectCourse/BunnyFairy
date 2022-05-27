@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import MemberLayout from "../MemberLayout/MemberLayout.vue";
-import MemberHomeOverview from "./MemberHomeOverview/MemberHomeOverview.vue";
-import MemberHomePanel from "./MemberHomePanel/MemberHomePanel.vue";
+import MemberOverview from "./MemberOverview/MemberOverview.vue";
+import MemberPanel from "./MemberPanel/MemberPanel.vue";
 import GoodsRelevant from "../Detail/GoodsRelevant/GoodsRelevant.vue";
 import GoodsItem from "../TopCategory/GoodsItem/GoodsItem.vue";
 import { getCollection } from "../../api/memberAPI";
@@ -26,15 +26,15 @@ const collection = useCollection();
 <template>
   <MemberLayout>
     <div class="member-home">
-      <MemberHomeOverview />
-      <MemberHomePanel title="我的收藏" v-if="collection">
+      <MemberOverview />
+      <MemberPanel title="我的收藏" v-if="collection">
         <GoodsItem
           v-for="goods in collection.items"
           :key="goods.id"
           :goods="goods"
         />
-      </MemberHomePanel>
-      <MemberHomePanel title="我的足迹"></MemberHomePanel>
+      </MemberPanel>
+      <MemberPanel title="我的足迹"></MemberPanel>
       <GoodsRelevant />
     </div>
   </MemberLayout>

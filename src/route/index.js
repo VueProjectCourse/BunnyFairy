@@ -58,7 +58,7 @@ const routes = [
   },
   {
     path: "/member/home",
-    component: () => import("@/views/Member/MemberHome.vue"),
+    component: () => import("@/views/Member/Member.vue"),
   },
 ];
 
