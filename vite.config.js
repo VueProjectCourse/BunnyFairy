@@ -17,7 +17,6 @@ export default defineConfig({
   // },
   define: {
     "process.env": {
-      BASE_URL: "http://pcapi-xiaotuxian-front-devtest.itheima.net/",
       NODE_ENV: "development",
     },
   },

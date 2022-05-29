@@ -1,13 +1,25 @@
-import { rest, setupWorker } from "msw";
+// app
+import { rest } from "msw";
 import faker from "faker";
-
-faker.locale = "zh_CN";
-
 const baseURL = "http://pcapi-xiaotuxian-front-devtest.itheima.net";
-function makeArray(length, generator) {
+const makeArray = (length, generator) => {
   return Array.from({ length }, generator);
-}
-const worker = setupWorker(
+};
+faker.locale = "zh_CN";
+export const handlers = [
+  // rest.post("/login", (req, res, ctx) => {
+  //   const { username } = req.body;
+
+  //   return res(
+  //     ctx.json({
+  //       id: "f79e82e8-c34a-4dc7-a49e-9fadc0979fda",
+  //       username,
+  //       firstName: "John",
+  //       lastName: "Maverick",
+  //     })
+  //   );
+  // }),
+
   rest.get(`${baseURL}/member/collect`, (req, res, ctx) => {
     return res(
       ctx.json({
@@ -29,7 +41,5 @@ const worker = setupWorker(
         },
       })
     );
-  })
-);
-
-export default worker;
+  }),
+];

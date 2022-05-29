@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
   <!-- 概览 -->
   <div class="home-overview">

@@ -1,8 +1,7 @@
 <script setup>
-import MemberSidebar from "./MemberSidebar/MemberSidebar.vue";
-import Layout from "../DefaultLayout/Layout.vue";
+import Layout from '../DefaultLayout/Layout.vue';
+import MemberSidebar from "./MemberSidebar/MemberSidebar.vue"
 </script>
-
 <template>
   <Layout>
     <div class="container">

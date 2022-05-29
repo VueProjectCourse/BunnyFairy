@@ -60,6 +60,29 @@ const routes = [
     path: "/member/home",
     component: () => import("@/views/Member/Member.vue"),
   },
+  // {
+  //   path: "/member/order",
+  //   component: () => import("@/views/Member/OrderList/OrderList.vue"),
+  // },
+  // {
+  //   path: "/member/order/:id",
+  //   component: () => import("@/views/Member/OrderDetail/OrderDetail.vue"),
+  // },
+
+  {
+    path: "/member/order",
+    component: () => import("@/views/Member/OrderView/OrderView.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/Member/OrderList/OrderList.vue"),
+      },
+      {
+        path: ":id",
+        component: () => import("@/views/Member/OrderDetail/OrderDetail.vue"),
+      },
+    ],
+  },
 ];
 
 const router = createRouter({
@@ -67,6 +90,8 @@ const router = createRouter({
   routes,
   // 始终让 滚动条到顶部
   scrollBehavior: () => ({ top: 0 }),
+  linkActiveClass: "fuzzy-active",
+  linkExactActiveClass: "exact-active",
 });
 
 router.beforeEach(authGuard);

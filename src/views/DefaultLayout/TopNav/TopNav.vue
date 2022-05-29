@@ -29,7 +29,7 @@ const handlerLogout = () => {
             <RouterLink to="/member/home">
               <i class="iconfont icon-user"></i>
               {{ profile.account }}
-            </RouterLink>
+            </RouterLink> 
           </li>
           <li>
             <a href="javascript:" @click="handlerLogout">退出登录</a>
