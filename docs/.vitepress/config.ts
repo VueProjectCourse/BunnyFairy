@@ -255,24 +255,23 @@ function getGuideSidebar() {
         { text: '个人中心-我的收藏', link: "/profile/profile-collect"},
         { text: '个人中心-菜单激活', link: "/profile/menu-active"},
         { text: '在vue中使用JSX', link: "/profile/jsx-syntax"},
-        { text: '封装XtxTabs组件', },
-        { text: '订单管理-渲染订单标题', },
-        { text: '订单管理-基础布局', },
-
-        { text: '订单管理-列表渲染', },
+        { text: '封装XtxTabs组件', link: "/profile/tabs-component"},
+        { text: '订单管理-渲染订单标题',link: "/profile/order-title" },
+        { text: '订单管理-基础布局', link: "/profile/order-base"},
+        { text: '订单管理-列表渲染', link: "/profile/order-render"},
         { text: '订单管理-条件查询', },
         { text: '订单管理-取消订单', },
+
         { text: '订单管理-删除订单', },
         { text: '订单管理-确认收货', },
         { text: '订单管理-查看物流', },
-
         { text: '订单详情-头部展示', },
+
         { text: '订单详情-封装步骤条组件', },
         { text: '订单详情-物流信息', },
         { text: '订单详情-商品信息', },
         { text: '订单详情-取消订单', },
         { text: '订单详情-确认收货', },
-        
         { text: '订单详情-再次购买', },
       ]
     },
