@@ -129,3 +129,34 @@
   margin: 0 auto;
   border: none;
 }
+
+
+/* tab组件 */
+.xtx-tabs {
+  background: #fff;
+}
+.xtx-tabs > nav {
+  height: 60px;
+  line-height: 60px;
+  display: flex;
+  border-bottom: 1px solid #f5f5f5;
+}
+.xtx-tabs > nav > a {
+  width: 110px;
+  border-right: 1px solid #f5f5f5;
+  text-align: center;
+  font-size: 16px;
+}
+.xtx-tabs > nav > a.active {
+  border-top: 2px solid #27BA9B;
+  height: 60px;
+  background: #fff;
+  line-height: 56px;
+}
+.xtx-tabs > div {
+  display: none;
+}
+.xtx-tabs > div.active {
+  display: block;
+}
+
