@@ -2,6 +2,9 @@
 
 ::: tip Object
 这一小节，我们的目标是完成订单列表默认渲染
+
+示例如下:
+![79](./images/79.png)
 :::
 
 ::: warning Path
