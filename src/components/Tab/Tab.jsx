@@ -5,7 +5,6 @@ export default defineComponent({
   emits: ["update:active"],
   setup(props, {slots,emit}){
      // 获取插槽内容
-     console.log(slots.default())
      const defaults = slots.default();
      // 用于存储选项卡标题
      const titles = [];

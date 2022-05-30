@@ -2,33 +2,32 @@
 import MemberLayout from "../../MemberLayout/MemberLayout.vue";
 import Tab from "../../../components/Tab/Tab.jsx";
 import { ref } from "vue";
-import TabContent from "../../../components/Tab/TabContent.vue";
-const tabsData = ref([
-  { title: "选项卡标题一", content: "选项卡内容一" },
-  { title: "选项卡标题二", content: "选项卡内容二" },
-]);
-
+import { orderStatus } from "@/api/constantsAPI";
+import { useOrderList } from "./OrderList";
+import OrderItem from "../OrderItem/OrderItem.vue";
 const active = ref(0);
+const { orderList, reqParams } = useOrderList();
+
+// 获取订单列表数据
 </script>
 
 <template>
   <MemberLayout>
     <div class="member-order">
-      订单列表
-
       <Tab v-model:active="active">
         <TabTitle
-          v-for="(item, index) in tabsData"
-          :key="index"
-          :title="item.title"
+          v-for="status in orderStatus"
+          :key="status.name"
+          :title="status.label"
         ></TabTitle>
-
-        <TabContent
-          v-for="(item, index) in tabsData"
-          :key="index"
-          :content="item.content"
-        ></TabContent>
       </Tab>
+      <div class="order-list" v-if="orderList">
+        <OrderItem
+          :order="item"
+          v-for="item in orderList.items"
+          :key="item.id"
+        />
+      </div>
     </div>
   </MemberLayout>
 </template>
@@ -37,6 +36,12 @@ const active = ref(0);
 .member-order {
   height: 100%;
   background: #fff;
+  position: relative;
+}
+
+.order-list {
+  background: #fff;
+  padding: 20px;
   position: relative;
 }
 </style>
