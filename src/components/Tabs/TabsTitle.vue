@@ -1,4 +1,4 @@
-<script setup></script>
+<!-- TabTitle -->
 <template>
   <slot />
 </template>

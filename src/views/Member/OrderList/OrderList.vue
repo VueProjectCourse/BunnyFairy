@@ -1,31 +1,43 @@
 <script setup>
 import MemberLayout from "../../MemberLayout/MemberLayout.vue";
-import Tab from "../../../components/Tab/Tab.jsx";
+import Tabs from "../../../components/Tabs/Tabs.jsx";
+import TabsTitle from "../../../components/Tabs/TabsTitle.vue";
+// import TabsContent from "../../../components/Tabs/TabsContent.vue";
+import { orderStatus } from "../../../api/constantsAPI";
 import { ref } from "vue";
-import { orderStatus } from "@/api/constantsAPI";
 import { useOrderList } from "./OrderList";
 import OrderItem from "../OrderItem/OrderItem.vue";
-const active = ref(0);
-const { orderList, reqParams } = useOrderList();
+const { reqParams, orderList } = useOrderList();
+// const tabsData = ref([
+//   { title: "选项卡标题一", content: "选项卡内容一" },
+//   { title: "选项卡标题二", content: "选项卡内容二" },
+// ]);
 
-// 获取订单列表数据
+const active = ref(0);
 </script>
 
 <template>
   <MemberLayout>
     <div class="member-order">
-      <Tab v-model:active="active">
-        <TabTitle
-          v-for="status in orderStatus"
-          :key="status.name"
-          :title="status.label"
-        ></TabTitle>
-      </Tab>
+      <Tabs v-model:active="active">
+        <TabsTitle
+          v-for="item in orderStatus"
+          :key="item.name"
+          :title="item.label"
+        ></TabsTitle>
+
+        <!-- <TabsContent
+          v-for="item in tabsData"
+          :key="item.content"
+          :content="item.content"
+        ></TabsContent> -->
+      </Tabs>
+
       <div class="order-list" v-if="orderList">
         <OrderItem
-          :order="item"
           v-for="item in orderList.items"
           :key="item.id"
+          :order="item"
         />
       </div>
     </div>

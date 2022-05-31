@@ -1,7 +1,18 @@
 <script setup>
-defineProps(["order"]);
-</script>
+import { orderStatus } from "../../../api/constantsAPI";
+import useCountDown from "../../../utils/useCountDown";
+const props = defineProps({
+  order: {
+    type: Object,
+  },
+});
 
+const { start, count } = useCountDown();
+
+if (props.order.orderState === 1) {
+  start(props.order.countdown);
+}
+</script>
 <template>
   <div class="order-item">
     <div class="head">
@@ -12,13 +23,10 @@ defineProps(["order"]);
         v-if="order.orderState === 1 && order.countdown !== -1"
       >
         <i class="iconfont icon-down-time"></i>
-        <b>付款截止：{{ timeText }}</b>
+        <b>付款截止：{{ count }}</b>
       </span>
       <!-- 订单状态为 已完成(5)或已取消(6)时可以删除订单 -->
-      <a
-        v-if="[5, 6].includes(order.orderState)"
-        href="javascript:;"
-        class="del"
+      <a href="javascript:" class="del" v-if="[5, 6].includes(order.orderState)"
         >删除</a
       >
     </div>
@@ -26,15 +34,13 @@ defineProps(["order"]);
       <div class="column goods">
         <ul>
           <li v-for="goods in order.skus" :key="goods.id">
-            <router-link class="image" :to="`/product/${goods.spuId}`">
+            <a class="image" href="javascript:">
               <img :src="goods.image" alt="" />
-            </router-link>
+            </a>
             <div class="info">
-              <p class="name ellipsis-2">
-                {{ goods.name }}
-              </p>
+              <p class="name ellipsis-2">{{ goods.name }}</p>
               <p class="attr ellipsis">
-                {{ goods.attrsText }}
+                <span>{{ goods.attrsText }} </span>
               </p>
             </div>
             <div class="price">¥{{ goods.realPay }}</div>
@@ -47,6 +53,10 @@ defineProps(["order"]);
         <p>
           {{ orderStatus[order.orderState].label }}
         </p>
+        <!-- <p>待付款</p> -->
+        <!-- <a href="javascript:" class="green">查看物流</a>
+        <a href="javascript:" class="green">评价商品</a>
+        <a href="javascript:" class="green">查看评价</a> -->
         <p v-if="order.orderState === 3">
           <a href="javascript:;" class="green">查看物流</a>
         </p>
@@ -60,17 +70,17 @@ defineProps(["order"]);
       <div class="column amount">
         <p class="red">¥{{ order.payMoney }}</p>
         <p>（含运费：¥{{ order.postFee }}）</p>
-        <p>在线支付</p>
+        <p>在线付款</p>
       </div>
       <div class="column action">
         <Button
-          @click="$router.push(`/member/pay?orderId=${order.id}`)"
           type="primary"
           size="small"
           v-if="order.orderState === 1"
+          @click="$router.push(`/member/pay?orderId=${order.id}`)"
           >立即付款</Button
         >
-        <Button v-if="order.orderState === 3" type="primary" size="small"
+        <Button type="primary" size="small" v-if="order.orderState === 3"
           >确认收货</Button
         >
         <p>
