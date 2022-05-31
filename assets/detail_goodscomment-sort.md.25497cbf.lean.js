@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u8BC4\u4EF7\u7EC4\u4EF6-\u6570\u636E\u6392\u5E8F\u4E0E\u7B5B\u9009","description":"","frontmatter":{},"headers":[],"relativePath":"detail/goodscomment-sort.md"}',t={},e=p("",5),o=[e];function c(l,u,r,i,k,m){return a(),s("div",null,o)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

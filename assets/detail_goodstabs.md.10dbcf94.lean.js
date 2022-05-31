@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";var t="/BunnyFairy/assets/45.c896a574.png";const d='{"title":"\u6807\u7B7E\u9875\u7EC4\u4EF6","description":"","frontmatter":{},"headers":[],"relativePath":"detail/goodstabs.md"}',o={},e=p("",5),c=[e];function l(u,i,r,k,b,m){return a(),s("div",null,c)}var v=n(o,[["render",l]]);export{d as __pageData,v as default};

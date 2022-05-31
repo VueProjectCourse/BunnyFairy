@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const d='{"title":"\u8BE6\u60C5\u7EC4\u4EF6","description":"","frontmatter":{},"headers":[],"relativePath":"detail/gooddetails.md"}',p={},e=t("",5),o=[e];function l(c,u,i,r,k,m){return a(),s("div",null,o)}var g=n(p,[["render",l]]);export{d as __pageData,g as default};

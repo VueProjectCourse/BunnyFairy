@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const m='{"title":"\u8D2D\u7269\u8F66-\u6570\u636E\u6E32\u67D3-\u672A\u767B\u5F55","description":"","frontmatter":{},"headers":[],"relativePath":"cart/cart-page-render.md"}',p={},o=t("",5),c=[o];function e(l,u,k,i,r,g){return a(),s("div",null,c)}var d=n(p,[["render",e]]);export{m as __pageData,d as default};

@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const m='{"title":"\u652F\u4ED8-\u652F\u4ED8\u7ED3\u679C\u5C55\u793A","description":"","frontmatter":{},"headers":[],"relativePath":"settlement/pay-result.md"}',p={},e=t("",4),o=[e];function c(l,u,k,i,r,b){return a(),s("div",null,o)}var d=n(p,[["render",c]]);export{m as __pageData,d as default};

@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const g='{"title":"\u5B9E\u73B0\u5438\u9876\u5BFC\u822A(\u4F20\u7EDF)","description":"","frontmatter":{},"headers":[],"relativePath":"home/sticky-nav-tradition.md"}',t={},e=p("",5),o=[e];function c(l,u,i,r,k,b){return a(),s("div",null,o)}var d=n(t,[["render",c]]);export{g as __pageData,d as default};

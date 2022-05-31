@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u4E00\u7EA7\u9762\u5305\u5C51\u5BFC\u822A","description":"","frontmatter":{},"headers":[],"relativePath":"category/bread-top.md"}',t={},e=p("",5),o=[e];function c(l,u,r,i,k,b){return a(),s("div",null,o)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const g='{"title":"\u652F\u4ED8-\u8DF3\u8F6C\u652F\u4ED8","description":"","frontmatter":{},"headers":[],"relativePath":"settlement/pay-jump.md"}',p={},e=t("",5),o=[e];function c(l,u,i,r,k,m){return a(),s("div",null,o)}var d=n(p,[["render",c]]);export{g as __pageData,d as default};

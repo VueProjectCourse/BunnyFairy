@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const d='{"title":"\u8F6E\u64AD\u56FE\u70B9\u51FB\u8F6E\u64AD","description":"","frontmatter":{},"headers":[],"relativePath":"home/home-carousel-click.md"}',p={},e=t("",5),o=[e];function c(l,u,r,i,k,m){return a(),s("div",null,o)}var g=n(p,[["render",c]]);export{d as __pageData,g as default};

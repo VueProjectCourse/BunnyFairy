@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u70ED\u699C\u7EC4\u4EF6","description":"","frontmatter":{},"headers":[],"relativePath":"detail/goodshot.md"}',t={},o=p("",5),e=[o];function c(l,u,i,r,k,b){return a(),s("div",null,e)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

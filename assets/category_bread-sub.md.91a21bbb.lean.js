@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const d='{"title":"\u4E8C\u7EA7\u9762\u5305\u5C51\u5BFC\u822A","description":"","frontmatter":{},"headers":[],"relativePath":"category/bread-sub.md"}',p={},e=t("",5),o=[e];function c(l,u,r,i,k,m){return a(),s("div",null,o)}var g=n(p,[["render",c]]);export{d as __pageData,g as default};

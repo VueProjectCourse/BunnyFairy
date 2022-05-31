@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u6279\u91CF\u6CE8\u518C\u7EC4\u4EF6","description":"","frontmatter":{},"headers":[],"relativePath":"category/bulk-registration.md"}',t={},o=p("",5),c=[o];function e(l,u,i,r,k,m){return a(),s("div",null,c)}var _=n(t,[["render",e]]);export{d as __pageData,_ as default};

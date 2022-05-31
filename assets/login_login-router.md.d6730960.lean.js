@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const m='{"title":"\u767B\u5F55-\u914D\u7F6E\u8DEF\u7531\u89C4\u5219","description":"","frontmatter":{},"headers":[],"relativePath":"login/login-router.md"}',p={},e=t("",5),o=[e];function l(c,i,u,r,k,d){return a(),s("div",null,o)}var b=n(p,[["render",l]]);export{m as __pageData,b as default};

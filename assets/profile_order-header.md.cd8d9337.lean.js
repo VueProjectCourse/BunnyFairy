@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const g='{"title":"\u8BA2\u5355\u8BE6\u60C5-\u5934\u90E8\u5C55\u793A","description":"","frontmatter":{},"headers":[],"relativePath":"profile/order-header.md"}',p={},e=t("",5),o=[e];function c(l,u,i,r,k,b){return a(),s("div",null,o)}var d=n(p,[["render",c]]);export{g as __pageData,d as default};

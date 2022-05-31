@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u5206\u9875\u7EC4\u4EF6-\u5173\u8054\u8BC4\u8BBA\u5217\u8868","description":"","frontmatter":{},"headers":[],"relativePath":"detail/pagination-concat.md"}',t={},e=p("",5),o=[e];function c(l,u,r,i,k,b){return a(),s("div",null,o)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

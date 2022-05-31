@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u914D\u7F6E\u8DEF\u7531\u7BA1\u7406\u5668","description":"","frontmatter":{},"headers":[],"relativePath":"preparation/router-config.md"}',e={},t=p("",5),o=[t];function r(l,c,i,u,k,b){return a(),s("div",null,o)}var v=n(e,[["render",r]]);export{d as __pageData,v as default};

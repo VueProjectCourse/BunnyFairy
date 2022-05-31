@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u7ED3\u7B97-\u63D0\u4EA4\u8BA2\u5355","description":"","frontmatter":{},"headers":[],"relativePath":"settlement/order-submit.md"}',t={},e=p("",5),o=[e];function c(l,r,u,i,k,m){return a(),s("div",null,o)}var y=n(t,[["render",c]]);export{d as __pageData,y as default};

@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u8D2D\u7269\u8F66-\u66F4\u65B0\u5546\u54C1\u5217\u8868-\u672A\u767B\u5F55","description":"","frontmatter":{},"headers":[],"relativePath":"cart/cart-goods-update.md"}',t={},o=p("",5),e=[o];function c(l,u,i,r,k,m){return a(),s("div",null,e)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

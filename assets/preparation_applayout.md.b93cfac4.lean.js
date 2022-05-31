@@ -1,0 +1,1 @@
+import{_ as s,c as n,o as a,a as p}from"./app.ba9c527d.js";const m='{"title":"\u5E03\u5C40\u6A21\u677F\u9875\u9762","description":"","frontmatter":{},"headers":[],"relativePath":"preparation/applayout.md"}',t={},e=p("",5),l=[e];function o(c,i,u,r,k,g){return a(),n("div",null,l)}var b=s(t,[["render",o]]);export{m as __pageData,b as default};

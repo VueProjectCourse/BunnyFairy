@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as e}from"./app.ba9c527d.js";const k='{"title":"\u9879\u76EE\u521D\u59CB\u5316","description":"","frontmatter":{},"headers":[],"relativePath":"preparation/initialization.md"}',p={},t=e("",5),l=[t];function o(i,r,c,u,d,b){return a(),s("div",null,l)}var g=n(p,[["render",o]]);export{k as __pageData,g as default};

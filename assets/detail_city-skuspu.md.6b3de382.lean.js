@@ -1,0 +1,1 @@
+import{_ as t,c as s,o as i,a as l}from"./app.ba9c527d.js";const k='{"title":"\u89C4\u683C\u7EC4\u4EF6-SPU\u3001SKU","description":"","frontmatter":{},"headers":[],"relativePath":"detail/city-skuspu.md"}',o={},c=l("",5),e=[c];function p(a,n,d,r,u,_){return i(),s("div",null,e)}var U=t(o,[["render",p]]);export{k as __pageData,U as default};

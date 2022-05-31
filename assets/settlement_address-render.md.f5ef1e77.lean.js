@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const m='{"title":"\u7ED3\u7B97-\u6536\u8D27\u5730\u5740-\u6E32\u67D3","description":"","frontmatter":{},"headers":[],"relativePath":"settlement/address-render.md"}',t={},e=p("",5),o=[e];function c(l,u,r,i,k,d){return a(),s("div",null,o)}var f=n(t,[["render",c]]);export{m as __pageData,f as default};

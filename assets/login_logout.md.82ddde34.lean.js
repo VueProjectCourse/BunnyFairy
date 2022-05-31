@@ -1,0 +1,1 @@
+import{_ as s,c as n,o as a,a as t}from"./app.ba9c527d.js";const b='{"title":"\u9000\u51FA\u767B\u5F55","description":"","frontmatter":{},"headers":[],"relativePath":"login/logout.md"}',p={},o=t("",5),e=[o];function c(l,u,i,r,k,m){return a(),n("div",null,e)}var g=s(p,[["render",c]]);export{b as __pageData,g as default};

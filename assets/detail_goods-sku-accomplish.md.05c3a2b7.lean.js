@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u89C4\u683C\u7EC4\u4EF6-\u7981\u7528\u6548\u679C\u5B9E\u73B0","description":"","frontmatter":{},"headers":[],"relativePath":"detail/goods-sku-accomplish.md"}',t={},e=p("",5),c=[e];function o(l,u,i,r,k,b){return a(),s("div",null,c)}var g=n(t,[["render",o]]);export{d as __pageData,g as default};

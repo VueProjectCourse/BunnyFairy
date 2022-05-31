@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u8BA2\u5355\u7BA1\u7406-\u53D6\u6D88\u8BA2\u5355(2)","description":"","frontmatter":{},"headers":[],"relativePath":"profile/order-cancel2.md"}',t={},e=p("",5),o=[e];function c(l,u,r,i,k,b){return a(),s("div",null,o)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

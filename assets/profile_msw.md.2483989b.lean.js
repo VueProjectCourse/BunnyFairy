@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";var t="/BunnyFairy/assets/150.bf023bb4.jpeg";const v='{"title":"Mock Service Worker","description":"","frontmatter":{},"headers":[],"relativePath":"profile/msw.md"}',e={},o=p("",5),c=[o];function l(u,r,i,k,m,b){return a(),s("div",null,c)}var g=n(e,[["render",l]]);export{v as __pageData,g as default};

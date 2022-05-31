@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const d='{"title":"\u57CE\u5E02\u9009\u62E9\u7EC4\u4EF6-\u4EA4\u4E92\u903B\u8F91","description":"","frontmatter":{},"headers":[],"relativePath":"detail/city-interact.md"}',p={},e=t("",5),o=[e];function c(l,u,i,r,k,m){return a(),s("div",null,o)}var y=n(p,[["render",c]]);export{d as __pageData,y as default};

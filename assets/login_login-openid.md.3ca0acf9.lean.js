@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const b='{"title":"QQ\u767B\u5F55-\u83B7\u53D6openid","description":"","frontmatter":{},"headers":[],"relativePath":"login/login-openid.md"}',t={},o=p("",5),c=[o];function e(l,i,u,r,k,d){return a(),s("div",null,c)}var _=n(t,[["render",e]]);export{b as __pageData,_ as default};

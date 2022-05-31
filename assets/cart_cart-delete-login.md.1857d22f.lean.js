@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const b='{"title":"\u8D2D\u7269\u8F66-\u5220\u9664\u5546\u54C1-\u5DF2\u767B\u5F55","description":"","frontmatter":{},"headers":[],"relativePath":"cart/cart-delete-login.md"}',t={},e=p("",5),o=[e];function c(l,u,i,r,k,d){return a(),s("div",null,o)}var _=n(t,[["render",c]]);export{b as __pageData,_ as default};

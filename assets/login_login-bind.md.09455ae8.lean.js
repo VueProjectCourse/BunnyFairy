@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"QQ\u767B\u5F55-\u68C0\u7D22\u5DF2\u7ED1\u5B9A\u8D26\u53F7","description":"","frontmatter":{},"headers":[],"relativePath":"login/login-bind.md"}',t={},o=p("",5),e=[o];function c(l,u,i,r,k,b){return a(),s("div",null,e)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

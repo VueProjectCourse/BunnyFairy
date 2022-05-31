@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u5B9E\u73B0\u56FE\u7247\u61D2\u52A0\u8F7D","description":"","frontmatter":{},"headers":[],"relativePath":"home/lazyload-image.md"}',t={},e=p("",5),o=[e];function c(l,u,i,r,k,m){return a(),s("div",null,o)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

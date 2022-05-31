@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";var t="/BunnyFairy/assets/133.c5cde765.png";const d='{"title":"\u6CE8\u610F\u4E8B\u9879\u7EC4\u4EF6","description":"","frontmatter":{},"headers":[],"relativePath":"detail/goodswarn.md"}',c={},l=p("",5),e=[l];function o(u,i,r,k,g,b){return a(),s("div",null,e)}var v=n(c,[["render",o]]);export{d as __pageData,v as default};

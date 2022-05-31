@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const b='{"title":"\u4E8C\u7EA7\u5206\u7C7B-\u5546\u54C1\u6392\u5E8F\u4E0E\u7B5B\u9009","description":"","frontmatter":{},"headers":[],"relativePath":"category/goods-sort-filter.md"}',p={},e=t("",5),o=[e];function c(l,u,r,i,k,d){return a(),s("div",null,o)}var g=n(p,[["render",c]]);export{b as __pageData,g as default};

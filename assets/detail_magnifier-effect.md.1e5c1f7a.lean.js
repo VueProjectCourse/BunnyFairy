@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";var t="/BunnyFairy/assets/36.bcada498.png";const g='{"title":"\u653E\u5927\u955C\u6548\u679C","description":"","frontmatter":{},"headers":[],"relativePath":"detail/magnifier-effect.md"}',e={},o=p("",5),c=[o];function l(u,i,r,k,b,m){return a(),s("div",null,c)}var v=n(e,[["render",l]]);export{g as __pageData,v as default};

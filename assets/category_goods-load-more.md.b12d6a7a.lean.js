@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u4E8C\u7EA7\u5206\u7C7B-\u52A0\u8F7D\u66F4\u591A\u6570\u636E","description":"","frontmatter":{},"headers":[],"relativePath":"category/goods-load-more.md"}',t={},e=p("",4),o=[e];function c(l,u,i,r,k,b){return a(),s("div",null,o)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

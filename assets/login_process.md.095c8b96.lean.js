@@ -1,0 +1,1 @@
+import{_ as l,c as i,o as s,a as t}from"./app.ba9c527d.js";var o="/BunnyFairy/assets/52.c681e132.png";const v='{"title":"QQ\u767B\u5F55-\u6D41\u7A0B\u5206\u6790","description":"","frontmatter":{},"headers":[],"relativePath":"login/process.md"}',e={},c=t("",5),a=[c];function p(r,n,d,_,Q,u){return s(),i("div",null,a)}var h=l(e,[["render",p]]);export{v as __pageData,h as default};

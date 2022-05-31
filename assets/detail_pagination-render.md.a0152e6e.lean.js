@@ -1,0 +1,1 @@
+import{_ as a,c as n,o as s,a as t}from"./app.ba9c527d.js";const m='{"title":"\u5206\u9875\u7EC4\u4EF6-\u6E32\u67D3\u5206\u9875\u6570\u636E","description":"","frontmatter":{},"headers":[],"relativePath":"detail/pagination-render.md"}',p={},e=t("",5),l=[e];function c(o,u,i,r,k,g){return s(),n("div",null,l)}var q=a(p,[["render",c]]);export{m as __pageData,q as default};

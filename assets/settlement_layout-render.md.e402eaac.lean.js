@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const b='{"title":"\u7ED3\u7B97-\u6E32\u67D3\u9875\u9762","description":"","frontmatter":{},"headers":[],"relativePath":"settlement/layout-render.md"}',p={},o=t("",5),e=[o];function c(l,u,k,i,r,g){return a(),s("div",null,e)}var m=n(p,[["render",c]]);export{b as __pageData,m as default};

@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u767B\u5F55-\u624B\u673A\u53F7\u767B\u5F55-\u767B\u5F55","description":"","frontmatter":{},"headers":[],"relativePath":"login/phone-login.md"}',t={},o=p("",5),e=[o];function c(l,u,r,i,k,b){return a(),s("div",null,e)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

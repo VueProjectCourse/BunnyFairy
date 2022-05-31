@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as p}from"./app.ba9c527d.js";const d='{"title":"\u5C01\u88C5\u590D\u9009\u6846\u7EC4\u4EF6","description":"","frontmatter":{},"headers":[],"relativePath":"category/packaged-checked.md"}',t={},e=p("",5),o=[e];function c(l,u,i,k,r,b){return a(),s("div",null,o)}var g=n(t,[["render",c]]);export{d as __pageData,g as default};

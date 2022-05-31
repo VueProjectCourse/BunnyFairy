@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,a as t}from"./app.ba9c527d.js";const b='{"title":"\u8BA2\u5355\u7BA1\u7406-\u5220\u9664\u8BA2\u5355","description":"","frontmatter":{},"headers":[],"relativePath":"profile/order-delete.md"}',p={},e=t("",5),o=[e];function c(l,u,r,i,k,d){return a(),s("div",null,o)}var g=n(p,[["render",c]]);export{b as __pageData,g as default};
